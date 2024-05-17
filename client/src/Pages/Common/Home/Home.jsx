@@ -25,7 +25,7 @@ function Home() {
             </div>
             <div className='row'>
                 <div className='col-12 text-white m-5'>
-                    <button type='button' className='btn btn-primary btn-lg rounded-pill px-5'>Know more</button>
+                    <button type='button' className='btn bg-theme text-white btn-lg rounded-pill px-5'>Know more</button>
                 </div>
             </div>
             <div className='row'>
@@ -42,7 +42,7 @@ function Home() {
                     </div>
                     <div className='row'>
                         <div className='col-12 m-5'>
-                            <button type='button' className='btn btn-primary btn-lg rounded-pill px-5 '>Know more</button>
+                            <button type='button' className='btn bg-theme text-white btn-lg rounded-pill px-5 '>Know more</button>
                         </div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@ function Home() {
             </div>
             <div className='row'>
                 <div className='col-12 text-white my-5'>
-                    <button type='button' className='btn btn-primary btn-lg rounded-pill px-5'>Know more</button>
+                    <button type='button' className='btn bg-theme text-white btn-lg rounded-pill px-5'>Know more</button>
                 </div>
             </div>
             <div className='row m-5'>
@@ -174,7 +174,7 @@ function Home() {
                                 </svg>
                                 </div>
                         
-                        <div className='col-6 text-start bg-primary text-white position-relative'>
+                        <div className='col-6 text-start bg-theme text-white position-relative'>
                             <div className='row'>
                                 <div className='col-sm m-3'>
                                     <p className='m-4 text-white fs-5 text-start home-heading'>Name</p>

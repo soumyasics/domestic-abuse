@@ -9,15 +9,17 @@ import User_Register from './Pages/Common/User/register/User_Register';
 function App() {
   return (
     <div className="container-fluid">
-      <Navbar />
+      
       <BrowserRouter>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path='/user-login' element={<User_Login />} />
         <Route path='/user-register' element={<User_Register />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
-    <Footer />
+    
     </div>
   );
 }
