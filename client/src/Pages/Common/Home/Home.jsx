@@ -14,53 +14,60 @@ function Home() {
         </div>
         <div className='container text-center'>
             <div className="row">
-                <div className="col-12 home-heading m-5">
+                <div className="col home-heading m-5">
                      We Are
                 </div>
             </div>
             <div className='row'>
-                <div className="col-12 home-para m-5">
+                <div className="col home-para m-5">
                  Haven is your confidential online oasis, built to empower you to break free from the grip of domestic abuse. Here, you'll find:
                 </div>
             </div>
             <div className='row'>
-                <div className='col-12 text-white m-5'>
+                <div className='col text-white m-5'>
                     <button type='button' className='btn bg-theme text-white btn-lg rounded-pill px-5'>Know more</button>
                 </div>
             </div>
             <div className='row'>
                 <div className='col-6'>
                     <div className='row'>
-                        <div className='col-12 home-inner-para m-5'>
+                        <div className='col home-inner-para m-5'>
                             Find peace and support. Leave abuse behind.
                         </div>
                     </div>
-                    <div className='row'>
-                        <div className='col-12 home-para m-5'>
+                    <div className='row '>
+                        <div className='col home-para m-5 '>
                         Haven is your confidential online sanctuary, empowering you to break free from domestic abuse.
                         </div>
                     </div>
                     <div className='row'>
-                        <div className='col-12 m-5'>
+                        <div className='col m-5'>
                             <button type='button' className='btn bg-theme text-white btn-lg rounded-pill px-5 '>Know more</button>
                         </div>
                     </div>
                 </div>
                 <div className='col-6'>
-                    <img src={safe} className='img-fluid mx-5' alt='safe'/>
+                    <img src={safe} className=' mx-5 img-fluid' alt='safe'/>
                 </div>
             </div>
             
         </div>
-        <img src={divider} className='img-fluid'/>
+        <div className='container text-center '>
+            <div className='row'>
+                <div className='col'>
+                    <img src={divider} className='img-fluid' />
+                </div>
+            </div>
+        </div>
+        
         <div className='container text-center'>
             <div className="row">
-                <div className="col-12 home-heading m-5">
+                <div className="col home-heading m-5">
                 Features
                 </div>
             </div>
             <div className='row'>
-                <div className="col-12 home-para m-5">
+                <div className="col home-para m-5">
                 Highlight powerful, anonymous stories of survivors who found support and strength at Haven.
                 </div>
             </div>
