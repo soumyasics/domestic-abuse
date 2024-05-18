@@ -34,7 +34,12 @@ const schema = mongoose.Schema({
         type: Object,
         required: true
 
+    },
+    isActive:{
+        type: String,
+     default:'pending'
     }
 });
+
 module.exports = mongoose.model('supporters', schema)
 
