@@ -68,7 +68,7 @@ const registerSupporters = async (req, res) => {
 
 // View all Supporterss
 const viewSupporters = (req, res) => {
-    Supporters.find()
+    Supporters.find({isActive:'approved'})
         .exec()
         .then(data => {
             if (data.length > 0) {
@@ -160,25 +160,6 @@ const viewSupportersById = (req, res) => {
         });
 };
 
-// Delete Supporters by ID
-const deleteSupportersById = (req, res) => {
-    Supporters.findByIdAndDelete({ _id: req.params.id })
-        .exec()
-        .then(data => {
-            res.json({
-                status: 200,
-                msg: "Data removed successfully",
-                data: data
-            });
-        })
-        .catch(err => {
-            res.status(500).json({
-                status: 500,
-                msg: "No Data obtained",
-                Error: err
-            });
-        });
-};
 
 // Forgot Password for Supporters
 const forgotPassword = (req, res) => {
@@ -315,15 +296,97 @@ const createToken = (user) => {
   
   //Login Custome --finished
 
+  // view all Supporters to be accepted/rejected
+const viewSupporterReqsForAdmin = (req, res) => {
+    Supporters.find({isActive:'pending'})
+        .exec()
+        .then(data => {
+            res.json({
+                status: 200,
+                msg: "Data removed successfully",
+                data: data
+            });
+        })
+        .catch(err => {
+            res.status(500).json({
+                status: 500,
+                msg: "No Data obtained",
+                Error: err
+            });
+        });
+};
+
+// Approve Supporters by ID
+const approveSupportersById = (req, res) => {
+    Supporters.findByIdAndUpdate({ _id: req.params.id },{isActive:'approved'})
+        .exec()
+        .then(data => {
+            res.json({
+                status: 200,
+                msg: "Data obtained successfully",
+                data: data
+            });
+        })
+        .catch(err => {
+            res.status(500).json({
+                status: 500,
+                msg: "No Data obtained",
+                Error: err
+            });
+        });
+};
+// Reject Supporters by ID
+const rejectSupportersById = (req, res) => {
+    Supporters.findByIdAndUpdate({ _id: req.params.id },{isActive:'rejected'})
+        .exec()
+        .then(data => {
+            res.json({
+                status: 200,
+                msg: "Data updated successfully",
+                data: data
+            });
+        })
+        .catch(err => {
+            res.status(500).json({
+                status: 500,
+                msg: "No Data obtained",
+                Error: err
+            });
+        });
+};
+
+// Remove Supporters by ID
+const removeSupportersById = (req, res) => {
+    Supporters.findByIdAndUpdate({ _id: req.params.id },{isActive:'inactive'})
+        .exec()
+        .then(data => {
+            res.json({
+                status: 200,
+                msg: "Data removed successfully",
+                data: data
+            });
+        })
+        .catch(err => {
+            res.status(500).json({
+                status: 500,
+                msg: "No Data obtained",
+                Error: err
+            });
+        });
+};
 module.exports = {
     registerSupporters,
     viewSupporters,
     editSupportersById,
     viewSupportersById,
-    deleteSupportersById,
     forgotPassword,
     resetPassword,
     login,
     requireAuth,
-    upload
+    upload,
+    viewSupporterReqsForAdmin,
+    approveSupportersById,
+    removeSupportersById,
+    rejectSupportersById,
+    
 };
