@@ -10,7 +10,7 @@ import x from '../../../Assets/transparent-x-logo-logo-brand-identity-company-or
 function Footer() {
   return (
     <div className='container-fluid footer-base bg-theme'>
-      <div className='container m-5'>
+      <div className=' m-5 '>
         <div className='row'>
           <div className='col'>
             <h4 className='my-3 p-2 fw-bolder'>Safe Space For Domestic Abuse</h4>
