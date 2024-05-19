@@ -4,6 +4,10 @@
 client/node_modules
 /.pnp
 .pnp.js
+server/node_modules
+
+#upload folder
+server/upload
 
 # testing
 /coverage
