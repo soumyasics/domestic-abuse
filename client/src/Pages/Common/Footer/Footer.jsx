@@ -9,7 +9,7 @@ import x from '../../../Assets/transparent-x-logo-logo-brand-identity-company-or
 
 function Footer() {
   return (
-    <div className='container-fluid footer-base bg-theme'>
+    <div className='container-fluid footer-base m-0 p-0 bg-theme'>
       <div className=' m-5 '>
         <div className='row'>
           <div className='col'>
@@ -50,11 +50,11 @@ function Footer() {
             <hr/>
           </div>
         </div>
-        <div className='row'>
-          <div className='col'>
+        <div className='row bg-theme'>
+          <div className='col '>
               <p className='m-0'>© 2020 - 2023 Srishti campus Inc.All rights reserved.</p>
           </div>
-          <div className='col d-flex align-items-end ms-5 justify-content-end'>
+          <div className='col d-flex align-items-end ms-5 justify-content-end '>
           <Link className='text-decoration-none mx-3 text-dark' to=''>Terms of Service</Link>
           <Link className='text-decoration-none mx-3 text-dark' to=''>Privacy Policy</Link>
           <Link className='text-decoration-none mx-3 text-dark' to=''>Cookies</Link>
