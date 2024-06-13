@@ -26,18 +26,24 @@ const schema = mongoose.Schema({
         type: String,
         required: true
     },
-    gender: {
+    organization: {
         type: String,
-        required: true
+        default:'Nill'
+      
     },
     image: {
         type: Object,
         required: true
 
     },
+    adminApproved:{
+        type: Boolean,
+        default:false
+    
+    },
     isActive:{
-        type: String,
-     default:'pending'
+        type: Boolean,
+        default:false
     }
 });
 

@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
   const upload = multer({ storage: storage }).single("image");
 const registerSupporters = async (req, res) => {
     try {
-         const { name,  contact, email,password,gender } = req.body;
+         const { name,  contact, email,password,organization} = req.body;
 
         const newSupporters = new Supporters({
             name,
@@ -26,7 +26,7 @@ const registerSupporters = async (req, res) => {
             email,
             image:req.file,
             password,
-            gender
+            organization
         });
 
         
@@ -96,7 +96,7 @@ const viewSupporters = (req, res) => {
 // Update Supporters by ID
 const editSupportersById =async (req, res) => {
     let flag=0
-    const { name,  contact, email,password,gender } = req.body;
+    const { name,  contact, email,password,organization } = req.body;
     let existingSupporters = await Supporters.find({ contact });
     let SupportersData = await Supporters.findById({  _id: req.params.id  });
 await existingSupporters.map(x=>{
@@ -114,7 +114,7 @@ if(flag==0){
     email,
     image:req.file,
     password,
-    gender
+    organization
     })
         .exec()
         .then(data => {
@@ -318,7 +318,7 @@ const viewSupporterReqsForAdmin = (req, res) => {
 
 // Approve Supporters by ID
 const approveSupportersById = (req, res) => {
-    Supporters.findByIdAndUpdate({ _id: req.params.id },{isActive:'approved'})
+    Supporters.findByIdAndUpdate({ _id: req.params.id },{adminApproved:true,isActive:true})
         .exec()
         .then(data => {
             res.json({
@@ -337,7 +337,7 @@ const approveSupportersById = (req, res) => {
 };
 // Reject Supporters by ID
 const rejectSupportersById = (req, res) => {
-    Supporters.findByIdAndUpdate({ _id: req.params.id },{isActive:'rejected'})
+    Supporters.findByIdAndUpdate({ _id: req.params.id },{adminApproved:false})
         .exec()
         .then(data => {
             res.json({
@@ -357,7 +357,7 @@ const rejectSupportersById = (req, res) => {
 
 // Remove Supporters by ID
 const removeSupportersById = (req, res) => {
-    Supporters.findByIdAndUpdate({ _id: req.params.id },{isActive:'inactive'})
+    Supporters.findByIdAndUpdate({ _id: req.params.id },{isActive:false})
         .exec()
         .then(data => {
             res.json({
