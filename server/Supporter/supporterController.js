@@ -298,12 +298,12 @@ const createToken = (user) => {
 
   // view all Supporters to be accepted/rejected
 const viewSupporterReqsForAdmin = (req, res) => {
-    Supporters.find({isActive:'pending'})
+    Supporters.find({adminApproved:false})
         .exec()
         .then(data => {
             res.json({
                 status: 200,
-                msg: "Data removed successfully",
+                msg: "Data obtained successfully",
                 data: data
             });
         })
