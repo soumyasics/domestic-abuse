@@ -1,44 +1,4 @@
-html, body, #root {
-  height: 100%;
-  margin: 0;
-}
-html, body, #root {
-  height: 100%;
-  margin: 0;
-}
+.bg-creamy{
+    background-color: #FBF5F0 !important;
 
-.admin-sidebar-container {
-  display: flex;
-  min-height: 100vh; /* Make sure the container takes the full viewport height */
 }
-
-.admin-main-content {
-  flex-grow: 1;
-  padding: 1rem;
-  overflow-y: auto; /* Add this if the content inside the main area overflows */
-}
-
-.admin-dashboard {
-    display: flex;
-  }
-  
-  .content {
-    flex-grow: 1;
-    padding: 20px;
-  }
-  .admin-reject-btn{
-    background-color: #383838 !important;
-  }
-  .admin-card-theme{
-    background-color: #E3F8FF;
-  
-  }
-  .admin-sidebar-container {
-    display: flex;
-    min-height: 100vh;
-  }
-  
-  .admin-sidebar {
-    flex-shrink: 0;
-    height: 100vh;
-  }

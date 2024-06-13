@@ -1,93 +1,41 @@
 import React from 'react';
 import AdminSidebar from '../AdminSidebar/AdminSidebar';
 import './AdminDashboard.css';
-import AdminSearchbar from '../AdminSearchbar/AdminSearchbar';
 import AdminStatBox from '../AdminStatBox/AdminStatBox';
-import { FaUsers, FaHouseUser, FaUserShield, FaGavel } from 'react-icons/fa';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import SupportersRequestTable from '../../Supporter/Request/SupportersRequestTable';
+import { Container, Row, Col } from 'react-bootstrap';
+import { PiWindowsLogoThin } from "react-icons/pi";
+import { People, House } from 'react-bootstrap-icons';
+import { FaHandshake,FaPeopleGroup } from "react-icons/fa6";
+import { GoLaw } from "react-icons/go";
 
 function AdminDashboard() {
   return (
-    <div className="admin-sidebar-container bg-theme">
-      <AdminSidebar />
-      <div className="admin-main-content bg-white">
-        {/* Search bar on top */}
-        <AdminSearchbar />
-        
-        {/* Statistic boxes */}
-        <Container className="my-4">
-          <div className="d-flex justify-content-center flex-wrap">
-            <AdminStatBox 
-              icon={<FaUsers size={40} />} 
-              color="#6285FE" 
-              title="Supporters" 
-              count="100,000K" 
-            />
-            <AdminStatBox 
-              icon={<FaUsers size={40} />} 
-              color="#FD4930" 
-              title="Users" 
-              count="100,000K" 
-            />
-            <AdminStatBox 
-              icon={<FaHouseUser size={40} />} 
-              color="#28C60E" 
-              title="Safe House" 
-              count="100,000K" 
-            />
-            <AdminStatBox 
-              icon={<FaUserShield size={40} />} 
-              color="#BA76FF" 
-              title="Counselors" 
-              count="100,000K" 
-            />
-            <AdminStatBox 
-              icon={<FaGavel size={40} />} 
-              color="#FF5D29" 
-              title="Legal Professionals" 
-              count="100,000K" 
-            />
+    <div className='container-fluid bg-creamy'>
+      <div className='row'>
+        <div className='col-md-2'>
+          <AdminSidebar />
+        </div>
+        <div className='col '>
+          <div className='row mt-3'>
+            <div className='col m-5 d-flex'>
+              <PiWindowsLogoThin size={50}/> <span className='align-self-center'><h2 className='theme-purple d-inline '>Dashboard</h2></span>
+            </div>
           </div>
-        </Container>
-        
-        {/* Supporter request section */}
-        <h4 className='m-3'>View new supporters request</h4>
-        <Container>
-          <Row>
-            <Col md={6} className="mb-4 d-flex">
-              <Card className="flex-grow-1">
-                <Card.Body>
-                  <Card.Text className='m-2'>
-                    <strong>Login</strong> - Ben4 <br />
-                    <strong>Display name</strong> - ben4 <br />
-                    <strong>Email</strong> - Bensamson4@gmail.com <br />
-                    <strong>Registration date</strong> - 09/03/1997 07:30 A.M
-                  </Card.Text>
-                  <Button variant="success" className="me-2 bg-theme border-0 text-dark px-4 py-2 fw-bolder m-2">Approve</Button>
-                  <Button variant="danger" className='border-0 text-dark admin-reject-btn text-white px-4 py-2 fw-bolder m-2'>Reject</Button>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col md={6} className="mb-4 d-flex">
-              <Card className="flex-grow-1">
-                <Card.Body>
-                  <Card.Text className='m-2'>
-                    <strong>Login</strong> - Ben4 <br />
-                    <strong>Display name</strong> - ben4 <br />
-                    <strong>Email</strong> - Bensamson4@gmail.com <br />
-                    <strong>Registration date</strong> - 09/03/1997 07:30 A.M
-                  </Card.Text>
-                  <Button variant="success" className="me-2 bg-theme border-0 text-dark px-4 py-2 fw-bolder m-2">Approve</Button>
-                  <Button variant="danger" className='border-0 text-dark admin-reject-btn text-white px-4 py-2 fw-bolder m-2'>Reject</Button>
-                </Card.Body>
-              </Card>
-            </Col>
-            {/* Add more supporter request cards as needed */}
-          </Row>
-          <div className="d-flex justify-content-end">
-            <Button variant="primary" className="mt-4 bg-theme text-dark border-0 fw-bolder px-5 py-2">View All</Button>
-          </div>
-        </Container>
+          <Container>
+            <Row>
+              <AdminStatBox icon={<FaHandshake size={40} />} color="#E8BD25" title="Supporters" count="30" />
+              <AdminStatBox icon={<People size={40} />} color="#A5668B" title="Users" count="20" />
+              <AdminStatBox icon={<House size={40} />} color="#67A244" title="Safe Space" count="20" />
+              <AdminStatBox icon={<GoLaw size={40} />} color="#D3D3D3" title="Legal Professionals" count="15" />
+              <AdminStatBox icon={<FaPeopleGroup size={40} />} color="#FF6347" title="Counsellors" count="18" />
+            </Row>
+            <Row className='mt-4'>
+              <h3>New Supporters Request</h3>
+              <SupportersRequestTable />
+            </Row>
+          </Container>
+        </div>
       </div>
     </div>
   );

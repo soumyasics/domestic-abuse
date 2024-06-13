@@ -7,9 +7,10 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import User_Login from './Pages/User/login/User_Login';
 import User_Register from './Pages/User/register/User_Register';
 import AdminLogin from './Pages/Admin/AdminLogin/AdminLogin';
-import Header from './Pages/Common/Header/Header';
 import AdminDashboard from './Pages/Admin/AdminDashboard/AdminDashboard';
 import ProtectedRoute from './Pages/Admin/ProtectedRoute/ProtectedRoute';
+import SupporterRegister from './Pages/Supporter/SupporterRegister/SupporterRegister';
+import AdminNavbar from './Pages/Admin/AdminNavbar/AdminNavbar';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <ConditionalNavbar />
         <div className="flex-grow-1">
           <Routes>
+            {/* Common Paths */}
             <Route path="/" element={<Home />} />
             <Route path='/user-login' element={<User_Login />} />
             <Route path='/user-register' element={<User_Register />} />
@@ -28,6 +30,9 @@ function App() {
                 <AdminDashboard />
               </ProtectedRoute>
             } />
+            {/* Supporter Paths */}
+            <Route path='/supporter-register' element={<SupporterRegister />} />
+
           </Routes>
         </div>
         <Footer />
@@ -38,9 +43,9 @@ function App() {
 
 function ConditionalNavbar() {
   const location = useLocation();
-  const HeaderPaths = ['/admin-login', '/user-login', '/admin-dashboard'];
+  const HeaderPaths = ['/admin-login','/admin-dashboard'];
   if (HeaderPaths.includes(location.pathname)) {
-    return <Header />;
+    return <AdminNavbar />;
   } else {
     return <Navbar />;
   }
