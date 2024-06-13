@@ -1,8 +1,25 @@
-#navbar-linked{
-color: rgba(50, 148, 218, 0.98);
-font-family: Sahitya;
-font-size: 21px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+#navbar-linked {
+    color: rgba(50, 148, 218, 0.98);
+    font-family: Poppins;
+    font-size: 1.5em;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    background-color: #FCECDE !important;
+}
+
+.navbar-brands {
+    font-family: Inter;
+    font-size: 1.5em;
+    font-weight: 600;
+    text-align: left;
+    margin-left: 10px;
+}
+
+.theme-purple {
+    color: #59244C !important;
+}
+
+.theme-green {
+    color: #67A244 !important;
 }
