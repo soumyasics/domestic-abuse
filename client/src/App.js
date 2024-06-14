@@ -15,7 +15,7 @@ import AdminNavbar from './Pages/Admin/AdminNavbar/AdminNavbar';
 function App() {
   return (
     <div className="d-flex flex-column min-vh-100">
-      <BrowserRouter>
+      <BrowserRouter basename='domestic_abuse'>
         <ConditionalNavbar />
         <div className="flex-grow-1">
           <Routes>
