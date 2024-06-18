@@ -10,7 +10,7 @@ import { TbLogout } from "react-icons/tb";
 import { MdArrowDropDown } from "react-icons/md";
 import { IoMdArrowDropright } from "react-icons/io";
 
-const AdminSidebar = () => {
+const AdminSidebar = ({changeActivePage}) => {
   const [menuOpen, setMenuOpen] = useState({
     supporters: false,
     safeSpace: false,
@@ -47,7 +47,8 @@ const AdminSidebar = () => {
                 </button>
                 <ul className={`collapse nav flex-column ms-1 ${menuOpen.supporters ? 'show' : ''}`} id="supportersSubmenu" data-bs-parent="#menu">
                   <li className="w-100 ms-3">
-                    <Link to="/new-request" className="nav-link px-0"> <span className="ms-2 d-none d-sm-inline theme-purple"><IoMdArrowDropright size={25} /></span><span className="d-none d-sm-inline theme-purple">New Request</span></Link>
+                  <Link to="#" className="nav-link px-0" onClick={() => changeActivePage("home")}> <span className="ms-2 d-none d-sm-inline theme-purple"><IoMdArrowDropright size={25} /></span><span className="d-none d-sm-inline theme-purple">Home</span></Link>
+                    <Link to="#" className="nav-link px-0" onClick={() => changeActivePage("new-request")}> <span className="ms-2 d-none d-sm-inline theme-purple"><IoMdArrowDropright size={25} /></span><span className="d-none d-sm-inline theme-purple">New Request</span></Link>
                   </li>
                 </ul>
               </li>

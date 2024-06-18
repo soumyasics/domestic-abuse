@@ -1,9 +1,7 @@
-// src/Services/apiService.jsx
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
-// const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
-
+//const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
+ const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
 // Api for Viewing all Supporters Request for admin to approve, reject or view
 export const viewSupporterReqsForAdmin = async () => {
   try {
@@ -52,6 +50,52 @@ export const loginSupporter = async (supporter, setTokenCallback) => {
       return {
         success: false,
         message: error.response.data.msg || 'Login failed'
+      };
+    }
+    return {
+      success: false,
+      message: 'An unexpected error occurred'
+    };
+  }
+};
+
+// Api for Accepting Supporter Request by Id
+export const approveSupportersById = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/approveSupportersById/${id}`);
+    if (response.data.status === 200) {
+      return { success: true, data: response.data };
+    } else {
+      return { success: false, message: response.data.msg };
+    }
+  } catch (error) {
+    if (error.response && error.response.data) {
+      return {
+        success: false,
+        message: error.response.data.msg || 'Approval failed'
+      };
+    }
+    return {
+      success: false,
+      message: 'An unexpected error occurred'
+    };
+  }
+};
+
+// Api for Rejecting Supporter Request by Id
+export const rejectSupportersById = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/rejectSupportersById/${id}`);
+    if (response.data.status === 200) {
+      return { success: true, data: response.data };
+    } else {
+      return { success: false, message: response.data.msg };
+    }
+  } catch (error) {
+    if (error.response && error.response.data) {
+      return {
+        success: false,
+        message: error.response.data.msg || 'Rejection failed'
       };
     }
     return {
