@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import SupporterDetails from '../SupporterDetails/SupporterDetails';
+import demo from '../../../Assets/demo-supp.png';
 
 const SupportersRequestTable = () => {
   const [supporters, setSupporters] = useState([]);
@@ -26,8 +27,10 @@ const SupportersRequestTable = () => {
   const fetchSupporters = async () => {
     try {
       const supporterData = await viewSupporterReqsForAdmin();
-      setSupporters(supporterData.data);
-      console.log(supporterData);
+      const filteredSupporters = supporterData.data.filter(supporter => !supporter.adminApproved);
+      setSupporters(filteredSupporters);
+      setCounter(1); 
+      console.log(filteredSupporters);
     } catch (error) {
       console.error('Error fetching Supporters:', error);
       toast.error('Error fetching supporter requests.');
@@ -48,7 +51,7 @@ const SupportersRequestTable = () => {
               const response = await approveSupportersById(id);
               if (response.success) {
                 toast.success('Supporter approved successfully.');
-                setSupporters((prev) => prev.filter((supporter) => supporter.id !== id));
+                fetchSupporters(); // Re-fetch supporters
               } else {
                 toast.error(response.message || 'Error approving supporter.');
               }
@@ -76,7 +79,7 @@ const SupportersRequestTable = () => {
               const response = await rejectSupportersById(id);
               if (response.success) {
                 toast.success('Supporter rejected successfully.');
-                setSupporters((prev) => prev.filter((supporter) => supporter.id !== id));
+                fetchSupporters(); 
               } else {
                 toast.error(response.message || 'Error rejecting supporter.');
               }
@@ -125,24 +128,28 @@ const SupportersRequestTable = () => {
             </thead>
             <tbody className='text-center'>
               {supporters.map((supporter, index) => (
-                <tr key={supporter.id}>
+                <tr key={supporter._id}>
                   <td>{counter + index}</td>
                   <td>
                     <img
-                      src={supporter.image}
+                      src={supporter.image || demo}
                       alt={`${supporter.name}'s avatar`}
                       className="img-fluid supporter-profile-pic"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = demo;
+                      }}
                     />
                   </td>
                   <td>{supporter.name}</td>
                   <td>{supporter.contact}</td>
                   <td>{supporter.email}</td>
                   <td>{supporter.organization}</td>
-                  <td className=' '>
+                  <td className=''>
                     <div className='text-center'>
                       <i className="bi bi-eye m-3" onClick={() => handleView(supporter)}></i>
-                      <i className="bi bi-x m-3 redhover" onClick={() => handleReject(supporter.id)}></i>
-                      <i className="bi bi-check2 m-3 greenhover" onClick={() => handleApprove(supporter.id)}></i>
+                      <i className="bi bi-x m-3 redhover" onClick={() => handleReject(supporter._id)}></i>
+                      <i className="bi bi-check2 m-3 greenhover" onClick={() => handleApprove(supporter._id)}></i>
                     </div>
                   </td>
                 </tr>

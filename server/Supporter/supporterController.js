@@ -308,6 +308,7 @@ const viewSupporterReqsForAdmin = (req, res) => {
             });
         })
         .catch(err => {
+            log
             res.status(500).json({
                 status: 500,
                 msg: "No Data obtained",
@@ -337,12 +338,12 @@ const approveSupportersById = (req, res) => {
 };
 // Reject Supporters by ID
 const rejectSupportersById = (req, res) => {
-    Supporters.findByIdAndUpdate({ _id: req.params.id },{adminApproved:false})
+    Supporters.findByIdAndDelete({ _id: req.params.id })
         .exec()
         .then(data => {
             res.json({
                 status: 200,
-                msg: "Data updated successfully",
+                msg: "Removed successfully",
                 data: data
             });
         })
