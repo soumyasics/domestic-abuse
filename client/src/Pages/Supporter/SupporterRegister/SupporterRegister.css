@@ -1,0 +1,15 @@
+.bg-purple{
+    background-color: #59244C !important;
+}
+
+  
+  .form-label {
+    font-weight: bold;
+  }
+  
+  .invalid-feedback {
+    display: block;
+  }
+  .container-spec{
+    max-height: 800px !important;
+  }

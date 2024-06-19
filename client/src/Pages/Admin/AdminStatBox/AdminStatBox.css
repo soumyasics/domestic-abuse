@@ -1,0 +1,12 @@
+.stat-box {
+    width: 200px !important;
+    height: 120px !important;
+    opacity: 0.8;
+    box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.5),0 5px 10px rgba(0, 0, 0, 0.5);
+}
+  .stat-box-icon-position{
+    top: -30%;
+    left: 10%;
+    width: 80px !important;
+    height: 80px;
+  }

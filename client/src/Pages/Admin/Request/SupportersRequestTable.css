@@ -1,0 +1,28 @@
+.supporters-table {
+    width: 100%;
+  }
+  .supporter-profile-pic{
+    border-radius: 50%;
+    height: 40px !important;
+  }
+
+.supporters-table .bi {
+  font-size: 1.8rem;
+  color: grey;
+  transition: color 0.3s, transform 0.3s;
+  cursor: pointer;
+}
+
+.supporters-table .bi:hover {
+  color: #59244C !important;
+  transform: scale(1.2);
+}
+
+.supporters-table  .redhover:hover {
+  color: red !important;
+  transform: scale(1.2);
+}
+.supporters-table .greenhover:hover {
+  color: green !important;
+  transform: scale(1.2);
+}

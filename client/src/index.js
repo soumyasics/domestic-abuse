@@ -7,11 +7,23 @@ import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../node_modules/bootstrap/dist/js/bootstrap';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+import { AuthProvider } from './context/AuthContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <AuthProvider>
+      <ToastContainer
+        theme="dark"
+        position="top-right"
+        autoClose={3000}
+        closeOnClick
+        pauseOnHover={false}
+      />
+      <App />
+    </AuthProvider>
   </React.StrictMode>
 );
 
