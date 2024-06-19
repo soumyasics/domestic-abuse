@@ -1,11 +1,11 @@
 import React from 'react';
 import './Home.css';
-import safeHug from '../../../Assets/7c144baaddfe08105d7104d62a2437fd.png';
-import guide from '../../../Assets/IMG-20240607-WA0015.jpg';
-import thinking from '../../../Assets/IMG-20240607-WA0013.jpg';
-import water from '../../../Assets/IMG-20240607-WA0018.jpg';
-import working from '../../../Assets/unnamed.png';
-import location from '../../../Assets/unnamed (1).png';
+import safeHug from '../../../Assets/unnamed (2).png';
+import guide from '../../../Assets/img 3.png';
+import thinking from '../../../Assets/img 4.png';
+import water from '../../../Assets/img2.png';
+import working from '../../../Assets/IMG 5.png';
+import location from '../../../Assets/IMG6.png';
 function Home() {
     return (
         <div className='container'>

@@ -11,6 +11,9 @@ import AdminDashboard from './Pages/Admin/AdminDashboard/AdminDashboard';
 import ProtectedRoute from './Pages/Admin/ProtectedRoute/ProtectedRoute';
 import SupporterRegister from './Pages/Supporter/SupporterRegister/SupporterRegister';
 import AdminNavbar from './Pages/Admin/AdminNavbar/AdminNavbar';
+import AdminViewAllSupportersRequest from './Pages/Admin/AdminViewAllSupportersRequest/AdminViewAllSupportersRequest';
+import SupporterLogin from './Pages/Supporter/SupporterLogin/SupporterLogin';
+import SupporterHome from './Pages/Supporter/SupporterHome/SupporterHome';
 
 function App() {
   return (
@@ -30,8 +33,13 @@ function App() {
                 <AdminDashboard />
               </ProtectedRoute>
             } />
+            <Route path='/admin-view-all-supporters-request' element={
+                <AdminViewAllSupportersRequest />
+            } />
             {/* Supporter Paths */}
             <Route path='/supporter-register' element={<SupporterRegister />} />
+            <Route path='/supporter-login' element={<SupporterLogin />} />
+            <Route path='/supporter-home' element={<SupporterHome />} />
 
           </Routes>
         </div>
@@ -43,7 +51,7 @@ function App() {
 
 function ConditionalNavbar() {
   const location = useLocation();
-  const HeaderPaths = ['/admin-login','/admin-dashboard'];
+  const HeaderPaths = ['/admin-login', '/admin-dashboard','/admin-view-all-supporters-request'];
   if (HeaderPaths.includes(location.pathname)) {
     return <AdminNavbar />;
   } else {

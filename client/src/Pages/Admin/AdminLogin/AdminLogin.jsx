@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './AdminLogin.css';
-import CoolGirl from '../../../Assets/da233fcece78fe2b2c6a6128e4d1ffff.jpeg';
+import CoolGirl from '../../../Assets/ADMIN LOGIN.png';
 import { useNavigate } from 'react-router-dom';
 
 export default function AdminLogin() {
@@ -27,10 +27,10 @@ export default function AdminLogin() {
     <>
       <div className="container">
         <div className="row vh-75 my-5">
-          <div className="col-md-6 d-grid">
+          <div className="col-md-6 d-grid my-5">
             <img src={CoolGirl} className="img-fluid m-1 align-self-center " alt="Victim" />
           </div>
-          <div className="col-md-6 text-center d-grid align-self-center">
+          <div className="col-md-6 text-center d-grid align-self-center my-5">
             <div className="row m-4">
               <div className="col">
                 <h1 className='fw-semibold theme-purple m-3'> Admin Login </h1>
@@ -48,7 +48,7 @@ export default function AdminLogin() {
                 <div className="input-group">
                   <input type={passwordShown ? "text":"password"} id="password" className="form-control form-control-lg border border-end-0 rounded-end-0 home-card-bg rounded-4" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                   <span className="input-group-text home-card-bg border-start-0 rounded-end-4" onClick={togglePasswordVisibility} >
-                    <i className= {passwordShown ? "fa-regular fa-eye-slash":"fa-regular fa-eye"}></i>
+                    <i className= {passwordShown ? "fa-regular fa-eye-slash theme-purple":"fa-regular fa-eye theme-purple"}></i>
                   </span>
                 </div>
               </div>
