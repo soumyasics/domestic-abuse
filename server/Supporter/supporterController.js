@@ -375,6 +375,26 @@ const removeSupportersById = (req, res) => {
             });
         });
 };
+
+// Remove Supporters by ID
+const activateSupportersById = (req, res) => {
+    Supporters.findByIdAndUpdate({ _id: req.params.id },{isActive:true})
+        .exec()
+        .then(data => {
+            res.json({
+                status: 200,
+                msg: "Data removed successfully",
+                data: data
+            });
+        })
+        .catch(err => {
+            res.status(500).json({
+                status: 500,
+                msg: "No Data obtained",
+                Error: err
+            });
+        });
+};
 module.exports = {
     registerSupporters,
     viewSupporters,
@@ -389,5 +409,6 @@ module.exports = {
     approveSupportersById,
     removeSupportersById,
     rejectSupportersById,
+    activateSupportersById
     
 };
