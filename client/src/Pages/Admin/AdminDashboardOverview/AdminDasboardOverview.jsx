@@ -10,7 +10,6 @@ import AdminStatBox from '../AdminStatBox/AdminStatBox';
 function AdminDasboardOverview() {
 
     return (
-
         <Container>
             <Row>
                 <AdminStatBox icon={<FaHandshake size={40} />} color="#E8BD25" title="Supporters" count="30" />
@@ -21,7 +20,7 @@ function AdminDasboardOverview() {
             </Row>
             <Row className='mt-4'>
                 <h3>New Supporters Request</h3>
-                <SupportersRequestTable />
+                <SupportersRequestTable  activePage={'new-request'}/>
             </Row>
         </Container>
     )
