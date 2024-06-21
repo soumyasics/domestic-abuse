@@ -14,6 +14,7 @@ router.post('/viewSupporterReqsForAdmin', supporter.viewSupporterReqsForAdmin);
 router.post('/approveSupportersById/:id', supporter.approveSupportersById);
 router.post('/rejectSupportersById/:id', supporter.rejectSupportersById);
 router.post('/removeSupportersById/:id', supporter.removeSupportersById);
+router.post('/activateSupportersById/:id', supporter.activateSupportersById);
 
 
 module.exports=router
