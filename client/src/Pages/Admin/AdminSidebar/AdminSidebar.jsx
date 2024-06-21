@@ -49,6 +49,8 @@ const AdminSidebar = ({changeActivePage}) => {
                   <li className="w-100 ms-3">
                   <Link to="#" className="nav-link px-0" onClick={() => changeActivePage("home")}> <span className="ms-2 d-none d-sm-inline theme-purple"><IoMdArrowDropright size={25} /></span><span className="d-none d-sm-inline theme-purple">Home</span></Link>
                     <Link to="#" className="nav-link px-0" onClick={() => changeActivePage("new-request")}> <span className="ms-2 d-none d-sm-inline theme-purple"><IoMdArrowDropright size={25} /></span><span className="d-none d-sm-inline theme-purple">New Request</span></Link>
+                    <Link to="#" className="nav-link px-0" onClick={() => changeActivePage("all-supporters")}> <span className="ms-2 d-none d-sm-inline theme-purple"><IoMdArrowDropright size={25} /></span><span className="d-none d-sm-inline theme-purple">View All Supporters</span></Link>
+
                   </li>
                 </ul>
               </li>

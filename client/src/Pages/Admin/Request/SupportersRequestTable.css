@@ -26,3 +26,8 @@
   color: green !important;
   transform: scale(1.2);
 }
+
+.danger-box:hover{
+  background-color: red;
+  color: white;
+}

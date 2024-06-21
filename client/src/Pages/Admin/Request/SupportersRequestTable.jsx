@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Table, Modal, Button } from 'react-bootstrap';
 import './SupportersRequestTable.css';
 import {
   viewSupporterReqsForAdmin,
   approveSupportersById,
   rejectSupportersById,
+  viewSupporters,
+  removeSupportersById
 } from '../../../Services/apiService';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,32 +14,44 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import SupporterDetails from '../SupporterDetails/SupporterDetails';
 import demo from '../../../Assets/demo-supp.png';
+import { BsDashCircle } from "react-icons/bs";
 
-const SupportersRequestTable = () => {
+const SupportersRequestTable = (props) => {
   const [supporters, setSupporters] = useState([]);
   const [loading, setLoading] = useState(true);
   const [counter, setCounter] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [selectedSupporter, setSelectedSupporter] = useState(null);
+  const [action, setAction] = useState(false);
 
-  useEffect(() => {
-    fetchSupporters();
-  }, []);
-
-  const fetchSupporters = async () => {
+  const fetchSupporters = useCallback(async () => {
     try {
-      const supporterData = await viewSupporterReqsForAdmin();
-      const filteredSupporters = supporterData.data.filter(supporter => !supporter.adminApproved);
-      setSupporters(filteredSupporters);
-      setCounter(1); 
-      console.log(filteredSupporters);
+      if (props.activePage === 'new-request') {
+        const supporterData = await viewSupporterReqsForAdmin();
+        const filteredSupporters = supporterData.data.filter(supporter => !supporter.adminApproved);
+        setSupporters(filteredSupporters);
+        setCounter(1);
+        console.log(filteredSupporters);
+        setAction(false);
+      }
+      if (props.activePage === 'all-supporters') {
+        const supporterData = await viewSupporters();
+        setSupporters(supporterData.data);
+        setCounter(1);
+        console.log(supporterData.data);
+        setAction(true);
+      }
     } catch (error) {
       console.error('Error fetching Supporters:', error);
       toast.error('Error fetching supporter requests.');
     } finally {
       setLoading(false);
     }
-  };
+  }, [props.activePage]);
+
+  useEffect(() => {
+    fetchSupporters();
+  }, [fetchSupporters]);
 
   const handleApprove = (id) => {
     confirmAlert({
@@ -51,7 +65,7 @@ const SupportersRequestTable = () => {
               const response = await approveSupportersById(id);
               if (response.success) {
                 toast.success('Supporter approved successfully.');
-                fetchSupporters(); // Re-fetch supporters
+                fetchSupporters();
               } else {
                 toast.error(response.message || 'Error approving supporter.');
               }
@@ -79,12 +93,39 @@ const SupportersRequestTable = () => {
               const response = await rejectSupportersById(id);
               if (response.success) {
                 toast.success('Supporter rejected successfully.');
-                fetchSupporters(); 
+                fetchSupporters();
               } else {
                 toast.error(response.message || 'Error rejecting supporter.');
               }
             } catch (error) {
               toast.error('Error rejecting supporter.');
+            }
+          },
+        },
+        {
+          label: 'No',
+        },
+      ],
+    });
+  };
+  const handleRemoval = (id) => {
+    confirmAlert({
+      title: 'Confirm Removal',
+      message: 'Are you sure you want to remove this supporter?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: async () => {
+            try {
+              const response = await removeSupportersById(id);
+              if (response.success) {
+                toast.success('Supporter removed successfully.');
+                fetchSupporters();
+              } else {
+                toast.error(response.message || 'Error removing supporter.');
+              }
+            } catch (error) {
+              toast.error('Error removing supporter.');
             }
           },
         },
@@ -116,14 +157,14 @@ const SupportersRequestTable = () => {
         <>
           <Table striped bordered hover className="supporters-table">
             <thead className="">
-              <tr className="text-center">
-                <th>#</th>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Contact Number</th>
-                <th>Email Id</th>
-                <th>Organisation Name</th>
-                <th>Action</th>
+              <tr className="text-center ">
+                <th className='bg-purple text-white'>#</th>
+                <th className='bg-purple text-white'>Image</th>
+                <th className='bg-purple text-white'>Name</th>
+                <th className='bg-purple text-white'>Contact Number</th>
+                <th className='bg-purple text-white'>Email Id</th>
+                <th className='bg-purple text-white'>Organisation Name</th>
+                <th className='bg-purple text-white'>Action</th>
               </tr>
             </thead>
             <tbody className='text-center'>
@@ -147,9 +188,8 @@ const SupportersRequestTable = () => {
                   <td>{supporter.organization}</td>
                   <td className=''>
                     <div className='text-center'>
-                      <i className="bi bi-eye m-3" onClick={() => handleView(supporter)}></i>
-                      <i className="bi bi-x m-3 redhover" onClick={() => handleReject(supporter._id)}></i>
-                      <i className="bi bi-check2 m-3 greenhover" onClick={() => handleApprove(supporter._id)}></i>
+                      {action ? (<div onClick={() => handleRemoval(supporter._id)} className='m-2 danger-box p-1 theme-purple'> <BsDashCircle size={22} color='white' className='mx-2'/>Remove </div>) : (<><i className="bi bi-eye m-3" onClick={() => handleView(supporter)}></i><i className="bi bi-x m-3 redhover" onClick={() => handleReject(supporter._id)}></i><i className="bi bi-check2 m-3 greenhover" onClick={() => handleApprove(supporter._id)}></i></>)}
+
                     </div>
                   </td>
                 </tr>
@@ -157,14 +197,14 @@ const SupportersRequestTable = () => {
             </tbody>
           </Table>
 
-          <Modal show={showModal} onHide={handleClose}>
-            <Modal.Header closeButton>
+          <Modal show={showModal} onHide={handleClose} className='bg-creamy'>
+            <Modal.Header closeButton className='bg-creamy'>
               <Modal.Title>Supporter Details</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body className='bg-creamy'>
               {selectedSupporter && <SupporterDetails supporter={selectedSupporter} />}
             </Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer className='bg-creamy'>
               <Button variant="secondary" onClick={handleClose}>
                 Close
               </Button>
