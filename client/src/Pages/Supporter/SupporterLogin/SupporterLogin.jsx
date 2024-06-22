@@ -21,7 +21,7 @@ function SupporterLogin() {
     const handleLogin = async () => {
         try {
             const supporter = { email, password };
-            const result = await loginSupporter(supporter, login); 
+            const result = await loginSupporter(supporter, login);
 
             if (result.success) {
                 toast.success('Login successful!');

@@ -14,7 +14,8 @@ import AdminNavbar from './Pages/Admin/AdminNavbar/AdminNavbar';
 import AdminViewAllSupportersRequest from './Pages/Admin/AdminViewAllSupportersRequest/AdminViewAllSupportersRequest';
 import SupporterLogin from './Pages/Supporter/SupporterLogin/SupporterLogin';
 import SupporterHome from './Pages/Supporter/SupporterHome/SupporterHome';
-import ForgotPassword from './Pages/Common/ForgotPassword/ForgotPassword';
+import SupporterForgotPassword from './Pages/Supporter/SupporterForgotPassword/SupporterForgotPassword';
+import SupporterEditProfile from './Pages/Supporter/SupporterEditProfile/SupporterEditProfile';
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path='/user-login' element={<User_Login />} />
             <Route path='/user-register' element={<User_Register />} />
-            <Route path='/forgot-password' element={<ForgotPassword />} />
+            
 
             {/* Admin Paths */}
             <Route path='/admin-login' element={<AdminLogin />} />
@@ -43,6 +44,8 @@ function App() {
             <Route path='/supporter-register' element={<SupporterRegister />} />
             <Route path='/supporter-login' element={<SupporterLogin />} />
             <Route path='/supporter-home' element={<SupporterHome />} />
+            <Route path='/supporter-forgot-password' element={<SupporterForgotPassword />} />
+            <Route path='/supporter-edit-profile' element={<SupporterEditProfile />} />
 
           </Routes>
         </div>
