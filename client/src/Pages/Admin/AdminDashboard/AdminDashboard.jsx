@@ -25,7 +25,8 @@ function AdminDashboard() {
             </div>
             <div className="admin-dashboard-main-bar">
               {activePage === "home" && <AdminDasboardOverview />}
-              {activePage === "new-request" && <SupportersRequestTable />}
+              {activePage === "new-request" && <SupportersRequestTable activePage={activePage} />}
+              {activePage === "all-supporters" && <SupportersRequestTable activePage={activePage} />}
 
             </div>
           </div>

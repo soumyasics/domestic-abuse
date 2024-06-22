@@ -376,14 +376,14 @@ const removeSupportersById = (req, res) => {
         });
 };
 
-// Remove Supporters by ID
+// Activate Supporters by ID
 const activateSupportersById = (req, res) => {
     Supporters.findByIdAndUpdate({ _id: req.params.id },{isActive:true})
         .exec()
         .then(data => {
             res.json({
                 status: 200,
-                msg: "Data removed successfully",
+                msg: "User Activated successfully",
                 data: data
             });
         })
