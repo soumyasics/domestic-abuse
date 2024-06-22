@@ -6,6 +6,7 @@ import { loginSupporter } from '../../../Services/apiService';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AuthContext from '../../../context/AuthContext';
+import { Link } from 'react-router-dom';
 
 function SupporterLogin() {
     const [email, setEmail] = useState('');
@@ -79,7 +80,17 @@ function SupporterLogin() {
                             </div>
                         </div>
                     </div>
-                    <div className="row m-5">
+                    <div className="row m-5 mb-0">
+                        <div className="col">
+                            <Link to='/supporter-forgot-password' className='text-decoration-none text-dark'>I Forgot my <span className='theme-purple'>Password</span></Link>
+                        </div>
+                    </div>
+                    <div className="row m-5 my-0 mt-1">
+                        <div className="col">
+                            <Link to='/supporter-register' className='text-decoration-none text-dark'>Are you a new Supporter? <span className='theme-purple'>Register Now</span></Link>
+                        </div>
+                    </div>
+                    <div className="row m-5 ">
                         <div className="col">
                             <button type="button" className="btn bg-theme btn-lg fw-bolder px-5 text-white rounded-pill" onClick={handleLogin}>Login</button>
                         </div>

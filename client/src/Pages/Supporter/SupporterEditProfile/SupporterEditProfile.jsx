@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import demo from '../../../Assets/supp-edit-profile.png';
 import { editSupportersById, getSupporterById } from '../../../Services/apiService';
-import { useNavigate } from 'react-router-dom';  // Import useNavigate
+import { useNavigate } from 'react-router-dom'; 
 
 function SupporterEditProfile() {
     const [supporter, setSupporter] = useState({

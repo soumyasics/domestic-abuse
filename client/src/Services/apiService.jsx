@@ -2,8 +2,6 @@ import axios from 'axios';
 
 const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
 // const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
-const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
-// const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
 // Api for Viewing all Supporters Request for admin to approve, reject or view
 export const viewSupporterReqsForAdmin = async () => {
   try {
