@@ -9,20 +9,21 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import demo from '../../../Assets/supp-edit-profile.png';
 import { editSupportersById, getSupporterById } from '../../../Services/apiService';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 
 function SupporterEditProfile() {
     const [supporter, setSupporter] = useState({
         name: '',
         email: '',
         contact: '',
-        organisation: '',
+        password:'',
+        organization: '',
         image: null,
     });
     const [imagePreview, setImagePreview] = useState(demo);
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchSupporterData = async () => {
@@ -30,6 +31,7 @@ function SupporterEditProfile() {
             if (supporterId) {
                 try {
                     const response = await getSupporterById(supporterId);
+                    console.log('Fetch supporter response:', response);
                     if (response.status === 200) {
                         setSupporter(response.data);
                         setImagePreview(response.data.image || demo);
@@ -37,6 +39,7 @@ function SupporterEditProfile() {
                         toast.error('Supporter not found');
                     }
                 } catch (error) {
+                    console.error('Error fetching supporter data:', error);
                     toast.error('An error occurred while fetching the supporter data');
                 }
             }
@@ -50,27 +53,27 @@ function SupporterEditProfile() {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const phoneRegex = /^\d{10}$/;
         const nameRegex = /^[A-Za-z\s]+$/;
-    
+
         if (supporter.name && !nameRegex.test(supporter.name)) {
             newErrors.name = 'Name should only contain alphabets';
         }
-    
+
         if (supporter.email && !emailRegex.test(supporter.email)) {
             newErrors.email = 'Invalid email format';
         }
-    
+
         if (supporter.contact && !phoneRegex.test(supporter.contact)) {
             newErrors.contact = 'Contact number should be 10 digits';
         }
-    
+
         if (supporter.image && supporter.image.type && !['image/jpeg', 'image/png', 'image/gif'].includes(supporter.image.type)) {
             newErrors.image = 'Only image files (jpeg, png, gif) are allowed';
         }
-    
+
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
-    
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setSupporter({
@@ -101,21 +104,32 @@ function SupporterEditProfile() {
             const formData = new FormData();
             formData.append('name', supporter.name);
             formData.append('email', supporter.email);
+            formData.append('password', supporter.password);
             formData.append('contact', supporter.contact);
-            formData.append('organisation', supporter.organisation);
-            formData.append('image', supporter.image);
+            formData.append('organization', supporter.organization);
+
+            if (supporter.image) {
+                formData.append('image', supporter.image);
+            }
+            console.log(formData.entries());
+            // Log formData entries for debugging
+            for (let [key, value] of formData.entries()) {
+                console.log(key, value);
+            }
 
             const supporterId = localStorage.getItem('supporterId');
             try {
                 const response = await editSupportersById(supporterId, formData);
+                console.log('Edit supporter response:', response);
 
                 if (response.success) {
                     toast.success('Profile updated successfully');
-                    navigate('/supporter-home');  
+                    navigate('/supporter-home');
                 } else {
                     toast.error(response.message || 'Failed to update profile');
                 }
             } catch (error) {
+                console.error('Error updating profile:', error);
                 toast.error('An error occurred while updating the profile');
             } finally {
                 setIsSubmitting(false);
@@ -222,27 +236,23 @@ function SupporterEditProfile() {
                                     </span>
                                     <input
                                         type="text"
-                                        id="organisation"
-                                        name="organisation"
-                                        className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.organisation ? 'is-invalid' : ''}`}
+                                        id="organization"
+                                        name="organization"
+                                        className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.organization ? 'is-invalid' : ''}`}
                                         placeholder="Specify an organisation"
-                                        value={supporter.organisation}
+                                        value={supporter.organization}
                                         onChange={handleChange}
-                                        aria-describedby="organisationError"
+                                        aria-describedby="organizationError"
                                         required
                                     />
-                                    {errors.organisation && <div id="organisationError" className="invalid-feedback">{errors.organisation}</div>}
+                                    {errors.organization && <div id="organizationError" className="invalid-feedback">{errors.organization}</div>}
                                 </div>
                             </div>
                         </div>
-                        <div className="row m-5">
-                            <div className="col">
-                                <button
-                                    type="submit"
-                                    className="btn btn-lg bg-purple text-light supporter-edit-profile-button px-5 py-2 fs-6"
-                                    disabled={isSubmitting}
-                                >
-                                    {isSubmitting ? 'Updating...' : 'Update'}
+                        <div className='row justify-content-center'>
+                            <div className='col-6 col-md-4 m-4 mt-0'>
+                                <button type='submit' className='btn btn-lg bg-purple text-white supporter-edit-profile-save' disabled={isSubmitting}>
+                                    {isSubmitting ? 'Saving...' : 'Update'}
                                 </button>
                             </div>
                         </div>

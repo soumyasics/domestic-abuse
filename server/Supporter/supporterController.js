@@ -100,10 +100,11 @@ const editSupportersById =async (req, res) => {
     let existingSupporters = await Supporters.find({ contact });
     let SupportersData = await Supporters.findById({  _id: req.params.id  });
 await existingSupporters.map(x=>{
+    if(contact!=SupportersData.contact){
     if (x.contact!=SupportersData.contact) {
       flag=1        
     }
-    
+}
 })
 
 if(flag==0){
@@ -118,6 +119,7 @@ if(flag==0){
     })
         .exec()
         .then(data => {
+            
             res.json({
                 status: 200,
                 msg: "Updated successfully"

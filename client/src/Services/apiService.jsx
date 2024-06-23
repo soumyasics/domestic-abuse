@@ -1,3 +1,4 @@
+//src/Services/apiService.jsx
 import axios from 'axios';
 
 const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
@@ -166,19 +167,14 @@ export const forgotPassword = async (emails,passwords) => {
 //Api for Supporter Edit Profile
 export const editSupportersById = async (id, supporterData) => {
   try {
-    const formData = new FormData();
-    Object.keys(supporterData).forEach(key => {
-      formData.append(key, supporterData[key]);
-    });
-
-    const response = await axios.post(`${API_BASE_URL}/editSupportersById/${id}`, formData, {
+    const response = await axios.post(`${API_BASE_URL}/editSupportersById/${id}`, supporterData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
 
     if (response.data.status === 200) {
-      return { success: true, data: response.data.msg };
+      return { success: true, data: response.data };
     } else {
       return { success: false, message: response.data.msg };
     }
