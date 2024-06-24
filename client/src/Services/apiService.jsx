@@ -37,26 +37,26 @@ export const registerSupporters = async (supporterData) => {
 // Api for Supporter Login
 export const loginSupporter = async (supporter, setTokenCallback) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/loginSupporter`, supporter);
+      const response = await axios.post(`${API_BASE_URL}/loginSupporter`, supporter);
 
-    if (response.data.status === 200) {
-      const { token, data } = response.data;
-      setTokenCallback(token, data._id); 
-      return { success: true, user: data };
-    } else {
-      return { success: false, message: response.data.msg };
-    }
+      if (response.data.status === 200) {
+          const { token, data } = response.data;
+          setTokenCallback(token, data._id);
+          return { success: true, user: data };
+      } else {
+          return { success: false, message: response.data.msg };
+      }
   } catch (error) {
-    if (error.response && error.response.data) {
+      if (error.response && error.response.data) {
+          return {
+              success: false,
+              message: error.response.data.msg || 'Login failed',
+          };
+      }
       return {
-        success: false,
-        message: error.response.data.msg || 'Login failed'
+          success: false,
+          message: 'An unexpected error occurred',
       };
-    }
-    return {
-      success: false,
-      message: 'An unexpected error occurred'
-    };
   }
 };
 
