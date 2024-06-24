@@ -121,10 +121,10 @@ function SupporterRegister() {
     <>
     <div className="container px-5 m-auto mt-5 container-spec">
       <div className="row  px-5 mt-5">
-        <div className="col-md-6 d-flex  mt-5">
-          <img src={supporter1} className=" m-1 align-self-center img-fluid  " alt="supporter" />
+        <div className="col-md-6   mt-5">
+          <img src={supporter1} className=" align-self-center img-fluid  object-fit-cover supporter-register-scale-img " alt="supporter" />
         </div>
-        <div className="col-md-6 mt-5  text-center d-grid align-self-start">
+        <div className="col-md-6 mt-5  text-center  align-self-start">
           <div className="row m-4 mt-0">
             <div className="col">
               <h1 className='fw-semibold theme-purple m-3'> Supporter Registration</h1>

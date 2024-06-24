@@ -10,68 +10,68 @@ import x from '../../../Assets/transparent-x-logo-logo-brand-identity-company-or
 
 function Footer() {
   return (
-    <footer className='footer bg-theme'>
-      <div className='container-fluid p-0 '>
-        <div className='row'>
-          <div className='col m-5 d-flex '>
-            <Link className="navbar-brand ms-5 me-0" to="/"><img src={brand} alt='brand' height={100} className='' /></Link>
-            <h1 className='navbar-brands align-self-center  ms-0'> <span className='text-white me-2'>Safe</span> <span className='theme-green'>Space</span></h1>
+    <footer className='footer h-100 bg-theme'>
+      <div className='container-fluid p-0'>
+        <div className='row d-flex  align-items-center justify-content-between'>
+          <div className='col-auto d-flex align-items-center'>
+            <Link className="navbar-brand me-2" to="/">
+              <img src={brand} alt='brand' height={100} className='img-fluid' />
+            </Link>
+            <h1 className='navbar-brands align-self-center ms-0'>
+              <span className='text-white me-2'>Safe</span>
+              <span className='theme-green'>Space</span>
+            </h1>
           </div>
-          <div className='col text-white m-5'>
+          <div className='col-auto text-white m-3'>
             <h5 className='fs-3'>Terms & Policies</h5>
             <ul className='list-group list-group-flush text-white bg-theme'>
-              <li className='list-group-item  bg-theme border-0'>
-                <Link className='text-white  text-decoration-none' to={'/'}>Terms of Service</Link>
+              <li className='list-group-item bg-theme border-0'>
+                <Link className='text-white text-decoration-none' to={'/'}>Terms of Service</Link>
               </li>
-              <li className='list-group-item bg-theme'>
-                <Link className='text-white  text-decoration-none' to={''}>Privacy Policy</Link>
+              <li className='list-group-item bg-theme border-0'>
+                <Link className='text-white text-decoration-none' to={''}>Privacy Policy</Link>
               </li>
             </ul>
           </div>
-          <div className='col text-white m-5'>
+          <div className='col-auto text-white m-3'>
             <h5 className='fs-3'>Contact</h5>
-            <p className=''>safespace@gmail.com</p>
+            <p>safespace@gmail.com</p>
             <p>Skype</p>
           </div>
-          <div className='col text-white m-5'>
+          <div className='col-auto text-white m-3'>
             <h5 className='fs-3'>Location</h5>
-            <p className=''>HSHSGSDHSHDSHDH</p>
-            <p className=''>HSHSGSDHSHDSHDH</p>
-            <p className=''>HSHSGSDHSHDSHDH</p>
+            <p>HSHSGSDHSHDSHDH</p>
+            <p>HSHSGSDHSHDSHDH</p>
+            <p>HSHSGSDHSHDSHDH</p>
           </div>
-          <div className='col text-white m-5 '>
-            
-              <div className='row'>
-                <div className='col d-flex'>
-                  <p className=' align-self-center m-auto'>Keep in TOUCH</p>
-                </div>
+          <div className='col-auto text-white m-3 '>
+            <div className='row'>
+              <div className='col text-center '>
+                <p className=' m-auto'>Keep in TOUCH</p>
               </div>
-              <div className='row d-flex'>
-                <div className='col d-flex'>
+            </div>
+            <div className='row '>
+              <div className='col'>
                 <span className='m-1 p-2'>
-                <img src={fb} alt="Facebook" className='rounded-circle' width={'50'} />
-              </span>
-              <span className='m-1 p-2'>
-                <img src={insta} alt="Instagram" className='rounded-circle' width={'50'} />
-              </span>
-              <span className='m-1 p-2'>
-                <img src={x} alt="X" className='rounded-circle' width={'50'} />
-              </span>
-              <span className='m-1 p-2'>
-                <img src={youtube} alt="YouTube" className='rounded-circle' width={'50'} />
-              </span>
-              <span className='m-1 p-2'>
-                <img src={linkedIn} alt="LinkedIn" className='rounded-circle' width={'50'} />
-              </span>
-                </div>
+                  <img src={fb} alt="Facebook" className='rounded-circle img-fluid social-icon' />
+                </span>
+                <span className='m-1 p-2'>
+                  <img src={insta} alt="Instagram" className='rounded-circle img-fluid social-icon' />
+                </span>
+                <span className='m-1 p-2'>
+                  <img src={x} alt="X" className='rounded-circle img-fluid social-icon' />
+                </span>
+                <span className='m-1 p-2'>
+                  <img src={youtube} alt="YouTube" className='rounded-circle img-fluid social-icon' />
+                </span>
+                <span className='m-1 p-2'>
+                  <img src={linkedIn} alt="LinkedIn" className='rounded-circle img-fluid social-icon' />
+                </span>
               </div>
-              
-              
+            </div>
           </div>
         </div>
-
       </div>
-
     </footer>
   );
 }

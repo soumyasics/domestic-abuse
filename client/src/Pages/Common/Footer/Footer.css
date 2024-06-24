@@ -1,7 +1,28 @@
-.footer-base{
-    height: 300px;
-}
 
-.bg-theme{
+  
+  .bg-theme {
     background-color: #59244C !important;
-}
+  }
+  
+  .social-icon {
+    max-width: 50px;
+    max-height: 50px;
+  }
+  
+  @media (max-width: 1400px) {
+    .navbar-brand,
+    .navbar-brands,
+    .fs-3,
+    .list-group,
+    p {
+      text-align: center;
+    }
+  
+    
+  
+    .social-icon {
+      max-width: 30px;
+      max-height: 30px;
+    }
+  }
+  
