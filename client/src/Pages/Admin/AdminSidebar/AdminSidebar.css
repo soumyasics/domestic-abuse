@@ -1,23 +1,37 @@
-/* AdminSidebar.css */
-  .bg-cream {
-    background-color: #FCECDE !important;
-  }
-  
-  .min-vh-100 {
-    min-height: 100vh;
-  }
-  .accordion-button::after {
-    margin-left: auto;
-  }
-  .admin-heading{
-    background-color:#A2869B !important;
-    height: 12%;
-    width: 100%;
-  }
-.admin-heading:hover {
-  background-color:#59244C !important;
+.bg-cream {
+  background-color: #FCECDE !important;
 }
-/* .admin-list:hover{
-  background-color:  #59244C !important;
-  color:white !important;
-} */
+
+.min-vh-100 {
+  min-height: 100vh;
+}
+
+.accordion-button::after {
+  margin-left: auto;
+}
+
+.admin-heading {
+  background-color: #A2869B !important;
+  height: 12%;
+  width: 100%;
+}
+
+.admin-heading:hover {
+  background-color: #59244C !important;
+  color: white !important;
+}
+.admin-heading:hover .theme-purple,
+.admin-heading:hover span {
+  background-color: #59244C !important;
+  color: white !important;
+}
+
+.admin-list:hover {
+  background-color: #59244C !important;
+  color: white !important;
+}
+
+.admin-list:hover .theme-purple,
+.admin-list:hover span {
+  color: white !important;
+}

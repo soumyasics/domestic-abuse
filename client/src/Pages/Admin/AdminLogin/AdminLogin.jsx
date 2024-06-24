@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './AdminLogin.css';
 import CoolGirl from '../../../Assets/ADMIN LOGIN.png';
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
-import AuthContext from '../../../context/AuthContext'; 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import AuthContext from '../../../context/AuthContext';
 
 export default function AdminLogin() {
   const [username, setUsername] = useState('');
@@ -20,15 +21,20 @@ export default function AdminLogin() {
     const hardCodedUsername = 'admin';
     const hardCodedPassword = 'password@1';
     if (username === hardCodedUsername && password === hardCodedPassword) {
-      login('dummy-token'); 
+      login('dummy-token');
       navigate('/admin-dashboard');
+      setTimeout(()=>{
+        toast.success('Login successful!');
+      },2000);
+      
     } else {
-      alert("Incorrect Username or Password");
+      toast.error('Incorrect Username or Password');
     }
   };
 
   return (
     <>
+      <ToastContainer />
       <div className="container">
         <div className="row vh-75 my-5">
           <div className="col-md-6 d-grid my-5">
