@@ -244,34 +244,45 @@ const createToken = (user) => {
     return jwt.sign({ userId: user._id }, secret, { expiresIn: '1h' });
   };
   
-  const login = (req, res) => {
+  const login =async (req, res) => {
     const { email, password } = req.body;
   
-    Supporters.findOne({ email }).then(user => {
+    await Supporters.findOne({ email }).then(user => {
      
   
       if (!user) {
         return res.json({status:405,msg: 'User not found' });
       }
-  
-        if (user.password!=password) {
+      if (user.password!=password) {
+           
           return res.json({ status:405,msg: 'Password Mismatch !!' });
         }
   
-      
+        if(user.adminApproved==false)
+            {
+                return res.json({ status:409,msg: 'Please wait for Admin Approval !!' });
+
+            }
+            if(!user.isActive)
+                {
+                    return res.json({ status:409,msg: 'Your Account is Currently De-Activated By Admin !!' });
+
+                }
+                else{
         const token = createToken(user);
   
         res.json({
             status:200,
             data:user, 
             token });
-     
+        }
     }).catch(err=>{
      console.log(err);
             return res.json({status:500,msg: 'Something went wrong' });
           
     })
-  };
+}
+  
      
   //validate
   
