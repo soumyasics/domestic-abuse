@@ -1,7 +1,8 @@
 const router = require('express').Router()
 const supporter = require('./Supporter/supporterController')
+const safehouse=require('./SafeHouse/houseController')
 
-//citizen routes
+//suppoerter routes
 router.post('/registerSupporters', supporter.upload, supporter.registerSupporters);
 router.post('/viewSupportersById/:id', supporter.viewSupportersById);
 router.post('/editSupportersById/:id', supporter.upload, supporter.editSupportersById);
@@ -16,5 +17,16 @@ router.post('/rejectSupportersById/:id', supporter.rejectSupportersById);
 router.post('/removeSupportersById/:id', supporter.removeSupportersById);
 router.post('/activateSupportersById/:id', supporter.activateSupportersById);
 
+//safehouse routes
+router.post('/registerSafehouse', safehouse.upload, safehouse.registerSafehouse);
+router.post('/viewSafehouseById/:id', safehouse.viewSafehouseById);
+router.post('/editSafehouseById/:id', safehouse.upload, safehouse.editSafehouseById);
+router.post('/viewSafehouses', safehouse.viewSafehouses);
+router.post('/activateSafehouseById/:id', safehouse.activateSafehouseById);
+router.post('/approveSafehouseById/:id', safehouse.approveSafehouseById);
+router.post('/deActivateSafehouseById/:id', safehouse.deActivateSafehouseById);
+router.post('/rejectSafehouseById/:id', safehouse.rejectSafehouseById);
+
+router.post('/viewSafehouseReqsForAdmin/:id', safehouse.viewSafehouseReqsForAdmin);
 
 module.exports = router
