@@ -57,7 +57,7 @@ function App() {
 
 function ConditionalNavbar() {
   const location = useLocation();
-  const HeaderPaths = ['/admin-login', '/admin-dashboard','/admin-view-all-supporters-request'];
+  const HeaderPaths = ['/admin-dashboard','/admin-view-all-supporters-request'];
   if (HeaderPaths.includes(location.pathname)) {
     return <AdminNavbar />;
   } else {

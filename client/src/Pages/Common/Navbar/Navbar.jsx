@@ -1,4 +1,3 @@
-// src/components/Navbar/Navbar.js
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
@@ -44,7 +43,7 @@ function Navbar() {
                         </li>
                         {isLoggedIn ? (
                             <li className="nav-item">
-                                <button className="nav-link mx-3 theme-purple fw-semibold btn btn-link" onClick={handleLogout}>Logout</button>
+                                <button className="nav-link mx-3 theme-purple fw-semibold btn btn-link py-1" onClick={handleLogout}>Logout</button>
                             </li>
                         ) : (
                             <li className="nav-item dropdown">

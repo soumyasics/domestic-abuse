@@ -13,3 +13,8 @@
   .container-spec{
     max-height: 800px !important;
   }
+
+  .supporter-register-scale-img {
+    transition: transform 0.3s ease;
+    transform: scale(1.1);
+}

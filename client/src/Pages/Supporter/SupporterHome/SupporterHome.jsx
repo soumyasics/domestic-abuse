@@ -39,14 +39,14 @@ function SupporterHome() {
             </div>
             <div className='card m-5' style={{backgroundColor:'#F2D7EE'}}>
                 <div className='row m-5'>
-                    <div className='col-8 card-body my-5'>
+                    <div className='col-md-6 card-body my-5 mt-0'>
                         <h3 className='card-title fw-bold'>About <span className='theme-purple'>Safe</span> <span className='theme-green'>Space</span></h3>
-                        <p className='card-text fw-medium my-5 fs-4'>
+                        <p className='card-text fw-medium my-5 mt-3 fs-4'>
                             Helping people find safety and support. Safe Space makes it simple tofind the services and resources that victims and survivors of domestic violence need. We provide the largest searchable database of programs and shelters in the U.S. and Canada and an extensive libraryof resources. Safe space strives to be the catalyst that those experiencing abuse need to for positive change.Domestic Abuse is a serious issue that affects millions of people worldwide each year. Survivors of domestic violence often experience feelings of isolation and shame, making it difficult for them to speak up and seek help. It is crucial that these individuals are provided with a safe space to share their experiences without fear of judgement or criticism
                         </p>
                     </div>
-                    <div className='col-4 my-5'>
-                        <img src={guy} className='img-fluid' alt='supporter guy' />
+                    <div className='col-md-6  align-self-center text-center '>
+                        <img src={guy} className='img-fluid object-fit-cover scale-img' alt='supporter guy' />
                     </div>
                 </div>
             </div>
