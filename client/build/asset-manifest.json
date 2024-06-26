@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/domestic_abuse/static/css/main.f76e40bd.css",
-    "main.js": "/domestic_abuse/static/js/main.7a173fb0.js",
+    "main.css": "/domestic_abuse/static/css/main.a6546b89.css",
+    "main.js": "/domestic_abuse/static/js/main.4280a6a2.js",
     "static/js/592.50e4c38e.chunk.js": "/domestic_abuse/static/js/592.50e4c38e.chunk.js",
     "static/media/unnamed (2).png": "/domestic_abuse/static/media/unnamed (2).1e380e542faf24b43b06.png",
     "static/media/Rectangle 34.png": "/domestic_abuse/static/media/Rectangle 34.ac99590247fd37a7f9c8.png",
@@ -30,12 +30,12 @@
     "static/media/fa-v4compatibility.woff2": "/domestic_abuse/static/media/fa-v4compatibility.cf7f5903d06b79ad60f1.woff2",
     "static/media/youtube-logo-youtube-logo-transparent-youtube-icon-transparent-free-free-png.webp": "/domestic_abuse/static/media/youtube-logo-youtube-logo-transparent-youtube-icon-transparent-free-free-png.6dbd219bac5dd6caadd1.webp",
     "index.html": "/domestic_abuse/index.html",
-    "main.f76e40bd.css.map": "/domestic_abuse/static/css/main.f76e40bd.css.map",
-    "main.7a173fb0.js.map": "/domestic_abuse/static/js/main.7a173fb0.js.map",
+    "main.a6546b89.css.map": "/domestic_abuse/static/css/main.a6546b89.css.map",
+    "main.4280a6a2.js.map": "/domestic_abuse/static/js/main.4280a6a2.js.map",
     "592.50e4c38e.chunk.js.map": "/domestic_abuse/static/js/592.50e4c38e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f76e40bd.css",
-    "static/js/main.7a173fb0.js"
+    "static/css/main.a6546b89.css",
+    "static/js/main.4280a6a2.js"
   ]
 }
