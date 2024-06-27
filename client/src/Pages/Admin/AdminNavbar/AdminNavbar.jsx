@@ -46,9 +46,9 @@ function AdminNavbar() {
             </li>
             <li className="nav-item">
               {isLoggedIn ? (
-                <button className="nav-link mx-3 theme-purple fw-semibold" onClick={handleLogout}>Logout</button>
+                <button className="nav-link mx-3 theme-purple fw-semibold btn btn-link" onClick={handleLogout}>Logout</button>
               ) : (
-                <button className="nav-link mx-3 theme-purple fw-semibold" onClick={handleLogin}>Login</button>
+                <button className="nav-link mx-3 theme-purple fw-semibold btn btn-link" onClick={handleLogin}>Login</button>
               )}
             </li>
           </ul>

@@ -21,12 +21,11 @@ export default function AdminLogin() {
     const hardCodedUsername = 'admin';
     const hardCodedPassword = 'password@1';
     if (username === hardCodedUsername && password === hardCodedPassword) {
-      login('dummy-token');
-      navigate('/admin-dashboard');
-      setTimeout(()=>{
-        toast.success('Login successful!');
-      },2000);
-      
+      login('dummy-token', 'admin');
+      toast.success('Login successful!');
+      setTimeout(() => {
+        navigate('/admin-dashboard');
+      }, 2000);
     } else {
       toast.error('Incorrect Username or Password');
     }
@@ -38,12 +37,12 @@ export default function AdminLogin() {
       <div className="container">
         <div className="row vh-75 my-5">
           <div className="col-md-6 d-grid my-5">
-            <img src={CoolGirl} className="img-fluid m-1 align-self-center" alt="Victim" />
+            <img src={CoolGirl} className="img-fluid m-1 align-self-center" alt="Admin" />
           </div>
           <div className="col-md-6 text-center d-grid align-self-center my-5">
             <div className="row m-4">
               <div className="col">
-                <h1 className='fw-semibold theme-purple m-3'> Admin Login </h1>
+                <h1 className="fw-semibold theme-purple m-3"> Admin Login </h1>
               </div>
             </div>
             <div className="row m-4 text-start">
