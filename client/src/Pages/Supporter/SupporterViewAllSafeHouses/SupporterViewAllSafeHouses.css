@@ -1,0 +1,27 @@
+.view-all-safehouse-theme{
+    background-color: #501843 !important;
+    
+}
+.view-all-safehouse-theme-table-body{
+    background-color: #FBF5F0 !important;
+    opacity: 0.8;
+    font-family: poppins;
+    font-weight: 400;
+    font-size:1.5rem;
+}
+.pagination .page-item .page-link {
+    color: #6f42c1; 
+  }
+  
+  .pagination .active .page-link {
+    background-color: #6f42c1; 
+    color: white;
+  }
+  
+  .pagination .page-link {
+    border: none;
+  }
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  

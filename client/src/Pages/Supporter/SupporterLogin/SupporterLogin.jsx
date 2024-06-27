@@ -3,7 +3,7 @@ import './SupporterLogin.css';
 import CoolGirl from '../../../Assets/SUPPORTER LOGIN PAGE.png';
 import { useNavigate } from 'react-router-dom';
 import { loginSupporter } from '../../../Services/apiService';
-import { toast } from 'react-toastify';
+import { toast,ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AuthContext from '../../../context/AuthContext';
 import { Link } from 'react-router-dom';
@@ -39,6 +39,7 @@ function SupporterLogin() {
 
     return (
         <div className="container">
+             <ToastContainer />
             <div className="row vh-75 my-5">
                 <div className="col-md-6 d-grid my-5">
                     <img src={CoolGirl} className="img-fluid m-1 align-self-center border" alt="Victim" />

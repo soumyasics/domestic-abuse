@@ -6,10 +6,12 @@ import { People, House } from 'react-bootstrap-icons';
 import { GoLaw } from "react-icons/go";
 import { FaPeopleGroup } from "react-icons/fa6";
 import guy from '../../../Assets/supporter_guy.png';
+import { toast,ToastContainer } from 'react-toastify';
 
 function SupporterHome() {
     return (
         <div className='container-fluid'>
+            <ToastContainer />
             <div className='row d-flex m-5'>
                 <div className='col align-self-center text-center m-auto'>
                     <div className='row m-auto '>
