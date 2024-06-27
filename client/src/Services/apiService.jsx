@@ -5,7 +5,7 @@ import axios from 'axios';
 //export const IMG_BASE_URL = 'http://localhost:4039/';
 export const IMG_BASE_URL = 'http://hybrid.srishticampus.in:4039/';
 
- export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
+export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
 // Api for Viewing all Supporters Request for admin to approve, reject or view
 export const viewSupporterReqsForAdmin = async () => {
   try {
@@ -217,5 +217,41 @@ export const getSupporterById = async (supporterId) => {
   } catch (error) {
       console.error(`Error fetching supporter with ID ${supporterId}:`, error);
       throw error; 
+  }
+};
+
+// API for Registering Safe House
+export const registerSafeHouse = async (safehouseData) => {
+  try {
+    // const formData = new FormData();
+    // Object.keys(safehouseData).forEach(key => {
+    //   formData.append(key, safehouseData[key]);
+    // });
+
+    // const response = await axios.post(`${API_BASE_URL}/registerSafehouse`, formData, {
+    //   headers: {
+    //     'Content-Type': 'multipart/form-data',
+    //   },
+    // });
+
+    // // Handling responses based on status code
+    // switch (response.data.status) {
+    //   case 200:
+    //     toast.success(response.data.msg); // "Inserted successfully"
+    //     return { success: true, message: response.data.msg, data: response.data.data };
+    //   case 409:
+    //     toast.error(response.data.msg); // "Contact Number Already Registered With Us !!"
+    //     return { success: false, message: response.data.msg };
+    //   case 500:
+    //     toast.error(response.data.msg); // "Data not Inserted"
+    //     return { success: false, message: response.data.msg };
+    //   default:
+    //     toast.error('Unexpected error occurred');
+    //     return { success: false, message: 'Unexpected error occurred' };
+    // }
+  } catch (error) {
+    console.error('Error Registering Safe House', error);
+    //toast.error(error.response?.data?.message || 'Registration failed. Please try again.');
+    throw error;
   }
 };

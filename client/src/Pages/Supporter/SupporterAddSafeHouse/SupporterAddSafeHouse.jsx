@@ -1,3 +1,4 @@
+// src/Components/Supporter/SupporterAddSafeHouse.jsx
 import React, { useState } from 'react';
 import './SupporterAddSafeHouse.css';
 import safehouseImg from '../../../Assets/safe-house.png';
@@ -5,13 +6,13 @@ import { FaHouse, FaLocationDot, FaCoins, FaList } from "react-icons/fa6";
 import { MdNumbers, MdFamilyRestroom } from "react-icons/md";
 import { FaPhoneAlt, FaCameraRetro } from "react-icons/fa";
 import { CgOrganisation } from "react-icons/cg";
-import { registerSupporters } from '../../../Services/apiService';
+import { registerSafeHouse } from '../../../Services/apiService';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function SupporterAddSafeHouse() {
   const [safehouse, setSafehouse] = useState({
-    houseName: '',
+    name: '',
     address: '',
     contact: '',
     landmark: '',
@@ -30,7 +31,6 @@ function SupporterAddSafeHouse() {
     const nameRegex = /^[A-Za-z\s]+$/;
     const capacityRegex = /^[1-9][0-9]*$/;
     const rentRegex = /^\$?[1-9]\d{0,2}(,\d{3})*(\.\d{2})?$/;
-    ;
 
     if (!safehouse.name) {
       newErrors.name = 'House Name is required';
@@ -67,14 +67,17 @@ function SupporterAddSafeHouse() {
     } else if (!['image/jpeg', 'image/png', 'image/gif'].includes(safehouse.image.type)) {
       newErrors.image = 'Only image files (jpeg, png, gif) are allowed';
     }
+
     if (!safehouse.monthlyRent) {
       newErrors.monthlyRent = 'Monthly Rent is required';
     } else if (!rentRegex.test(safehouse.monthlyRent)) {
       newErrors.monthlyRent = 'Enter Valid Monthly Rent';
     }
+
     if (!safehouse.description) {
       newErrors.description = 'Description is required';
     }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -104,27 +107,31 @@ function SupporterAddSafeHouse() {
 
     setIsSubmitting(true);
     try {
-      const response = await registerSupporters(safehouse);
-      console.log('Registered User', response);
-      toast.success('Registration successful!');
+      const response = await registerSafeHouse(safehouse);
+      if (response.success) {
+        toast.success('Safe House registered successfully!');
+        // Reset form or perform additional actions on success
+      } else {
+        toast.error(response.message);
+      }
     } catch (error) {
-      console.error('Error Registering Supporter', error);
-      toast.error(error.response?.data?.message || 'Registration failed. Please try again.');
+      console.error('Error Registering Safe House', error);
+      toast.error('Registration failed. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <div className="container px-5 m-auto mt-5  ">
-      <div className="row  px-5 mt-5">
-        <div className="col-md-6   my-5 border rounded p-5 d-flex">
-          <img src={safehouseImg} className=" align-self-center img-fluid  object-fit-cover " alt="safe house" />
+    <div className="container px-5 m-auto mt-5">
+      <div className="row px-5 mt-5">
+        <div className="col-md-6 my-5 border rounded p-5 d-flex">
+          <img src={safehouseImg} className="align-self-center img-fluid object-fit-cover" alt="safe house" />
         </div>
-        <div className="col-md-6 mt-5  text-center    align-self-start">
+        <div className="col-md-6 mt-5 text-center align-self-start">
           <div className="row m-3 mt-0">
             <div className="col">
-              <h2 className='fw-semibold theme-purple m-3'> Add Safe House</h2>
+              <h2 className="fw-semibold theme-purple m-3">Add Safe House</h2>
             </div>
           </div>
           <form onSubmit={handleSubmit} noValidate>
@@ -137,7 +144,7 @@ function SupporterAddSafeHouse() {
                   <input
                     type="text"
                     id="name"
-                    name='name'
+                    name="name"
                     className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.name ? 'is-invalid' : ''}`}
                     placeholder="House Name"
                     value={safehouse.name}
@@ -162,7 +169,6 @@ function SupporterAddSafeHouse() {
                     onChange={handleImageChange}
                     aria-describedby="imageError"
                     required
-
                   />
                   {errors.image && <div id="imageError" className="invalid-feedback">{errors.image}</div>}
                 </div>
@@ -200,7 +206,7 @@ function SupporterAddSafeHouse() {
                     id="contact"
                     name="contact"
                     className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.contact ? 'is-invalid' : ''}`}
-                    placeholder="Contact"
+                    placeholder="Contact Number"
                     value={safehouse.contact}
                     onChange={handleChange}
                     aria-describedby="contactError"
@@ -214,7 +220,7 @@ function SupporterAddSafeHouse() {
               <div className="col">
                 <div className="input-group">
                   <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
-                    <CgOrganisation />
+                    <FaLocationDot />
                   </span>
                   <input
                     type="text"
@@ -245,10 +251,10 @@ function SupporterAddSafeHouse() {
                     placeholder="License Number"
                     value={safehouse.licenseNo}
                     onChange={handleChange}
-                    aria-describedby="licenseError"
+                    aria-describedby="licenseNoError"
                     required
                   />
-                  {errors.licenseNo && <div id="licenseError" className="invalid-feedback">{errors.licenseNo}</div>}
+                  {errors.licenseNo && <div id="licenseNoError" className="invalid-feedback">{errors.licenseNo}</div>}
                 </div>
               </div>
             </div>
@@ -259,18 +265,17 @@ function SupporterAddSafeHouse() {
                     <MdFamilyRestroom />
                   </span>
                   <input
-                    type="text"
+                    type="number"
                     id="accommodationCapacity"
                     name="accommodationCapacity"
                     className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.accommodationCapacity ? 'is-invalid' : ''}`}
                     placeholder="Accommodation Capacity"
                     value={safehouse.accommodationCapacity}
                     onChange={handleChange}
-                    aria-describedby="accommodationError"
+                    aria-describedby="accommodationCapacityError"
                     required
                   />
-
-                  {errors.accommodationCapacity && <div id="accommodationError" className="invalid-feedback">{errors.accommodationCapacity}</div>}
+                  {errors.accommodationCapacity && <div id="accommodationCapacityError" className="invalid-feedback">{errors.accommodationCapacity}</div>}
                 </div>
               </div>
             </div>
@@ -288,10 +293,10 @@ function SupporterAddSafeHouse() {
                     placeholder="Monthly Rent"
                     value={safehouse.monthlyRent}
                     onChange={handleChange}
-                    aria-describedby="rentError"
+                    aria-describedby="monthlyRentError"
                     required
                   />
-                  {errors.monthlyRent && <div id="rentError" className="invalid-feedback">{errors.monthlyRent}</div>}
+                  {errors.monthlyRent && <div id="monthlyRentError" className="invalid-feedback">{errors.monthlyRent}</div>}
                 </div>
               </div>
             </div>
@@ -301,8 +306,7 @@ function SupporterAddSafeHouse() {
                   <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
                     <FaList />
                   </span>
-                  <input
-                    type="text"
+                  <textarea
                     id="description"
                     name="description"
                     className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.description ? 'is-invalid' : ''}`}
@@ -316,15 +320,10 @@ function SupporterAddSafeHouse() {
                 </div>
               </div>
             </div>
-
-            <div className="row m-5">
+            <div className="row m-3 mt-0">
               <div className="col">
-                <button
-                  type="submit"
-                  className="btn bg-theme btn-lg fw-bolder px-5 text-white rounded-pill"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? 'Submitting...' : 'Submit'}
+                <button type="submit" className="btn btn-lg btn-purple w-100 mt-3" disabled={isSubmitting}>
+                  {isSubmitting ? 'Registering...' : 'Register Safe House'}
                 </button>
               </div>
             </div>
@@ -332,7 +331,7 @@ function SupporterAddSafeHouse() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default SupporterAddSafeHouse
+export default SupporterAddSafeHouse;
