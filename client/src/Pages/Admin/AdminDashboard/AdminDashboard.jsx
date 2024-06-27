@@ -4,6 +4,7 @@ import './AdminDashboard.css';
 import { PiWindowsLogoThin } from "react-icons/pi";
 import AdminDasboardOverview from '../AdminDashboardOverview/AdminDasboardOverview';
 import SupportersRequestTable from '../Request/SupportersRequestTable';
+import AdminViewAllSafehouses from '../AdminViewAllSafehouses/AdminViewAllSafehouses';
 
 function AdminDashboard() {
   const [activePage, setActivePage] = useState("home");
@@ -27,6 +28,7 @@ function AdminDashboard() {
               {activePage === "home" && <AdminDasboardOverview />}
               {activePage === "new-request" && <SupportersRequestTable activePage={activePage} />}
               {activePage === "all-supporters" && <SupportersRequestTable activePage={activePage} />}
+              {activePage === "all-safehouses" && <AdminViewAllSafehouses activePage={activePage} />}
 
             </div>
           </div>

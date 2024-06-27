@@ -11,11 +11,14 @@ import AdminDashboard from './Pages/Admin/AdminDashboard/AdminDashboard';
 import ProtectedRoute from './Pages/Admin/ProtectedRoute/ProtectedRoute';
 import SupporterRegister from './Pages/Supporter/SupporterRegister/SupporterRegister';
 import AdminNavbar from './Pages/Admin/AdminNavbar/AdminNavbar';
-import AdminViewAllSupportersRequest from './Pages/Admin/AdminViewAllSupportersRequest/AdminViewAllSupportersRequest';
 import SupporterLogin from './Pages/Supporter/SupporterLogin/SupporterLogin';
 import SupporterHome from './Pages/Supporter/SupporterHome/SupporterHome';
 import SupporterForgotPassword from './Pages/Supporter/SupporterForgotPassword/SupporterForgotPassword';
 import SupporterEditProfile from './Pages/Supporter/SupporterEditProfile/SupporterEditProfile';
+import SupporterAddSafeHouse from './Pages/Supporter/SupporterAddSafeHouse/SupporterAddSafeHouse';
+import SupporterEditSafeHouse from './Pages/Supporter/SupporterEditSafeHouse/SupporterEditSafeHouse';
+import SupporterViewAllSafeHouses from './Pages/Supporter/SupporterViewAllSafeHouses/SupporterViewAllSafeHouses';
+import AdminViewAllSafehouses from './Pages/Admin/AdminViewAllSafehouses/AdminViewAllSafehouses';
 
 function App() {
   return (
@@ -37,16 +40,20 @@ function App() {
                 <AdminDashboard />
               </ProtectedRoute>
             } />
-            <Route path='/admin-view-all-supporters-request' element={
-                <AdminViewAllSupportersRequest />
+            <Route path='/admin-view-all-safehouses' element={
+                <AdminViewAllSafehouses />
             } />
+            
             {/* Supporter Paths */}
             <Route path='/supporter-register' element={<SupporterRegister />} />
             <Route path='/supporter-login' element={<SupporterLogin />} />
             <Route path='/supporter-home' element={<SupporterHome />} />
             <Route path='/supporter-forgot-password' element={<SupporterForgotPassword />} />
             <Route path='/supporter-edit-profile' element={<SupporterEditProfile />} />
-
+            <Route path='/supporter-add-safe-space' element={<SupporterAddSafeHouse />} />
+            <Route path='/supporter-edit-safe-space' element={<SupporterEditSafeHouse />} />
+            <Route path='/supporter-view-all-safehouses' element={<SupporterViewAllSafeHouses />} />
+            
           </Routes>
         </div>
         <Footer />

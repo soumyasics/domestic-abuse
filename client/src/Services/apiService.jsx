@@ -1,8 +1,8 @@
 //src/Services/apiService.jsx
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
- //const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
+export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
+ //export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
 // Api for Viewing all Supporters Request for admin to approve, reject or view
 export const viewSupporterReqsForAdmin = async () => {
   try {
@@ -13,7 +13,7 @@ export const viewSupporterReqsForAdmin = async () => {
     throw error;
   }
 };
-
+export const IMG_BASE_URL = 'http://localhost:4039/';
 // Api for Registering Supporters
 export const registerSupporters = async (supporterData) => {
   try {
@@ -27,10 +27,25 @@ export const registerSupporters = async (supporterData) => {
         'Content-Type': 'multipart/form-data',
       },
     });
-    return response.data;
+
+    // Handling responses based on status code
+    switch (response.data.status) {
+      case 200:
+        console.log(response.data.msg); // "Inserted successfully"
+        return { success: true, message: response.data.msg, data: response.data.data };
+      case 409:
+        console.log(response.data.msg); // Either "contact Number Already Registered With Us !!" or "Email already in use"
+        return { success: false, message: response.data.msg };
+      case 500:
+        console.log(response.data.msg); // "Data not Inserted"
+        return { success: false, message: response.data.msg };
+      default:
+        console.log('Unexpected response status:', response.data.status);
+        return { success: false, message: 'Unexpected error occurred' };
+    }
   } catch (error) {
     console.error('Error Registering Supporter', error);
-    throw error; 
+    throw error;
   }
 };
 

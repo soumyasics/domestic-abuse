@@ -7,8 +7,9 @@ import { FaPhoneAlt, FaCameraRetro } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { CgOrganisation } from "react-icons/cg";
 import { registerSupporters } from '../../../Services/apiService';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 function SupporterRegister() {
   const [supporter, setSupporter] = useState({
@@ -17,13 +18,14 @@ function SupporterRegister() {
     contact: '',
     password: '',
     rePassword: '',
-    organisation: '',
+    organization: '',
     image: null,
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showRePassword, setShowRePassword] = useState(false);
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -67,8 +69,8 @@ function SupporterRegister() {
       newErrors.rePassword = 'Passwords do not match';
     }
 
-    if (!supporter.organisation) {
-      newErrors.organisation = 'Organisation Name is required';
+    if (!supporter.organization) {
+      newErrors.organization = 'Organization Name is required';
     }
 
     if (!supporter.image) {
@@ -107,8 +109,12 @@ function SupporterRegister() {
     setIsSubmitting(true);
     try {
       const response = await registerSupporters(supporter);
-      console.log('Registered User', response);
-      toast.success('Registration successful!');
+      if (response.success) {
+        toast.success(response.message);
+        navigate('/supporter-login');
+      } else {
+        toast.error(response.message);
+      }
     } catch (error) {
       console.error('Error Registering Supporter', error);
       toast.error(error.response?.data?.message || 'Registration failed. Please try again.');
@@ -120,11 +126,12 @@ function SupporterRegister() {
   return (
     <>
     <div className="container px-5 m-auto mt-5 container-spec">
-      <div className="row  px-5 mt-5">
-        <div className="col-md-6   mt-5">
-          <img src={supporter1} className=" align-self-center img-fluid  object-fit-cover supporter-register-scale-img " alt="supporter" />
+      <ToastContainer />
+      <div className="row px-5 mt-5">
+        <div className="col-md-6 mt-5">
+          <img src={supporter1} className=" align-self-center img-fluid object-fit-cover supporter-register-scale-img " alt="supporter" />
         </div>
-        <div className="col-md-6 mt-5  text-center  align-self-start">
+        <div className="col-md-6 mt-5 text-center align-self-start">
           <div className="row m-4 mt-0">
             <div className="col">
               <h1 className='fw-semibold theme-purple m-3'> Supporter Registration</h1>
@@ -250,16 +257,16 @@ function SupporterRegister() {
                   </span>
                   <input
                     type="text"
-                    id="organisation"
-                    name="organisation"
-                    className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.organisation ? 'is-invalid' : ''}`}
-                    placeholder="Specify an organisation"
-                    value={supporter.organisation}
+                    id="organization"
+                    name="organization"
+                    className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.organization ? 'is-invalid' : ''}`}
+                    placeholder="Specify an organization"
+                    value={supporter.organization}
                     onChange={handleChange}
-                    aria-describedby="organisationError"
+                    aria-describedby="organizationError"
                     required
                   />
-                  {errors.organisation && <div id="organisationError" className="invalid-feedback">{errors.organisation}</div>}
+                  {errors.organization && <div id="organizationError" className="invalid-feedback">{errors.organization}</div>}
                 </div>
               </div>
             </div>

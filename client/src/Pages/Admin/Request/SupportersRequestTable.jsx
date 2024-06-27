@@ -6,18 +6,20 @@ import {
   approveSupportersById,
   rejectSupportersById,
   viewSupporters,
-  removeSupportersById
+  removeSupportersById,
+  IMG_BASE_URL,
 } from '../../../Services/apiService';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import SupporterDetails from '../SupporterDetails/SupporterDetails';
-import demo from '../../../Assets/demo-supp.png';
+import demoImage from '../../../Assets/demo-supp.png'; 
 import { BsDashCircle } from "react-icons/bs";
 
 const SupportersRequestTable = (props) => {
   const [supporters, setSupporters] = useState([]);
+  const [activeSupporters, setActiveSupporters] = useState([]);
   const [loading, setLoading] = useState(true);
   const [counter, setCounter] = useState(1);
   const [showModal, setShowModal] = useState(false);
@@ -31,14 +33,15 @@ const SupportersRequestTable = (props) => {
         const filteredSupporters = supporterData.data.filter(supporter => !supporter.adminApproved);
         setSupporters(filteredSupporters);
         setCounter(1);
-        console.log(filteredSupporters);
         setAction(false);
       }
       if (props.activePage === 'all-supporters') {
         const supporterData = await viewSupporters();
-        setSupporters(supporterData.data);
+        const allSupporters = supporterData.data;
+        const activeSupportersFiltered = allSupporters.filter(supporter => supporter.isActive);
+        setSupporters(allSupporters);
+        setActiveSupporters(activeSupportersFiltered);
         setCounter(1);
-        console.log(supporterData.data);
         setAction(true);
       }
     } catch (error) {
@@ -53,7 +56,7 @@ const SupportersRequestTable = (props) => {
     fetchSupporters();
   }, [fetchSupporters]);
 
-  const handleApprove = (id) => {
+  const handleApprove = async (id) => {
     confirmAlert({
       title: 'Confirm Approval',
       message: 'Are you sure you want to approve this supporter?',
@@ -81,7 +84,7 @@ const SupportersRequestTable = (props) => {
     });
   };
 
-  const handleReject = (id) => {
+  const handleReject = async (id) => {
     confirmAlert({
       title: 'Confirm Rejection',
       message: 'Are you sure you want to reject this supporter?',
@@ -108,7 +111,8 @@ const SupportersRequestTable = (props) => {
       ],
     });
   };
-  const handleRemoval = (id) => {
+
+  const handleRemoval = async (id) => {
     confirmAlert({
       title: 'Confirm Removal',
       message: 'Are you sure you want to remove this supporter?',
@@ -168,19 +172,22 @@ const SupportersRequestTable = (props) => {
               </tr>
             </thead>
             <tbody className='text-center'>
-              {supporters.map((supporter, index) => (
+              {action ? activeSupporters.map((supporter, index) => (
                 <tr key={supporter._id}>
                   <td>{counter + index}</td>
                   <td>
-                    <img
-                      src={supporter.image || demo}
-                      alt={`${supporter.name}'s avatar`}
-                      className="img-fluid supporter-profile-pic"
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = demo;
-                      }}
-                    />
+                    <div className="rounded-circle overflow-hidden mx-auto" style={{ width: '50px', height: '50px' }}>
+                      <img
+                        src={`${IMG_BASE_URL}/${supporter.image && supporter.image.filename ? supporter.image.filename : demoImage}`}
+                        alt={`${supporter.name}'s avatar`}
+                        className="img-fluid"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = demoImage; 
+                        }}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      />
+                    </div>
                   </td>
                   <td>{supporter.name}</td>
                   <td>{supporter.contact}</td>
@@ -188,8 +195,36 @@ const SupportersRequestTable = (props) => {
                   <td>{supporter.organization}</td>
                   <td className=''>
                     <div className='text-center'>
-                      {action ? (<div onClick={() => handleRemoval(supporter._id)} className='m-2 danger-box p-1 theme-purple'> <BsDashCircle size={22} color='white' className='mx-2'/>Remove </div>) : (<><i className="bi bi-eye m-3" onClick={() => handleView(supporter)}></i><i className="bi bi-x m-3 redhover" onClick={() => handleReject(supporter._id)}></i><i className="bi bi-check2 m-3 greenhover" onClick={() => handleApprove(supporter._id)}></i></>)}
-
+                      <div onClick={() => handleRemoval(supporter._id)} className='m-2 danger-box p-1 theme-purple'> <BsDashCircle size={22} color='white' className='mx-2'/>Remove </div>
+                    </div>
+                  </td>
+                </tr>
+              )) : supporters.map((supporter, index) => (
+                <tr key={supporter._id}>
+                  <td>{counter + index}</td>
+                  <td>
+                    <div className="rounded-circle overflow-hidden mx-auto" style={{ width: '50px', height: '50px' }}>
+                      <img
+                        src={`${IMG_BASE_URL}/${supporter.image && supporter.image.filename ? supporter.image.filename : demoImage}`}
+                        alt={`${supporter.name}'s avatar`}
+                        className="img-fluid"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = demoImage; 
+                        }}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      />
+                    </div>
+                  </td>
+                  <td>{supporter.name}</td>
+                  <td>{supporter.contact}</td>
+                  <td>{supporter.email}</td>
+                  <td>{supporter.organization}</td>
+                  <td className=''>
+                    <div className='text-center'>
+                      <i className="bi bi-eye m-3" onClick={() => handleView(supporter)}></i>
+                      <i className="bi bi-x m-3 redhover" onClick={() => handleReject(supporter._id)}></i>
+                      <i className="bi bi-check2 m-3 greenhover" onClick={() => handleApprove(supporter._id)}></i>
                     </div>
                   </td>
                 </tr>
@@ -205,7 +240,7 @@ const SupportersRequestTable = (props) => {
               {selectedSupporter && <SupporterDetails supporter={selectedSupporter} />}
             </Modal.Body>
             <Modal.Footer className='bg-creamy'>
-              <Button variant="secondary" onClick={handleClose}>
+              <Button className='bg-purple border-0' onClick={handleClose}>
                 Close
               </Button>
             </Modal.Footer>

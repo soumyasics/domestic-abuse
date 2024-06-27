@@ -1,28 +1,28 @@
+.footer-custom {
+  height: 380px;
+  overflow: hidden; 
+  background-color: #59244C;
+}
 
-  
-  .bg-theme {
-    background-color: #59244C !important;
+.bg-theme {
+  background-color: #59244C !important;
+}
+
+.social-icon-custom {
+  max-width: 50px;
+  max-height: 50px;
+}
+
+.hr-custom {
+  height: 3px;
+  border: none;
+  background-color: white;
+  margin: 20px 0;
+}
+
+@media (max-width: 1400px) {
+  .social-icon-custom {
+    max-width: 30px;
+    max-height: 30px;
   }
-  
-  .social-icon {
-    max-width: 50px;
-    max-height: 50px;
-  }
-  
-  @media (max-width: 1400px) {
-    .navbar-brand,
-    .navbar-brands,
-    .fs-3,
-    .list-group,
-    p {
-      text-align: center;
-    }
-  
-    
-  
-    .social-icon {
-      max-width: 30px;
-      max-height: 30px;
-    }
-  }
-  
+}
