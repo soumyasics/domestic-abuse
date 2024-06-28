@@ -19,6 +19,7 @@ import SupporterAddSafeHouse from './Pages/Supporter/SupporterAddSafeHouse/Suppo
 import SupporterEditSafeHouse from './Pages/Supporter/SupporterEditSafeHouse/SupporterEditSafeHouse';
 import SupporterViewAllSafeHouses from './Pages/Supporter/SupporterViewAllSafeHouses/SupporterViewAllSafeHouses';
 import AdminViewAllSafehouses from './Pages/Admin/AdminViewAllSafehouses/AdminViewAllSafehouses';
+import AdminSafehouseDetailedView from './Pages/Admin/AdminSafehouseDetailedView/AdminSafehouseDetailedView';
 
 function App() {
   return (
@@ -42,7 +43,9 @@ function App() {
             <Route path='/admin-view-all-safehouses' element={
                 <AdminViewAllSafehouses />
             } />
-
+            <Route path='/admin-safehouse-details' element={
+                <AdminSafehouseDetailedView />
+            } />  
             {/* Supporter Paths */}
             <Route path='/supporter-register' element={<SupporterRegister />} />
             <Route path='/supporter-login' element={<SupporterLogin />} />
@@ -53,7 +56,6 @@ function App() {
             
             {/* Updated route for editing safe house */}
             <Route path='/supporter-edit-safe-space' element={<SupporterEditSafeHouse />} />
-
             <Route path='/supporter-view-all-safehouses' element={<SupporterViewAllSafeHouses />} />
           </Routes>
         </div>
