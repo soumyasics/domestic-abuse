@@ -1,6 +1,6 @@
 .footer-custom {
   height: 380px;
-  overflow: hidden; 
+  overflow: hidden;
   background-color: #59244C;
 }
 
@@ -22,7 +22,11 @@
 
 @media (max-width: 1400px) {
   .social-icon-custom {
-    max-width: 30px;
-    max-height: 30px;
+    max-width: 40px;
+    max-height: 40px;
   }
+}
+.footer-img{
+  width: 50%;
+  height: 50%;
 }

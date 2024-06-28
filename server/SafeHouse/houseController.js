@@ -35,7 +35,7 @@ const registerSafehouse = async (req, res) => {
             image: req.file,
             supporterId
         });
-
+        
         let existingSafehouse = await Safehouse.findOne({ contact });
         if (existingSafehouse) {
             return res.json({
@@ -47,6 +47,7 @@ const registerSafehouse = async (req, res) => {
 
         await newSafehouse.save()
             .then(data => {
+                console.log("data added",data);
                 return res.json({
                     status: 200,
                     msg: "Inserted successfully",
@@ -54,6 +55,7 @@ const registerSafehouse = async (req, res) => {
                 });
             })
             .catch(err => {
+                console.log("data not added",err);
                 return res.json({
                     status: 500,
                     msg: "Data not Inserted",
@@ -147,9 +149,11 @@ console.log(contact != safehouseData.contact);
 
 // View safehouse by ID
 const viewSafehouseById = (req, res) => {
-    Safehouse.findById(req.params.id)
+    console.log("id",req.params.id);
+    Safehouse.findById({_id:req.params.id})
         .exec()
         .then(data => {
+            console.log(data);
             res.json({
                 status: 200,
                 msg: "Data obtained successfully",
@@ -166,6 +170,27 @@ const viewSafehouseById = (req, res) => {
 };
 
 
+// View safehouse by ID
+const viewSafehouseBySupporterId = (req, res) => {
+    console.log("id",req.params.id);
+    Safehouse.find({supporterId:req.params.id})
+        .exec()
+        .then(data => {
+            console.log(data);
+            res.json({
+                status: 200,
+                msg: "Data obtained successfully",
+                data: data
+            });
+        })
+        .catch(err => {
+            res.status(500).json({
+                status: 500,
+                msg: "No Data obtained",
+                Error: err
+            });
+        });
+};
 const viewSafehouseReqsForAdmin = (req, res) => {
     Safehouse.find({adminApproved:fasle})
         .exec()
@@ -275,5 +300,6 @@ module.exports = {
     approveSafehouseById,
     deActivateSafehouseById,
     rejectSafehouseById,
-    activateSafehouseById
+    activateSafehouseById,
+    viewSafehouseBySupporterId
 };

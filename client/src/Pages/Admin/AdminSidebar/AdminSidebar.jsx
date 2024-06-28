@@ -43,6 +43,14 @@ const AdminSidebar = ({ changeActivePage }) => {
           </div>
           <div className="d-flex flex-column align-items-center align-items-sm-start px-0 pt-2 text-white min-vh-100">
             <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start w-100" id="menu">
+            <li className='admin-list w-100 border-bottom border-dark-subtle'>
+                <Link to="#" className="nav-link d-flex justify-content-between align-items-center " onClick={() => changeActivePage("home")}>  
+                  <div className="d-flex align-items-center">
+                    <House size={24} className='theme-purple' />
+                    <span className="ms-1 d-none d-sm-inline theme-purple">Home</span>
+                  </div>
+                </Link>
+              </li>
               <li className='border-bottom border-dark-subtle w-100'>
                 <button onClick={() => toggleMenu('supporters')} className="nav-link btn btn-link text-decoration-none d-flex justify-content-between align-items-center w-100">
                   <div className="d-flex align-items-center">

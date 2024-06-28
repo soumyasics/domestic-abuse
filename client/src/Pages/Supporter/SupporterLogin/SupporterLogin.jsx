@@ -10,32 +10,35 @@ import { Link } from 'react-router-dom';
 
 function SupporterLogin() {
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [passwordShown, setPasswordShown] = useState(false);
-    const navigate = useNavigate();
-    const { login } = useContext(AuthContext);
+  const [password, setPassword] = useState('');
+  const [passwordShown, setPasswordShown] = useState(false);
+  const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
-    const togglePasswordVisibility = () => {
-        setPasswordShown(!passwordShown);
-    };
+  const togglePasswordVisibility = () => {
+    setPasswordShown(!passwordShown);
+  };
 
-    const handleLogin = async () => {
-        try {
-            const supporter = { email, password };
-            const result = await loginSupporter(supporter, login);
+  const handleLogin = async () => {
+    try {
+      const supporter = { email, password };
+      const result = await loginSupporter(supporter, (token, supporterId) => {
+        login(token, 'supporter', supporterId); // Pass supporterId to login function
+      });
 
-            if (result.success) {
-                toast.success('Login successful!');
-                setTimeout(() => {
-                    navigate('/supporter-home');
-                }, 2000);
-            } else {
-                toast.error(result.message);
-            }
-        } catch (error) {
-            toast.error('An unexpected error occurred during login');
-        }
-    };
+      if (result.success) {
+        toast.success('Login successful!');
+        setTimeout(() => {
+          navigate('/supporter-home');
+        }, 2000);
+      } else {
+        toast.error(result.message);
+      }
+    } catch (error) {
+      toast.error('An unexpected error occurred during login');
+    }
+  };
+
 
     return (
         <div className="container">

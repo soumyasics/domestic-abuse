@@ -9,7 +9,7 @@ function AdminNavbar() {
   const { isLoggedIn, logout } = useContext(AuthContext);
 
   const handleImageClick = () => {
-    navigate('/');
+    navigate('/admin-dashboard');
   };
 
   const handleLogout = () => {
@@ -24,7 +24,7 @@ function AdminNavbar() {
   return (
     <div className="container-fluid p-0">
       <nav className="navbar navbar-expand-lg navbar-light" id="navbar-linked">
-        <Link className="navbar-brand ms-5 me-0" to="/">
+        <Link className="navbar-brand ms-5 me-0" to="/admin-dashboard">
           <img src={brand} alt="brand" height={80} />
         </Link>
         <h1 className="navbar-brands d-flex align-self-end ms-0" onClick={handleImageClick}>
@@ -36,13 +36,13 @@ function AdminNavbar() {
         <div className="collapse navbar-collapse mx-5 justify-content-end" id="navbarNav">
           <ul className="navbar-nav ml-auto mx-5">
             <li className="nav-item active">
-              <Link className="nav-link mx-3 theme-purple fw-semibold" to="/">Home</Link>
+              <Link className="nav-link mx-3 theme-purple fw-semibold" to="/admin-dashboard">Home</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link mx-3 theme-purple fw-semibold" to="/">Users</Link>
+              <Link className="nav-link mx-3 theme-purple fw-semibold" to="/admin-dashboard">Users</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link mx-3 theme-purple fw-semibold" to="/">Blog</Link>
+              <Link className="nav-link mx-3 theme-purple fw-semibold" to="/admin-dashboard">Blog</Link>
             </li>
             <li className="nav-item">
               {isLoggedIn ? (
