@@ -14,8 +14,8 @@ function Footer() {
       <div className='container-fluid p-0'>
         <div className='row d-flex align-items-center justify-content-between'>
           <div className='col-auto d-flex align-items-center'>
-            <Link className="navbar-brand me-2" to="/">
-              <img src={brand} alt='brand' className='img-fluid' />
+            <Link className="navbar-brand me-2 text-center" to="#">
+              <img src={brand} alt='brand' className='footer-img' />
             </Link>
             <h1 className='ms-0'>
               <span className='text-white me-2'>Safe</span>
@@ -26,10 +26,10 @@ function Footer() {
             <h5 className='fs-3'>Terms & Policies</h5>
             <ul className='list-group list-group-flush text-white bg-theme'>
               <li className='list-group-item bg-transparent border-0'>
-                <Link className='text-white text-decoration-none' to='/'>Terms of Service</Link>
+                <Link className='text-white text-decoration-none' to='#'>Terms of Service</Link>
               </li>
               <li className='list-group-item bg-transparent border-0'>
-                <Link className='text-white text-decoration-none' to='/'>Privacy Policy</Link>
+                <Link className='text-white text-decoration-none' to='#'>Privacy Policy</Link>
               </li>
             </ul>
           </div>
@@ -39,20 +39,20 @@ function Footer() {
             <p>Skype</p>
           </div>
           <div className='col-auto text-white m-3'>
-            <h5 className='fs-3'>Location</h5>
+            <h5 className='fs-3 text-center'>Location</h5>
             <p>HSHSGSDHSHDSHDH</p>
             <p>HSHSGSDHSHDSHDH</p>
             <p>HSHSGSDHSHDSHDH</p>
           </div>
-          <div className='col-auto text-white m-3'>
+          <div className='col-lg text-white m-3'>
             <div className='row'>
-              <div className='col text-center m-5'>
+              <div className='col text-center m-5 mx-0'>
                 <p className='m-auto'>Keep in TOUCH</p>
               </div>
             </div>
             <div className='row'>
               <div className='col d-flex justify-content-center'>
-                <span className='m-1 p-2'>
+                <span className='m-1  p-2'>
                   <img src={fb} alt="Facebook" className='rounded-circle img-fluid social-icon-custom' />
                 </span>
                 <span className='m-1 p-2'>

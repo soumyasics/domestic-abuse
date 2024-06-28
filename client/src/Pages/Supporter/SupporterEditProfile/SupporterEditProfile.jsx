@@ -8,7 +8,7 @@ import './SupporterEditProfile.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import demo from '../../../Assets/supp-edit-profile.png';
-import { editSupportersById, getSupporterById } from '../../../Services/apiService';
+import { editSupportersById, getSupporterById, IMG_BASE_URL } from '../../../Services/apiService';
 import { useNavigate } from 'react-router-dom';
 
 function SupporterEditProfile() {
@@ -16,7 +16,7 @@ function SupporterEditProfile() {
         name: '',
         email: '',
         contact: '',
-        password:'',
+        password: '',
         organization: '',
         image: null,
     });
@@ -34,7 +34,7 @@ function SupporterEditProfile() {
                     console.log('Fetch supporter response:', response);
                     if (response.status === 200) {
                         setSupporter(response.data);
-                        setImagePreview(response.data.image || demo);
+                        setImagePreview(response.data.image ? `${IMG_BASE_URL}/${response.data.image.filename}` : demo);
                     } else {
                         toast.error('Supporter not found');
                     }
@@ -111,6 +111,7 @@ function SupporterEditProfile() {
             if (supporter.image) {
                 formData.append('image', supporter.image);
             }
+
             console.log(formData.entries());
             // Log formData entries for debugging
             for (let [key, value] of formData.entries()) {
@@ -147,7 +148,18 @@ function SupporterEditProfile() {
                         <div className='row align-items-center justify-content-center'>
                             <div className='col-md-2 m-4 mt-0'>
                                 <div className='supporter-edit-profile-border-box p-3 position-relative'>
-                                    <img src={imagePreview} alt='profile demo' className='img-fluid rounded-circle' />
+                                    <div className="rounded-circle overflow-hidden" style={{ width: '150px', height: '150px', margin: '0 auto' }}>
+                                        <img
+                                            src={imagePreview}
+                                            alt='profile demo'
+                                            className='img-fluid rounded-circle'
+                                            onError={(e) => {
+                                                e.target.onerror = null;
+                                                e.target.src = demo; 
+                                            }}
+                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                        />
+                                    </div>
                                     <div className='rounded-circle bg-white supporter-edit-profile-icon-box border-light position-absolute'>
                                         <label htmlFor="imageUpload" className="image-upload-label">
                                             <PiPencilDuotone color={'#59244C'} size={40} />

@@ -1,15 +1,30 @@
+// src/components/layout/Navbar.jsx
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import brand from '../../../Assets/2a75e2f413ad511cbebf7abc265805b4.png';
-import AuthContext from '../../../context/AuthContext';
+import { AuthContext } from '../../../context/AuthContext';
 
 function Navbar() {
     const navigate = useNavigate();
-    const { isLoggedIn, logout } = useContext(AuthContext);
+    const { isLoggedIn, logout, userRole } = useContext(AuthContext);
 
     const handleImageClick = () => {
-        navigate('/');
+        if (isLoggedIn) {
+            switch (userRole) {
+                case 'supporter':
+                    navigate('/supporter-home');
+                    break;
+                case 'admin':
+                    navigate('/admin-dashboard'); // Example route for admin
+                    break;
+                default:
+                    navigate('/');
+                    break;
+            }
+        } else {
+            navigate('/');
+        }
     };
 
     const handleLogout = () => {
@@ -33,7 +48,11 @@ function Navbar() {
                 <div className="collapse navbar-collapse mx-5 justify-content-end" id="navbarNav">
                     <ul className="navbar-nav ml-auto mx-5">
                         <li className="nav-item active">
-                            <Link className="nav-link mx-3 theme-purple fw-semibold" to="/">Home</Link>
+                            {isLoggedIn && userRole === 'supporter' ? (
+                                <Link className="nav-link mx-3 theme-purple fw-semibold" to="/supporter-home">Home</Link>
+                            ) : (
+                                <Link className="nav-link mx-3 theme-purple fw-semibold" to="/">Home</Link>
+                            )}
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link mx-3 theme-purple fw-semibold" to="/">About Us</Link>

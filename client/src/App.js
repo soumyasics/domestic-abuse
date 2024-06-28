@@ -31,7 +31,6 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path='/user-login' element={<User_Login />} />
             <Route path='/user-register' element={<User_Register />} />
-            
 
             {/* Admin Paths */}
             <Route path='/admin-login' element={<AdminLogin />} />
@@ -43,7 +42,7 @@ function App() {
             <Route path='/admin-view-all-safehouses' element={
                 <AdminViewAllSafehouses />
             } />
-            
+
             {/* Supporter Paths */}
             <Route path='/supporter-register' element={<SupporterRegister />} />
             <Route path='/supporter-login' element={<SupporterLogin />} />
@@ -51,9 +50,11 @@ function App() {
             <Route path='/supporter-forgot-password' element={<SupporterForgotPassword />} />
             <Route path='/supporter-edit-profile' element={<SupporterEditProfile />} />
             <Route path='/supporter-add-safe-space' element={<SupporterAddSafeHouse />} />
-            <Route path='/supporter-edit-safe-space' element={<SupporterEditSafeHouse />} />
-            <Route path='/supporter-view-all-safehouses' element={<SupporterViewAllSafeHouses />} />
             
+            {/* Updated route for editing safe house */}
+            <Route path='/supporter-edit-safe-space' element={<SupporterEditSafeHouse />} />
+
+            <Route path='/supporter-view-all-safehouses' element={<SupporterViewAllSafeHouses />} />
           </Routes>
         </div>
         <Footer />

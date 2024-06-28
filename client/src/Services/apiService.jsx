@@ -1,11 +1,10 @@
 //src/Services/apiService.jsx
 import axios from 'axios';
 
-//export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
-//export const IMG_BASE_URL = 'http://localhost:4039/';
-export const IMG_BASE_URL = 'http://hybrid.srishticampus.in:4039/';
-
-export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
+export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
+export const IMG_BASE_URL = 'http://localhost:4039/';
+//export const IMG_BASE_URL = 'http://hybrid.srishticampus.in:4039/';
+//export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
 // Api for Viewing all Supporters Request for admin to approve, reject or view
 export const viewSupporterReqsForAdmin = async () => {
   try {
@@ -223,35 +222,97 @@ export const getSupporterById = async (supporterId) => {
 // API for Registering Safe House
 export const registerSafeHouse = async (safehouseData) => {
   try {
-    // const formData = new FormData();
-    // Object.keys(safehouseData).forEach(key => {
-    //   formData.append(key, safehouseData[key]);
-    // });
+    const formData = new FormData();
+    Object.keys(safehouseData).forEach(key => {
+      if (key === 'image') {
+        formData.append('image', safehouseData[key], safehouseData[key].name);
+      } else {
+        formData.append(key, safehouseData[key]);
+      }
+    });
 
-    // const response = await axios.post(`${API_BASE_URL}/registerSafehouse`, formData, {
-    //   headers: {
-    //     'Content-Type': 'multipart/form-data',
-    //   },
-    // });
+    const response = await axios.post(`${API_BASE_URL}/registerSafehouse`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
 
-    // // Handling responses based on status code
-    // switch (response.data.status) {
-    //   case 200:
-    //     toast.success(response.data.msg); // "Inserted successfully"
-    //     return { success: true, message: response.data.msg, data: response.data.data };
-    //   case 409:
-    //     toast.error(response.data.msg); // "Contact Number Already Registered With Us !!"
-    //     return { success: false, message: response.data.msg };
-    //   case 500:
-    //     toast.error(response.data.msg); // "Data not Inserted"
-    //     return { success: false, message: response.data.msg };
-    //   default:
-    //     toast.error('Unexpected error occurred');
-    //     return { success: false, message: 'Unexpected error occurred' };
-    // }
+    if (response.data.status === 200) {
+      return { success: true, message: response.data.msg };
+    } else {
+      return { success: false, message: response.data.msg };
+    }
   } catch (error) {
-    console.error('Error Registering Safe House', error);
-    //toast.error(error.response?.data?.message || 'Registration failed. Please try again.');
+    if (error.response && error.response.data) {
+      return {
+        success: false,
+        message: error.response.data.msg || 'Failed to register safe house',
+      };
+    }
+    return {
+      success: false,
+      message: 'An unexpected error occurred',
+    };
+  }
+};
+
+//Api for Updating Safehouse by ID
+export const editSafehouseById = async (id, safehouseData) => {
+  try {
+    const formData = new FormData();
+    Object.keys(safehouseData).forEach(key => {
+      if (key === 'image') {
+        formData.append('image', safehouseData[key], safehouseData[key].name);
+      } else {
+        formData.append(key, safehouseData[key]);
+      }
+    });
+
+    const response = await axios.post(`${API_BASE_URL}/editSafehouseById/${id}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    if (response.data.status === 200) {
+      return { success: true, data: response.data };
+    } else {
+      return { success: false, message: response.data.msg };
+    }
+  } catch (error) {
+    if (error.response && error.response.data) {
+      return {
+        success: false,
+        message: error.response.data.msg || 'Update failed'
+      };
+    }
+    return {
+      success: false,
+      message: 'An unexpected error occurred'
+    };
+  }
+};
+
+// Function to view safehouse by ID
+export const viewSafehouseById = async (id) => {
+  try {
+    console.log(id);
+    const response = await axios.post(`${API_BASE_URL}/viewSafehouseById/${id}`);
+    console.log(response);
+    return response.data.data;
+  } catch (error) {
+    console.error(`Error fetching safe house with ID ${id}:`, error);
+    throw error;
+  }
+};
+// Function to view all safehouses
+export const viewSafehouses = async () => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewSafehouses`);
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching safehouses:', error);
     throw error;
   }
 };
