@@ -6,9 +6,25 @@ import { GoLaw } from "react-icons/go";
 import { Container, Row, Col } from 'react-bootstrap';
 import SupportersRequestTable from '../Request/SupportersRequestTable';
 import AdminStatBox from '../AdminStatBox/AdminStatBox';
+import { useState, Fragment, useEffect } from 'react';
+import axiosInstance from '../../../Constant/BaseURL';
+import { useNavigate } from 'react-router-dom';
 
 function AdminDasboardOverview() {
-
+    const [userData, setUserData] = useState({});
+    const navigate = useNavigate();
+  
+    useEffect(() => {
+      axiosInstance
+        .post(`viewSupporters`)
+        .then((res) => {
+          console.log(res);
+          setUserData(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, []);
     return (
         <Container>
             <Row>

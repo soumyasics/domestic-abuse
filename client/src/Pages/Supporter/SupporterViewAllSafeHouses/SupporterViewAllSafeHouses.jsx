@@ -5,6 +5,7 @@ import ReactPaginate from 'react-paginate';
 import { FaPen } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
 import { viewSafehouses } from '../../../Services/apiService'; 
+import { Link } from 'react-router-dom';
 
 function SupporterViewAllSafeHouses() {
   const [safehouses, setSafehouses] = useState([]);
@@ -53,6 +54,9 @@ function SupporterViewAllSafeHouses() {
       <div className='row m-5 mt-5 mb-2'>
         <div className='col'>
           <h4 className='theme-purple'>Safe House Details</h4>
+        </div>
+        <div className='col'>
+          <h4 className='theme-purple'><Link to="/supporter-add-safe-space">Add New Safe House</Link></h4>
         </div>
       </div>
       <div className='table-responsive m-5 mt-2'>
