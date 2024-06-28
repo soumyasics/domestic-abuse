@@ -20,6 +20,8 @@ import SupporterEditSafeHouse from './Pages/Supporter/SupporterEditSafeHouse/Sup
 import SupporterViewAllSafeHouses from './Pages/Supporter/SupporterViewAllSafeHouses/SupporterViewAllSafeHouses';
 import AdminViewAllSafehouses from './Pages/Admin/AdminViewAllSafehouses/AdminViewAllSafehouses';
 import AdminSafehouseDetailedView from './Pages/Admin/AdminSafehouseDetailedView/AdminSafehouseDetailedView';
+import CounsellorRegistration from './Pages/Counsellor/CounsellorRegistration/CounsellorRegistration';
+import CounsellorLogin from './Pages/Counsellor/CounsellorLogin/CounsellorLogin';
 
 function App() {
   return (
@@ -57,6 +59,11 @@ function App() {
             {/* Updated route for editing safe house */}
             <Route path='/supporter-edit-safe-space' element={<SupporterEditSafeHouse />} />
             <Route path='/supporter-view-all-safehouses' element={<SupporterViewAllSafeHouses />} />
+
+            {/* Counsellor Paths */}
+            <Route path='/counsellor-register' element={<CounsellorRegistration />} />
+            <Route path='/counsellor-login' element={<CounsellorLogin/>} />
+            
           </Routes>
         </div>
         <Footer />

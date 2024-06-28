@@ -7,7 +7,7 @@
   }
 
 .supporters-table .bi {
-  font-size: 1.8rem;
+  font-size: 25px;
   color: grey;
   transition: color 0.3s, transform 0.3s;
   cursor: pointer;

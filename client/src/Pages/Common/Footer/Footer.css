@@ -1,5 +1,5 @@
 .footer-custom {
-  height: 380px;
+  height: 300px;
   overflow: hidden;
   background-color: #59244C;
 }
@@ -24,6 +24,8 @@
   .social-icon-custom {
     max-width: 40px;
     max-height: 40px;
+    min-width: 30px;
+    min-height: 30px;
   }
 }
 .footer-img{

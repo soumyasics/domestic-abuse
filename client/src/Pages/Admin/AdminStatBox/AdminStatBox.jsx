@@ -4,7 +4,7 @@ import './AdminStatBox.css';
 
 function AdminStatBox({ icon, color, title, count }) {
   return (
-    <Card className=" m-4 stat-box rounded-4" >
+    <Card className=" m-3 stat-box rounded-4" >
       <div className='position-relative row card-body'>
         <div className='position-absolute stat-box-icon-position d-flex  align-items-center col border rounded-4' style={{ backgroundColor: color ,color:'white'}}>
           <div className='text-center align-self-center position-absolute top-50 start-50 translate-middle '>

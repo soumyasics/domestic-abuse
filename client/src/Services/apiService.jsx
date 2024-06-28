@@ -316,3 +316,29 @@ export const viewSafehouses = async () => {
     throw error;
   }
 };
+
+//Api for Counsellor Login
+export const loginCounsellor = async (counsellor, setTokenCallback) => {
+  try {
+      const response = await axios.post(`${API_BASE_URL}/loginCounsellor`, counsellor);
+
+      if (response.data.status === 200) {
+          const { token, data } = response.data;
+          setTokenCallback(token, data._id);
+          return { success: true, user: data };
+      } else {
+          return { success: false, message: response.data.msg };
+      }
+  } catch (error) {
+      if (error.response && error.response.data) {
+          return {
+              success: false,
+              message: error.response.data.msg || 'Login failed',
+          };
+      }
+      return {
+          success: false,
+          message: 'An unexpected error occurred',
+      };
+  }
+};

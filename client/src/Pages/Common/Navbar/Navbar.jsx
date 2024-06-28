@@ -15,6 +15,9 @@ function Navbar() {
                 case 'supporter':
                     navigate('/supporter-home');
                     break;
+                case 'counsellor':
+                    navigate('/counsellor-home');
+                    break;
                 case 'admin':
                     navigate('/admin-dashboard'); // Example route for admin
                     break;
@@ -72,6 +75,7 @@ function Navbar() {
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown1" >
                                     <li><Link className="dropdown-item theme-purple fw-semibold" to="/admin-login">Admin</Link></li>
                                     <li><Link className="dropdown-item theme-purple fw-semibold" to="/supporter-login">Supporter</Link></li>
+                                    <li><Link className="dropdown-item theme-purple fw-semibold" to="/counsellor-login">Counsellor</Link></li>
                                     <li><Link className="dropdown-item theme-purple fw-semibold" to="#">Legal Professional</Link></li>
                                 </ul>
                             </li>

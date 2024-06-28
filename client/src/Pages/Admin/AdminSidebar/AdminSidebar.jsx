@@ -34,12 +34,12 @@ const AdminSidebar = ({ changeActivePage }) => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-auto px-sm-2 px-0 bg-cream">
+        <div className="col px-sm-2 px-0 bg-cream">
           <div className='d-flex admin-heading text-white'>
             <span className='d-flex align-items-center'>
             <PersonCircle size={32}  className='border rounded-circle m-3 align-self-center theme-purple' />
             </span>
-            <h3 className='m-3 align-self-center'>Welcome Admin</h3>
+            <h6 className='m-3 align-self-center'>Welcome Admin</h6>
           </div>
           <div className="d-flex flex-column align-items-center align-items-sm-start px-0 pt-2 text-white min-vh-100">
             <ul className="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start w-100" id="menu">
@@ -61,10 +61,6 @@ const AdminSidebar = ({ changeActivePage }) => {
                 </button>
                 <ul className={`collapse nav flex-column ms-1 ${menuOpen.supporters ? 'show' : ''}`} id="supportersSubmenu" data-bs-parent="#menu">
                   <li className="w-100 ms-3">
-                    <Link to="#" className="nav-link px-0 admin-list" onClick={() => changeActivePage("home")}>
-                      <span className="ms-2 d-none d-sm-inline theme-purple"><IoMdArrowDropright size={25} /></span>
-                      <span className="d-none d-sm-inline theme-purple">Home</span>
-                    </Link>
                     <Link to="#" className="nav-link px-0 admin-list" onClick={() => changeActivePage("new-request")}>
                       <span className="ms-2 d-none d-sm-inline theme-purple"><IoMdArrowDropright size={25} /></span>
                       <span className="d-none d-sm-inline theme-purple">New Request</span>

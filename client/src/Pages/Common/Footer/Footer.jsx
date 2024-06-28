@@ -13,17 +13,17 @@ function Footer() {
     <footer className='footer-custom'>
       <div className='container-fluid p-0'>
         <div className='row d-flex align-items-center justify-content-between'>
-          <div className='col-auto d-flex align-items-center'>
+          <div className='col d-flex align-items-center'>
             <Link className="navbar-brand me-2 text-center" to="#">
               <img src={brand} alt='brand' className='footer-img' />
             </Link>
             <h1 className='ms-0'>
-              <span className='text-white me-2'>Safe</span>
-              <span className='theme-green'>Space</span>
+              <span className='text-white me-2 fs-3 fw-semibold'>Safe</span>
+              <span className='theme-green fs-3 fw-semibold'>Space</span>
             </h1>
           </div>
-          <div className='col-auto text-white m-3'>
-            <h5 className='fs-3'>Terms & Policies</h5>
+          <div className='col text-white m-3'>
+            <h5 className='fs-5 fw-semibold'>Terms & Policies</h5>
             <ul className='list-group list-group-flush text-white bg-theme'>
               <li className='list-group-item bg-transparent border-0'>
                 <Link className='text-white text-decoration-none' to='#'>Terms of Service</Link>
@@ -33,22 +33,22 @@ function Footer() {
               </li>
             </ul>
           </div>
-          <div className='col-auto text-white m-3'>
-            <h5 className='fs-3'>Contact</h5>
+          <div className='col text-white m-3'>
+            <h5 className='fs-5 fw-semibold'>Contact</h5>
             <p>safespace@gmail.com</p>
             <p>Skype</p>
           </div>
-          <div className='col-auto text-white m-3 mt-5'>
-            <h5 className='fs-3 text-center'>Important</h5>
+          <div className='col text-white m-3 mt-5'>
+            <h5 className='fs-5 text-center fw-semibold'>Important</h5>
             <p>If you are in immediate danger, please call 911. </p>
             <p>For confidential support</p> 
             <p> call the National Domestic Violence Hotline at 1-500-719-7133.</p>
             
           </div>
-          <div className='col-lg text-white m-3'>
+          <div className='col text-white m-3'>
             <div className='row'>
               <div className='col text-center m-5 mx-0'>
-                <p className='m-auto'>Keep in TOUCH</p>
+                <p className='m-auto fw-semibold'>Keep in TOUCH</p>
               </div>
             </div>
             <div className='row'>
@@ -77,7 +77,7 @@ function Footer() {
             <hr className='hr-custom'/>
           </div>
         </div>
-        <div className='row text-white fs-4 text-center'>
+        <div className='row text-white fs-6 text-center'>
           <div className='col'>
             <p>copyright@2024</p>
           </div>

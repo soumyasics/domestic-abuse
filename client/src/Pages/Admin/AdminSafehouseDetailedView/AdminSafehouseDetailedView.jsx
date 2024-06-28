@@ -25,7 +25,7 @@ function AdminSafehouseDetailedView(props, supporter) {
               style={{ width: '100%', height: '100%' }}
             />
           </div>
-          <div className='col m-3 bg-creamy theme-purple text-center fs-5 border rounded'>
+          <div className='col m-3 bg-creamy theme-purple text-center fs-6 border rounded'>
             <div className='row border-bottom m-5 '>
               <div className='col-6'>
                 House Name:
@@ -100,7 +100,7 @@ function AdminSafehouseDetailedView(props, supporter) {
               </div>
             </div>
           </div>
-          <div className='col fs-5 border rounded bg-creamy'>
+          <div className='col fs-6 border rounded bg-creamy'>
             <div className='row border-bottom m-5'>
               <div className='col-6'>
                 Name:
