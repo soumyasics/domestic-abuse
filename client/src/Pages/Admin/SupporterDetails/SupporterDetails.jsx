@@ -23,7 +23,7 @@ const SupporterDetails = ({ supporter }) => {
             </div>
           </div>
         </div>
-        <div className='row border-bottom-5'>
+        <div className='row border-bottom'>
           <div className='col-4'>
             Name:
           </div>
@@ -31,7 +31,7 @@ const SupporterDetails = ({ supporter }) => {
             {supporter.name}
           </div>
         </div>
-        <div className='row border-bottom-5'>
+        <div className='row border-bottom'>
           <div className='col-4'>
             Contact No:
           </div>
@@ -39,7 +39,7 @@ const SupporterDetails = ({ supporter }) => {
             {supporter.contact}
           </div>
         </div>
-        <div className='row border-bottom-5'>
+        <div className='row border-bottom'>
           <div className='col-4'>
             Mail Id:
           </div>
@@ -47,7 +47,7 @@ const SupporterDetails = ({ supporter }) => {
             {supporter.email}
           </div>
         </div>
-        <div className='row border-bottom-5'>
+        <div className='row border-bottom'>
           <div className='col'>
             Organisation Name:
           </div>

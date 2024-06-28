@@ -38,11 +38,12 @@ function Footer() {
             <p>safespace@gmail.com</p>
             <p>Skype</p>
           </div>
-          <div className='col-auto text-white m-3'>
-            <h5 className='fs-3 text-center'>Location</h5>
-            <p>HSHSGSDHSHDSHDH</p>
-            <p>HSHSGSDHSHDSHDH</p>
-            <p>HSHSGSDHSHDSHDH</p>
+          <div className='col-auto text-white m-3 mt-5'>
+            <h5 className='fs-3 text-center'>Important</h5>
+            <p>If you are in immediate danger, please call 911. </p>
+            <p>For confidential support</p> 
+            <p> call the National Domestic Violence Hotline at 1-500-719-7133.</p>
+            
           </div>
           <div className='col-lg text-white m-3'>
             <div className='row'>
