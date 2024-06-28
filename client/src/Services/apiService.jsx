@@ -57,6 +57,7 @@ export const loginSupporter = async (supporter, setTokenCallback) => {
       const response = await axios.post(`${API_BASE_URL}/loginSupporter`, supporter);
 
       if (response.data.status === 200) {
+        localStorage.setItem("supporterId",response.data._id)
           const { token, data } = response.data;
           setTokenCallback(token, data._id);
           return { success: true, user: data };

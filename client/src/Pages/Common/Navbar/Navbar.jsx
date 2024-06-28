@@ -54,6 +54,13 @@ function Navbar() {
                                 <Link className="nav-link mx-3 theme-purple fw-semibold" to="/">Home</Link>
                             )}
                         </li>
+                        <li className="nav-item active">
+                            {isLoggedIn && userRole === 'supporter' ? (
+                                <Link className="nav-link mx-3 theme-purple fw-semibold" to="/supporter-view-all-safehouses">Safe House</Link>
+                            ) : (
+                               <p></p>
+                            )}
+                        </li>
                         <li className="nav-item">
                             <Link className="nav-link mx-3 theme-purple fw-semibold" to="/">About Us</Link>
                         </li>

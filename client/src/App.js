@@ -36,9 +36,9 @@ function App() {
             {/* Admin Paths */}
             <Route path='/admin-login' element={<AdminLogin />} />
             <Route path='/admin-dashboard' element={
-              <ProtectedRoute>
+         
                 <AdminDashboard />
-              </ProtectedRoute>
+             
             } />
             <Route path='/admin-view-all-safehouses' element={
                 <AdminViewAllSafehouses />
@@ -73,6 +73,7 @@ function ConditionalNavbar() {
   } else {
     return <Navbar />;
   }
+
 }
 
 export default App;

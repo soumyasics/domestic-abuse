@@ -1,305 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './AdminViewAllSafehouses.css';
 import { Table } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import { FaPen, FaEye } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
+import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../../../Constant/BaseURL';
 
 
 
 function AdminViewAllSafehouses() {
-  const [safehouses, setSafehouses] = useState([
-    {
-      _id: '1',
-      houseName: 'Safe House 1',
-      address: '123 Street, City',
-      contact: '1234567890',
-      landmark: 'Near Park',
-      licenseNo: 'LN12345',
-      accommodationCapacity: '10',
-      image: 'path/to/image1.jpg',
-      monthlyRent: '$1000',
-      description: 'Description 1',
-    },
-    {
-      _id: '2',
-      houseName: 'Safe House 2',
-      address: '456 Avenue, City',
-      contact: '0987654321',
-      landmark: 'Near Mall',
-      licenseNo: 'LN67890',
-      accommodationCapacity: '15',
-      image: 'path/to/image2.jpg',
-      monthlyRent: '$1500',
-      description: 'Description 2',
-    },
-     {
-      _id: '3',
-      houseName: 'Safe House 2',
-      address: '456 Avenue, City',
-      contact: '0987654321',
-      landmark: 'Near Mall',
-      licenseNo: 'LN67890',
-      accommodationCapacity: '15',
-      image: 'path/to/image2.jpg',
-      monthlyRent: '$1500',
-      description: 'Description 2',
-    },
-    {
-      _id: '4',
-      houseName: 'Safe House 2',
-      address: '456 Avenue, City',
-      contact: '0987654321',
-      landmark: 'Near Mall',
-      licenseNo: 'LN67890',
-      accommodationCapacity: '15',
-      image: 'path/to/image2.jpg',
-      monthlyRent: '$1500',
-      description: 'Description 2',
-    },
-    {
-      _id: '5',
-      houseName: 'Safe House 2',
-      address: '456 Avenue, City',
-      contact: '0987654321',
-      landmark: 'Near Mall',
-      licenseNo: 'LN67890',
-      accommodationCapacity: '15',
-      image: 'path/to/image2.jpg',
-      monthlyRent: '$1500',
-      description: 'Description 2',
-    },
-    {
-      _id: '6',
-      houseName: 'Safe House 2',
-      address: '456 Avenue, City',
-      contact: '0987654321',
-      landmark: 'Near Mall',
-      licenseNo: 'LN67890',
-      accommodationCapacity: '15',
-      image: 'path/to/image2.jpg',
-      monthlyRent: '$1500',
-      description: 'Description 2',
-    },
-    {
-      _id: '7',
-      houseName: 'Safe House 2',
-      address: '456 Avenue, City',
-      contact: '0987654321',
-      landmark: 'Near Mall',
-      licenseNo: 'LN67890',
-      accommodationCapacity: '15',
-      image: 'path/to/image2.jpg',
-      monthlyRent: '$1500',
-      description: 'Description 2',
-    },
-    {
-      _id: '8',
-      houseName: 'Safe House 2',
-      address: '456 Avenue, City',
-      contact: '0987654321',
-      landmark: 'Near Mall',
-      licenseNo: 'LN67890',
-      accommodationCapacity: '15',
-      image: 'path/to/image2.jpg',
-      monthlyRent: '$1500',
-      description: 'Description 2',
-    },
-    {
-      _id: '9',
-      houseName: 'Safe House 2',
-      address: '456 Avenue, City',
-      contact: '0987654321',
-      landmark: 'Near Mall',
-      licenseNo: 'LN67890',
-      accommodationCapacity: '15',
-      image: 'path/to/image2.jpg',
-      monthlyRent: '$1500',
-      description: 'Description 2',
-    },
-    {
-      _id: '10',
-      houseName: 'Safe House 2',
-      address: '456 Avenue, City',
-      contact: '0987654321',
-      landmark: 'Near Mall',
-      licenseNo: 'LN67890',
-      accommodationCapacity: '15',
-      image: 'path/to/image2.jpg',
-      monthlyRent: '$1500',
-      description: 'Description 2',
-    },
-    {
-      _id: '11',
-      houseName: 'Safe House 2',
-      address: '456 Avenue, City',
-      contact: '0987654321',
-      landmark: 'Near Mall',
-      licenseNo: 'LN67890',
-      accommodationCapacity: '15',
-      image: 'path/to/image2.jpg',
-      monthlyRent: '$1500',
-      description: 'Description 2',
-    },
-    {
-      _id: '12',
-      houseName: 'Safe House 2',
-      address: '456 Avenue, City',
-      contact: '0987654321',
-      landmark: 'Near Mall',
-      licenseNo: 'LN67890',
-      accommodationCapacity: '15',
-      image: 'path/to/image2.jpg',
-      monthlyRent: '$1500',
-      description: 'Description 2',
-    },
-    {
-      _id: '13',
-      houseName: 'Safe House 2',
-      address: '456 Avenue, City',
-      contact: '0987654321',
-      landmark: 'Near Mall',
-      licenseNo: 'LN67890',
-      accommodationCapacity: '15',
-      image: 'path/to/image2.jpg',
-      monthlyRent: '$1500',
-      description: 'Description 2',
-    },
-    {
-      _id: '14',
-      houseName: 'Safe House 2',
-      address: '456 Avenue, City',
-      contact: '0987654321',
-      landmark: 'Near Mall',
-      licenseNo: 'LN67890',
-      accommodationCapacity: '15',
-      image: 'path/to/image2.jpg',
-      monthlyRent: '$1500',
-      description: 'Description 2',
-    },
-    {
-      _id: '15',
-      houseName: 'Safe House 2',
-      address: '456 Avenue, City',
-      contact: '0987654321',
-      landmark: 'Near Mall',
-      licenseNo: 'LN67890',
-      accommodationCapacity: '15',
-      image: 'path/to/image2.jpg',
-      monthlyRent: '$1500',
-      description: 'Description 2',
-    },
-    {
-      _id: '16',
-      houseName: 'Safe House 2',
-      address: '456 Avenue, City',
-      contact: '0987654321',
-      landmark: 'Near Mall',
-      licenseNo: 'LN67890',
-      accommodationCapacity: '15',
-      image: 'path/to/image2.jpg',
-      monthlyRent: '$1500',
-      description: 'Description 2',
-    },
-    {
-      _id: '17',
-      houseName: 'Safe House 2',
-      address: '456 Avenue, City',
-      contact: '0987654321',
-      landmark: 'Near Mall',
-      licenseNo: 'LN67890',
-      accommodationCapacity: '15',
-      image: 'path/to/image2.jpg',
-      monthlyRent: '$1500',
-      description: 'Description 2',
-    },
-    {
-      _id: '18',
-      houseName: 'Safe House 2',
-      address: '456 Avenue, City',
-      contact: '0987654321',
-      landmark: 'Near Mall',
-      licenseNo: 'LN67890',
-      accommodationCapacity: '15',
-      image: 'path/to/image2.jpg',
-      monthlyRent: '$1500',
-      description: 'Description 2',
-    },
-    {
-      _id: '19',
-      houseName: 'Safe House 2',
-      address: '456 Avenue, City',
-      contact: '0987654321',
-      landmark: 'Near Mall',
-      licenseNo: 'LN67890',
-      accommodationCapacity: '15',
-      image: 'path/to/image2.jpg',
-      monthlyRent: '$1500',
-      description: 'Description 2',
-    },
-    {
-      _id: '20',
-      houseName: 'Safe House 2',
-      address: '456 Avenue, City',
-      contact: '0987654321',
-      landmark: 'Near Mall',
-      licenseNo: 'LN67890',
-      accommodationCapacity: '15',
-      image: 'path/to/image2.jpg',
-      monthlyRent: '$1500',
-      description: 'Description 2',
-    },
-    {
-      _id: '21',
-      houseName: 'Safe House 2',
-      address: '456 Avenue, City',
-      contact: '0987654321',
-      landmark: 'Near Mall',
-      licenseNo: 'LN67890',
-      accommodationCapacity: '15',
-      image: 'path/to/image2.jpg',
-      monthlyRent: '$1500',
-      description: 'Description 2',
-    },
-    {
-      _id: '22',
-      houseName: 'Safe House 2',
-      address: '456 Avenue, City',
-      contact: '0987654321',
-      landmark: 'Near Mall',
-      licenseNo: 'LN67890',
-      accommodationCapacity: '15',
-      image: 'path/to/image2.jpg',
-      monthlyRent: '$1500',
-      description: 'Description 2',
-    },
-    {
-      _id: '23',
-      houseName: 'Safe House 2',
-      address: '456 Avenue, City',
-      contact: '0987654321',
-      landmark: 'Near Mall',
-      licenseNo: 'LN67890',
-      accommodationCapacity: '15',
-      image: 'path/to/image2.jpg',
-      monthlyRent: '$1500',
-      description: 'Description 2',
-    },
-    {
-      _id: '24',
-      houseName: 'Safe House 2',
-      address: '456 Avenue, City',
-      contact: '0987654321',
-      landmark: 'Near Mall',
-      licenseNo: 'LN67890',
-      accommodationCapacity: '15',
-      image: 'path/to/image2.jpg',
-      monthlyRent: '$1500',
-      description: 'Description 2',
-    },
-    
-  ]);
 
+
+
+
+
+  const [safehouses, setSafehouses] = useState([]);
+
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    axiosInstance
+      .post(`viewSafehouses`)
+      .then((res) => {
+        console.log(res);
+        setSafehouses(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   const [currentPage, setCurrentPage] = useState(0);
   const safehousesPerPage = 10;
 
@@ -335,7 +66,7 @@ function AdminViewAllSafehouses() {
             <tr className="text-center">
               <th className='view-all-safehouse-theme text-white'>SI.No</th>
               <th className='view-all-safehouse-theme text-white'>Name</th>
-              <th className='view-all-safehouse-theme text-white'>Address</th>
+           
               <th className='view-all-safehouse-theme text-white'>Contact Number</th>
               <th className='view-all-safehouse-theme text-white'>Landmark</th>
               <th className='view-all-safehouse-theme text-white'>Accommodation Capacity</th>
@@ -347,12 +78,12 @@ function AdminViewAllSafehouses() {
             {currentSafehouses.map((safehouse, index) => (
               <tr key={safehouse._id} className='view-all-safehouse-theme-table-body'>
                 <td className='p-2'>{offset + index + 1}</td>
-                <td className='p-2'>{safehouse.houseName}</td>
-                <td className='p-2'>{safehouse.address}</td>
+                <td className='p-2'>{safehouse.name}</td>
+               
                 <td className='p-2'>{safehouse.contact}</td>
                 <td className='p-2'>{safehouse.landmark}</td>
-                <td className='p-2'>{safehouse.accommodationCapacity}</td>
-                <td className='p-2'>{safehouse.monthlyRent}</td>
+                <td className='p-2'>{safehouse.capacity}</td>
+                <td className='p-2'>{safehouse.rent}</td>
                 <td className='p-2'>
                   <div className='d-flex justify-content-center'>
                     <div className='bg-purple rounded-circle cursor-pointer mx-2'>
