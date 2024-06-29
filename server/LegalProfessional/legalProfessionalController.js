@@ -26,7 +26,7 @@ const upload = multer({ storage: storage }).fields([
 // Register Legal Professionals
 const registerLegalProfessional = async (req, res) => {
   try {
-    const { name, contact, email, password, barAssociationId, firmName, language, licenseNumber } = req.body;
+    const { name, contact, email, password, barAssociationId, firmName, licenseNumber } = req.body;
 
     const newLegalProfessional = new LegalProfessionals({
       name,
@@ -35,12 +35,12 @@ const registerLegalProfessional = async (req, res) => {
       password,
       barAssociationId,
       firmName,
-      language,
+      
       licenseNumber,
       photo: req.files['photo'][0],
       proof: req.files['proof'][0],
     });
-
+    console.log(newLegalProfessional);
     let existingLegalProfessional = await LegalProfessionals.findOne({ contact });
     if (existingLegalProfessional) {
       return res.json({
@@ -59,6 +59,7 @@ const registerLegalProfessional = async (req, res) => {
         });
       })
       .catch(err => {
+        console.log(err);
         if (err.code === 11000) {
           return res.json({
             status: 409,
@@ -348,7 +349,7 @@ const approveLegalProfessionalById = (req, res) => {
     });
 };
 
-// Approve Legal Professional by ID
+// Deactivate Legal Professional by ID
 const deActivateLegalProfessionalById = (req, res) => {
     LegalProfessionals.findByIdAndUpdate(req.params.id, {isActive: false })
       .exec()
@@ -388,7 +389,7 @@ const activateLegalProfessionalById = (req, res) => {
       });
   };
 
-// Approve Legal Professional by ID
+// Delete or Reject Legal Professional by ID
 const deleteLegalProfessionalById = (req, res) => {
     LegalProfessionals.findByIdAndDelete(req.params.id)
       .exec()

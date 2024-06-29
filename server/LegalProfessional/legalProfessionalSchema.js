@@ -36,11 +36,7 @@ const schema = mongoose.Schema({
         required: true
       
     },
-    language: {
-        type: String,
-        required: true
-      
-    },
+  
     licenseNumber: {
         type: String,
         required: true

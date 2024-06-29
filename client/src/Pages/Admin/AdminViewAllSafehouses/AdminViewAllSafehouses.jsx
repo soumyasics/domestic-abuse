@@ -6,14 +6,10 @@ import { FaPen, FaEye } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../../Constant/BaseURL';
+import { TiTick } from "react-icons/ti";
 
 
-
-function AdminViewAllSafehouses() {
-
-
-
-
+function AdminViewAllSafehouses(activePage) {
 
   const [safehouses, setSafehouses] = useState([]);
 
@@ -34,12 +30,16 @@ function AdminViewAllSafehouses() {
   const [currentPage, setCurrentPage] = useState(0);
   const safehousesPerPage = 10;
 
-  const handleEdit = (id) => {
+  const handleAccept = (id) => {
+    // Edit functionality
+    console.log(`Edit Safe House with ID: ${id}`);
+  };
+  const handleView = (id) => {
     // Edit functionality
     console.log(`Edit Safe House with ID: ${id}`);
   };
 
-  const handleRemove = (id) => {
+  const handleReject = (id) => {
     // Remove functionality
     console.log(`Remove Safe House with ID: ${id}`);
   };
@@ -89,7 +89,19 @@ function AdminViewAllSafehouses() {
                     <div className='bg-purple rounded-circle cursor-pointer mx-2'>
                       <FaEye 
                         className='mx-2 text-white'
-                        onClick={() => handleEdit(safehouse._id)}
+                        onClick={() => handleView(safehouse._id)}
+                      />
+                    </div>
+                    <div className='bg-purple rounded-circle cursor-pointer mx-2'>
+                      <TiTick
+                        className='mx-2 text-white'
+                        onClick={() => handleAccept(safehouse._id)}
+                      />
+                    </div>
+                    <div className='bg-purple rounded-circle cursor-pointer mx-2'>
+                      <RxCross1 
+                        className='mx-2 text-white'
+                        onClick={() => handleReject(safehouse._id)}
                       />
                     </div>
                   </div>

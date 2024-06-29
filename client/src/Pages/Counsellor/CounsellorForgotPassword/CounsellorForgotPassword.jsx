@@ -1,8 +1,10 @@
+// src/Components/Counsellor/CounsellorForgotPassword/CounsellorForgotPassword.jsx
+
 import React, { useState } from 'react';
 import './CounsellorForgotPassword.css';
 import { useNavigate } from 'react-router-dom';
 import CoolGirl from '../../../Assets/counsellor-login.jpeg';
-import { forgotPassword } from '../../../Services/apiService';
+import { forgotPasswordCounsellor } from '../../../Services/apiService';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -50,7 +52,7 @@ function CounsellorForgotPassword() {
       return;
     }
     try {
-      const response = await forgotPassword(email, password);
+      const response = await forgotPasswordCounsellor(email, password);
       console.log(response);
       toast.success("Password reset successful. Redirecting to login page...");
       setTimeout(() => {

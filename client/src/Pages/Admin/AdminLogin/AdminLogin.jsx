@@ -16,20 +16,19 @@ export default function AdminLogin() {
   const togglePasswordVisibility = () => {
     setPasswordShown(!passwordShown);
   };
-
   const handleLogin = () => {
     const hardCodedUsername = 'admin';
     const hardCodedPassword = 'password@1';
     if (username === hardCodedUsername && password === hardCodedPassword) {
-      localStorage.setItem("admin",1)
+      localStorage.setItem("admin", 1);
       toast.success('Login successful!');
-      
-        navigate('/admin-dashboard');
-     
+      login('dummy-token', 'admin', 1); 
+      navigate('/admin-dashboard');
     } else {
       toast.error('Incorrect Username or Password');
     }
   };
+  
 
   return (
     <>

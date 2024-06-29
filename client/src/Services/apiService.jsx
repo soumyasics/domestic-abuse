@@ -317,29 +317,270 @@ export const viewSafehouses = async (id) => {
     throw error;
   }
 };
+// Api for Counsellor Register
+export const registerCounsellors = async (counsellorData) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/registerCounsellors`, counsellorData);
+    // Handling responses based on status code
+    switch (response.data.status) {
+      case 200:
+        console.log(response.data.msg); // "Inserted successfully"
+        return { success: true, message: response.data.msg, data: response.data.data };
+      case 409:
+        console.log(response.data.msg); // Either "Contact Number Already Registered With Us !!" or "Email already in use"
+        return { success: false, message: response.data.msg };
+      case 500:
+        console.log(response.data.msg); // "Data not Inserted"
+        return { success: false, message: response.data.msg };
+      default:
+        console.log('Unexpected response status:', response.data.status);
+        return { success: false, message: 'Unexpected error occurred' };
+    }
+  } catch (error) {
+    console.error('Error Registering Counsellor', error);
+    throw error;
+  }
+};
 
-//Api for Counsellor Login
+// Api for Counsellor Login
 export const loginCounsellor = async (counsellor, setTokenCallback) => {
   try {
-      const response = await axios.post(`${API_BASE_URL}/loginCounsellor`, counsellor);
+    const response = await axios.post(`${API_BASE_URL}/loginCounsellor`, counsellor);
 
-      if (response.data.status === 200) {
-          const { token, data } = response.data;
-          setTokenCallback(token, data._id);
-          return { success: true, user: data };
+    if (response.data.status === 200) {
+      const { token, data } = response.data;
+      setTokenCallback(token, data._id);
+      return { success: true, user: data };
+    } else if (response.data.status === 405) {
+      return { success: false, message: 'User not found ' };
+    }else if (response.data.status === 407) {
+        return { success: false, message: 'Password Mismatch ' };
+      } 
+    else if (response.data.status === 409) {
+      if (response.data.msg.includes('Admin Approval')) {
+        return { success: false, message: 'Please wait for Admin Approval' };
+      } else if (response.data.msg.includes('De-Activated')) {
+        return { success: false, message: 'Your Account is Currently De-Activated By Admin' };
       } else {
-          return { success: false, message: response.data.msg };
+        return { success: false, message: 'Password Mismatch' };
       }
+    } else {
+      return { success: false, message: 'Unknown error occurred' };
+    }
   } catch (error) {
-      if (error.response && error.response.data) {
-          return {
-              success: false,
-              message: error.response.data.msg || 'Login failed',
-          };
-      }
+    if (error.response && error.response.data) {
       return {
-          success: false,
-          message: 'An unexpected error occurred',
+        success: false,
+        message: error.response.data.msg || 'Login failed',
       };
+    }
+    return {
+      success: false,
+      message: 'An unexpected error occurred',
+    };
+  }
+};
+
+// Add forgotPasswordCounsellor function
+export const forgotPasswordCounsellor = async (email, password) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/forgotPasswordCounsellor`, { email, password });
+    if (response.data.status === 200) {
+      return { success: true, message: response.data.msg };
+    } else {
+      return { success: false, message: response.data.msg };
+    }
+  } catch (error) {
+    if (error.response && error.response.data) {
+      return {
+        success: false,
+        message: error.response.data.msg || 'Password reset failed'
+      };
+    }
+    return {
+      success: false,
+      message: 'An unexpected error occurred'
+    };
+  }
+};
+
+// Api for Registering Legal Professionals
+export const registerLegalProfessional = async (legalProfessionalData) => {
+  try {
+    const formData = new FormData();
+    Object.keys(legalProfessionalData).forEach(key => {
+      const value = legalProfessionalData[key];
+      if (key === 'photo' || key === 'proof') {
+        if (value && typeof value === 'object' && value.name) {
+          formData.append(key, value, value.name);
+        }
+      } else {
+        formData.append(key, value);
+      }
+    });
+
+    const response = await axios.post(`${API_BASE_URL}/registerLegalProfessional`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    switch (response.data.status) {
+      case 200:
+        console.log(response.data.msg); // "Inserted successfully"
+        return { success: true, message: response.data.msg, data: response.data.data };
+      case 409:
+        console.log(response.data.msg); // "Contact Number Already Registered With Us !!" or "Email already in use"
+        return { success: false, message: response.data.msg };
+      case 500:
+        console.log(response.data.msg); // "Data not Inserted"
+        return { success: false, message: response.data.msg };
+      default:
+        console.log('Unexpected response status:', response.data.status);
+        return { success: false, message: 'Unexpected error occurred' };
+    }
+  } catch (error) {
+    console.error('Error Registering Legal Professional', error);
+    throw error;
+  }
+};
+
+// Api for Legal Professional Login
+export const loginLegalProfessional = async (legalProfessional, setTokenCallback) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/loginLegalProfessional`, legalProfessional);
+
+    if (response.data.status === 200) {
+      const { token, data } = response.data;
+      setTokenCallback(token, data._id);
+      return { success: true, user: data };
+    } else if (response.data.status === 405) {
+      return { success: false, message: 'User not found ' };
+    } else if (response.data.status === 407) {
+      return { success: false, message: 'Password Mismatch ' };
+    } else if (response.data.status === 409) {
+      if (response.data.msg.includes('Admin Approval')) {
+        return { success: false, message: 'Please wait for Admin Approval' };
+      } else if (response.data.msg.includes('De-Activated')) {
+        return { success: false, message: 'Your Account is Currently De-Activated By Admin' };
+      } else {
+        return { success: false, message: 'Password Mismatch' };
+      }
+    } else {
+      return { success: false, message: 'Unknown error occurred' };
+    }
+  } catch (error) {
+    if (error.response && error.response.data) {
+      return {
+        success: false,
+        message: error.response.data.msg || 'Login failed',
+      };
+    }
+    return {
+      success: false,
+      message: 'An unexpected error occurred',
+    };
+  }
+};
+
+//Api for Legal Professional Forgot Password
+export const resetPasswordLegalProfessional = async (email, password) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/forgotPasswordLegalProfessional`, {
+      email,
+      password
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+// Api for Viewing all Counsellor Requests for Admin
+export const viewCounsellorReqsForAdmin = async () => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewCounsellorReqsForAdmin`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching Counsellor Requests for Admin', error);
+    throw error;
+  }
+};
+
+// Api for Approving Counsellor Request by ID
+export const approveCounsellorsById = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/approveCounsellorsById/${id}`);
+    if (response.data.status === 200) {
+      return { success: true, data: response.data };
+    } else {
+      return { success: false, message: response.data.msg };
+    }
+  } catch (error) {
+    if (error.response && error.response.data) {
+      return {
+        success: false,
+        message: error.response.data.msg || 'Approval failed'
+      };
+    }
+    return {
+      success: false,
+      message: 'An unexpected error occurred'
+    };
+  }
+};
+
+// Api for Rejecting Counsellor Request by ID
+export const rejectCounsellorsById = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/rejectCounsellorsById/${id}`);
+    if (response.data.status === 200) {
+      return { success: true, data: response.data };
+    } else {
+      return { success: false, message: response.data.msg };
+    }
+  } catch (error) {
+    if (error.response && error.response.data) {
+      return {
+        success: false,
+        message: error.response.data.msg || 'Rejection failed'
+      };
+    }
+    return {
+      success: false,
+      message: 'An unexpected error occurred'
+    };
+  }
+};
+
+// API for Viewing all Legal Professional Requests for Admin
+export const viewLegalProfessionalReqsForAdmin = async () => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewLegalProfessionalReqsForAdmin`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching Legal Professional Requests for Admin', error);
+    throw error;
+  }
+};
+
+// API for Approving Legal Professionals by ID
+export const approveLegalProfessionalsById = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/approveLegalProfessionalById/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error approving Legal Professional', error);
+    throw error;
+  }
+};
+
+// API for Rejecting Legal Professionals by ID
+export const rejectLegalProfessionalsById = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/deleteLegalProfessionalById/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error rejecting Legal Professional', error);
+    throw error;
   }
 };

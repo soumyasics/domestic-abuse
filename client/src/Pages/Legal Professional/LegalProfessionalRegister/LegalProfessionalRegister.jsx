@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import './LegalProfessionalRegister.css';
-import legalProfessional1 from '../../../Assets/legal-professional-register.png'; 
+import legalProfessional1 from '../../../Assets/legal-professional-register.png';
 import { People } from 'react-bootstrap-icons';
 import { MdEmail, MdOutlinePassword, MdVisibility, MdVisibilityOff } from "react-icons/md";
 import { FaPhoneAlt, FaCameraRetro } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { BsBuilding } from "react-icons/bs";
-import { registerLegalProfessionals } from '../../../Services/apiService';
+import { registerLegalProfessional } from '../../../Services/apiService';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
@@ -120,19 +120,20 @@ function LegalProfessionalRegister() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) {
+      console.log(errors);
       toast.error('Please fix the errors in the form.');
       return;
     }
 
     setIsSubmitting(true);
     try {
-    //   const response = await registerLegalProfessionals(legalProfessional);
-    //   if (response.success) {
-    //     toast.success(response.message);
-    //     navigate('/legal-professional-login');
-    //   } else {
-    //     toast.error(response.message);
-    //   }
+      const response = await registerLegalProfessional(legalProfessional);
+      if (response.success) {
+        toast.success(response.message);
+        navigate('/legal-professional-login');
+      } else {
+        toast.error(response.message);
+      }
     } catch (error) {
       console.error('Error Registering Legal Professional', error);
       toast.error(error.response?.data?.message || 'Registration failed. Please try again.');
@@ -152,7 +153,7 @@ function LegalProfessionalRegister() {
         <div className="col-md-6 mt-5 text-center align-self-start">
           <div className="row m-4 mt-0">
             <div className="col">
-              <h1 className='fw-semibold theme-purple m-3'>Legal Professional Registration</h1>
+              <h3 className='fw-semibold theme-purple m-3'>Legal Professional Registration</h3>
             </div>
           </div>
           <form onSubmit={handleSubmit} noValidate>
@@ -285,9 +286,10 @@ function LegalProfessionalRegister() {
             <div className="row m-4 mt-0 text-start">
               <div className="col">
                 <div className="input-group">
-                  <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
+                  <label htmlFor="photo" className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
                     <FaCameraRetro />
-                  </span>
+                    <span className="ms-2">Photo</span>
+                  </label>
                   <input
                     type="file"
                     className={`form-control form-control-lg ${errors.photo ? 'is-invalid' : ''}`}
@@ -301,12 +303,14 @@ function LegalProfessionalRegister() {
                 </div>
               </div>
             </div>
+
             <div className="row m-4 mt-0 text-start">
               <div className="col">
                 <div className="input-group">
-                  <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
+                  <label htmlFor="proof" className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
                     <FaCameraRetro />
-                  </span>
+                    <span className="ms-2">Proof</span>
+                  </label>
                   <input
                     type="file"
                     className={`form-control form-control-lg ${errors.proof ? 'is-invalid' : ''}`}
@@ -320,6 +324,7 @@ function LegalProfessionalRegister() {
                 </div>
               </div>
             </div>
+
             <div className="row m-4 mt-0 text-start">
               <div className="col">
                 <div className="input-group">
@@ -383,7 +388,7 @@ function LegalProfessionalRegister() {
         </div>
       </div>
     </div>
-    </>
+  </>
   );
 }
 

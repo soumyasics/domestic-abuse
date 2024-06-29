@@ -26,7 +26,8 @@ import CounsellorForgotPassword from './Pages/Counsellor/CounsellorForgotPasswor
 import LegalProfessionalLogin from './Pages/Legal Professional/LegalProfessionalLogin/LegalProfessionalLogin';
 import LegalProfessionalRegister from './Pages/Legal Professional/LegalProfessionalRegister/LegalProfessionalRegister';
 import LegalProfessionalForgotPassword from './Pages/Legal Professional/LegalProfessionalForgotPassword/LegalProfessionalForgotPassword';
-
+import CounsellorHome from './Pages/Counsellor/CounsellorHome/CounsellorHome';
+import AdminCounsellorRequests from './Pages/Admin/AdminCounsellorRequests/AdminCounsellorRequests';
 function App() {
   return (
     <div className="d-flex flex-column min-vh-100">
@@ -52,6 +53,8 @@ function App() {
             <Route path='/admin-safehouse-details' element={
                 <AdminSafehouseDetailedView />
             } />  
+            <Route path='/admin-counsellor-requests' element={<AdminCounsellorRequests />} />
+
             {/* Supporter Paths */}
             <Route path='/supporter-register' element={<SupporterRegister />} />
             <Route path='/supporter-login' element={<SupporterLogin />} />
@@ -68,6 +71,7 @@ function App() {
             <Route path='/counsellor-register' element={<CounsellorRegistration />} />
             <Route path='/counsellor-login' element={<CounsellorLogin/>} />
             <Route path='/counsellor-forgot-password' element={<CounsellorForgotPassword/>} />
+            <Route path='/counsellor-home' element={<CounsellorHome />} />
 
             {/* Legal Professional Paths  */}
             <Route path='/legal-professional-login' element={<LegalProfessionalLogin/>} />

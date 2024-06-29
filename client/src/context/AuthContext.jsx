@@ -4,23 +4,23 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [supporterId, setSupporterId] = useState(null); // Initialize supporterId state
-  const [counsellorId, setCounsellorId] = useState(null); // Initialize counsellorId state
-  const [userRole, setUserRole] = useState(null); // Initialize userRole state
+  const [supporterId, setSupporterId] = useState(null);
+  const [counsellorId, setCounsellorId] = useState(null);
+  const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    const savedUserRole = localStorage.getItem('userRole'); // Retrieve userRole from localStorage
-    const savedSupporterId = localStorage.getItem('supporterId'); // Retrieve supporterId from localStorage
-    const savedCounsellorId = localStorage.getItem('counsellorId'); // Retrieve counsellorId from localStorage
+    const savedUserRole = localStorage.getItem('userRole');
+    const savedSupporterId = localStorage.getItem('supporterId');
+    const savedCounsellorId = localStorage.getItem('counsellorId');
     
     if (token && savedUserRole) {
       setIsLoggedIn(true);
-      setUserRole(savedUserRole); // Set userRole state if available
+      setUserRole(savedUserRole);
       if (savedUserRole === 'supporter') {
-        setSupporterId(savedSupporterId); // Set supporterId state if available
+        setSupporterId(savedSupporterId);
       } else if (savedUserRole === 'counsellor') {
-        setCounsellorId(savedCounsellorId); // Set counsellorId state if available
+        setCounsellorId(savedCounsellorId);
       }
     }
   }, []);
@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }) => {
       setCounsellorId(userId);
     }
     setIsLoggedIn(true);
-    setUserRole(userRole); // Set userRole state
+    setUserRole(userRole);
   };
 
   const logout = () => {
@@ -45,9 +45,9 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('supporterId');
     localStorage.removeItem('counsellorId');
     setIsLoggedIn(false);
-    setUserRole(null); // Clear userRole state
-    setSupporterId(null); // Clear supporterId state
-    setCounsellorId(null); // Clear counsellorId state
+    setUserRole(null);
+    setSupporterId(null);
+    setCounsellorId(null);
   };
 
   return (
