@@ -2,6 +2,7 @@ const router = require('express').Router()
 const supporter = require('./Supporter/supporterController')
 const safehouse = require('./SafeHouse/houseController')
 const Counsellor = require('./Counsellor/counsellorController')
+const LegalProfessional = require('./LegalProfessional/legalProfessionalController')
 
 //suppoerter routes
 router.post('/registerSupporters', supporter.upload, supporter.registerSupporters);
@@ -45,4 +46,19 @@ router.post('/rejectCounsellorsById/:id', Counsellor.rejectCounsellorsById);
 router.post('/removeCounsellorsById/:id', Counsellor.removeCounsellorsById);
 router.post('/activateCounsellorsById/:id', Counsellor.activateCounsellorsById);
 
+
+
+//Legal Professional routes
+router.post('/registerLegalProfessional',LegalProfessional.upload,  LegalProfessional.registerLegalProfessional);
+router.post('/viewLegalProfessionalById/:id', LegalProfessional.viewLegalProfessionalById);
+router.post('/editLegalProfessionalById/:id',LegalProfessional.upload,LegalProfessional.editLegalProfessionalById);
+router.post('/forgotPasswordLegalProfessional', LegalProfessional.forgotPassword);
+router.post('/viewLegalProfessionals', LegalProfessional.viewLegalProfessionals);
+router.post('/resetPasswordloginLegalProfessional/:id', LegalProfessional.resetPassword);
+router.post('/loginLegalProfessional', LegalProfessional.login);
+router.post('/viewLegalProfessionalReqsForAdmin', LegalProfessional.viewLegalProfessionalReqsForAdmin);
+router.post('/approveCounsellorsById/:id', LegalProfessional.approveLegalProfessionalById);
+router.post('/deleteLegalProfessionalById/:id', LegalProfessional.deleteLegalProfessionalById);
+router.post('/deActivateLegalProfessionalById/:id', LegalProfessional.deActivateLegalProfessionalById);
+router.post('/activateLegalProfessionalById/:id', LegalProfessional.activateLegalProfessionalById);
 module.exports = router
