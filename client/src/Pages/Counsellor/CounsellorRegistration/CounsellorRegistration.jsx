@@ -111,7 +111,6 @@ function CounsellorRegistration() {
     setIsSubmitting(true);
     try {
       const response = await registerCounsellors(counsellor);
-      console.log('frontend',response)
       if (response.success) {
         toast.success(response.message);
         navigate('/counsellor-login');

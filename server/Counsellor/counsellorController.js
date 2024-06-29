@@ -7,7 +7,6 @@ const secret = 'CounsellorsSecret'; // Replace this with your own secret key
 
 
 const registerCounsellors = async (req, res) => {
-    console.log("datas",req.body);
     try {
         const { name, contact, email, password, experience, specialisation, language, location } = req.body;
 
@@ -244,7 +243,7 @@ const login = async (req, res) => {
             return res.json({ status: 405, msg: 'User not found' });
         }
         if (user.password != password) {
-            return res.json({ status: 405, msg: 'Password Mismatch !!' });
+            return res.json({ status: 407, msg: 'Password Mismatch !!' });
         }
 
         if (user.adminApproved == false) {

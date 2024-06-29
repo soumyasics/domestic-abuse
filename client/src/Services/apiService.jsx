@@ -319,18 +319,8 @@ export const viewSafehouses = async (id) => {
 };
 // Api for Counsellor Register
 export const registerCounsellors = async (counsellorData) => {
-  console.log('service',counsellorData);
   try {
-    const formData = new FormData();
-    Object.keys(counsellorData).forEach(key => {
-      formData.append(key, counsellorData[key]);
-    });
-    const response = await axios.post(`${API_BASE_URL}/registerCounsellors`, counsellorData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-
+    const response = await axios.post(`${API_BASE_URL}/registerCounsellors`, counsellorData);
     // Handling responses based on status code
     switch (response.data.status) {
       case 200:
@@ -352,28 +342,64 @@ export const registerCounsellors = async (counsellorData) => {
   }
 };
 
-//Api for Counsellor Login
+// Function for Counsellor Login
 export const loginCounsellor = async (counsellor, setTokenCallback) => {
   try {
-      const response = await axios.post(`${API_BASE_URL}/loginCounsellor`, counsellor);
+    const response = await axios.post(`${API_BASE_URL}/loginCounsellor`, counsellor);
 
-      if (response.data.status === 200) {
-          const { token, data } = response.data;
-          setTokenCallback(token, data._id);
-          return { success: true, user: data };
+    if (response.data.status === 200) {
+      const { token, data } = response.data;
+      setTokenCallback(token, data._id);
+      return { success: true, user: data };
+    } else if (response.data.status === 405) {
+      return { success: false, message: 'User not found ' };
+    }else if (response.data.status === 407) {
+        return { success: false, message: 'Password Mismatch ' };
+      } 
+    else if (response.data.status === 409) {
+      if (response.data.msg.includes('Admin Approval')) {
+        return { success: false, message: 'Please wait for Admin Approval' };
+      } else if (response.data.msg.includes('De-Activated')) {
+        return { success: false, message: 'Your Account is Currently De-Activated By Admin' };
       } else {
-          return { success: false, message: response.data.msg };
+        return { success: false, message: 'Password Mismatch' };
       }
+    } else {
+      return { success: false, message: 'Unknown error occurred' };
+    }
   } catch (error) {
-      if (error.response && error.response.data) {
-          return {
-              success: false,
-              message: error.response.data.msg || 'Login failed',
-          };
-      }
+    if (error.response && error.response.data) {
       return {
-          success: false,
-          message: 'An unexpected error occurred',
+        success: false,
+        message: error.response.data.msg || 'Login failed',
       };
+    }
+    return {
+      success: false,
+      message: 'An unexpected error occurred',
+    };
+  }
+};
+
+// Add forgotPasswordCounsellor function
+export const forgotPasswordCounsellor = async (email, password) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/forgotPasswordCounsellor`, { email, password });
+    if (response.data.status === 200) {
+      return { success: true, message: response.data.msg };
+    } else {
+      return { success: false, message: response.data.msg };
+    }
+  } catch (error) {
+    if (error.response && error.response.data) {
+      return {
+        success: false,
+        message: error.response.data.msg || 'Password reset failed'
+      };
+    }
+    return {
+      success: false,
+      message: 'An unexpected error occurred'
+    };
   }
 };
