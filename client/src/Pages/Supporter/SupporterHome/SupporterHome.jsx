@@ -15,20 +15,20 @@ function SupporterHome() {
             <div className='row d-flex m-5'>
                 <div className='col align-self-center text-center m-auto'>
                     <div className='row m-auto '>
-                        <div className='col-auto '>
+                        <div className='col-lg-6 '>
                             <SupporterStatBox icon={<People size={40} />} color="#DF9E5B" title="Users" count="20" textColor="#734669" />
                         </div>
-                        <div className='col-auto'>
+                        <div className='col-lg-6'>
                             <SupporterStatBox icon={<House size={40} />} color="#734669" title="Safe House" count="20" textColor="#DF9E5B" />
 
                         </div>
                     </div>
                     <div className='row m-auto'>
-                        <div className='col-auto'>
+                        <div className='col-lg-6'>
                             <SupporterStatBox icon={<GoLaw size={40} />} color="#734669" title="Legal Professionals" count="15" textColor="#DF9E5B" />
 
                         </div>
-                        <div className='col-auto'>
+                        <div className='col-lg-6'>
                             <SupporterStatBox icon={<FaPeopleGroup size={40} />} color="#DF9E5B" title="Counsellors" count="18" textColor="#734669" />
 
                         </div>
