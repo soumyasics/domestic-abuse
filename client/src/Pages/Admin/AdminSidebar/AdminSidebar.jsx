@@ -81,12 +81,12 @@ const AdminSidebar = ({ changeActivePage }) => {
                   <MdArrowDropDown size={25} className="theme-purple" />
                 </button>
                 <ul className={`collapse nav flex-column ms-1 ${menuOpen.safeSpace ? 'show' : ''}`} id="safeSpaceSubmenu" data-bs-parent="#menu">
-                  <li className="w-100 ms-3">
+                  {/* <li className="w-100 ms-3">
                     <Link to="/new-request" className="nav-link px-0 admin-list">
                       <span className="ms-2 d-none d-sm-inline theme-purple"><IoMdArrowDropright size={25} /></span>
                       <span className="d-none d-sm-inline theme-purple">New Request</span>
                     </Link>
-                  </li>
+                  </li> */}
                   <li className="w-100 ms-3">
                     <Link to="#" className="nav-link px-0 admin-list" onClick={() => changeActivePage("all-safehouses")}>
                       <span className="ms-2 d-none d-sm-inline theme-purple"><IoMdArrowDropright size={25} /></span>

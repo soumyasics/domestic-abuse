@@ -3,7 +3,7 @@ import AdminSidebar from '../AdminSidebar/AdminSidebar';
 import './AdminDashboard.css';
 import { PiWindowsLogoThin } from "react-icons/pi";
 import AdminDasboardOverview from '../AdminDashboardOverview/AdminDasboardOverview';
-import SupportersRequestTable from '../Request/SupportersRequestTable';
+import SupportersRequestTable from '../SupportersRequest/SupportersRequestTable';
 import AdminViewAllSafehouses from '../AdminViewAllSafehouses/AdminViewAllSafehouses';
 import AdminSafehouseDetailedView from '../AdminSafehouseDetailedView/AdminSafehouseDetailedView';
 import axiosInstance from '../../../Constant/BaseURL'
