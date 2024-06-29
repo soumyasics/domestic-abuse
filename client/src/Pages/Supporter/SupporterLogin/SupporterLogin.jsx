@@ -27,7 +27,10 @@ function SupporterLogin() {
       });
 
       if (result.success) {
+        console.log(result);
+
         toast.success('Login successful!');
+        localStorage.setItem("supporterId",result.user._id)
         setTimeout(() => {
           navigate('/supporter-home');
         }, 2000);

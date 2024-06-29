@@ -307,9 +307,9 @@ export const viewSafehouseById = async (id) => {
   }
 };
 // Function to view all safehouses
-export const viewSafehouses = async () => {
+export const viewSafehouses = async (id) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/viewSafehouses`);
+    const response = await axios.post(`${API_BASE_URL}/viewSafehouseBySupporterId/${id}`);
     console.log(response);
     return response.data;
   } catch (error) {
