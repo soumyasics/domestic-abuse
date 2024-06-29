@@ -25,7 +25,6 @@ const SupportersRequestTable = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedSupporter, setSelectedSupporter] = useState(null);
   const [action, setAction] = useState(false);
-
   const fetchSupporters = useCallback(async () => {
     try {
       if (props.activePage === 'new-request') {

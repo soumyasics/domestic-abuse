@@ -16,7 +16,7 @@ function SupporterViewAllSafeHouses() {
     // Fetch safehouses data from backend
     const fetchSafehouses = async () => {
       try {
-        const response = await viewSafehouses();
+        const response = await viewSafehouses(localStorage.getItem('supporterId'));
         if (response.status === 200) {
           setSafehouses(response.data);
         } else {
