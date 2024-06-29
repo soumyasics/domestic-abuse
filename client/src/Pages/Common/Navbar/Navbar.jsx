@@ -19,7 +19,7 @@ function Navbar() {
                     navigate('/counsellor-home');
                     break;
                 case 'admin':
-                    navigate('/admin-dashboard'); // Example route for admin
+                    navigate('/admin-dashboard');
                     break;
                 default:
                     navigate('/');

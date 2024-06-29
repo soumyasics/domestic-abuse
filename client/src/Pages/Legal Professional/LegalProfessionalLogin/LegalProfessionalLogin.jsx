@@ -1,17 +1,17 @@
 import React, { useState, useContext } from 'react';
 import './LegalProfessionalLogin.css';
 import legalGirl from '../../../Assets/legal-professional-login.png'; 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { loginLegalProfessional } from '../../../Services/apiService'; 
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AuthContext from '../../../context/AuthContext';
-import { Link } from 'react-router-dom';
 
 function LegalProfessionalLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordShown, setPasswordShown] = useState(false);
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
 
@@ -19,21 +19,44 @@ function LegalProfessionalLogin() {
     setPasswordShown(!passwordShown);
   };
 
-  const handleLogin = async () => {
-    try {
-    //   const legalProfessional = { email, password };
-    //   const result = await loginLegalProfessional(legalProfessional, (token, legalProfessionalId) => {
-    //     login(token, 'legalProfessional', legalProfessionalId); // Pass legalProfessionalId to login function
-    //   });
+  const validate = () => {
+    const newErrors = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    //   if (result.success) {
-    //     toast.success('Login successful!');
-    //     setTimeout(() => {
-    //       navigate('/legal-professional-home');
-    //     }, 2000);
-    //   } else {
-    //     toast.error(result.message);
-    //   }
+    if (!email) {
+      newErrors.email = 'Email is required';
+    } else if (!emailRegex.test(email)) {
+      newErrors.email = 'Invalid email format';
+    }
+
+    if (!password) {
+      newErrors.password = 'Password is required';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleLogin = async () => {
+    if (!validate()) {
+      toast.error('Please fix the errors in the form.');
+      return;
+    }
+
+    try {
+      const legalProfessional = { email, password };
+      const result = await loginLegalProfessional(legalProfessional, (token, legalProfessionalId) => {
+        login(token, 'legalProfessional', legalProfessionalId); // Pass legalProfessionalId to login function
+      });
+
+      if (result.success) {
+        toast.success('Login successful!');
+        setTimeout(() => {
+          navigate('/legal-professional-home');
+        }, 2000);
+      } else {
+        toast.error(result.message);
+      }
     } catch (error) {
       toast.error('An unexpected error occurred during login');
     }
@@ -58,11 +81,13 @@ function LegalProfessionalLogin() {
                 <input
                   type='email'
                   id="email"
-                  className="form-control form-control-lg border home-card-bg rounded-4"
+                  className={`form-control form-control-lg border home-card-bg rounded-4 ${errors.email ? 'is-invalid' : ''}`}
                   placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  aria-describedby="emailError"
                 />
+                {errors.email && <div id="emailError" className="invalid-feedback">{errors.email}</div>}
               </div>
             </div>
           </div>
@@ -72,14 +97,16 @@ function LegalProfessionalLogin() {
                 <input
                   type={passwordShown ? "text" : "password"}
                   id="password"
-                  className="form-control form-control-lg border border-end-0 rounded-end-0 home-card-bg rounded-4"
+                  className={`form-control form-control-lg border border-end-0 rounded-end-0 home-card-bg rounded-4 ${errors.password ? 'is-invalid' : ''}`}
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  aria-describedby="passwordError"
                 />
                 <span className="input-group-text home-card-bg border-start-0 rounded-end-4" onClick={togglePasswordVisibility}>
                   <i className={passwordShown ? "fa-regular fa-eye-slash theme-purple" : "fa-regular fa-eye theme-purple"}></i>
                 </span>
+                {errors.password && <div id="passwordError" className="invalid-feedback">{errors.password}</div>}
               </div>
             </div>
           </div>

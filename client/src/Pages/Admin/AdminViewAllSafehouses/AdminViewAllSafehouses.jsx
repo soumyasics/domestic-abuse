@@ -9,11 +9,7 @@ import axiosInstance from '../../../Constant/BaseURL';
 import { TiTick } from "react-icons/ti";
 
 
-function AdminViewAllSafehouses() {
-
-
-
-
+function AdminViewAllSafehouses(activePage) {
 
   const [safehouses, setSafehouses] = useState([]);
 

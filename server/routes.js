@@ -57,7 +57,7 @@ router.post('/viewLegalProfessionals', LegalProfessional.viewLegalProfessionals)
 router.post('/resetPasswordloginLegalProfessional/:id', LegalProfessional.resetPassword);
 router.post('/loginLegalProfessional', LegalProfessional.login);
 router.post('/viewLegalProfessionalReqsForAdmin', LegalProfessional.viewLegalProfessionalReqsForAdmin);
-router.post('/approveCounsellorsById/:id', LegalProfessional.approveLegalProfessionalById);
+router.post('/approveLegalProfessionalById/:id', LegalProfessional.approveLegalProfessionalById);
 router.post('/deleteLegalProfessionalById/:id', LegalProfessional.deleteLegalProfessionalById);
 router.post('/deActivateLegalProfessionalById/:id', LegalProfessional.deActivateLegalProfessionalById);
 router.post('/activateLegalProfessionalById/:id', LegalProfessional.activateLegalProfessionalById);

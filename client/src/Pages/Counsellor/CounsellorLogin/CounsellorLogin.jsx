@@ -18,7 +18,21 @@ function CounsellorLogin() {
     setPasswordShown(!passwordShown);
   };
 
+  const validateForm = () => {
+    if (!email) {
+      toast.error('Email is required');
+      return false;
+    }
+    if (!password) {
+      toast.error('Password is required');
+      return false;
+    }
+    return true;
+  };
+
   const handleLogin = async () => {
+    if (!validateForm()) return;
+
     try {
       const counsellor = { email, password };
       const result = await loginCounsellor(counsellor, (token, counsellorId) => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Table, Button } from 'react-bootstrap';
-import './AdminCounsellorRequests.css';
-import { viewCounsellorReqsForAdmin, approveCounsellorsById, rejectCounsellorsById } from '../../../Services/apiService';
+import './AdminLegalProfessionalRequests.css';
+import { viewLegalProfessionalReqsForAdmin, approveLegalProfessionalsById, rejectLegalProfessionalsById } from '../../../Services/apiService';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { confirmAlert } from 'react-confirm-alert';
@@ -9,47 +9,47 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import ReactPaginate from 'react-paginate';
 import { BsEye } from "react-icons/bs";
 
-const AdminCounsellorRequests = () => {
-  const [counsellors, setCounsellors] = useState([]);
+const AdminLegalProfessionalRequests = () => {
+  const [legalProfessionals, setLegalProfessionals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
 
   const itemsPerPage = 10;
 
-  const fetchCounsellors = useCallback(async () => {
+  const fetchLegalProfessionals = useCallback(async () => {
     try {
-      const response = await viewCounsellorReqsForAdmin();
-      setCounsellors(response.data || []);
+      const response = await viewLegalProfessionalReqsForAdmin();
+      setLegalProfessionals(response.data || []);
     } catch (error) {
-      console.error('Error fetching Counsellors:', error);
-      toast.error('Error fetching counsellor requests.');
+      console.error('Error fetching Legal Professionals:', error);
+      toast.error('Error fetching legal professional requests.');
     } finally {
       setLoading(false);
     }
   }, []);
 
   useEffect(() => {
-    fetchCounsellors(currentPage);
-  }, [fetchCounsellors, currentPage]);
+    fetchLegalProfessionals(currentPage);
+  }, [fetchLegalProfessionals, currentPage]);
 
   const handleApprove = async (id) => {
     confirmAlert({
       title: 'Confirm Approval',
-      message: 'Are you sure you want to approve this counsellor?',
+      message: 'Are you sure you want to approve this legal professional?',
       buttons: [
         {
           label: 'Yes',
           onClick: async () => {
             try {
-              const response = await approveCounsellorsById(id);
+              const response = await approveLegalProfessionalsById(id);
               if (response.success) {
-                toast.success('Counsellor approved successfully.');
-                fetchCounsellors(currentPage);
+                toast.success('Legal professional approved successfully.');
+                fetchLegalProfessionals(currentPage);
               } else {
-                toast.error(response.message || 'Error approving counsellor.');
+                toast.error(response.message || 'Error approving legal professional.');
               }
             } catch (error) {
-              toast.error('Error approving counsellor.');
+              toast.error('Error approving legal professional.');
             }
           },
         },
@@ -63,21 +63,21 @@ const AdminCounsellorRequests = () => {
   const handleReject = async (id) => {
     confirmAlert({
       title: 'Confirm Rejection',
-      message: 'Are you sure you want to reject this counsellor?',
+      message: 'Are you sure you want to reject this legal professional?',
       buttons: [
         {
           label: 'Yes',
           onClick: async () => {
             try {
-              const response = await rejectCounsellorsById(id);
+              const response = await rejectLegalProfessionalsById(id);
               if (response.success) {
-                toast.success('Counsellor rejected successfully.');
-                fetchCounsellors(currentPage);
+                toast.success('Legal professional rejected successfully.');
+                fetchLegalProfessionals(currentPage);
               } else {
-                toast.error(response.message || 'Error rejecting counsellor.');
+                toast.error(response.message || 'Error rejecting legal professional.');
               }
             } catch (error) {
-              toast.error('Error rejecting counsellor.');
+              toast.error('Error rejecting legal professional.');
             }
           },
         },
@@ -92,55 +92,57 @@ const AdminCounsellorRequests = () => {
     setCurrentPage(event.selected);
   };
 
-  const paginatedCounsellors = counsellors.slice(
+  const paginatedLegalProfessionals = legalProfessionals.slice(
     currentPage * itemsPerPage,
     (currentPage + 1) * itemsPerPage
   );
 
-  const pageCount = Math.ceil(counsellors.length / itemsPerPage);
+  const pageCount = Math.ceil(legalProfessionals.length / itemsPerPage);
 
   return (
     <div className="table-responsive">
       <ToastContainer />
       {loading ? (
         <p className="theme-purple fs-1">Loading...</p>
-      ) : counsellors.length === 0 ? (
+      ) : legalProfessionals.length === 0 ? (
         <p className="m-5 text-center fs-1">No new entries</p>
       ) : (
         <>
-          <Table striped bordered hover className="counsellors-table">
+          <Table striped bordered hover className="legal-professionals-table">
             <thead>
               <tr className="text-center">
                 <th className='bg-purple text-white'>#</th>
                 <th className='bg-purple text-white'>Name</th>
                 <th className='bg-purple text-white'>Email-Id</th>
                 <th className='bg-purple text-white'>Contact Number</th>
-                <th className='bg-purple text-white'>Location</th>
+                <th className='bg-purple text-white'>Firm Name</th>
+                <th className='bg-purple text-white'>Firm Address</th>
                 <th className='bg-purple text-white'>Action</th>
               </tr>
             </thead>
             <tbody className='text-center'>
-              {paginatedCounsellors.map((counsellor, index) => (
-                <tr key={counsellor._id}>
+              {paginatedLegalProfessionals.map((professional, index) => (
+                <tr key={professional._id}>
                   <td>{index + 1 + currentPage * itemsPerPage}</td>
-                  <td>{counsellor.name}</td>
-                  <td>{counsellor.email}</td>
-                  <td>{counsellor.contact}</td>
-                  <td>{counsellor.location}</td>
+                  <td>{professional.name}</td>
+                  <td>{professional.email}</td>
+                  <td>{professional.contact}</td>
+                  <td>{professional.firmName}</td>
+                  <td>{professional.firmAddress}</td>
                   <td className=''>
                     <div className='text-center'>
                       <i className="m-3 cursor-pointer" onClick={() => {/* navigate to detailed view */}}><BsEye size={22} /></i>
                       <Button
                         variant="outline-success"
                         className="m-2 px-5"
-                        onClick={() => handleApprove(counsellor._id)}
+                        onClick={() => handleApprove(professional._id)}
                       >
                         Approve
                       </Button>
                       <Button
                         variant="outline-danger"
                         className="m-2 px-5"
-                        onClick={() => handleReject(counsellor._id)}
+                        onClick={() => handleReject(professional._id)}
                       >
                         Reject
                       </Button>
@@ -176,4 +178,4 @@ const AdminCounsellorRequests = () => {
   );
 };
 
-export default AdminCounsellorRequests;
+export default AdminLegalProfessionalRequests;
