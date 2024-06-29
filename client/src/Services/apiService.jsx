@@ -317,6 +317,40 @@ export const viewSafehouses = async (id) => {
     throw error;
   }
 };
+// Api for Counsellor Register
+export const registerCounsellors = async (counsellorData) => {
+  console.log('service',counsellorData);
+  try {
+    const formData = new FormData();
+    Object.keys(counsellorData).forEach(key => {
+      formData.append(key, counsellorData[key]);
+    });
+    const response = await axios.post(`${API_BASE_URL}/registerCounsellors`, counsellorData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    // Handling responses based on status code
+    switch (response.data.status) {
+      case 200:
+        console.log(response.data.msg); // "Inserted successfully"
+        return { success: true, message: response.data.msg, data: response.data.data };
+      case 409:
+        console.log(response.data.msg); // Either "Contact Number Already Registered With Us !!" or "Email already in use"
+        return { success: false, message: response.data.msg };
+      case 500:
+        console.log(response.data.msg); // "Data not Inserted"
+        return { success: false, message: response.data.msg };
+      default:
+        console.log('Unexpected response status:', response.data.status);
+        return { success: false, message: 'Unexpected error occurred' };
+    }
+  } catch (error) {
+    console.error('Error Registering Counsellor', error);
+    throw error;
+  }
+};
 
 //Api for Counsellor Login
 export const loginCounsellor = async (counsellor, setTokenCallback) => {

@@ -7,6 +7,7 @@ const secret = 'CounsellorsSecret'; // Replace this with your own secret key
 
 
 const registerCounsellors = async (req, res) => {
+    console.log("datas",req.body);
     try {
         const { name, contact, email, password, experience, specialisation, language, location } = req.body;
 
@@ -53,6 +54,7 @@ const registerCounsellors = async (req, res) => {
                 });
             });
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: error.message });
     }
 };

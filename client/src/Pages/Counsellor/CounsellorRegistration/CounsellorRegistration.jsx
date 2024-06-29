@@ -6,9 +6,9 @@ import { MdEmail, MdOutlinePassword, MdVisibility, MdVisibilityOff } from "react
 import { FaPhoneAlt, FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { IoLanguage } from "react-icons/io5";
-import { CgOrganisation } from "react-icons/cg";
 import { FaLocationDot } from "react-icons/fa6";
-import { registerSupporters } from '../../../Services/apiService';
+import { CgOrganisation } from "react-icons/cg";
+import { registerCounsellors } from '../../../Services/apiService';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
@@ -110,7 +110,8 @@ function CounsellorRegistration() {
 
     setIsSubmitting(true);
     try {
-      const response = await registerSupporters(counsellor);
+      const response = await registerCounsellors(counsellor);
+      console.log('frontend',response)
       if (response.success) {
         toast.success(response.message);
         navigate('/counsellor-login');
@@ -136,7 +137,7 @@ function CounsellorRegistration() {
           <div className="col-md-6 mt-5 text-center align-self-start">
             <div className="row m-4 mt-0">
               <div className="col">
-                <h1 className='fw-semibold theme-purple m-3'> Counsellors Registration</h1>
+                <h3 className='fw-semibold theme-purple m-3'> Counsellors Registration</h3>
               </div>
             </div>
             <form onSubmit={handleSubmit} noValidate>
@@ -242,14 +243,8 @@ function CounsellorRegistration() {
                       <option value="">Select Specialisation</option>
                       <option value="Clinical Counselors">Clinical Counselors</option>
                       <option value="School Counselors">School Counselors</option>
-                      <option value="Marriage and Family Therapists">Marriage and Family Therapists</option>
-                      <option value="Substance Abuse Counselors">Substance Abuse Counselors</option>
-                      <option value="Career Counselors">Career Counselors</option>
                       <option value="Rehabilitation Counselors">Rehabilitation Counselors</option>
-                      <option value="Grief Counselors">Grief Counselors</option>
-                      <option value="Mental Health Counselors">Mental Health Counselors</option>
-                      <option value="Child and Adolescent Counselors">Child and Adolescent Counselors</option>
-                      <option value="Guidance Counselors">Guidance Counselors</option>
+                      <option value="Substance Abuse Counselors">Substance Abuse Counselors</option>
                     </select>
                     {errors.specialisation && <div id="specialisationError" className="invalid-feedback">{errors.specialisation}</div>}
                   </div>
@@ -259,7 +254,7 @@ function CounsellorRegistration() {
                 <div className="col">
                   <div className="input-group">
                     <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
-                    <IoLanguage />
+                      <IoLanguage />
                     </span>
                     <input
                       type="text"
@@ -280,7 +275,7 @@ function CounsellorRegistration() {
                 <div className="col">
                   <div className="input-group">
                     <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
-                    <FaLocationDot />
+                      <FaLocationDot />
                     </span>
                     <input
                       type="text"
@@ -301,10 +296,10 @@ function CounsellorRegistration() {
                 <div className="col">
                   <div className="input-group">
                     <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
-                      <MdOutlinePassword />
+                      <RiLockPasswordFill />
                     </span>
                     <input
-                      type={showPassword ? "text" : "password"}
+                      type={showPassword ? 'text' : 'password'}
                       id="password"
                       name="password"
                       className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.password ? 'is-invalid' : ''}`}
@@ -314,8 +309,8 @@ function CounsellorRegistration() {
                       aria-describedby="passwordError"
                       required
                     />
-                    <span className="input-group-text home-card-bg border-end-0 rounded-end-2 bg-purple text-white" onClick={togglePasswordVisibility}>
-                      {showPassword ? <MdVisibilityOff /> : <MdVisibility />}
+                    <span className="input-group-text bg-transparent border-end-0 rounded-start-2 bg-purple text-white" onClick={togglePasswordVisibility}>
+                      {showPassword ? <MdVisibility /> : <MdVisibilityOff />}
                     </span>
                     {errors.password && <div id="passwordError" className="invalid-feedback">{errors.password}</div>}
                   </div>
@@ -325,10 +320,10 @@ function CounsellorRegistration() {
                 <div className="col">
                   <div className="input-group">
                     <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
-                      <RiLockPasswordFill />
+                      <MdOutlinePassword />
                     </span>
                     <input
-                      type={showRePassword ? "text" : "password"}
+                      type={showRePassword ? 'text' : 'password'}
                       id="rePassword"
                       name="rePassword"
                       className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.rePassword ? 'is-invalid' : ''}`}
@@ -338,18 +333,16 @@ function CounsellorRegistration() {
                       aria-describedby="rePasswordError"
                       required
                     />
-                    <span className="input-group-text home-card-bg border-end-0 rounded-end-2 bg-purple text-white" onClick={toggleRePasswordVisibility}>
-                      {showRePassword ? <MdVisibilityOff /> : <MdVisibility />}
+                    <span className="input-group-text bg-transparent border-end-0 rounded-start-2 bg-purple text-white" onClick={toggleRePasswordVisibility}>
+                      {showRePassword ? <MdVisibility /> : <MdVisibilityOff />}
                     </span>
                     {errors.rePassword && <div id="rePasswordError" className="invalid-feedback">{errors.rePassword}</div>}
                   </div>
                 </div>
               </div>
-              <div className="row m-5 text-start ">
-                <div className="col text-center">
-                  <button type="submit" className="btn bg-theme btn-lg fw-bolder px-5 text-white rounded-pill" disabled={isSubmitting}>
-                    {isSubmitting ? 'Registering...' : 'Register'}
-                  </button>
+              <div className="row m-4 mt-0 text-center">
+                <div className="col">
+                  <button type="submit" className="btn btn-lg bg-purple text-white border-0 text-center">Register</button>
                 </div>
               </div>
             </form>

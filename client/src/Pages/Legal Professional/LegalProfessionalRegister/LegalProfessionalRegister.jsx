@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './LegalProfessionalRegister.css';
-import legalProfessional1 from '../../../Assets/legal-professional-register.png'; 
+import legalProfessional1 from '../../../Assets/legal-professional-register.png';
 import { People } from 'react-bootstrap-icons';
 import { MdEmail, MdOutlinePassword, MdVisibility, MdVisibilityOff } from "react-icons/md";
 import { FaPhoneAlt, FaCameraRetro } from "react-icons/fa";
@@ -126,13 +126,13 @@ function LegalProfessionalRegister() {
 
     setIsSubmitting(true);
     try {
-    //   const response = await registerLegalProfessionals(legalProfessional);
-    //   if (response.success) {
-    //     toast.success(response.message);
-    //     navigate('/legal-professional-login');
-    //   } else {
-    //     toast.error(response.message);
-    //   }
+      //   const response = await registerLegalProfessionals(legalProfessional);
+      //   if (response.success) {
+      //     toast.success(response.message);
+      //     navigate('/legal-professional-login');
+      //   } else {
+      //     toast.error(response.message);
+      //   }
     } catch (error) {
       console.error('Error Registering Legal Professional', error);
       toast.error(error.response?.data?.message || 'Registration failed. Please try again.');
@@ -143,246 +143,250 @@ function LegalProfessionalRegister() {
 
   return (
     <>
-    <div className="container px-5 m-auto mt-5 ">
-      <ToastContainer />
-      <div className="row px-5 my-5">
-        <div className="col-md-6 mt-5">
-          <img src={legalProfessional1} className="align-self-center m-auto object-fit-cover legal-professional-register-scale-img" alt="legal professional" />
-        </div>
-        <div className="col-md-6 mt-5 text-center align-self-start">
-          <div className="row m-4 mt-0">
-            <div className="col">
-              <h1 className='fw-semibold theme-purple m-3'>Legal Professional Registration</h1>
-            </div>
+      <div className="container px-5 m-auto mt-5 ">
+        <ToastContainer />
+        <div className="row px-5 my-5">
+          <div className="col-md-6 mt-5">
+            <img src={legalProfessional1} className="align-self-center m-auto object-fit-cover legal-professional-register-scale-img" alt="legal professional" />
           </div>
-          <form onSubmit={handleSubmit} noValidate>
-            <div className="row m-4 mt-0 text-start">
+          <div className="col-md-6 mt-5 text-center align-self-start">
+            <div className="row m-4 mt-0">
               <div className="col">
-                <div className="input-group">
-                  <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
-                    <People />
-                  </span>
-                  <input
-                    type="text"
-                    id="name"
-                    name='name'
-                    className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.name ? 'is-invalid' : ''}`}
-                    placeholder="Name"
-                    value={legalProfessional.name}
-                    onChange={handleChange}
-                    aria-describedby="nameError"
-                    required
-                  />
-                  {errors.name && <div id="nameError" className="invalid-feedback">{errors.name}</div>}
+                <h3 className='fw-semibold theme-purple m-3'>Legal Professional Registration</h3>
+              </div>
+            </div>
+            <form onSubmit={handleSubmit} noValidate>
+              <div className="row m-4 mt-0 text-start">
+                <div className="col">
+                  <div className="input-group">
+                    <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
+                      <People />
+                    </span>
+                    <input
+                      type="text"
+                      id="name"
+                      name='name'
+                      className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.name ? 'is-invalid' : ''}`}
+                      placeholder="Name"
+                      value={legalProfessional.name}
+                      onChange={handleChange}
+                      aria-describedby="nameError"
+                      required
+                    />
+                    {errors.name && <div id="nameError" className="invalid-feedback">{errors.name}</div>}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="row m-4 mt-0 text-start">
-              <div className="col">
-                <div className="input-group">
-                  <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
-                    <MdEmail />
-                  </span>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.email ? 'is-invalid' : ''}`}
-                    placeholder="Email"
-                    value={legalProfessional.email}
-                    onChange={handleChange}
-                    aria-describedby="emailError"
-                    required
-                  />
-                  {errors.email && <div id="emailError" className="invalid-feedback">{errors.email}</div>}
+              <div className="row m-4 mt-0 text-start">
+                <div className="col">
+                  <div className="input-group">
+                    <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
+                      <MdEmail />
+                    </span>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.email ? 'is-invalid' : ''}`}
+                      placeholder="Email"
+                      value={legalProfessional.email}
+                      onChange={handleChange}
+                      aria-describedby="emailError"
+                      required
+                    />
+                    {errors.email && <div id="emailError" className="invalid-feedback">{errors.email}</div>}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="row m-4 mt-0 text-start">
-              <div className="col">
-                <div className="input-group">
-                  <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
-                    <FaPhoneAlt />
-                  </span>
-                  <input
-                    type="tel"
-                    id="contact"
-                    name="contact"
-                    className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.contact ? 'is-invalid' : ''}`}
-                    placeholder="Contact Number"
-                    value={legalProfessional.contact}
-                    onChange={handleChange}
-                    aria-describedby="contactError"
-                    required
-                  />
-                  {errors.contact && <div id="contactError" className="invalid-feedback">{errors.contact}</div>}
+              <div className="row m-4 mt-0 text-start">
+                <div className="col">
+                  <div className="input-group">
+                    <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
+                      <FaPhoneAlt />
+                    </span>
+                    <input
+                      type="tel"
+                      id="contact"
+                      name="contact"
+                      className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.contact ? 'is-invalid' : ''}`}
+                      placeholder="Contact Number"
+                      value={legalProfessional.contact}
+                      onChange={handleChange}
+                      aria-describedby="contactError"
+                      required
+                    />
+                    {errors.contact && <div id="contactError" className="invalid-feedback">{errors.contact}</div>}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="row m-4 mt-0 text-start">
-              <div className="col">
-                <div className="input-group">
-                  <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
-                    <BsBuilding />
-                  </span>
-                  <input
-                    type="text"
-                    id="barAssociationId"
-                    name="barAssociationId"
-                    className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.barAssociationId ? 'is-invalid' : ''}`}
-                    placeholder="Bar Association Id"
-                    value={legalProfessional.barAssociationId}
-                    onChange={handleChange}
-                    aria-describedby="barAssociationIdError"
-                    required
-                  />
-                  {errors.barAssociationId && <div id="barAssociationIdError" className="invalid-feedback">{errors.barAssociationId}</div>}
+              <div className="row m-4 mt-0 text-start">
+                <div className="col">
+                  <div className="input-group">
+                    <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
+                      <BsBuilding />
+                    </span>
+                    <input
+                      type="text"
+                      id="barAssociationId"
+                      name="barAssociationId"
+                      className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.barAssociationId ? 'is-invalid' : ''}`}
+                      placeholder="Bar Association Id"
+                      value={legalProfessional.barAssociationId}
+                      onChange={handleChange}
+                      aria-describedby="barAssociationIdError"
+                      required
+                    />
+                    {errors.barAssociationId && <div id="barAssociationIdError" className="invalid-feedback">{errors.barAssociationId}</div>}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="row m-4 mt-0 text-start">
-              <div className="col">
-                <div className="input-group">
-                  <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
-                    <BsBuilding />
-                  </span>
-                  <input
-                    type="text"
-                    id="firmName"
-                    name="firmName"
-                    className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.firmName ? 'is-invalid' : ''}`}
-                    placeholder="Firm Name"
-                    value={legalProfessional.firmName}
-                    onChange={handleChange}
-                    aria-describedby="firmNameError"
-                    required
-                  />
-                  {errors.firmName && <div id="firmNameError" className="invalid-feedback">{errors.firmName}</div>}
+              <div className="row m-4 mt-0 text-start">
+                <div className="col">
+                  <div className="input-group">
+                    <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
+                      <BsBuilding />
+                    </span>
+                    <input
+                      type="text"
+                      id="firmName"
+                      name="firmName"
+                      className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.firmName ? 'is-invalid' : ''}`}
+                      placeholder="Firm Name"
+                      value={legalProfessional.firmName}
+                      onChange={handleChange}
+                      aria-describedby="firmNameError"
+                      required
+                    />
+                    {errors.firmName && <div id="firmNameError" className="invalid-feedback">{errors.firmName}</div>}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="row m-4 mt-0 text-start">
-              <div className="col">
-                <div className="input-group">
-                  <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
-                    <RiLockPasswordFill />
-                  </span>
-                  <input
-                    type="text"
-                    id="licenseNumber"
-                    name="licenseNumber"
-                    className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.licenseNumber ? 'is-invalid' : ''}`}
-                    placeholder="License Number"
-                    value={legalProfessional.licenseNumber}
-                    onChange={handleChange}
-                    aria-describedby="licenseNumberError"
-                    required
-                  />
-                  {errors.licenseNumber && <div id="licenseNumberError" className="invalid-feedback">{errors.licenseNumber}</div>}
+              <div className="row m-4 mt-0 text-start">
+                <div className="col">
+                  <div className="input-group">
+                    <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
+                      <RiLockPasswordFill />
+                    </span>
+                    <input
+                      type="text"
+                      id="licenseNumber"
+                      name="licenseNumber"
+                      className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.licenseNumber ? 'is-invalid' : ''}`}
+                      placeholder="License Number"
+                      value={legalProfessional.licenseNumber}
+                      onChange={handleChange}
+                      aria-describedby="licenseNumberError"
+                      required
+                    />
+                    {errors.licenseNumber && <div id="licenseNumberError" className="invalid-feedback">{errors.licenseNumber}</div>}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="row m-4 mt-0 text-start">
-              <div className="col">
-                <div className="input-group">
-                  <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
-                    <FaCameraRetro />
-                  </span>
-                  <input
-                    type="file"
-                    className={`form-control form-control-lg ${errors.photo ? 'is-invalid' : ''}`}
-                    id="photo"
-                    name="photo"
-                    onChange={handleImageChange}
-                    aria-describedby="photoError"
-                    required
-                  />
-                  {errors.photo && <div id="photoError" className="invalid-feedback">{errors.photo}</div>}
+              <div className="row m-4 mt-0 text-start">
+                <div className="col">
+                  <div className="input-group">
+                    <label htmlFor="photo" className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
+                      <FaCameraRetro />
+                      <span className="ms-2">Photo</span>
+                    </label>
+                    <input
+                      type="file"
+                      className={`form-control form-control-lg ${errors.photo ? 'is-invalid' : ''}`}
+                      id="photo"
+                      name="photo"
+                      onChange={handleImageChange}
+                      aria-describedby="photoError"
+                      required
+                    />
+                    {errors.photo && <div id="photoError" className="invalid-feedback">{errors.photo}</div>}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="row m-4 mt-0 text-start">
-              <div className="col">
-                <div className="input-group">
-                  <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
-                    <FaCameraRetro />
-                  </span>
-                  <input
-                    type="file"
-                    className={`form-control form-control-lg ${errors.proof ? 'is-invalid' : ''}`}
-                    id="proof"
-                    name="proof"
-                    onChange={handleImageChange}
-                    aria-describedby="proofError"
-                    required
-                  />
-                  {errors.proof && <div id="proofError" className="invalid-feedback">{errors.proof}</div>}
+
+              <div className="row m-4 mt-0 text-start">
+                <div className="col">
+                  <div className="input-group">
+                    <label htmlFor="proof" className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
+                      <FaCameraRetro />
+                      <span className="ms-2">Proof</span>
+                    </label>
+                    <input
+                      type="file"
+                      className={`form-control form-control-lg ${errors.proof ? 'is-invalid' : ''}`}
+                      id="proof"
+                      name="proof"
+                      onChange={handleImageChange}
+                      aria-describedby="proofError"
+                      required
+                    />
+                    {errors.proof && <div id="proofError" className="invalid-feedback">{errors.proof}</div>}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="row m-4 mt-0 text-start">
-              <div className="col">
-                <div className="input-group">
-                  <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
-                    <RiLockPasswordFill />
-                  </span>
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    id="password"
-                    name="password"
-                    className={`form-control form-control-lg border border-start-0 home-card-bg border-end-0 ${errors.password ? 'is-invalid' : ''}`}
-                    placeholder="Password"
-                    value={legalProfessional.password}
-                    onChange={handleChange}
-                    aria-describedby="passwordError"
-                    required
-                  />
-                  <span className="input-group-text home-card-bg border-start-0 rounded-end-2 theme-purple" onClick={togglePasswordVisibility} style={{ cursor: 'pointer' }}>
-                    {showPassword ? <MdVisibilityOff /> : <MdVisibility />}
-                  </span>
-                  {errors.password && <div id="passwordError" className="invalid-feedback">{errors.password}</div>}
+
+              <div className="row m-4 mt-0 text-start">
+                <div className="col">
+                  <div className="input-group">
+                    <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
+                      <RiLockPasswordFill />
+                    </span>
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      id="password"
+                      name="password"
+                      className={`form-control form-control-lg border border-start-0 home-card-bg border-end-0 ${errors.password ? 'is-invalid' : ''}`}
+                      placeholder="Password"
+                      value={legalProfessional.password}
+                      onChange={handleChange}
+                      aria-describedby="passwordError"
+                      required
+                    />
+                    <span className="input-group-text home-card-bg border-start-0 rounded-end-2 theme-purple" onClick={togglePasswordVisibility} style={{ cursor: 'pointer' }}>
+                      {showPassword ? <MdVisibilityOff /> : <MdVisibility />}
+                    </span>
+                    {errors.password && <div id="passwordError" className="invalid-feedback">{errors.password}</div>}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="row m-4 mt-0 text-start">
-              <div className="col">
-                <div className="input-group">
-                  <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
-                    <MdOutlinePassword />
-                  </span>
-                  <input
-                    type={showRePassword ? "text" : "password"}
-                    id="rePassword"
-                    name="rePassword"
-                    className={`form-control form-control-lg border border-start-0 home-card-bg border-end-0 ${errors.rePassword ? 'is-invalid' : ''}`}
-                    placeholder="Re-enter Password"
-                    value={legalProfessional.rePassword}
-                    onChange={handleChange}
-                    aria-describedby="rePasswordError"
-                    required
-                  />
-                  <span className="input-group-text home-card-bg border-start-0 rounded-end-2 theme-purple" onClick={toggleRePasswordVisibility} style={{ cursor: 'pointer' }}>
-                    {showRePassword ? <MdVisibilityOff /> : <MdVisibility />}
-                  </span>
-                  {errors.rePassword && <div id="rePasswordError" className="invalid-feedback">{errors.rePassword}</div>}
+              <div className="row m-4 mt-0 text-start">
+                <div className="col">
+                  <div className="input-group">
+                    <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
+                      <MdOutlinePassword />
+                    </span>
+                    <input
+                      type={showRePassword ? "text" : "password"}
+                      id="rePassword"
+                      name="rePassword"
+                      className={`form-control form-control-lg border border-start-0 home-card-bg border-end-0 ${errors.rePassword ? 'is-invalid' : ''}`}
+                      placeholder="Re-enter Password"
+                      value={legalProfessional.rePassword}
+                      onChange={handleChange}
+                      aria-describedby="rePasswordError"
+                      required
+                    />
+                    <span className="input-group-text home-card-bg border-start-0 rounded-end-2 theme-purple" onClick={toggleRePasswordVisibility} style={{ cursor: 'pointer' }}>
+                      {showRePassword ? <MdVisibilityOff /> : <MdVisibility />}
+                    </span>
+                    {errors.rePassword && <div id="rePasswordError" className="invalid-feedback">{errors.rePassword}</div>}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="row m-5">
-              <div className="col">
-                <button
-                  type="submit"
-                  className="btn bg-theme btn-lg fw-bolder px-5 text-white rounded-pill"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? 'Submitting...' : 'Submit'}
-                </button>
+              <div className="row m-5">
+                <div className="col">
+                  <button
+                    type="submit"
+                    className="btn bg-theme btn-lg fw-bolder px-5 text-white rounded-pill"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? 'Submitting...' : 'Submit'}
+                  </button>
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
     </>
   );
 }
