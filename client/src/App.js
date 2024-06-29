@@ -22,6 +22,10 @@ import AdminViewAllSafehouses from './Pages/Admin/AdminViewAllSafehouses/AdminVi
 import AdminSafehouseDetailedView from './Pages/Admin/AdminSafehouseDetailedView/AdminSafehouseDetailedView';
 import CounsellorRegistration from './Pages/Counsellor/CounsellorRegistration/CounsellorRegistration';
 import CounsellorLogin from './Pages/Counsellor/CounsellorLogin/CounsellorLogin';
+import CounsellorForgotPassword from './Pages/Counsellor/CounsellorForgotPassword/CounsellorForgotPassword';
+import LegalProfessionalLogin from './Pages/Legal Professional/LegalProfessionalLogin/LegalProfessionalLogin';
+import LegalProfessionalRegister from './Pages/Legal Professional/LegalProfessionalRegister/LegalProfessionalRegister';
+import LegalProfessionalForgotPassword from './Pages/Legal Professional/LegalProfessionalForgotPassword/LegalProfessionalForgotPassword';
 
 function App() {
   return (
@@ -63,7 +67,13 @@ function App() {
             {/* Counsellor Paths */}
             <Route path='/counsellor-register' element={<CounsellorRegistration />} />
             <Route path='/counsellor-login' element={<CounsellorLogin/>} />
-            
+            <Route path='/counsellor-forgot-password' element={<CounsellorForgotPassword/>} />
+
+            {/* Legal Professional Paths  */}
+            <Route path='/legal-professional-login' element={<LegalProfessionalLogin/>} />
+            <Route path='/legal-professional-register' element={<LegalProfessionalRegister />} />
+            <Route path='/legal-professional-forgot-password' element={<LegalProfessionalForgotPassword/>} />
+
           </Routes>
         </div>
         <Footer />

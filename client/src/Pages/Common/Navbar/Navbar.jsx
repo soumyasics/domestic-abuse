@@ -83,7 +83,7 @@ function Navbar() {
                                     <li><Link className="dropdown-item theme-purple fw-semibold" to="/admin-login">Admin</Link></li>
                                     <li><Link className="dropdown-item theme-purple fw-semibold" to="/supporter-login">Supporter</Link></li>
                                     <li><Link className="dropdown-item theme-purple fw-semibold" to="/counsellor-login">Counsellor</Link></li>
-                                    <li><Link className="dropdown-item theme-purple fw-semibold" to="#">Legal Professional</Link></li>
+                                    <li><Link className="dropdown-item theme-purple fw-semibold" to="/legal-professional-login">Legal Professional</Link></li>
                                 </ul>
                             </li>
                         )}
