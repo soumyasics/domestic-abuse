@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const supporter = require('./Supporter/supporterController')
 const safehouse = require('./SafeHouse/houseController')
+const Counsellor = require('./Counsellor/counsellorController')
 
 //suppoerter routes
 router.post('/registerSupporters', supporter.upload, supporter.registerSupporters);
@@ -28,5 +29,20 @@ router.post('/deActivateSafehouseById/:id', safehouse.deActivateSafehouseById);
 router.post('/rejectSafehouseById/:id', safehouse.rejectSafehouseById);
 router.post('/viewSafehouseBySupporterId/:id', safehouse.viewSafehouseBySupporterId);
 router.post('/viewSafehouseReqsForAdmin/:id', safehouse.viewSafehouseReqsForAdmin);
+
+
+//suppoerter routes
+router.post('/registerCounsellors',  Counsellor.registerCounsellors);
+router.post('/viewCounsellorsById/:id', Counsellor.viewCounsellorsById);
+router.post('/editCounsellorsById/:id',Counsellor.editCounsellorsById);
+router.post('/forgotPasswordCounsellor', Counsellor.forgotPassword);
+router.post('/viewCounsellors', Counsellor.viewCounsellors);
+router.post('/resetPasswordloginCounsellor/:id', Counsellor.resetPassword);
+router.post('/loginCounsellor', Counsellor.login);
+router.post('/viewCounsellorReqsForAdmin', Counsellor.viewCounsellorReqsForAdmin);
+router.post('/approveCounsellorsById/:id', Counsellor.approveCounsellorsById);
+router.post('/rejectCounsellorsById/:id', Counsellor.rejectCounsellorsById);
+router.post('/removeCounsellorsById/:id', Counsellor.removeCounsellorsById);
+router.post('/activateCounsellorsById/:id', Counsellor.activateCounsellorsById);
 
 module.exports = router
