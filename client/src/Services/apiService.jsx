@@ -1,10 +1,10 @@
 //src/Services/apiService.jsx
 import axios from 'axios';
 
-export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
-export const IMG_BASE_URL = 'http://localhost:4039/';
-//export const IMG_BASE_URL = 'http://hybrid.srishticampus.in:4039/';
-//export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
+//export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
+//export const IMG_BASE_URL = 'http://localhost:4039/';
+export const IMG_BASE_URL = 'http://hybrid.srishticampus.in:4039/';
+export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
 // Api for Viewing all Supporters Request for admin to approve, reject or view
 export const viewSupporterReqsForAdmin = async () => {
   try {
@@ -510,10 +510,10 @@ export const viewCounsellorReqsForAdmin = async () => {
 export const approveCounsellorsById = async (id) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/approveCounsellorsById/${id}`);
-    if (response.data.status === 200) {
-      return { success: true, data: response.data };
+    if (response.status === 200) {
+      return { success: true, data: response.data.data, message: response.data.msg };
     } else {
-      return { success: false, message: response.data.msg };
+      return { success: false, message: response.data.msg || 'Approval failed' };
     }
   } catch (error) {
     if (error.response && error.response.data) {
@@ -533,16 +533,16 @@ export const approveCounsellorsById = async (id) => {
 export const rejectCounsellorsById = async (id) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/rejectCounsellorsById/${id}`);
-    if (response.data.status === 200) {
+    if (response.status === 200) {
       return { success: true, data: response.data };
     } else {
-      return { success: false, message: response.data.msg };
+      return { success: false, message: response.msg };
     }
   } catch (error) {
     if (error.response && error.response.data) {
       return {
         success: false,
-        message: error.response.data.msg || 'Rejection failed'
+        message: error.response.msg || 'Rejection failed'
       };
     }
     return {
@@ -556,10 +556,10 @@ export const rejectCounsellorsById = async (id) => {
 export const viewLegalProfessionalReqsForAdmin = async () => {
   try {
     const response = await axios.post(`${API_BASE_URL}/viewLegalProfessionalReqsForAdmin`);
-    return response.data;
+    return { success: true, data: response.data };
   } catch (error) {
     console.error('Error fetching Legal Professional Requests for Admin', error);
-    throw error;
+    return { success: false, message: 'Error fetching legal professional requests.' };
   }
 };
 
@@ -567,10 +567,23 @@ export const viewLegalProfessionalReqsForAdmin = async () => {
 export const approveLegalProfessionalsById = async (id) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/approveLegalProfessionalById/${id}`);
-    return response.data;
+    if (response.status === 200) {
+      return { success: true, message: response.data.msg, data: response.data.data };
+    } else {
+      return { success: false, message: response.data.msg || 'Approval failed' };
+    }
   } catch (error) {
     console.error('Error approving Legal Professional', error);
-    throw error;
+    if (error.response && error.response.data) {
+      return {
+        success: false,
+        message: error.response.data.msg || 'Approval failed'
+      };
+    }
+    return {
+      success: false,
+      message: 'An unexpected error occurred'
+    };
   }
 };
 
@@ -578,9 +591,22 @@ export const approveLegalProfessionalsById = async (id) => {
 export const rejectLegalProfessionalsById = async (id) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/deleteLegalProfessionalById/${id}`);
-    return response.data;
+    if (response.status === 200) {
+      return { success: true, message: response.data.msg };
+    } else {
+      return { success: false, message: response.data.msg || 'Rejection failed' };
+    }
   } catch (error) {
     console.error('Error rejecting Legal Professional', error);
-    throw error;
+    if (error.response && error.response.data) {
+      return {
+        success: false,
+        message: error.response.data.msg || 'Rejection failed'
+      };
+    }
+    return {
+      success: false,
+      message: 'An unexpected error occurred'
+    };
   }
 };
