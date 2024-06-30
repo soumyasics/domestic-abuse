@@ -63,20 +63,20 @@ function AdminViewAllSafehouses(activePage) {
       <div className='table-responsive m-5 mt-2'>
         <Table bordered hover className="supporters-table view-all-safehouse-theme-table-body">
           <thead>
-            <tr className="text-center">
-              <th className='view-all-safehouse-theme text-white'>SI.No</th>
-              <th className='view-all-safehouse-theme text-white'>Name</th>
+            <tr className="text-center ">
+              <th className='view-all-safehouse-theme text-white fs-6'>SI.No</th>
+              <th className='view-all-safehouse-theme text-white fs-6'>Name</th>
            
-              <th className='view-all-safehouse-theme text-white'>Contact Number</th>
-              <th className='view-all-safehouse-theme text-white'>Landmark</th>
-              <th className='view-all-safehouse-theme text-white'>Accommodation Capacity</th>
-              <th className='view-all-safehouse-theme text-white'>Monthly Rent</th>
-              <th className='view-all-safehouse-theme text-white'>Action</th>
+              <th className='view-all-safehouse-theme text-white fs-6'>Contact Number</th>
+              <th className='view-all-safehouse-theme text-white fs-6'>Landmark</th>
+              <th className='view-all-safehouse-theme text-white fs-6'>Accommodation Capacity</th>
+              <th className='view-all-safehouse-theme text-white fs-6'>Monthly Rent</th>
+              <th className='view-all-safehouse-theme text-white fs-6'>Action</th>
             </tr>
           </thead>
-          <tbody className='text-center'>
+          <tbody className='text-center fs-6'>
             {currentSafehouses.map((safehouse, index) => (
-              <tr key={safehouse._id} className='view-all-safehouse-theme-table-body'>
+              <tr key={safehouse._id} className='view-all-safehouse-theme-table-body fs-6'>
                 <td className='p-2'>{offset + index + 1}</td>
                 <td className='p-2'>{safehouse.name}</td>
                

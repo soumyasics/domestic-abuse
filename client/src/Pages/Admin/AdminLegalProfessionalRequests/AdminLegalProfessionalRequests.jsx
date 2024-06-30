@@ -19,18 +19,24 @@ const AdminLegalProfessionalRequests = () => {
   const fetchLegalProfessionals = useCallback(async () => {
     try {
       const response = await viewLegalProfessionalReqsForAdmin();
-      setLegalProfessionals(response.data || []);
+      if (response.success) {
+        console.log('Fetched legal professionals:', response.data);  // Debugging log
+        setLegalProfessionals(response.data.data);
+      } else {
+        toast.error(response.message);
+        setLegalProfessionals([]);
+      }
     } catch (error) {
-      console.error('Error fetching Legal Professionals:', error);
       toast.error('Error fetching legal professional requests.');
+      setLegalProfessionals([]);
     } finally {
       setLoading(false);
     }
   }, []);
 
   useEffect(() => {
-    fetchLegalProfessionals(currentPage);
-  }, [fetchLegalProfessionals, currentPage]);
+    fetchLegalProfessionals();
+  }, [fetchLegalProfessionals]);
 
   const handleApprove = async (id) => {
     confirmAlert({
@@ -43,8 +49,8 @@ const AdminLegalProfessionalRequests = () => {
             try {
               const response = await approveLegalProfessionalsById(id);
               if (response.success) {
-                toast.success('Legal professional approved successfully.');
-                fetchLegalProfessionals(currentPage);
+                toast.success(response.message || 'Legal professional approved successfully.');
+                fetchLegalProfessionals();
               } else {
                 toast.error(response.message || 'Error approving legal professional.');
               }
@@ -71,8 +77,8 @@ const AdminLegalProfessionalRequests = () => {
             try {
               const response = await rejectLegalProfessionalsById(id);
               if (response.success) {
-                toast.success('Legal professional rejected successfully.');
-                fetchLegalProfessionals(currentPage);
+                toast.success(response.message || 'Legal professional rejected successfully.');
+                fetchLegalProfessionals();
               } else {
                 toast.error(response.message || 'Error rejecting legal professional.');
               }
@@ -92,12 +98,16 @@ const AdminLegalProfessionalRequests = () => {
     setCurrentPage(event.selected);
   };
 
-  const paginatedLegalProfessionals = legalProfessionals.slice(
-    currentPage * itemsPerPage,
-    (currentPage + 1) * itemsPerPage
-  );
+  const paginatedLegalProfessionals = Array.isArray(legalProfessionals)
+    ? legalProfessionals.slice(
+        currentPage * itemsPerPage,
+        (currentPage + 1) * itemsPerPage
+      )
+    : [];
 
-  const pageCount = Math.ceil(legalProfessionals.length / itemsPerPage);
+  const pageCount = Array.isArray(legalProfessionals)
+    ? Math.ceil(legalProfessionals.length / itemsPerPage)
+    : 0;
 
   return (
     <div className="table-responsive">

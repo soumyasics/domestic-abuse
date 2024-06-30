@@ -336,14 +336,14 @@ const approveLegalProfessionalById = (req, res) => {
     .then(data => {
       res.json({
         status: 200,
-        msg: "Data obtained successfully",
+        msg: "Approved successfully",
         data: data
       });
     })
     .catch(err => {
       res.status(500).json({
         status: 500,
-        msg: "Data not Updated",
+        msg: "Approval Failed",
         Error: err
       });
     });
@@ -396,14 +396,14 @@ const deleteLegalProfessionalById = (req, res) => {
       .then(data => {
         res.json({
           status: 200,
-          msg: "Data obtained successfully",
+          msg: "Rejected successfully",
           data: data
         });
       })
       .catch(err => {
         res.status(500).json({
           status: 500,
-          msg: "Data not Updated",
+          msg: "Rejection Failed",
           Error: err
         });
       });
