@@ -1,10 +1,10 @@
 //src/Services/apiService.jsx
 import axios from 'axios';
 
-//export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
-//export const IMG_BASE_URL = 'http://localhost:4039/';
-export const IMG_BASE_URL = 'http://hybrid.srishticampus.in:4039/';
-export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
+export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
+export const IMG_BASE_URL = 'http://localhost:4039/';
+//export const IMG_BASE_URL = 'http://hybrid.srishticampus.in:4039/';
+//export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
 // Api for Viewing all Supporters Request for admin to approve, reject or view
 export const viewSupporterReqsForAdmin = async () => {
   try {
@@ -608,5 +608,51 @@ export const rejectLegalProfessionalsById = async (id) => {
       success: false,
       message: 'An unexpected error occurred'
     };
+  }
+};
+// Function to get counsellor by ID
+export const getCounsellorById = async (id) => {
+  try {
+      const response = await axios.post(`${API_BASE_URL}/viewCounsellorsById/${id}`);
+      return response.data;
+  } catch (error) {
+      console.error('Error fetching counsellor data:', error);
+      throw error;
+  }
+};
+
+// Function to edit counsellor by ID
+export const editCounsellorById = async (id, data) => {
+  try {
+      const response = await axios.post(`${API_BASE_URL}/editCounsellorsById/${id}`, data);
+      return response.data;
+  } catch (error) {
+      console.error('Error editing counsellor data:', error);
+      throw error;
+  }
+};
+// Function to fetch legal professional by ID
+export const getLegalProfessionalById = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewLegalProfessionalById/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching legal professional by ID:', error);
+    throw error;
+  }
+};
+
+// Function to edit legal professional by ID
+export const editLegalProfessionalById = async (id, formData) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/editLegalProfessionalById/${id}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error editing legal professional by ID:', error);
+    throw error;
   }
 };

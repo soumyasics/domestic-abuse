@@ -28,6 +28,9 @@ import LegalProfessionalRegister from './Pages/Legal Professional/LegalProfessio
 import LegalProfessionalForgotPassword from './Pages/Legal Professional/LegalProfessionalForgotPassword/LegalProfessionalForgotPassword';
 import CounsellorHome from './Pages/Counsellor/CounsellorHome/CounsellorHome';
 import AdminCounsellorRequests from './Pages/Admin/AdminCounsellorRequests/AdminCounsellorRequests';
+import CounsellorEditProfile from './Pages/Counsellor/CounsellorEditProfile/CounsellorEditProfile';
+import LegalProfessionalEditProfile from './Pages/Legal Professional/LegalProfessionalEditProfile/LegalProfessionalEditProfile';
+import LegalProfessionalHome from './Pages/Legal Professional/LegalProfessionalHome/LegalProfessionalHome';
 function App() {
   return (
     <div className="d-flex flex-column min-vh-100">
@@ -72,11 +75,15 @@ function App() {
             <Route path='/counsellor-login' element={<CounsellorLogin/>} />
             <Route path='/counsellor-forgot-password' element={<CounsellorForgotPassword/>} />
             <Route path='/counsellor-home' element={<CounsellorHome />} />
+            <Route path='/counsellor-edit-profile' element={<CounsellorEditProfile />} />
+
 
             {/* Legal Professional Paths  */}
             <Route path='/legal-professional-login' element={<LegalProfessionalLogin/>} />
             <Route path='/legal-professional-register' element={<LegalProfessionalRegister />} />
             <Route path='/legal-professional-forgot-password' element={<LegalProfessionalForgotPassword/>} />
+            <Route path='/legal-professional-edit-profile' element={<LegalProfessionalEditProfile />} />
+            <Route path='/legal-professional-home' element={<LegalProfessionalHome />} />
 
           </Routes>
         </div>
