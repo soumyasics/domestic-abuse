@@ -4,7 +4,7 @@ import { People, House } from 'react-bootstrap-icons';
 import { FaHandshake, FaPeopleGroup } from "react-icons/fa6";
 import { GoLaw } from "react-icons/go";
 import { Container, Row, Col } from 'react-bootstrap';
-import SupportersRequestTable from '../Request/SupportersRequestTable';
+import SupportersRequestTable from '../SupportersRequest/SupportersRequestTable';
 import AdminStatBox from '../AdminStatBox/AdminStatBox';
 import { useState, Fragment, useEffect } from 'react';
 import axiosInstance from '../../../Constant/BaseURL';

@@ -125,16 +125,16 @@ function SupporterRegister() {
 
   return (
     <>
-    <div className="container px-5 m-auto mt-5 container-spec">
+    <div className="container px-5 m-auto mt-5 ">
       <ToastContainer />
       <div className="row px-5 mt-5">
-        <div className="col-md-6 mt-5">
-          <img src={supporter1} className=" align-self-center img-fluid object-fit-cover supporter-register-scale-img " alt="supporter" />
+        <div className="col-md-6 mt-5 d-flex align-items-center">
+          <img src={supporter1} className=" align-self-center object-fit-cover counsellor-register-scale-img " alt="supporter" />
         </div>
         <div className="col-md-6 mt-5 text-center align-self-start">
           <div className="row m-4 mt-0">
             <div className="col">
-              <h1 className='fw-semibold theme-purple m-3'> Supporter Registration</h1>
+              <h3 className='fw-semibold theme-purple m-3'> Supporter Registration</h3>
             </div>
           </div>
           <form onSubmit={handleSubmit} noValidate>
@@ -273,9 +273,12 @@ function SupporterRegister() {
             <div className="row m-4 mt-0 text-start">
               <div className="col">
                 <div className="input-group">
-                  <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
+      
+                  <label htmlFor="photo" className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
                     <FaCameraRetro />
-                  </span>
+                    <span className="ms-2">Photo</span>
+                    </label>
+                  
                   <input
                     type="file"
                     className={`form-control form-control-lg ${errors.image ? 'is-invalid' : ''}`}

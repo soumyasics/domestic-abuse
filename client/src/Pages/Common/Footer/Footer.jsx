@@ -39,7 +39,7 @@ function Footer() {
             <p>Skype</p>
           </div>
           <div className='col text-white m-3 mt-5'>
-            <h5 className='fs-5 text-center fw-semibold'>Important</h5>
+            <h5 className='fs-5  fw-semibold'>Important</h5>
             <p>If you are in immediate danger, please call 911. </p>
             <p>For confidential support</p> 
             <p> call the National Domestic Violence Hotline at 1-500-719-7133.</p>

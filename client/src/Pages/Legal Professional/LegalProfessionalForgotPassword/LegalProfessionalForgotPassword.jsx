@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './LegalProfessionalForgotPassword.css';
 import { useNavigate } from 'react-router-dom';
 import CoolGirl from '../../../Assets/legal-professional-login.png';
-import { forgotPassword } from '../../../Services/apiService';
+import { resetPasswordLegalProfessional } from '../../../Services/apiService';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -50,7 +50,7 @@ function LegalProfessionalForgotPassword() {
       return;
     }
     try {
-      const response = await forgotPassword(email, password);
+      const response = await resetPasswordLegalProfessional(email, password);
       console.log(response);
       toast.success("Password reset successful. Redirecting to login page...");
       setTimeout(() => {
@@ -58,7 +58,7 @@ function LegalProfessionalForgotPassword() {
       }, 3000);
     } catch (error) {
       console.error('Password reset failed', error);
-      toast.error(error.response?.data?.message || 'Password reset failed');
+      toast.error(error.response?.data?.msg || 'Password reset failed');
     }
   };
 
@@ -72,7 +72,7 @@ function LegalProfessionalForgotPassword() {
         <div className="col-md-6 text-center d-grid align-self-center my-5">
           <div className="row m-4">
             <div className="col">
-              <h1 className='fw-semibold theme- m-3 my-5 theme-purple'>Forgot Password</h1>
+              <h1 className='fw-semibold theme-purple m-3 my-5'>Forgot Password</h1>
             </div>
           </div>
           <form onSubmit={handleSubmit} noValidate>

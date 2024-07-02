@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './SupporterEditSafeHouse.css';
 import safehouseImg from '../../../Assets/newhouse.jpeg';
 import { FaHouse, FaLocationDot, FaCoins, FaList } from "react-icons/fa6";
@@ -189,9 +189,12 @@ function SupporterEditSafeHouse({ safehouseId }) {
             <div className="row m-3 mt-0 text-start">
               <div className="col">
                 <div className="input-group">
-                  <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
+                  <label htmlFor="photo" className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
+
                     <FaCameraRetro />
-                  </span>
+                    <span className="ms-2">Photo</span>
+
+                  </label>
                   <input
                     type="file"
                     className={`form-control form-control-lg ${errors.image ? 'is-invalid' : ''}`}

@@ -33,9 +33,9 @@ router.post('/viewSafehouseReqsForAdmin/:id', safehouse.viewSafehouseReqsForAdmi
 
 
 //suppoerter routes
-router.post('/registerCounsellors',  Counsellor.registerCounsellors);
+router.post('/registerCounsellors', Counsellor.registerCounsellors);
 router.post('/viewCounsellorsById/:id', Counsellor.viewCounsellorsById);
-router.post('/editCounsellorsById/:id',Counsellor.editCounsellorsById);
+router.post('/editCounsellorsById/:id', Counsellor.editCounsellorsById);
 router.post('/forgotPasswordCounsellor', Counsellor.forgotPassword);
 router.post('/viewCounsellors', Counsellor.viewCounsellors);
 router.post('/resetPasswordloginCounsellor/:id', Counsellor.resetPassword);
@@ -49,15 +49,15 @@ router.post('/activateCounsellorsById/:id', Counsellor.activateCounsellorsById);
 
 
 //Legal Professional routes
-router.post('/registerLegalProfessional',LegalProfessional.upload,  LegalProfessional.registerLegalProfessional);
+router.post('/registerLegalProfessional', LegalProfessional.upload, LegalProfessional.registerLegalProfessional);
 router.post('/viewLegalProfessionalById/:id', LegalProfessional.viewLegalProfessionalById);
-router.post('/editLegalProfessionalById/:id',LegalProfessional.upload,LegalProfessional.editLegalProfessionalById);
+router.post('/editLegalProfessionalById/:id', LegalProfessional.upload, LegalProfessional.editLegalProfessionalById);
 router.post('/forgotPasswordLegalProfessional', LegalProfessional.forgotPassword);
 router.post('/viewLegalProfessionals', LegalProfessional.viewLegalProfessionals);
 router.post('/resetPasswordloginLegalProfessional/:id', LegalProfessional.resetPassword);
 router.post('/loginLegalProfessional', LegalProfessional.login);
 router.post('/viewLegalProfessionalReqsForAdmin', LegalProfessional.viewLegalProfessionalReqsForAdmin);
-router.post('/approveCounsellorsById/:id', LegalProfessional.approveLegalProfessionalById);
+router.post('/approveLegalProfessionalById/:id', LegalProfessional.approveLegalProfessionalById);
 router.post('/deleteLegalProfessionalById/:id', LegalProfessional.deleteLegalProfessionalById);
 router.post('/deActivateLegalProfessionalById/:id', LegalProfessional.deActivateLegalProfessionalById);
 router.post('/activateLegalProfessionalById/:id', LegalProfessional.activateLegalProfessionalById);

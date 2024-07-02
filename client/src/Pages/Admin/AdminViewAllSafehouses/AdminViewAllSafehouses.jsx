@@ -6,14 +6,10 @@ import { FaPen, FaEye } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../../Constant/BaseURL';
+import { TiTick } from "react-icons/ti";
 
 
-
-function AdminViewAllSafehouses() {
-
-
-
-
+function AdminViewAllSafehouses(activePage) {
 
   const [safehouses, setSafehouses] = useState([]);
 
@@ -34,12 +30,16 @@ function AdminViewAllSafehouses() {
   const [currentPage, setCurrentPage] = useState(0);
   const safehousesPerPage = 10;
 
-  const handleEdit = (id) => {
+  const handleAccept = (id) => {
+    // Edit functionality
+    console.log(`Edit Safe House with ID: ${id}`);
+  };
+  const handleView = (id) => {
     // Edit functionality
     console.log(`Edit Safe House with ID: ${id}`);
   };
 
-  const handleRemove = (id) => {
+  const handleReject = (id) => {
     // Remove functionality
     console.log(`Remove Safe House with ID: ${id}`);
   };
@@ -63,20 +63,20 @@ function AdminViewAllSafehouses() {
       <div className='table-responsive m-5 mt-2'>
         <Table bordered hover className="supporters-table view-all-safehouse-theme-table-body">
           <thead>
-            <tr className="text-center">
-              <th className='view-all-safehouse-theme text-white'>SI.No</th>
-              <th className='view-all-safehouse-theme text-white'>Name</th>
+            <tr className="text-center ">
+              <th className='view-all-safehouse-theme text-white fs-6'>SI.No</th>
+              <th className='view-all-safehouse-theme text-white fs-6'>Name</th>
            
-              <th className='view-all-safehouse-theme text-white'>Contact Number</th>
-              <th className='view-all-safehouse-theme text-white'>Landmark</th>
-              <th className='view-all-safehouse-theme text-white'>Accommodation Capacity</th>
-              <th className='view-all-safehouse-theme text-white'>Monthly Rent</th>
-              <th className='view-all-safehouse-theme text-white'>Action</th>
+              <th className='view-all-safehouse-theme text-white fs-6'>Contact Number</th>
+              <th className='view-all-safehouse-theme text-white fs-6'>Landmark</th>
+              <th className='view-all-safehouse-theme text-white fs-6'>Accommodation Capacity</th>
+              <th className='view-all-safehouse-theme text-white fs-6'>Monthly Rent</th>
+              <th className='view-all-safehouse-theme text-white fs-6'>Action</th>
             </tr>
           </thead>
-          <tbody className='text-center'>
+          <tbody className='text-center fs-6'>
             {currentSafehouses.map((safehouse, index) => (
-              <tr key={safehouse._id} className='view-all-safehouse-theme-table-body'>
+              <tr key={safehouse._id} className='view-all-safehouse-theme-table-body fs-6'>
                 <td className='p-2'>{offset + index + 1}</td>
                 <td className='p-2'>{safehouse.name}</td>
                
@@ -89,7 +89,19 @@ function AdminViewAllSafehouses() {
                     <div className='bg-purple rounded-circle cursor-pointer mx-2'>
                       <FaEye 
                         className='mx-2 text-white'
-                        onClick={() => handleEdit(safehouse._id)}
+                        onClick={() => handleView(safehouse._id)}
+                      />
+                    </div>
+                    <div className='bg-purple rounded-circle cursor-pointer mx-2'>
+                      <TiTick
+                        className='mx-2 text-white'
+                        onClick={() => handleAccept(safehouse._id)}
+                      />
+                    </div>
+                    <div className='bg-purple rounded-circle cursor-pointer mx-2'>
+                      <RxCross1 
+                        className='mx-2 text-white'
+                        onClick={() => handleReject(safehouse._id)}
                       />
                     </div>
                   </div>

@@ -1,12 +1,11 @@
 import React, { useState, useContext } from 'react';
 import './CounsellorLogin.css';
 import CoolGirl from '../../../Assets/counsellor-login.jpeg';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { loginCounsellor } from '../../../Services/apiService'; 
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AuthContext from '../../../context/AuthContext';
-import { Link } from 'react-router-dom';
 
 function CounsellorLogin() {
   const [email, setEmail] = useState('');
@@ -19,7 +18,21 @@ function CounsellorLogin() {
     setPasswordShown(!passwordShown);
   };
 
+  const validateForm = () => {
+    if (!email) {
+      toast.error('Email is required');
+      return false;
+    }
+    if (!password) {
+      toast.error('Password is required');
+      return false;
+    }
+    return true;
+  };
+
   const handleLogin = async () => {
+    if (!validateForm()) return;
+
     try {
       const counsellor = { email, password };
       const result = await loginCounsellor(counsellor, (token, counsellorId) => {

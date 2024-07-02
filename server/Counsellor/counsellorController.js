@@ -53,6 +53,7 @@ const registerCounsellors = async (req, res) => {
                 });
             });
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: error.message });
     }
 };
@@ -242,7 +243,7 @@ const login = async (req, res) => {
             return res.json({ status: 405, msg: 'User not found' });
         }
         if (user.password != password) {
-            return res.json({ status: 405, msg: 'Password Mismatch !!' });
+            return res.json({ status: 407, msg: 'Password Mismatch !!' });
         }
 
         if (user.adminApproved == false) {

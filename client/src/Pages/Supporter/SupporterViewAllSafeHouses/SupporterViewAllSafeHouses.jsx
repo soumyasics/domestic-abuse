@@ -55,8 +55,8 @@ function SupporterViewAllSafeHouses() {
         <div className='col'>
           <h4 className='theme-purple'>Safe House Details</h4>
         </div>
-        <div className='col'>
-          <h4 className='theme-purple'><Link to="/supporter-add-safe-space">Add New Safe House</Link></h4>
+        <div className='col text-end'>
+          <button className='btn bg-purple text-white'><Link to="/supporter-add-safe-space" className='text-white text-decoration-none'>Add New Safe House</Link></button>
         </div>
       </div>
       <div className='table-responsive m-5 mt-2'>
