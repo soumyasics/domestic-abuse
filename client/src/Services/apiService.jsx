@@ -445,19 +445,17 @@ export const registerLegalProfessional = async (legalProfessionalData) => {
   }
 };
 
-// Api for Legal Professional Login
-export const loginLegalProfessional = async (legalProfessional, setTokenCallback) => {
+export const loginLegalProfessional = async (legalProfessional) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/loginLegalProfessional`, legalProfessional);
 
     if (response.data.status === 200) {
       const { token, data } = response.data;
-      setTokenCallback(token, data._id);
-      return { success: true, user: data };
+      return { success: true, token, userId: data._id };
     } else if (response.data.status === 405) {
-      return { success: false, message: 'User not found ' };
+      return { success: false, message: 'User not found' };
     } else if (response.data.status === 407) {
-      return { success: false, message: 'Password Mismatch ' };
+      return { success: false, message: 'Password Mismatch' };
     } else if (response.data.status === 409) {
       if (response.data.msg.includes('Admin Approval')) {
         return { success: false, message: 'Please wait for Admin Approval' };
@@ -474,14 +472,17 @@ export const loginLegalProfessional = async (legalProfessional, setTokenCallback
       return {
         success: false,
         message: error.response.data.msg || 'Login failed',
+        debugInfo: error.response.data 
       };
     }
     return {
       success: false,
       message: 'An unexpected error occurred',
+      debugInfo: error 
     };
   }
 };
+
 
 //Api for Legal Professional Forgot Password
 export const resetPasswordLegalProfessional = async (email, password) => {
