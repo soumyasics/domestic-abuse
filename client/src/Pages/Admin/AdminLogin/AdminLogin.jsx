@@ -20,9 +20,9 @@ export default function AdminLogin() {
     const hardCodedUsername = 'admin';
     const hardCodedPassword = 'password@1';
     if (username === hardCodedUsername && password === hardCodedPassword) {
-      localStorage.setItem("admin", 1);
+      // localStorage.setItem("admin", 1);
       toast.success('Login successful!');
-      login('dummy-token', 'admin', 1); 
+      login('dummy-token', 'admin'); 
       navigate('/admin-dashboard');
     } else {
       toast.error('Incorrect Username or Password');

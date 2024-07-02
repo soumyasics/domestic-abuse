@@ -1,4 +1,3 @@
-// src/components/layout/Navbar.jsx
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
@@ -18,6 +17,9 @@ function Navbar() {
                 case 'counsellor':
                     navigate('/counsellor-home');
                     break;
+                case 'legalProfessional':
+                    navigate('/legal-professional-home');
+                    break;
                 case 'admin':
                     navigate('/admin-dashboard');
                     break;
@@ -33,6 +35,19 @@ function Navbar() {
     const handleLogout = () => {
         logout();
         navigate('/');
+    };
+
+    const getProfileLink = () => {
+        switch (userRole) {
+            case 'supporter':
+                return '/supporter-edit-profile';
+            case 'counsellor':
+                return '/counsellor-edit-profile';
+            case 'legalProfessional':
+                return '/legal-professional-edit-profile';
+            default:
+                return '#';
+        }
     };
 
     return (
@@ -61,7 +76,7 @@ function Navbar() {
                             {isLoggedIn && userRole === 'supporter' ? (
                                 <Link className="nav-link mx-3 theme-purple fw-semibold" to="/supporter-view-all-safehouses">Safe House</Link>
                             ) : (
-                               <p></p>
+                                <p></p>
                             )}
                         </li>
                         <li className="nav-item">
@@ -71,15 +86,25 @@ function Navbar() {
                             <Link className="nav-link mx-3 theme-purple fw-semibold" to="/">Our Services</Link>
                         </li>
                         {isLoggedIn ? (
-                            <li className="nav-item">
-                                <button className="nav-link mx-3 theme-purple fw-semibold btn btn-link py-1" onClick={handleLogout}>Logout</button>
-                            </li>
+                            <>
+                                <li className="nav-item dropdown">
+                                    <a className="nav-link dropdown-toggle mx-3 theme-purple fw-semibold" href="#" id="navbarDropdownProfile" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Profile
+                                    </a>
+                                    <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownProfile">
+                                        <li><Link className="dropdown-item theme-purple fw-semibold" to={getProfileLink()}>Edit Profile</Link></li>
+                                    </ul>
+                                </li>
+                                <li className="nav-item">
+                                    <button className="nav-link mx-3 theme-purple fw-semibold btn btn-link py-1" onClick={handleLogout}>Logout</button>
+                                </li>
+                            </>
                         ) : (
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle mx-3 theme-purple fw-semibold" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Login
                                 </a>
-                                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown1" >
+                                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown1">
                                     <li><Link className="dropdown-item theme-purple fw-semibold" to="/admin-login">Admin</Link></li>
                                     <li><Link className="dropdown-item theme-purple fw-semibold" to="/supporter-login">Supporter</Link></li>
                                     <li><Link className="dropdown-item theme-purple fw-semibold" to="/counsellor-login">Counsellor</Link></li>

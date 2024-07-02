@@ -45,19 +45,20 @@ function LegalProfessionalLogin() {
 
     try {
       const legalProfessional = { email, password };
-      const result = await loginLegalProfessional(legalProfessional, (token, legalProfessionalId) => {
-        login(token, 'legalProfessional', legalProfessionalId); // Pass legalProfessionalId to login function
-      });
+      const result = await loginLegalProfessional(legalProfessional);
 
       if (result.success) {
+        login(result.token, 'legalProfessional', result.userId); 
         toast.success('Login successful!');
         setTimeout(() => {
           navigate('/legal-professional-home');
         }, 2000);
       } else {
-        toast.error(result.message);
+        console.error('Login error:', result);
+        toast.error(result.message + (result.debugInfo ? `: ${JSON.stringify(result.debugInfo)}` : ''));
       }
     } catch (error) {
+      console.error('Unexpected error:', error);
       toast.error('An unexpected error occurred during login');
     }
   };
