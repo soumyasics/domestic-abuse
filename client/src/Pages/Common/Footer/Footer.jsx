@@ -41,9 +41,9 @@ function Footer() {
           <div className='col text-white m-3 mt-5'>
             <h5 className='fs-5  fw-semibold'>Important</h5>
             <p>If you are in immediate danger, please call 911. </p>
-            <p>For confidential support</p> 
+            <p>For confidential support</p>
             <p> call the National Domestic Violence Hotline at 1-500-719-7133.</p>
-            
+
           </div>
           <div className='col text-white m-3'>
             <div className='row'>
@@ -54,19 +54,35 @@ function Footer() {
             <div className='row'>
               <div className='col d-flex justify-content-center'>
                 <span className='m-1  p-2'>
-                  <img src={fb} alt="Facebook" className='rounded-circle img-fluid social-icon-custom' />
+                  <Link to={'https://www.facebook.com/login/'} className='btn'>
+                    <img src={fb} alt="Facebook" className='rounded-circle img-fluid social-icon-custom' />
+                  </Link>
+
                 </span>
                 <span className='m-1 p-2'>
-                  <img src={insta} alt="Instagram" className='rounded-circle img-fluid social-icon-custom' />
+                  <Link to={'https://www.instagram.com/accounts/login/?hl=en'} className='btn'>
+                    <img src={insta} alt="Instagram" className='rounded-circle img-fluid social-icon-custom' />
+                  </Link>
                 </span>
                 <span className='m-1 p-2'>
-                  <img src={x} alt="X" className='rounded-circle img-fluid social-icon-custom' />
+                  <Link to={'https://x.com/?lang=en'} className='btn'>
+                    <img src={x} alt="X" className='rounded-circle img-fluid social-icon-custom' />
+
+                  </Link>
                 </span>
                 <span className='m-1 p-2'>
-                  <img src={youtube} alt="YouTube" className='rounded-circle img-fluid social-icon-custom' />
+                  <Link to={'https://www.youtube.com/'} className='btn'>
+                    <img src={youtube} alt="YouTube" className='rounded-circle img-fluid social-icon-custom' />
+
+                  </Link>
+
                 </span>
                 <span className='m-1 p-2'>
-                  <img src={linkedIn} alt="LinkedIn" className='rounded-circle img-fluid social-icon-custom' />
+                  <Link to={'https://in.linkedin.com/'} className='btn'>
+                    <img src={linkedIn} alt="LinkedIn" className='rounded-circle img-fluid social-icon-custom' />
+
+                  </Link>
+
                 </span>
               </div>
             </div>
@@ -74,7 +90,7 @@ function Footer() {
         </div>
         <div className='row'>
           <div className='col'>
-            <hr className='hr-custom'/>
+            <hr className='hr-custom' />
           </div>
         </div>
         <div className='row text-white fs-6 text-center'>

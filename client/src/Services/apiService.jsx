@@ -1,15 +1,10 @@
 //src/Services/apiService.jsx
 import axios from 'axios';
 
-<<<<<<< HEAD
-// export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
-// export const IMG_BASE_URL = 'http://localhost:4039/';
-=======
-//export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
-//export const IMG_BASE_URL = 'http://localhost:4039/';
->>>>>>> 0c91af99336639d45d6ba40b3ab039634be0c997
-export const IMG_BASE_URL = 'http://hybrid.srishticampus.in:4039/';
-export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
+export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
+export const IMG_BASE_URL = 'http://localhost:4039/';
+//export const IMG_BASE_URL = 'http://hybrid.srishticampus.in:4039/';
+//export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
 // Api for Viewing all Supporters Request for admin to approve, reject or view
 export const viewSupporterReqsForAdmin = async () => {
   try {
@@ -450,19 +445,17 @@ export const registerLegalProfessional = async (legalProfessionalData) => {
   }
 };
 
-// Api for Legal Professional Login
-export const loginLegalProfessional = async (legalProfessional, setTokenCallback) => {
+export const loginLegalProfessional = async (legalProfessional) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/loginLegalProfessional`, legalProfessional);
 
     if (response.data.status === 200) {
       const { token, data } = response.data;
-      setTokenCallback(token, data._id);
-      return { success: true, user: data };
+      return { success: true, token, userId: data._id };
     } else if (response.data.status === 405) {
-      return { success: false, message: 'User not found ' };
+      return { success: false, message: 'User not found' };
     } else if (response.data.status === 407) {
-      return { success: false, message: 'Password Mismatch ' };
+      return { success: false, message: 'Password Mismatch' };
     } else if (response.data.status === 409) {
       if (response.data.msg.includes('Admin Approval')) {
         return { success: false, message: 'Please wait for Admin Approval' };
@@ -479,14 +472,17 @@ export const loginLegalProfessional = async (legalProfessional, setTokenCallback
       return {
         success: false,
         message: error.response.data.msg || 'Login failed',
+        debugInfo: error.response.data 
       };
     }
     return {
       success: false,
       message: 'An unexpected error occurred',
+      debugInfo: error 
     };
   }
 };
+
 
 //Api for Legal Professional Forgot Password
 export const resetPasswordLegalProfessional = async (email, password) => {
@@ -613,5 +609,51 @@ export const rejectLegalProfessionalsById = async (id) => {
       success: false,
       message: 'An unexpected error occurred'
     };
+  }
+};
+// Function to get counsellor by ID
+export const getCounsellorById = async (id) => {
+  try {
+      const response = await axios.post(`${API_BASE_URL}/viewCounsellorsById/${id}`);
+      return response.data;
+  } catch (error) {
+      console.error('Error fetching counsellor data:', error);
+      throw error;
+  }
+};
+
+// Function to edit counsellor by ID
+export const editCounsellorById = async (id, data) => {
+  try {
+      const response = await axios.post(`${API_BASE_URL}/editCounsellorsById/${id}`, data);
+      return response.data;
+  } catch (error) {
+      console.error('Error editing counsellor data:', error);
+      throw error;
+  }
+};
+// Function to fetch legal professional by ID
+export const getLegalProfessionalById = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewLegalProfessionalById/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching legal professional by ID:', error);
+    throw error;
+  }
+};
+
+// Function to edit legal professional by ID
+export const editLegalProfessionalById = async (id, formData) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/editLegalProfessionalById/${id}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error editing legal professional by ID:', error);
+    throw error;
   }
 };

@@ -6,6 +6,7 @@ export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [supporterId, setSupporterId] = useState(null);
   const [counsellorId, setCounsellorId] = useState(null);
+  const [legalProfessionalId, setLegalProfessionalId] = useState(null); 
   const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
@@ -13,6 +14,7 @@ export const AuthProvider = ({ children }) => {
     const savedUserRole = localStorage.getItem('userRole');
     const savedSupporterId = localStorage.getItem('supporterId');
     const savedCounsellorId = localStorage.getItem('counsellorId');
+    const savedLegalProfessionalId = localStorage.getItem('legalProfessionalId');
     
     if (token && savedUserRole) {
       setIsLoggedIn(true);
@@ -21,6 +23,8 @@ export const AuthProvider = ({ children }) => {
         setSupporterId(savedSupporterId);
       } else if (savedUserRole === 'counsellor') {
         setCounsellorId(savedCounsellorId);
+      } else if (savedUserRole === 'legalProfessional') { 
+        setLegalProfessionalId(savedLegalProfessionalId);
       }
     }
   }, []);
@@ -34,6 +38,9 @@ export const AuthProvider = ({ children }) => {
     } else if (userRole === 'counsellor') {
       localStorage.setItem('counsellorId', userId);
       setCounsellorId(userId);
+    } else if (userRole === 'legalProfessional') { 
+      localStorage.setItem('legalProfessionalId', userId);
+      setLegalProfessionalId(userId);
     }
     setIsLoggedIn(true);
     setUserRole(userRole);
@@ -44,14 +51,16 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('userRole');
     localStorage.removeItem('supporterId');
     localStorage.removeItem('counsellorId');
+    localStorage.removeItem('legalProfessionalId'); 
     setIsLoggedIn(false);
     setUserRole(null);
     setSupporterId(null);
     setCounsellorId(null);
+    setLegalProfessionalId(null); 
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout, supporterId, counsellorId, userRole }}>
+    <AuthContext.Provider value={{ isLoggedIn, login, logout, supporterId, counsellorId, legalProfessionalId, userRole }}>
       {children}
     </AuthContext.Provider>
   );
