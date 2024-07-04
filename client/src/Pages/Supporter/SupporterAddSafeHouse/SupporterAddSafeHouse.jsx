@@ -122,7 +122,7 @@ function SupporterAddSafeHouse() {
       if (response.success) {
         toast.success('Safe House registered successfully!');
         setTimeout(() => {
-          navigate('/supporter-home');
+          navigate('/supporter-view-all-safehouses');
         }, 1000);
 
         // Reset form or perform additional actions on success

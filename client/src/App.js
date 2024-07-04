@@ -67,7 +67,7 @@ function App() {
             <Route path='/supporter-add-safe-space' element={<SupporterAddSafeHouse />} />
             
             {/* Updated route for editing safe house */}
-            <Route path='/supporter-edit-safe-space' element={<SupporterEditSafeHouse />} />
+            <Route path='/supporter-edit-safe-house' element={<SupporterEditSafeHouse />} />
             <Route path='/supporter-view-all-safehouses' element={<SupporterViewAllSafeHouses />} />
 
             {/* Counsellor Paths */}
