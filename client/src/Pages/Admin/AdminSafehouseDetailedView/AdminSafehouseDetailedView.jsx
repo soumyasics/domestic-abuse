@@ -1,21 +1,22 @@
-import React from 'react';
+import React,{useState} from 'react';
 import './AdminSafehouseDetailedView.css';
 import demoSafehouse from '../../../Assets/newhouse.jpeg';
 import { IMG_BASE_URL } from '../../../Services/apiService';
 import demo from '../../../Assets/demo-supp.png';
-function AdminSafehouseDetailedView(props, supporter) {
+function AdminSafehouseDetailedView(safehouse) {
+  const [supporter,setSupporter]=useState();
   return (
     <>
       <div className='container'>
         <div className='row m-5'>
           <div className='col'>
-            <h3 className='text-center theme-purple fw-bold'>{props.name ? props.name : 'Aishwaryas Home'}</h3>
+            <h3 className='text-center theme-purple fw-bold'>{safehouse.name ? safehouse.name : 'Aishwaryas Home'}</h3>
           </div>
         </div>
         <div className='row m-5'>
           <div className='col m-3'>
             <img
-              src={props.image && props.image.filename ? `${IMG_BASE_URL}/${props.image.filename}` : demoSafehouse}
+              src={safehouse.image && safehouse.image.filename ? `${IMG_BASE_URL}/${safehouse.image.filename}` : demoSafehouse}
               alt='Safehouse'
               className='img-fluid rounded'
               onError={(e) => {
@@ -31,7 +32,7 @@ function AdminSafehouseDetailedView(props, supporter) {
                 House Name:
               </div>
               <div className='col-6 text-secondary'>
-                {props.name ? props.name : 'Aishwaryas Home'}
+                {safehouse.name ? safehouse.name : 'Aishwaryas Home'}
               </div>
             </div>
             <div className='row border-bottom m-5'>
@@ -39,7 +40,7 @@ function AdminSafehouseDetailedView(props, supporter) {
                 Address:
               </div>
               <div className='col-6 text-secondary'>
-                {props.landmark ? props.landmark : 'Akkulam Rd, Trivandrum'}
+                {safehouse.landmark ? safehouse.landmark : 'Akkulam Rd, Trivandrum'}
               </div>
             </div>
             <div className='row border-bottom m-5'>
@@ -47,7 +48,7 @@ function AdminSafehouseDetailedView(props, supporter) {
                 Contact Number:
               </div>
               <div className='col-6 text-secondary'>
-                {props.contact ? props.contact : '9495211400'}
+                {safehouse.contact ? safehouse.contact : '9495211400'}
               </div>
             </div>
             <div className='row border-bottom m-5'>
@@ -55,7 +56,7 @@ function AdminSafehouseDetailedView(props, supporter) {
                 Accommodation Capacity:
               </div>
               <div className='col-6 text-secondary'>
-                {props.capacity ? props.capacity : '6'}
+                {safehouse.capacity ? safehouse.capacity : '6'}
               </div>
             </div>
             <div className='row border-bottom m-5'>
@@ -63,7 +64,7 @@ function AdminSafehouseDetailedView(props, supporter) {
                 Monthly Rent:
               </div>
               <div className='col-6 text-secondary'>
-                {props.rent ? props.rent : '5000'}
+                {safehouse.rent ? safehouse.rent : '5000'}
               </div>
             </div>
             <div className='row border-bottom m-5'>
@@ -71,7 +72,7 @@ function AdminSafehouseDetailedView(props, supporter) {
                 Description:
               </div>
               <div className='col-6 text-secondary'>
-                {props.description ? props.description : 'It is a place where someone can stay and be protected'}
+                {safehouse.description ? safehouse.description : 'It is a place where someone can stay and be protected'}
               </div>
             </div>
           </div>
@@ -119,7 +120,7 @@ function AdminSafehouseDetailedView(props, supporter) {
             </div>
             <div className='row border-bottom m-5'>
               <div className='col-6'>
-                Mail Id:
+                Email Id:
               </div>
               <div className='col-6 text-secondary'>
                 {supporter.email}

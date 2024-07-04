@@ -1,54 +1,91 @@
 import React, { useEffect, useState } from 'react';
-import './AdminViewAllSafehouses.css';
 import { Table } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import { FaEye } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
-import { useNavigate } from 'react-router-dom';
 import { TiTick } from "react-icons/ti";
-import { viewSafehouses } from '../../../Services/apiService';
+import { viewSafehouseReqsForAdmin, approveSafehouseById, rejectSafehouseById } from '../../../Services/apiService';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import { useNavigate } from 'react-router-dom';
 
-function AdminViewAllSafehouses() {
+function AdminSafehouseRequests() {
   const [safehouses, setSafehouses] = useState([]);
+  const [safehouseDetail, setSafehouseDetail] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
   const safehousesPerPage = 10;
   const navigate = useNavigate();
 
-  const fetchSafehouses = async () => {
-    try {
-      const response = await viewSafehouses();
-      if (response.success) {
-        setSafehouses(response.data);
-      } else {
-        console.error('Failed to fetch safehouses:', response.message);
-        setSafehouses([]); // Ensure safehouses is always defined
-      }
-    } catch (error) {
-      console.error('Error fetching safehouses:', error);
-      setSafehouses([]); // Ensure safehouses is always defined
+  const fetchSafehouseRequests = async () => {
+    const response = await viewSafehouseReqsForAdmin();
+    if (response.success) {
+      setSafehouses(response.data);
+    } else {
+      console.error('Failed to fetch safehouse requests:', response.message);
     }
   };
 
   useEffect(() => {
-    fetchSafehouses();
+    fetchSafehouseRequests();
   }, []);
 
   const handleAccept = (id) => {
-    console.log(`Accept Safe House with ID: ${id}`);
-  };
-
-  const handleView = (id) => {
-    console.log(`View Safe House with ID: ${id}`);
+    confirmAlert({
+      title: 'Confirm Approval',
+      message: 'Are you sure you want to approve this safe house?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: async () => {
+            const response = await approveSafehouseById(id);
+            if (response.success) {
+              console.log(`Safehouse with ID: ${id} approved successfully`);
+              fetchSafehouseRequests(); // Refresh the list after approval
+            } else {
+              console.error('Failed to approve safehouse:', response.message);
+            }
+          }
+        },
+        {
+          label: 'No',
+          onClick: () => console.log('Approval cancelled')
+        }
+      ]
+    });
   };
 
   const handleReject = (id) => {
-    console.log(`Reject Safe House with ID: ${id}`);
+    confirmAlert({
+      title: 'Confirm Rejection',
+      message: 'Are you sure you want to reject this safe house?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: async () => {
+            const response = await rejectSafehouseById(id);
+            if (response.success) {
+              console.log(`Safehouse with ID: ${id} rejected successfully`);
+              fetchSafehouseRequests(); // Refresh the list after rejection
+            } else {
+              console.error('Failed to reject safehouse:', response.message);
+            }
+          }
+        },
+        {
+          label: 'No',
+          onClick: () => console.log('Rejection cancelled')
+        }
+      ]
+    });
   };
 
-  // Pagination logic
+  const handleView = async (data) => {
+    navigate(`/admin-safehouse-details`, { state: { data } });
+  };
+
   const offset = currentPage * safehousesPerPage;
-  const currentSafehouses = safehouses ? safehouses.slice(offset, offset + safehousesPerPage) : [];
-  const pageCount = Math.ceil(safehouses ? safehouses.length / safehousesPerPage : 0);
+  const currentSafehouses = safehouses.slice(offset, offset + safehousesPerPage);
+  const pageCount = Math.ceil(safehouses.length / safehousesPerPage);
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
@@ -58,7 +95,7 @@ function AdminViewAllSafehouses() {
     <div className='container-fluid m-auto'>
       <div className='row m-5 mt-5 mb-2'>
         <div className='col'>
-          <h4 className='theme-purple'>Safe House Details</h4>
+          <h4 className='theme-purple'>Safe House Requests</h4>
         </div>
       </div>
       <div className='table-responsive m-5 mt-2'>
@@ -85,19 +122,19 @@ function AdminViewAllSafehouses() {
                 <td className='p-2'>{safehouse.rent}</td>
                 <td className='p-2'>
                   <div className='d-flex justify-content-center'>
-                    <div className='bg-purple rounded-circle cursor-pointer mx-2'>
+                    <div className='bg-purple rounded-circle cursor-pointer mx-2 p-1'>
                       <FaEye 
                         className='mx-2 text-white'
-                        onClick={() => handleView(safehouse._id)}
+                        onClick={() => handleView(safehouse)}
                       />
                     </div>
-                    <div className='bg-purple rounded-circle cursor-pointer mx-2'>
+                    <div className='bg-purple rounded-circle cursor-pointer mx-2 p-1'>
                       <TiTick
                         className='mx-2 text-white'
                         onClick={() => handleAccept(safehouse._id)}
                       />
                     </div>
-                    <div className='bg-purple rounded-circle cursor-pointer mx-2'>
+                    <div className='bg-purple rounded-circle cursor-pointer mx-2 p-1'>
                       <RxCross1 
                         className='mx-2 text-white'
                         onClick={() => handleReject(safehouse._id)}
@@ -136,4 +173,4 @@ function AdminViewAllSafehouses() {
   );
 }
 
-export default AdminViewAllSafehouses;
+export default AdminSafehouseRequests;

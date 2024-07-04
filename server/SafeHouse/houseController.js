@@ -192,7 +192,7 @@ const viewSafehouseBySupporterId = (req, res) => {
         });
 };
 const viewSafehouseReqsForAdmin = (req, res) => {
-    Safehouse.find({adminApproved:fasle})
+    Safehouse.find({adminApproved:false})
         .exec()
         .then(data => {
             res.json({
