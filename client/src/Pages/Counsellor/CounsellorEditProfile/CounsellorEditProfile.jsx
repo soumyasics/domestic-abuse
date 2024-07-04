@@ -63,6 +63,7 @@ function CounsellorEditProfile() {
 
         if (counsellor.name && !nameRegex.test(counsellor.name)) {
             newErrors.name = 'Name should only contain alphabets';
+          
         }
 
         if (counsellor.email && !emailRegex.test(counsellor.email)) {
@@ -73,15 +74,13 @@ function CounsellorEditProfile() {
             newErrors.contact = 'Contact number should be 10 digits';
         }
 
-        if (counsellor.password && counsellor.password !== counsellor.rePassword) {
-            newErrors.rePassword = 'Passwords do not match';
-        }
-
+        
         if (counsellor.image && counsellor.image.type && !['image/jpeg', 'image/png', 'image/gif'].includes(counsellor.image.type)) {
             newErrors.image = 'Only image files (jpeg, png, gif) are allowed';
         }
 
         setErrors(newErrors);
+        console.log("nene",newErrors);
         return Object.keys(newErrors).length === 0;
     };
 
@@ -110,6 +109,7 @@ function CounsellorEditProfile() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log("valid",validate());
         if (validate()) {
             setIsSubmitting(true);
             const formData = new FormData();
@@ -128,7 +128,7 @@ function CounsellorEditProfile() {
 
             const counsellorId = localStorage.getItem('counsellorId');
             try {
-                const response = await editCounsellorById(counsellorId, formData);
+                const response = await editCounsellorById(counsellorId, counsellor);
                 console.log('Edit counsellor response:', response);
 
                 if (response.status === 200) {
