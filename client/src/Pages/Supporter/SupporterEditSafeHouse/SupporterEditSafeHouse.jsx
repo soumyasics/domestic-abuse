@@ -8,12 +8,13 @@ import { CgOrganisation } from "react-icons/cg";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { viewSafehouseById, editSafehouseById } from '../../../Services/apiService';
+import { useLocation,useNavigate } from 'react-router-dom';
 
-
-function SupporterEditSafeHouse({ safehouseId }) {
+function SupporterEditSafeHouse() {
+  const location = useLocation();
+  const { safehouseId } = location.state || {};
   const [safehouse, setSafehouse] = useState({
     name: '',
-    address: '',
     contact: '',
     landmark: '',
     licenseNo: '',
@@ -24,14 +25,13 @@ function SupporterEditSafeHouse({ safehouseId }) {
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const navigate=useNavigate();
   useEffect(() => {
     const fetchSafehouseData = async () => {
       try {
         const safehouseData = await viewSafehouseById(safehouseId);
         setSafehouse({
           name: safehouseData.name,
-          address: safehouseData.address,
           contact: safehouseData.contact,
           landmark: safehouseData.landmark,
           licenseNo: safehouseData.licenseNo,
@@ -52,16 +52,12 @@ function SupporterEditSafeHouse({ safehouseId }) {
     const phoneRegex = /^\d{10}$/;
     const nameRegex = /^[A-Za-z\s]+$/;
     const capacityRegex = /^[1-9][0-9]*$/;
-    const rentRegex = /^\$?[1-9]\d{0,2}(,\d{3})*(\.\d{2})?$/;
+    const rentRegex = /^[1-9]\d*$/;
 
     if (!safehouse.name) {
       newErrors.name = 'House Name is required';
     } else if (!nameRegex.test(safehouse.name)) {
       newErrors.name = 'House Name should only contain alphabets';
-    }
-
-    if (!safehouse.address) {
-      newErrors.address = 'Address is required';
     }
 
     if (!safehouse.contact) {
@@ -84,9 +80,7 @@ function SupporterEditSafeHouse({ safehouseId }) {
       newErrors.capacity = 'Accommodation Capacity has to be a number and above 0';
     }
 
-    if (!safehouse.image) {
-      newErrors.image = 'Image is required';
-    } else if (!['image/jpeg', 'image/png', 'image/gif'].includes(safehouse.image.type)) {
+    if (safehouse.image && !['image/jpeg', 'image/png', 'image/gif'].includes(safehouse.image.type)) {
       newErrors.image = 'Only image files (jpeg, png, gif) are allowed';
     }
 
@@ -129,18 +123,10 @@ function SupporterEditSafeHouse({ safehouseId }) {
 
     setIsSubmitting(true);
     try {
-      const formData = new FormData();
-      Object.keys(safehouse).forEach(key => {
-        if (key === 'image') {
-          formData.append('image', safehouse[key], safehouse[key].name);
-        } else {
-          formData.append(key, safehouse[key]);
-        }
-      });
-
-      const updateResponse = await editSafehouseById(safehouseId, formData);
+      const updateResponse = await editSafehouseById(safehouseId, safehouse);
       if (updateResponse.success) {
         toast.success('Safe house details updated successfully!');
+        navigate('/supporter-view-all-safehouses');
       } else {
         toast.error('Failed to update safe house details. Please try again.');
       }
@@ -207,27 +193,7 @@ function SupporterEditSafeHouse({ safehouseId }) {
                 </div>
               </div>
             </div>
-            <div className="row m-3 mt-0 text-start">
-              <div className="col">
-                <div className="input-group">
-                  <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
-                    <FaLocationDot />
-                  </span>
-                  <input
-                    type="text"
-                    id="address"
-                    name="address"
-                    className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.address ? 'is-invalid' : ''}`}
-                    placeholder="Address"
-                    value={safehouse.address}
-                    onChange={handleChange}
-                    aria-describedby="addressError"
-                    required
-                  />
-                  {errors.address && <div id="addressError" className="invalid-feedback">{errors.address}</div>}
-                </div>
-              </div>
-            </div>
+      
             <div className="row m-3 mt-0 text-start">
               <div className="col">
                 <div className="input-group">
@@ -358,7 +324,7 @@ function SupporterEditSafeHouse({ safehouseId }) {
               <div className="col">
                 <button
                   type="submit"
-                  className="btn home-card-bg w-100 text-white border-0"
+                  className="btn btn-lg bg-purple text-white  mt-3"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? 'Updating...' : 'Update Safe House'}

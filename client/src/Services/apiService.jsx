@@ -306,17 +306,39 @@ export const viewSafehouseById = async (id) => {
     throw error;
   }
 };
-// Function to view all safehouses
+// Function to view all safehouses by a particular supporter
 export const viewSafehouses = async (id) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/viewSafehouseBySupporterId/${id}`);
-    console.log(response);
     return response.data;
   } catch (error) {
     console.error('Error fetching safehouses:', error);
     throw error;
   }
 };
+// Api for Rejecting Safehouse by ID
+export const rejectSafehouseById = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/rejectSafehouseById/${id}`);
+    if (response.data.status === 200) {
+      return { success: true, data: response.data };
+    } else {
+      return { success: false, message: response.data.msg };
+    }
+  } catch (error) {
+    if (error.response && error.response.data) {
+      return {
+        success: false,
+        message: error.response.data.msg || 'Rejection failed'
+      };
+    }
+    return {
+      success: false,
+      message: 'An unexpected error occurred'
+    };
+  }
+};
+
 // Api for Counsellor Register
 export const registerCounsellors = async (counsellorData) => {
   try {
@@ -444,7 +466,7 @@ export const registerLegalProfessional = async (legalProfessionalData) => {
     throw error;
   }
 };
-
+//Api for legal professional login
 export const loginLegalProfessional = async (legalProfessional) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/loginLegalProfessional`, legalProfessional);

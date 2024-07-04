@@ -1,43 +1,68 @@
 import React, { useState, useEffect } from 'react';
 import './SupporterViewAllSafeHouses.css';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import { Table } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import { FaPen } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
-import { viewSafehouses } from '../../../Services/apiService'; 
-import { Link } from 'react-router-dom';
+import { viewSafehouses,rejectSafehouseById } from '../../../Services/apiService'; 
+import { Link,useNavigate } from 'react-router-dom';
+import { toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function SupporterViewAllSafeHouses() {
   const [safehouses, setSafehouses] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const safehousesPerPage = 10;
+  const navigate=useNavigate();
 
-  useEffect(() => {
-    // Fetch safehouses data from backend
-    const fetchSafehouses = async () => {
-      try {
-        const response = await viewSafehouses(localStorage.getItem('supporterId'));
-        if (response.status === 200) {
-          setSafehouses(response.data);
-        } else {
-          console.error('Failed to fetch safehouses:', response.msg);
-        }
-      } catch (error) {
-        console.error('Error fetching safehouses:', error);
+  const fetchSafehouses = async () => {
+    try {
+      const response = await viewSafehouses(localStorage.getItem('supporterId'));
+      if (response.status === 200) {
+        setSafehouses(response.data);
+      } else {
+        console.error('Failed to fetch safehouses:', response.msg);
       }
-    };
-
+    } catch (error) {
+      console.error('Error fetching safehouses:', error);
+    }
+  };
+  useEffect(() => {
     fetchSafehouses();
   }, []); // Empty dependency array ensures it runs only once on component mount
 
   const handleEdit = (id) => {
-    // Edit functionality
-    console.log(`Edit Safe House with ID: ${id}`);
+    navigate('/supporter-edit-safe-house',{ state: { safehouseId: id } })
   };
 
-  const handleRemove = (id) => {
-    // Remove functionality
-    console.log(`Remove Safe House with ID: ${id}`);
+  const handleRemove = async (id) => {
+    confirmAlert({
+      title: 'Confirm Removal',
+      message: 'Are you sure you want to remove this safehouse?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: async () => {
+            try {
+              const response = await rejectSafehouseById(id);
+              if (response.success) {
+                toast.success('Safehouse removed successfully.');
+                fetchSafehouses();
+              } else {
+                toast.error(response.message || 'Error removing safehouse.');
+              }
+            } catch (error) {
+              toast.error('Error removing safehouse.');
+            }
+          },
+        },
+        {
+          label: 'No',
+        },
+      ],
+    });
   };
 
   // Pagination logic
@@ -59,7 +84,7 @@ function SupporterViewAllSafeHouses() {
           <button className='btn bg-purple text-white'><Link to="/supporter-add-safe-space" className='text-white text-decoration-none'>Add New Safe House</Link></button>
         </div>
       </div>
-      <div className='table-responsive m-5 mt-2'>
+      <div className='table-responsive m-5 mt-5'>
         <Table bordered hover className="supporters-table view-all-safehouse-theme-table-body">
           <thead>
             <tr className="text-center">
