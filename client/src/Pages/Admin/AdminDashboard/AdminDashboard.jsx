@@ -10,6 +10,8 @@ import axiosInstance from '../../../Constant/BaseURL'
 import { useNavigate } from 'react-router-dom';
 import AdminCounsellorRequests from '../AdminCounsellorRequests/AdminCounsellorRequests';
 import AdminLegalProfessionalRequests from '../AdminLegalProfessionalRequests/AdminLegalProfessionalRequests';
+import AdminCounsellorViewAll from '../AdminCounsellorViewAll/AdminCounsellorViewAll';
+import AdminSafehouseRequests from '../AdminSafehouseRequests/AdminSafehouseRequests';
 function AdminDashboard() {
   const [activePage, setActivePage] = useState("home");
   const changeActivePage = (page) => {
@@ -49,8 +51,10 @@ function AdminDashboard() {
               {activePage === "new-request" && <SupportersRequestTable activePage={activePage} />}
               {activePage === "all-supporters" && <SupportersRequestTable activePage={activePage} />}
               {activePage === "all-safehouses" && <AdminViewAllSafehouses activePage={activePage} />}
+              {activePage === "request-safehouse" && <AdminSafehouseRequests activePage={activePage} />}
               {activePage === "safehouse-details" && <AdminSafehouseDetailedView activePage={activePage} />}
               {activePage === "request-counsellors" && <AdminCounsellorRequests activePage={activePage} />}
+              {activePage === "all-counsellors" && <AdminCounsellorViewAll activePage={activePage} />}
               {activePage === "request-legal-professionals" && <AdminLegalProfessionalRequests activePage={activePage} />}
 
             </div>

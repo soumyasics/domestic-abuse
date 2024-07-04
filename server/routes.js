@@ -29,7 +29,7 @@ router.post('/approveSafehouseById/:id', safehouse.approveSafehouseById);
 router.post('/deActivateSafehouseById/:id', safehouse.deActivateSafehouseById);
 router.post('/rejectSafehouseById/:id', safehouse.rejectSafehouseById);
 router.post('/viewSafehouseBySupporterId/:id', safehouse.viewSafehouseBySupporterId);
-router.post('/viewSafehouseReqsForAdmin/:id', safehouse.viewSafehouseReqsForAdmin);
+router.post('/viewSafehouseReqsForAdmin', safehouse.viewSafehouseReqsForAdmin);
 
 
 //suppoerter routes

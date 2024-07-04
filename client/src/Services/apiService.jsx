@@ -307,13 +307,47 @@ export const viewSafehouseById = async (id) => {
   }
 };
 // Function to view all safehouses by a particular supporter
-export const viewSafehouses = async (id) => {
+export const viewSafehousesBySupporterId = async (id) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/viewSafehouseBySupporterId/${id}`);
     return response.data;
   } catch (error) {
     console.error('Error fetching safehouses:', error);
     throw error;
+  }
+};
+// Function to view safehouse requests for admin
+export const viewSafehouseReqsForAdmin = async () => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewSafehouseReqsForAdmin`);
+    return {
+      success: true,
+      data: response.data.data,
+      message: response.data.msg,
+    };
+  } catch (error) {
+    console.error('Error fetching safehouse requests for admin:', error);
+    return {
+      success: false,
+      message: 'Failed to fetch safehouse requests for admin',
+    };
+  }
+};
+// Function to approve a safehouse by ID
+export const approveSafehouseById = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/approveSafehouseById/${id}`);
+    return {
+      success: true,
+      data: response.data.data,
+      message: response.data.msg,
+    };
+  } catch (error) {
+    console.error('Error approving safehouse by ID:', error);
+    return {
+      success: false,
+      message: 'Failed to approve safehouse by ID',
+    };
   }
 };
 // Api for Rejecting Safehouse by ID
@@ -338,7 +372,28 @@ export const rejectSafehouseById = async (id) => {
     };
   }
 };
-
+//Api for viewing all safehouses that are adminApproved
+export const viewSafehouses = async () => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewSafehouses`);
+    if (response.data.status === 200) {
+      return { success: true, data: response.data.data };
+    } else {
+      return { success: false, message: response.data.msg };
+    }
+  } catch (error) {
+    if (error.response && error.response.data) {
+      return {
+        success: false,
+        message: error.response.data.msg || 'Failed to fetch safehouses'
+      };
+    }
+    return {
+      success: false,
+      message: 'An unexpected error occurred'
+    };
+  }
+};
 // Api for Counsellor Register
 export const registerCounsellors = async (counsellorData) => {
   try {
