@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import './AdminCounsellorDetailedView.css';
-import demoCounsellor from '../../../Assets/demo-counsellor.png';
+import demoCounsellor from '../../../Assets/counsellor-registration.png';
 import { IMG_BASE_URL, getCounsellorById } from '../../../Services/apiService';
 
 function AdminCounsellorDetailedView() {
@@ -68,14 +68,6 @@ function AdminCounsellorDetailedView() {
               </div>
               <div className='col-6 text-secondary'>
                 {counsellor.email}
-              </div>
-            </div>
-            <div className='row border-bottom m-5'>
-              <div className='col-6'>
-                Password:
-              </div>
-              <div className='col-6 text-secondary'>
-                {counsellor.password}
               </div>
             </div>
             <div className='row border-bottom m-5'>
