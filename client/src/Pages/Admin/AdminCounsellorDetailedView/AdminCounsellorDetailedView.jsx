@@ -6,8 +6,6 @@ import { IMG_BASE_URL, getCounsellorById } from '../../../Services/apiService';
 import { Button } from 'react-bootstrap';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-  useEffect(() => {
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { viewCounsellorReqsForAdmin, approveCounsellorsById, rejectCounsellorsById } from '../../../Services/apiService';
@@ -15,6 +13,8 @@ import { viewCounsellorReqsForAdmin, approveCounsellorsById, rejectCounsellorsBy
 function AdminCounsellorDetailedView() {
   const { id } =useParams();
   const [counsellor, setCounsellor] = useState(null);
+
+  useEffect(() => {
     console.log("in",id);
     const fetchCounsellorData = async () => {
       if (id) {
@@ -95,12 +95,12 @@ function AdminCounsellorDetailedView() {
           <div className='col text-center'>
             <div className="rounded-circle overflow-hidden" style={{ width: '250px', height: '250px', margin: '0 auto' }}>
               <img
-                // src={counsellor.profileImage && counsellor.profileImage.filename ? `${IMG_BASE_URL}/${counsellor.profileImage.filename}` : demoCounsellor}
+                src={counsellor.profileImage && counsellor.profileImage.filename ? `${IMG_BASE_URL}/${counsellor.profileImage.filename}` : demoCounsellor}
                 alt='Counsellor'
                 className='img-fluid'
                 onError={(e) => {
                   e.target.onerror = null;
-                  // e.target.src = demoCounsellor;
+                  e.target.src = demoCounsellor;
                 }}
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
@@ -131,6 +131,7 @@ function AdminCounsellorDetailedView() {
                 {counsellor.email}
               </div>
             </div>
+           
             <div className='row border-bottom m-5'>
               <div className='col-6'>
                 Experience:
