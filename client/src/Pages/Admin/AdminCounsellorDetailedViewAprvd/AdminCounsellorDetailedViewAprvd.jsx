@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
-import './AdminCounsellorDetailedView.css';
-import demoCounsellor from '../../../Assets/counsellor-registration.png';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import '../AdminCounsellorDetailedView/AdminCounsellorDetailedView.css';
+// import demoCounsellor from '../../../Assets/demo-counsellor.png';
 import { IMG_BASE_URL, getCounsellorById } from '../../../Services/apiService';
 import { Button } from 'react-bootstrap';
 import { toast, ToastContainer } from 'react-toastify';
@@ -9,25 +9,28 @@ import 'react-toastify/dist/ReactToastify.css';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { viewCounsellorReqsForAdmin, approveCounsellorsById, rejectCounsellorsById } from '../../../Services/apiService';
+import axiosInstance from '../../../Constant/BaseURL'
+import demoCounsellor from '../../../Assets/counsellor-registration.png';
 
-function AdminCounsellorDetailedView() {
+function AdminCounsellorDetailedViewAprvd() {
   const { id } =useParams();
   const [counsellor, setCounsellor] = useState(null);
+const navigate=useNavigate()
 
+const fetchCounsellorData = async () => {
+  if (id) {
+    try {
+      const counsellorData = await getCounsellorById(id);
+      console.log("data",counsellorData);
+      setCounsellor(counsellorData);
+    } catch (error) {
+      console.error('Failed to fetch counsellor data:', error);
+    }
+  }
+};
   useEffect(() => {
     console.log("in",id);
-    useEffect(() => {
-    const fetchCounsellorData = async () => {
-      if (id) {
-        try {
-          const counsellorData = await getCounsellorById(id);
-          console.log("data",counsellorData);
-          setCounsellor(counsellorData);
-        } catch (error) {
-          console.error('Failed to fetch counsellor data:', error);
-        }
-      }
-    };
+  
     fetchCounsellorData();
   },[id]);
 
@@ -57,6 +60,48 @@ function AdminCounsellorDetailedView() {
       ],
     });
   };
+  const toggleUserActiveState = (counsellors) => {
+    console.log(counsellors.isActive);
+    if(counsellors.isActive){
+      handleDeactive(counsellors._id)
+    }
+    else{
+      handleActive(counsellors._id)
+    }
+  }
+  
+  const handleActive = (id) => {
+    console.log(id);
+    axiosInstance.post(`/activateCounsellorsById/${id}`)
+    .then((res)=>{
+      if(res.data.status === 200){
+        
+        counsellor.isActive=true   
+        // fetchCounsellors(currentPage);
+        fetchCounsellorData();
+
+}
+    })
+    .catch((err) => {
+      console.log("Error",err);
+    })
+  }
+
+  const handleDeactive = (id) => {
+    axiosInstance.post(`/removeCounsellorsById/${id}`)
+    .then((res) => {
+      if(res.data.status === 200){
+        counsellor.isActive=false   
+        // fetchCounsellors(currentPage);
+        fetchCounsellorData();
+
+
+      }
+    })
+    .catch((err) => {
+      console.log("Error",err);
+    })
+  }
 
   const handleReject = async (id) => {
     confirmAlert({
@@ -166,20 +211,12 @@ function AdminCounsellorDetailedView() {
               </div>
             </div>
             <div className='text-center'>
-                      <Button
-                        variant="outline-success"
-                        className="m-2 px-5"
-                        onClick={() => handleApprove(counsellor._id)}
-                      >
-                        Accept
-                      </Button>
-                      <Button
-                        variant="outline-danger"
-                        className="m-2 px-5"
-                        onClick={() => handleReject(counsellor._id)}
-                      >
-                        Reject
-                      </Button>
+            <button
+                     className={`toggle-button ${counsellor.isActive ? 'active' : 'inactive'}`} 
+                    onClick={()=>{toggleUserActiveState(counsellor)}}
+                    >
+                      {counsellor.isActive ? 'Active' : 'Inactive'}
+                    </button>
                     </div>
           </div>
         </div>
@@ -190,4 +227,4 @@ function AdminCounsellorDetailedView() {
   );
 }
 
-export default AdminCounsellorDetailedView;
+export default AdminCounsellorDetailedViewAprvd;

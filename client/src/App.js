@@ -33,6 +33,7 @@ import LegalProfessionalEditProfile from './Pages/Legal Professional/LegalProfes
 import LegalProfessionalHome from './Pages/Legal Professional/LegalProfessionalHome/LegalProfessionalHome';
 import AdminCounsellorViewAll from './Pages/Admin/AdminCounsellorViewAll/AdminCounsellorViewAll';
 import AdminCounsellorDetailedView from './Pages/Admin/AdminCounsellorDetailedView/AdminCounsellorDetailedView';
+import AdminCounsellorDetailedViewAprvd from './Pages/Admin/AdminCounsellorDetailedViewAprvd/AdminCounsellorDetailedViewAprvd';
 function App() {
   return (
     <div className="d-flex flex-column min-vh-100">
@@ -62,6 +63,8 @@ function App() {
 
             <Route path='/admin-counsellor-view-all' element={<AdminCounsellorViewAll />} />
             <Route path='/admin-viewdetailedCouncilor-req/:id' element={<AdminCounsellorDetailedView />} />
+            <Route path='/admin-viewall-aprvd-councillors' element={<AdminCounsellorViewAll />} />
+            <Route path='/admin-viewdetailedCouncilor-aprvd/:id' element={<AdminCounsellorDetailedViewAprvd/>} />
 
 
             {/* Supporter Paths */}
