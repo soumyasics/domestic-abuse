@@ -16,6 +16,7 @@ function AdminCounsellorDetailedView() {
 
   useEffect(() => {
     console.log("in",id);
+    useEffect(() => {
     const fetchCounsellorData = async () => {
       if (id) {
         try {
