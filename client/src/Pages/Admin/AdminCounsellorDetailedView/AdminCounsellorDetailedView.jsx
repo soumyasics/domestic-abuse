@@ -14,7 +14,6 @@ function AdminCounsellorDetailedView() {
   const { id } =useParams();
   const [counsellor, setCounsellor] = useState(null);
 
-  useEffect(() => {
     console.log("in",id);
     useEffect(() => {
     const fetchCounsellorData = async () => {
