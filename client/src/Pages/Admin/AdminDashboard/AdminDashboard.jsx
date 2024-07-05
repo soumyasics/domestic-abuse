@@ -56,6 +56,8 @@ function AdminDashboard() {
               {activePage === "safehouse-details" && <AdminSafehouseDetailedView activePage={activePage} />}
               {activePage === "request-counsellors" && <AdminCounsellorRequests activePage={activePage} />}
               {activePage === "request-legal-professionals" && <AdminLegalProfessionalRequests activePage={activePage} />}
+              {activePage === "admin-viewdetailedCouncilor-req" && <admin-viewdetailedCouncilor-req activePage={activePage} />}
+
 
             </div>
           </div>
