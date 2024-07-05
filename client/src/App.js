@@ -31,6 +31,7 @@ import AdminCounsellorRequests from './Pages/Admin/AdminCounsellorRequests/Admin
 import CounsellorEditProfile from './Pages/Counsellor/CounsellorEditProfile/CounsellorEditProfile';
 import LegalProfessionalEditProfile from './Pages/Legal Professional/LegalProfessionalEditProfile/LegalProfessionalEditProfile';
 import LegalProfessionalHome from './Pages/Legal Professional/LegalProfessionalHome/LegalProfessionalHome';
+import AdminCounsellorViewAll from './Pages/Admin/AdminCounsellorViewAll/AdminCounsellorViewAll';
 import AdminCounsellorDetailedView from './Pages/Admin/AdminCounsellorDetailedView/AdminCounsellorDetailedView';
 import AdminCounsellorViewAll from './Pages/Admin/AdminCounsellorViewAll/AdminCounsellorViewAll';
 function App() {
@@ -59,8 +60,11 @@ function App() {
                 <AdminSafehouseDetailedView />
             } />  
             <Route path='/admin-counsellor-requests' element={<AdminCounsellorRequests />} />
+
+            <Route path='/admin-counsellor-view-all' element={<AdminCounsellorViewAll />} />
             <Route path='/admin-viewdetailedCouncilor-req/:id' element={<AdminCounsellorDetailedView />} />
             <Route path='/admin-viewall-aprvd-councillors' element={<AdminCounsellorViewAll />} />
+
 
             {/* Supporter Paths */}
             <Route path='/supporter-register' element={<SupporterRegister />} />
