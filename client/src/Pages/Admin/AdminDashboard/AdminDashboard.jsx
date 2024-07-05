@@ -51,10 +51,10 @@ function AdminDashboard() {
               {activePage === "new-request" && <SupportersRequestTable activePage={activePage} />}
               {activePage === "all-supporters" && <SupportersRequestTable activePage={activePage} />}
               {activePage === "all-safehouses" && <AdminViewAllSafehouses activePage={activePage} />}
+              {activePage === "all-counsellors" && <AdminCounsellorViewAll activePage={activePage} />}
               {activePage === "request-safehouse" && <AdminSafehouseRequests activePage={activePage} />}
               {activePage === "safehouse-details" && <AdminSafehouseDetailedView activePage={activePage} />}
               {activePage === "request-counsellors" && <AdminCounsellorRequests activePage={activePage} />}
-              {activePage === "all-counsellors" && <AdminCounsellorViewAll activePage={activePage} />}
               {activePage === "request-legal-professionals" && <AdminLegalProfessionalRequests activePage={activePage} />}
 
             </div>

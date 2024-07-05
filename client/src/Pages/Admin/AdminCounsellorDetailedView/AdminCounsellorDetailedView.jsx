@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import './AdminCounsellorDetailedView.css';
-// import demoCounsellor from '../../../Assets/demo-counsellor.png';
+import demoCounsellor from '../../../Assets/counsellor-registration.png';
 import { IMG_BASE_URL, getCounsellorById } from '../../../Services/apiService';
 import { Button } from 'react-bootstrap';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+  useEffect(() => {
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { viewCounsellorReqsForAdmin, approveCounsellorsById, rejectCounsellorsById } from '../../../Services/apiService';
@@ -13,8 +15,6 @@ import { viewCounsellorReqsForAdmin, approveCounsellorsById, rejectCounsellorsBy
 function AdminCounsellorDetailedView() {
   const { id } =useParams();
   const [counsellor, setCounsellor] = useState(null);
-
-  useEffect(() => {
     console.log("in",id);
     const fetchCounsellorData = async () => {
       if (id) {
@@ -131,7 +131,6 @@ function AdminCounsellorDetailedView() {
                 {counsellor.email}
               </div>
             </div>
-           
             <div className='row border-bottom m-5'>
               <div className='col-6'>
                 Experience:
