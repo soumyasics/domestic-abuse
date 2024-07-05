@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import './AdminCounsellorDetailedView.css';
-import demoCounsellor from '../../../Assets/demo-counsellor.png';
+// import demoCounsellor from '../../../Assets/demo-counsellor.png';
 import { IMG_BASE_URL, getCounsellorById } from '../../../Services/apiService';
+import { Button } from 'react-bootstrap';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import { viewCounsellorReqsForAdmin, approveCounsellorsById, rejectCounsellorsById } from '../../../Services/apiService';
 
 function AdminCounsellorDetailedView() {
-  const { counsellorId } = useState('');
+  const { id } =useParams();
   const [counsellor, setCounsellor] = useState(null);
 
   useEffect(() => {
+    console.log("in",id);
     const fetchCounsellorData = async () => {
-      if (counsellorId) {
+      if (id) {
         try {
-          const counsellorData = await getCounsellorById(counsellorId);
+          const counsellorData = await getCounsellorById(id);
+          console.log("data",counsellorData);
           setCounsellor(counsellorData);
         } catch (error) {
           console.error('Failed to fetch counsellor data:', error);
@@ -20,8 +28,61 @@ function AdminCounsellorDetailedView() {
       }
     };
     fetchCounsellorData();
-  }, [counsellorId]);
+  },[id]);
 
+  const handleApprove = async (id) => {
+    confirmAlert({
+      title: 'Confirm Approval',
+      message: 'Are you sure you want to approve this counsellor?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: async () => {
+            try {
+              const response = await approveCounsellorsById(id);
+              if (response.success) {
+                toast.success('Counsellor approved successfully.');
+              } else {
+                toast.error(response.message || 'Error approving counsellor.');
+              }
+            } catch (error) {
+              toast.error('Error approving counsellor.');
+            }
+          },
+        },
+        {
+          label: 'No',
+        },
+      ],
+    });
+  };
+
+  const handleReject = async (id) => {
+    confirmAlert({
+      title: 'Confirm Rejection',
+      message: 'Are you sure you want to reject this counsellor?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: async () => {
+            try {
+              const response = await rejectCounsellorsById(id);
+              if (response.success) {
+                toast.success('Counsellor rejected successfully.');
+              } else {
+                toast.error(response.message || 'Error rejecting counsellor.');
+              }
+            } catch (error) {
+              toast.error('Error rejecting counsellor.');
+            }
+          },
+        },
+        {
+          label: 'No',
+        },
+      ],
+    });
+  };
   return (
     <div className='container'>
       <div className='row m-5'>
@@ -34,12 +95,12 @@ function AdminCounsellorDetailedView() {
           <div className='col text-center'>
             <div className="rounded-circle overflow-hidden" style={{ width: '250px', height: '250px', margin: '0 auto' }}>
               <img
-                src={counsellor.profileImage && counsellor.profileImage.filename ? `${IMG_BASE_URL}/${counsellor.profileImage.filename}` : demoCounsellor}
+                // src={counsellor.profileImage && counsellor.profileImage.filename ? `${IMG_BASE_URL}/${counsellor.profileImage.filename}` : demoCounsellor}
                 alt='Counsellor'
                 className='img-fluid'
                 onError={(e) => {
                   e.target.onerror = null;
-                  e.target.src = demoCounsellor;
+                  // e.target.src = demoCounsellor;
                 }}
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
@@ -70,14 +131,7 @@ function AdminCounsellorDetailedView() {
                 {counsellor.email}
               </div>
             </div>
-            <div className='row border-bottom m-5'>
-              <div className='col-6'>
-                Password:
-              </div>
-              <div className='col-6 text-secondary'>
-                {counsellor.password}
-              </div>
-            </div>
+           
             <div className='row border-bottom m-5'>
               <div className='col-6'>
                 Experience:

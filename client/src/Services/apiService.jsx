@@ -692,7 +692,8 @@ export const rejectLegalProfessionalsById = async (id) => {
 export const getCounsellorById = async (id) => {
   try {
       const response = await axios.post(`${API_BASE_URL}/viewCounsellorsById/${id}`);
-      return response.data;
+      console.log(response);
+      return response.data.data;
   } catch (error) {
       console.error('Error fetching counsellor data:', error);
       throw error;

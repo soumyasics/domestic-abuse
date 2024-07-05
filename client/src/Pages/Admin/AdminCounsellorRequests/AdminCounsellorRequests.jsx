@@ -8,6 +8,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import ReactPaginate from 'react-paginate';
 import { BsEye } from "react-icons/bs";
+import { useNavigate } from 'react-router-dom';
 
 const AdminCounsellorRequests = () => {
   const [counsellors, setCounsellors] = useState([]);
@@ -15,7 +16,7 @@ const AdminCounsellorRequests = () => {
   const [currentPage, setCurrentPage] = useState(0);
 
   const itemsPerPage = 10;
-
+const navigate=useNavigate()
   const fetchCounsellors = useCallback(async () => {
     try {
       const response = await viewCounsellorReqsForAdmin();
@@ -59,7 +60,9 @@ const AdminCounsellorRequests = () => {
       ],
     });
   };
-
+const navigateToInd=(id)=>{
+  navigate(`/admin-viewdetailedCouncilor-req/${id}`)
+}
   const handleReject = async (id) => {
     confirmAlert({
       title: 'Confirm Rejection',
@@ -129,7 +132,7 @@ const AdminCounsellorRequests = () => {
                   <td>{counsellor.location}</td>
                   <td className=''>
                     <div className='text-center'>
-                      <i className="m-3 cursor-pointer" onClick={() => {/* navigate to detailed view */}}><BsEye size={22} /></i>
+                      <i className="m-3 cursor-pointer" onClick={()=>{navigateToInd(counsellor._id)}}><BsEye size={22} /></i>
                       <Button
                         variant="outline-success"
                         className="m-2 px-5"
