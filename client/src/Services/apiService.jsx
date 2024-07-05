@@ -583,6 +583,16 @@ export const viewCounsellorReqsForAdmin = async () => {
     throw error;
   }
 };
+// Api for Viewing all Counsellor  for Admin
+export const viewCounsellorForAdmin = async () => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewCounsellors`);
+    return response.data.data;
+  } catch (error) {
+    console.error('Error fetching Counsellor Requests for Admin', error);
+    throw error;
+  }
+};
 
 // Api for Approving Counsellor Request by ID
 export const approveCounsellorsById = async (id) => {

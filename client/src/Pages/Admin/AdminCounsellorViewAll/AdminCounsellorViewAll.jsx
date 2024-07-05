@@ -1,6 +1,6 @@
 import React,{ useState, useEffect, useCallback }  from 'react';
 import { Table, Button } from 'react-bootstrap';
-import { viewCounsellorReqsForAdmin, approveCounsellorsById, rejectCounsellorsById } from '../../../Services/apiService';
+import { viewCounsellorForAdmin, approveCounsellorsById, rejectCounsellorsById } from '../../../Services/apiService';
 import { toast, ToastContainer } from 'react-toastify';
 import './AdminCounsellorViewAll.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,6 +9,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import ReactPaginate from 'react-paginate';
 import { BsEye } from "react-icons/bs";
 import { LuUserX } from "react-icons/lu";
+import axiosInstance from '../../../Constant/BaseURL'
 
 function AdminCounsellorViewAll() {
   const [counsellors, setCounsellors] = useState([]);
@@ -16,11 +17,20 @@ function AdminCounsellorViewAll() {
   const [currentPage, setCurrentPage] = useState(0);
 
   const itemsPerPage = 10;
-
+  const toggleUserActiveState = (counsellors) => {
+    console.log(counsellors.isActive);
+    if(counsellors.isActive){
+      handleDeactive(counsellors._id)
+    }
+    else{
+      handleActive(counsellors._id)
+    }
+  }
   const fetchCounsellors = useCallback(async () => {
     try {
-      const response = await viewCounsellorReqsForAdmin();
-      setCounsellors(response.data || []);
+      const response = await viewCounsellorForAdmin();
+      console.log(response);
+      setCounsellors(response || []);
     } catch (error) {
       console.error('Error fetching Counsellors:', error);
       toast.error('Error fetching counsellor requests.');
@@ -61,33 +71,35 @@ function AdminCounsellorViewAll() {
     });
   };
 
-  const handleReject = async (id) => {
-    confirmAlert({
-      title: 'Confirm Rejection',
-      message: 'Are you sure you want to reject this counsellor?',
-      buttons: [
-        {
-          label: 'Yes',
-          onClick: async () => {
-            try {
-              const response = await rejectCounsellorsById(id);
-              if (response.success) {
-                toast.success('Counsellor rejected successfully.');
-                fetchCounsellors(currentPage);
-              } else {
-                toast.error(response.message || 'Error rejecting counsellor.');
-              }
-            } catch (error) {
-              toast.error('Error rejecting counsellor.');
-            }
-          },
-        },
-        {
-          label: 'No',
-        },
-      ],
-    });
-  };
+
+  const handleActive = (id) => {
+    console.log(id);
+    axiosInstance.post(`/activateCounsellorsById/${id}`)
+    .then((res)=>{
+      if(res.data.status === 200){
+        
+        counsellors.isActive=true   
+        fetchCounsellors(currentPage);
+}
+    })
+    .catch((err) => {
+      console.log("Error",err);
+    })
+  }
+
+  const handleDeactive = (id) => {
+    axiosInstance.post(`/removeCounsellorsById/${id}`)
+    .then((res) => {
+      if(res.data.status === 200){
+        counsellors.isActive=false   
+        fetchCounsellors(currentPage);
+
+      }
+    })
+    .catch((err) => {
+      console.log("Error",err);
+    })
+  }
 
   const handlePageClick = (event) => {
     setCurrentPage(event.selected);
@@ -131,20 +143,13 @@ function AdminCounsellorViewAll() {
                   <td className=''>
                     <div className='text-center'>
                       <i className="m-3 cursor-pointer" onClick={() => {/* navigate to detailed view */}}><BsEye size={22} /></i>
-                      <Button
-                        variant="outline-success"
-                        className="m-2 px-5"
-                        onClick={() => handleApprove(counsellor._id)}
-                      >
-                        Approve
-                      </Button>
-                      <Button
-                        variant="outline-danger"
-                        className="m-2 px-5"
-                        onClick={() => handleReject(counsellor._id)}
-                      >
-                        Reject
-                      </Button>
+                      <button
+                     className={`toggle-button ${counsellor.isActive ? 'active' : 'inactive'}`} 
+                    onClick={()=>{toggleUserActiveState(counsellor)}}
+                    >
+                      {counsellor.isActive ? 'Active' : 'Inactive'}
+                    </button>
+                     
                     </div>
                   </td>
                 </tr>
