@@ -31,6 +31,7 @@ import AdminCounsellorRequests from './Pages/Admin/AdminCounsellorRequests/Admin
 import CounsellorEditProfile from './Pages/Counsellor/CounsellorEditProfile/CounsellorEditProfile';
 import LegalProfessionalEditProfile from './Pages/Legal Professional/LegalProfessionalEditProfile/LegalProfessionalEditProfile';
 import LegalProfessionalHome from './Pages/Legal Professional/LegalProfessionalHome/LegalProfessionalHome';
+import AdminCounsellorViewAll from './Pages/Admin/AdminCounsellorViewAll/AdminCounsellorViewAll';
 function App() {
   return (
     <div className="d-flex flex-column min-vh-100">
@@ -57,6 +58,7 @@ function App() {
                 <AdminSafehouseDetailedView />
             } />  
             <Route path='/admin-counsellor-requests' element={<AdminCounsellorRequests />} />
+            <Route path='/admin-counsellor-view-all' element={<AdminCounsellorViewAll />} />
 
             {/* Supporter Paths */}
             <Route path='/supporter-register' element={<SupporterRegister />} />

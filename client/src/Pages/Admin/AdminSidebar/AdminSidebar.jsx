@@ -117,7 +117,7 @@ const AdminSidebar = ({ changeActivePage }) => {
                   </li>
                   <li className="w-100 ms-3">
                     <Link to="#" className="nav-link admin-list px-0">
-                      <span className="ms-2 d-none d-sm-inline theme-purple"><IoMdArrowDropright size={25} /></span>
+                      <span className="ms-2 d-none d-sm-inline theme-purple" onClick={() => changeActivePage("all-counsellors")}><IoMdArrowDropright size={25} /></span>
                       <span className="d-none d-sm-inline theme-purple">View All</span>
                     </Link>
                   </li>
