@@ -8,6 +8,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import ReactPaginate from 'react-paginate';
 import { BsEye } from "react-icons/bs";
+import { useNavigate } from 'react-router-dom';
 
 const AdminLegalProfessionalRequests = () => {
   const [legalProfessionals, setLegalProfessionals] = useState([]);
@@ -15,6 +16,7 @@ const AdminLegalProfessionalRequests = () => {
   const [currentPage, setCurrentPage] = useState(0);
 
   const itemsPerPage = 10;
+  const navigate=useNavigate()
 
   const fetchLegalProfessionals = useCallback(async () => {
     try {
@@ -93,8 +95,10 @@ const AdminLegalProfessionalRequests = () => {
       ],
     });
   };
-
-  const handlePageClick = (event) => {
+  const navigateToInd=(id)=>{
+    navigate(`/admin-viewdetailedLegalProfessional/${id}`)
+  } 
+   const handlePageClick = (event) => {
     setCurrentPage(event.selected);
   };
 
@@ -126,7 +130,6 @@ const AdminLegalProfessionalRequests = () => {
                 <th className='bg-purple text-white'>Email-Id</th>
                 <th className='bg-purple text-white'>Contact Number</th>
                 <th className='bg-purple text-white'>Firm Name</th>
-                <th className='bg-purple text-white'>Firm Address</th>
                 <th className='bg-purple text-white'>Action</th>
               </tr>
             </thead>
@@ -138,10 +141,9 @@ const AdminLegalProfessionalRequests = () => {
                   <td>{professional.email}</td>
                   <td>{professional.contact}</td>
                   <td>{professional.firmName}</td>
-                  <td>{professional.firmAddress}</td>
                   <td className=''>
                     <div className='text-center'>
-                      <i className="m-3 cursor-pointer" onClick={() => {/* navigate to detailed view */}}><BsEye size={22} /></i>
+                      <i className="m-3 cursor-pointer" onClick={() => {navigateToInd(professional._id)}}><BsEye size={22} /></i>
                       <Button
                         variant="outline-success"
                         className="m-2 px-5"

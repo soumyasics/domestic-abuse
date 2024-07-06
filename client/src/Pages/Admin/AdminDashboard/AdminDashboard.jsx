@@ -12,6 +12,9 @@ import AdminCounsellorRequests from '../AdminCounsellorRequests/AdminCounsellorR
 import AdminLegalProfessionalRequests from '../AdminLegalProfessionalRequests/AdminLegalProfessionalRequests';
 import AdminCounsellorViewAll from '../AdminCounsellorViewAll/AdminCounsellorViewAll';
 import AdminSafehouseRequests from '../AdminSafehouseRequests/AdminSafehouseRequests';
+import AdminLegalProfessionalDetailedView from '../AdminLegalProfessionalDetailedView/AdminLegalProfessionalDetailedView';
+import AdminLegalProfessionalDetailedViewAprvd from '../AdminLegalProfessionalDetailedViewAprvd/AdminLegalProfessionalDetailedViewAprvd';
+import AdminLegalProfessionalViewAll from '../AdminLegalProfessionalViewAll/AdminLegalProfessionalViewAll';
 function AdminDashboard() {
   const [activePage, setActivePage] = useState("home");
   const changeActivePage = (page) => {
@@ -57,6 +60,9 @@ function AdminDashboard() {
               {activePage === "request-counsellors" && <AdminCounsellorRequests activePage={activePage} />}
               {activePage === "request-legal-professionals" && <AdminLegalProfessionalRequests activePage={activePage} />}
               {activePage === "admin-viewdetailedCouncilor-req" && <admin-viewdetailedCouncilor-req activePage={activePage} />}
+              {activePage === "vadmin-viewdetailedLegalProfessional" && <AdminLegalProfessionalDetailedViewAprvd activePage={activePage} />}
+              {activePage === "admin-viewall-aprvd-LegalProfessional" && <AdminLegalProfessionalViewAll activePage={activePage} />}
+              {activePage === "admin-viewdetailedLegalProfessional-aprvd" && <AdminLegalProfessionalDetailedViewAprvd activePage={activePage} />}
 
 
             </div>

@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { FaFile } from "react-icons/fa";
+import axiosInstance from '../../../Constant/BaseURL'
 
 function AdminLegalProfessionalDetailedViewAprvd() {
     const { id } = useParams();
@@ -19,7 +20,7 @@ function AdminLegalProfessionalDetailedViewAprvd() {
         if (id) {
           try {
             const legalProfessionalData = await getLegalProfessionalById(id);
-            setLegalProfessional(legalProfessionalData);
+            setLegalProfessional(legalProfessionalData.data);
           } catch (error) {
             console.error('Failed to fetch legal professional data:', error);
           }
@@ -81,6 +82,60 @@ function AdminLegalProfessionalDetailedViewAprvd() {
         ],
       });
     };
+
+    const toggleUserActiveState = (legalProfessional) => {
+      console.log(legalProfessional.isActive);
+      if(legalProfessional.isActive){
+        handleDeactive(legalProfessional._id)
+      }
+      else{
+        handleActive(legalProfessional._id)
+      }
+    }
+    const fetchCounsellorData = async () => {
+      if (id) {
+        try {
+          const legalProfessional = await getLegalProfessionalById(id);
+          console.log("data",legalProfessional);
+          setLegalProfessional(legalProfessional.data);
+        } catch (error) {
+          console.error('Failed to fetch counsellor data:', error);
+        }
+      }
+    };
+    const handleActive = (id) => {
+      console.log(id);
+      axiosInstance.post(`/activateLegalProfessionalById/${id}`)
+      .then((res)=>{
+        if(res.data.status === 200){
+          
+          legalProfessional.isActive=true   
+          // fetchCounsellors(currentPage);
+          fetchCounsellorData();
+  
+  }
+      })
+      .catch((err) => {
+        console.log("Error",err);
+      })
+    }
+  
+    const handleDeactive = (id) => {
+      axiosInstance.post(`/deActivateLegalProfessionalById/${id}`)
+      .then((res) => {
+        if(res.data.status === 200){
+          legalProfessional.isActive=false   
+          // fetchCounsellors(currentPage);
+          fetchCounsellorData();
+  
+  
+        }
+      })
+      .catch((err) => {
+        console.log("Error",err);
+      })
+    }
+  
   
     return (
       <div className='container'>
@@ -95,8 +150,8 @@ function AdminLegalProfessionalDetailedViewAprvd() {
             <div className='col text-center bg-purple d-flex'>
               <div className="rounded-circle overflow-hidden m-auto" style={{ width: '250px', height: '250px', margin: '0 auto' }}>
                 <img
-                  src={legalProfessional.profileImage && legalProfessional.profileImage.filename ? `${IMG_BASE_URL}/${legalProfessional.profileImage.filename}` : demoLegalProfessional}
-                  alt='Legal Professional'
+                src={legalProfessional.photo && legalProfessional.photo.filename ? `${IMG_BASE_URL}/${legalProfessional.photo.filename}` : demoLegalProfessional}
+                alt='Legal Professional'
                   className='img-fluid '
                   onError={(e) => {
                     e.target.onerror = null;
@@ -140,14 +195,7 @@ function AdminLegalProfessionalDetailedViewAprvd() {
                   {legalProfessional.firmName}
                 </div>
               </div>
-              <div className='row border-bottom m-5'>
-                <div className='col-6'>
-                  Firm Address:
-                </div>
-                <div className='col-6 text-secondary'>
-                  {legalProfessional.firmAddress}
-                </div>
-              </div>
+           
               <div className='row border-bottom m-5'>
                 <div className='col-6'>
                   License Number:
@@ -169,24 +217,16 @@ function AdminLegalProfessionalDetailedViewAprvd() {
                   Id Proof:
                 </div>
                 <div className='col-6 text-secondary'>
-                  <a href={demoLegalProfessional} target="_blank" rel="noopener noreferrer"> <FaFile className='theme-purple mx-1'/> Click Here</a>
+                <a href={ `${IMG_BASE_URL}/${legalProfessional.proof.filename}`} target="_blank" rel="noopener noreferrer"> <FaFile className='theme-purple mx-1'/> Click Here</a>
                 </div>
               </div>
               <div className='text-center'>
-                <Button
-                  variant="outline-success"
-                  className="m-2 px-5"
-                  onClick={() => handleApprove(legalProfessional._id)}
-                >
-                  Accept
-                </Button>
-                <Button
-                  variant="outline-danger"
-                  className="m-2 px-5"
-                  onClick={() => handleReject(legalProfessional._id)}
-                >
-                  Reject
-                </Button>
+              <button
+                     className={`toggle-button ${legalProfessional.isActive ? 'active' : 'inactive'}`} 
+                    onClick={()=>{toggleUserActiveState(legalProfessional)}}
+                    >
+                      {legalProfessional.isActive ? 'Active' : 'Inactive'}
+                    </button>
               </div>
             </div>
           </div>

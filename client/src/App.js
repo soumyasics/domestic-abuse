@@ -41,42 +41,41 @@ function App() {
   return (
     <div className="d-flex flex-column min-vh-100">
       <BrowserRouter basename='domestic_abuse'>
-        <ConditionalNavbar />
         <div className="flex-grow-1">
           <Routes>
             {/* Common Paths */}
-            <Route path="/" element={<Home />} />
-            <Route path='/user-login' element={<User_Login />} />
-            <Route path='/user-register' element={<User_Register />} />
+            <Route path="/" element={[<Navbar/>,<Home />]} />
+            <Route path='/user-login' element={[<Navbar/>,<User_Login />]} />
+            <Route path='/user-register' element={[<Navbar/>,<User_Register />]} />
 
             {/* Admin Paths */}
-            <Route path='/admin-login' element={<AdminLogin />} />
-            <Route path='/admin-dashboard' element={
+            <Route path='/admin-login' element={[<Navbar/>,<AdminLogin />]} />
+            <Route path='/admin-dashboard' element={[
          
-                <AdminDashboard />
+               <AdminNavbar/>, <AdminDashboard />
              
-            } />
+            ]} />
             <Route path='/admin-view-all-safehouses' element={
-                <AdminViewAllSafehouses />
+              [ <AdminNavbar/>, <AdminViewAllSafehouses />]
             } />
             <Route path='/admin-safehouse-details' element={
-                <AdminSafehouseDetailedView />
+                [<AdminNavbar/>,<AdminSafehouseDetailedView />]
             } />  
             <Route path='/admin-counsellor-requests' element={<AdminCounsellorRequests />} />
 
-            <Route path='/admin-counsellor-view-all' element={<AdminCounsellorViewAll />} />
-            <Route path='/admin-viewdetailedCouncilor-req/:id' element={<AdminCounsellorDetailedView />} />
-            <Route path='/admin-viewall-aprvd-councillors' element={<AdminCounsellorViewAll />} />
-            <Route path='/admin-viewdetailedCouncilor-aprvd/:id' element={<AdminCounsellorDetailedViewAprvd/>} />
-            <Route path='/admin-viewdetailedLegalProfessional/:id' element={<AdminLegalProfessionalDetailedView />} />
-            <Route path='/admin-viewdetailedLegalProfessional-aprvd/:id' element={<AdminLegalProfessionalDetailedViewAprvd/>} />
-            <Route path='/admin-viewall-aprvd-LegalProfessional' element={<AdminLegalProfessionalViewAll />} />
+            <Route path='/admin-counsellor-view-all' element={[<AdminNavbar/>,<AdminCounsellorViewAll />]} />
+            <Route path='/admin-viewdetailedCouncilor-req/:id' element={[<AdminNavbar/>,<AdminCounsellorDetailedView />]} />
+            <Route path='/admin-viewall-aprvd-councillors' element={[<AdminNavbar/>,<AdminCounsellorViewAll />]} />
+            <Route path='/admin-viewdetailedCouncilor-aprvd/:id' element={[<AdminNavbar/>,<AdminCounsellorDetailedViewAprvd/>]} />
+            <Route path='/admin-viewdetailedLegalProfessional/:id' element={[<AdminNavbar/>,<AdminLegalProfessionalDetailedView />]} />
+            <Route path='/admin-viewdetailedLegalProfessional-aprvd/:id' element={[<AdminNavbar/>,<AdminLegalProfessionalDetailedViewAprvd/>]} />
+            <Route path='/admin-viewall-aprvd-LegalProfessional' element={[<AdminNavbar/>,<AdminLegalProfessionalViewAll />]} />
 
             {/* Supporter Paths */}
-            <Route path='/supporter-register' element={<SupporterRegister />} />
-            <Route path='/supporter-login' element={<SupporterLogin />} />
+            <Route path='/supporter-register' element={[<Navbar/>,<SupporterRegister />]} />
+            <Route path='/supporter-login' element={[<Navbar/>,<SupporterLogin />]} />
             <Route path='/supporter-home' element={<SupporterHome />} />
-            <Route path='/supporter-forgot-password' element={<SupporterForgotPassword />} />
+            <Route path='/supporter-forgot-password' element={[<Navbar/>,<SupporterForgotPassword />]} />
             <Route path='/supporter-edit-profile' element={<SupporterEditProfile />} />
             <Route path='/supporter-add-safe-space' element={<SupporterAddSafeHouse />} />
             
@@ -85,17 +84,17 @@ function App() {
             <Route path='/supporter-view-all-safehouses' element={<SupporterViewAllSafeHouses />} />
 
             {/* Counsellor Paths */}
-            <Route path='/counsellor-register' element={<CounsellorRegistration />} />
-            <Route path='/counsellor-login' element={<CounsellorLogin/>} />
-            <Route path='/counsellor-forgot-password' element={<CounsellorForgotPassword/>} />
-            <Route path='/counsellor-home' element={<CounsellorHome />} />
-            <Route path='/counsellor-edit-profile' element={<CounsellorEditProfile />} />
+            <Route path='/counsellor-register' element={[<Navbar/>,<CounsellorRegistration />]} />
+            <Route path='/counsellor-login' element={[<Navbar/>,<CounsellorLogin/>]} />
+            <Route path='/counsellor-forgot-password' element={[<Navbar/>,<CounsellorForgotPassword/>]} />
+            <Route path='/counsellor-home' element={[<CounsellorHome />]} />
+            <Route path='/counsellor-edit-profile' element={[<CounsellorEditProfile />]} />
 
 
             {/* Legal Professional Paths  */}
-            <Route path='/legal-professional-login' element={<LegalProfessionalLogin/>} />
-            <Route path='/legal-professional-register' element={<LegalProfessionalRegister />} />
-            <Route path='/legal-professional-forgot-password' element={<LegalProfessionalForgotPassword/>} />
+            <Route path='/legal-professional-login' element={[<Navbar/>,<LegalProfessionalLogin/>]} />
+            <Route path='/legal-professional-register' element={[<Navbar/>,<LegalProfessionalRegister />]} />
+            <Route path='/legal-professional-forgot-password' element={[<Navbar/>,<LegalProfessionalForgotPassword/>]} />
             <Route path='/legal-professional-edit-profile' element={<LegalProfessionalEditProfile />} />
             <Route path='/legal-professional-home' element={<LegalProfessionalHome />} />
 
@@ -107,15 +106,15 @@ function App() {
   );
 }
 
-function ConditionalNavbar() {
-  const location = useLocation();
-  const HeaderPaths = ['/admin-dashboard'];
-  if (HeaderPaths.includes(location.pathname)) {
-    return <AdminNavbar />;
-  } else {
-    return <Navbar />;
-  }
+// function ConditionalNavbar() {
+//   const location = useLocation();
+//   const HeaderPaths = ['/admin-dashboard'];
+//   if (HeaderPaths.includes(location.pathname)) {
+//     return <AdminNavbar />;
+//   } else {
+//     return <Navbar />;
+//   }
 
-}
+// }
 
 export default App;
