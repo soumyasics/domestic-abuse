@@ -6,11 +6,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import ReactPaginate from 'react-paginate';
 import { BsEye } from "react-icons/bs";
 import axiosInstance from '../../../Constant/BaseURL'
+import { viewAllApprovedLegalProfessionals, rejectLegalProfessionalsById } from '../../../Services/apiService';
+import { useNavigate } from 'react-router-dom';
 
 const AdminLegalProfessionalViewAll = () => {
   const [legalProfessionals, setLegalProfessionals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
+  console.log("im here");
   const toggleUserActiveState = (legalProfessionals) => {
     console.log(legalProfessionals.isActive);
     if(legalProfessionals.isActive){
@@ -21,17 +24,17 @@ const AdminLegalProfessionalViewAll = () => {
     }
   }
   const itemsPerPage = 10;
-
+const navigate=useNavigate()
   const fetchLegalProfessionals = useCallback(async () => {
     try {
-      //const response = await viewAllLegalProfessionalsForAdmin();
-     // if (response.success) {
-      //  console.log('Fetched legal professionals:', response.data);  // Debugging log
-     //   setLegalProfessionals(response.data.data);
-     // } else {
-      //  toast.error(response.message);
-     //   setLegalProfessionals([]);
-    //  }
+      const response = await viewAllApprovedLegalProfessionals();
+     if (response) {
+       console.log('Fetched legal professionals:', response);  // Debugging log
+       setLegalProfessionals(response);
+     } else {
+       toast.error(response.message);
+       setLegalProfessionals([]);
+     }
     } catch (error) {
       toast.error('Error fetching legal professionals.');
       setLegalProfessionals([]);
@@ -75,7 +78,9 @@ const AdminLegalProfessionalViewAll = () => {
   const handlePageClick = (event) => {
     setCurrentPage(event.selected);
   };
-
+  const navigateToInd=(id)=>{
+    navigate(`/admin-viewdetailedLegalProfessional-aprvd/${id}`)
+  } 
   const paginatedLegalProfessionals = Array.isArray(legalProfessionals)
     ? legalProfessionals.slice(
         currentPage * itemsPerPage,
@@ -104,7 +109,6 @@ const AdminLegalProfessionalViewAll = () => {
                 <th className='bg-purple text-white'>Email-Id</th>
                 <th className='bg-purple text-white'>Contact Number</th>
                 <th className='bg-purple text-white'>Firm Name</th>
-                <th className='bg-purple text-white'>Firm Address</th>
                 <th className='bg-purple text-white'>Action</th>
               </tr>
             </thead>
@@ -116,10 +120,9 @@ const AdminLegalProfessionalViewAll = () => {
                   <td>{professional.email}</td>
                   <td>{professional.contact}</td>
                   <td>{professional.firmName}</td>
-                  <td>{professional.firmAddress}</td>
                   <td className=''>
                     <div className='text-center'>
-                      <i className="m-3 cursor-pointer" onClick={() => {/* navigate to detailed view */}}><BsEye size={22} /></i>
+                      <i className="m-3 cursor-pointer" onClick={() => {navigateToInd([professional._id])}}><BsEye size={22} /></i>
                       <button
                      className={`toggle-button ${professional.isActive ? 'active' : 'inactive'}`} 
                     onClick={()=>{toggleUserActiveState(professional)}}

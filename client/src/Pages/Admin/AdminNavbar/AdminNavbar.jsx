@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import brand from '../../../Assets/2a75e2f413ad511cbebf7abc265805b4.png';
 import { useContext } from 'react';
@@ -6,20 +6,23 @@ import AuthContext from '../../../context/AuthContext';
 
 function AdminNavbar() {
   const navigate = useNavigate();
-  const { isLoggedIn, logout } = useContext(AuthContext);
+  // const { isLoggedIn, logout } = useContext(AuthContext);
 
   const handleImageClick = () => {
     navigate('/admin-dashboard');
+ 
   };
 
+useEffect(() => {
+  if(localStorage.getItem("admin")==0)
+    navigate('/admin-login');
+}, []);
   const handleLogout = () => {
-    logout();
+    localStorage.setItem('admin',0)
     navigate('/admin-login');
   };
 
-  const handleLogin = () => {
-    navigate('/admin-login');
-  };
+
 
   return (
     <div className="container-fluid p-0">
@@ -45,11 +48,10 @@ function AdminNavbar() {
               <Link className="nav-link mx-3 theme-purple fw-semibold" to="/admin-dashboard">Blog</Link>
             </li>
             <li className="nav-item">
-              {isLoggedIn ? (
+             
+              
                 <button className="nav-link mx-3 theme-purple fw-semibold btn btn-link" onClick={handleLogout}>Logout</button>
-              ) : (
-                <button className="nav-link mx-3 theme-purple fw-semibold btn btn-link" onClick={handleLogin}>Login</button>
-              )}
+             
             </li>
           </ul>
         </div>

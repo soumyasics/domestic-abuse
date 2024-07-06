@@ -6,49 +6,35 @@ import { AuthContext } from '../../../context/AuthContext';
 
 function Navbar() {
     const navigate = useNavigate();
-    const { isLoggedIn, logout, userRole } = useContext(AuthContext);
+    // const { isLoggedIn, logout, userRole } = useContext(AuthContext);
 
     const handleImageClick = () => {
-        if (isLoggedIn) {
-            switch (userRole) {
-                case 'supporter':
-                    navigate('/supporter-home');
-                    break;
-                case 'counsellor':
-                    navigate('/counsellor-home');
-                    break;
-                case 'legalProfessional':
-                    navigate('/legal-professional-home');
-                    break;
-                case 'admin':
-                    navigate('/admin-dashboard');
-                    break;
-                default:
-                    navigate('/');
-                    break;
-            }
-        } else {
-            navigate('/');
-        }
+        // if (isLoggedIn) {
+        //     switch (userRole) {
+        //         case 'supporter':
+        //             navigate('/supporter-home');
+        //             break;
+        //         case 'counsellor':
+        //             navigate('/counsellor-home');
+        //             break;
+        //         case 'legalProfessional':
+        //             navigate('/legal-professional-home');
+        //             break;
+        //         case 'admin':
+        //             navigate('/admin-dashboard');
+        //             break;
+        //         default:
+        //             navigate('/');
+        //             break;
+        //     }
+        // } else {
+        //     navigate('/');
+        // }
     };
 
-    const handleLogout = () => {
-        logout();
-        navigate('/');
-    };
 
-    const getProfileLink = () => {
-        switch (userRole) {
-            case 'supporter':
-                return '/supporter-edit-profile';
-            case 'counsellor':
-                return '/counsellor-edit-profile';
-            case 'legalProfessional':
-                return '/legal-professional-edit-profile';
-            default:
-                return '#';
-        }
-    };
+
+   
 
     return (
         <div className='container-fluid'>
@@ -66,26 +52,26 @@ function Navbar() {
                 <div className="collapse navbar-collapse mx-5 justify-content-end" id="navbarNav">
                     <ul className="navbar-nav ml-auto mx-5">
                         <li className="nav-item active">
-                            {isLoggedIn && userRole === 'supporter' ? (
+                            {/* {isLoggedIn && userRole === 'supporter' ? (
                                 <Link className="nav-link mx-3 theme-purple fw-semibold" to="/supporter-home">Home</Link>
-                            ) : (
+                            ) : ( */}
                                 <Link className="nav-link mx-3 theme-purple fw-semibold" to="/">Home</Link>
-                            )}
+                            {/* )} */}
                         </li>
-                        <li className="nav-item active">
+                        {/* <li className="nav-item active">
                             {isLoggedIn && userRole === 'supporter' ? (
                                 <Link className="nav-link mx-3 theme-purple fw-semibold" to="/supporter-view-all-safehouses">Safe House</Link>
                             ) : (
                                 <p></p>
                             )}
-                        </li>
+                        </li> */}
                         <li className="nav-item">
                             <Link className="nav-link mx-3 theme-purple fw-semibold" to="/">About Us</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link mx-3 theme-purple fw-semibold" to="/">Our Services</Link>
                         </li>
-                        {isLoggedIn ? (
+                        {/* {isLoggedIn ? (
                             <>
                                 <li className="nav-item dropdown">
                                     <a className="nav-link dropdown-toggle mx-3 theme-purple fw-semibold" href="#" id="navbarDropdownProfile" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -99,7 +85,7 @@ function Navbar() {
                                     <button className="nav-link mx-3 theme-purple fw-semibold btn btn-link py-1" onClick={handleLogout}>Logout</button>
                                 </li>
                             </>
-                        ) : (
+                        ) : ( */}
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle mx-3 theme-purple fw-semibold" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Login
@@ -111,7 +97,7 @@ function Navbar() {
                                     <li><Link className="dropdown-item theme-purple fw-semibold" to="/legal-professional-login">Legal Professional</Link></li>
                                 </ul>
                             </li>
-                        )}
+                        {/* )} */}
                     </ul>
                 </div>
             </nav>

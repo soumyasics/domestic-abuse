@@ -134,14 +134,14 @@ const AdminSidebar = ({ changeActivePage }) => {
                 <ul className={`collapse nav flex-column border-bottom border-dark-subtle ms-1 ${menuOpen.legalProfessionals ? 'show' : ''}`} id="legalProfessionalsSubmenu" data-bs-parent="#menu">
                   <li className="w-100 ms-3">
                     <Link to="#" className="nav-link admin-list px-0" onClick={() => changeActivePage("request-legal-professionals")}>
-                      <span className="ms-2 d-none d-sm-inline theme-purple"><IoMdArrowDropright size={25} /></span>
+                      <span className="ms-2 d-none d-sm-inline theme-purple" onClick={() => changeActivePage("request-legal-professionals")}><IoMdArrowDropright size={25} /></span>
                       <span className="d-none d-sm-inline theme-purple">New Request</span>
                     </Link>
                   </li>
                   <li className="w-100 ms-3">
                     <Link to="#" className="nav-link admin-list px-0">
-                      <span className="ms-2 d-none d-sm-inline theme-purple"><IoMdArrowDropright size={25} /></span>
-                      <span className="d-none d-sm-inline theme-purple">View All</span>
+                      <span className="ms-2 d-none d-sm-inline theme-purple" onClick={() => changeActivePage("admin-viewall-aprvd-LegalProfessional")}><IoMdArrowDropright size={25} /></span>
+                      <span className="d-none d-sm-inline theme-purple" onClick={() => changeActivePage("admin-viewall-aprvd-LegalProfessional")}>View All</span>
                     </Link>
                   </li>
                 </ul>

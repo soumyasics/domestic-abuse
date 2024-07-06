@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import './AdminLegalProfessionalDetailedView.css';
 import demoLegalProfessional from '../../../Assets/legal-professional-registration.png';
-import { IMG_BASE_URL, getLegalProfessionalById, approveLegalProfessionalsById, rejectLegalProfessionalsById } from '../../../Services/apiService';
+import { IMG_BASE_URL,viewAllApprovedLegalProfessionals, getLegalProfessionalById, approveLegalProfessionalsById, rejectLegalProfessionalsById } from '../../../Services/apiService';
 import { Button } from 'react-bootstrap';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,14 +12,18 @@ import { FaFile } from "react-icons/fa";
 
 function AdminLegalProfessionalDetailedView() {
   const { id } = useParams();
-  const [legalProfessional, setLegalProfessional] = useState(null);
+  const [legalProfessional, setLegalProfessional] = useState({photo:{filename:''},proof:{
+    filename:''
+  }});
+  const navigate=useNavigate()
 
   useEffect(() => {
     const fetchLegalProfessionalData = async () => {
       if (id) {
         try {
           const legalProfessionalData = await getLegalProfessionalById(id);
-          setLegalProfessional(legalProfessionalData);
+          setLegalProfessional(legalProfessionalData.data);
+          console.log(legalProfessionalData.data);
         } catch (error) {
           console.error('Failed to fetch legal professional data:', error);
         }
@@ -40,6 +44,7 @@ function AdminLegalProfessionalDetailedView() {
               const response = await approveLegalProfessionalsById(id);
               if (response.success) {
                 toast.success('Legal professional approved successfully.');
+                navigate('/admin-viewall-aprvd-LegalProfessional')
               } else {
                 toast.error(response.message || 'Error approving legal professional.');
               }
@@ -95,7 +100,7 @@ function AdminLegalProfessionalDetailedView() {
           <div className='col text-center bg-purple d-flex'>
             <div className="rounded-circle overflow-hidden m-auto" style={{ width: '250px', height: '250px', margin: '0 auto' }}>
               <img
-                src={legalProfessional.profileImage && legalProfessional.profileImage.filename ? `${IMG_BASE_URL}/${legalProfessional.profileImage.filename}` : demoLegalProfessional}
+                src={legalProfessional.photo && legalProfessional.photo.filename ? `${IMG_BASE_URL}/${legalProfessional.photo.filename}` : demoLegalProfessional}
                 alt='Legal Professional'
                 className='img-fluid '
                 onError={(e) => {
@@ -140,14 +145,7 @@ function AdminLegalProfessionalDetailedView() {
                 {legalProfessional.firmName}
               </div>
             </div>
-            <div className='row border-bottom m-5'>
-              <div className='col-6'>
-                Firm Address:
-              </div>
-              <div className='col-6 text-secondary'>
-                {legalProfessional.firmAddress}
-              </div>
-            </div>
+            
             <div className='row border-bottom m-5'>
               <div className='col-6'>
                 License Number:
@@ -169,7 +167,7 @@ function AdminLegalProfessionalDetailedView() {
                 Id Proof:
               </div>
               <div className='col-6 text-secondary'>
-                <a href={demoLegalProfessional} target="_blank" rel="noopener noreferrer"> <FaFile className='theme-purple mx-1'/> Click Here</a>
+                <a href={ `${IMG_BASE_URL}/${legalProfessional.proof.filename}`} target="_blank" rel="noopener noreferrer"> <FaFile className='theme-purple mx-1'/> Click Here</a>
               </div>
             </div>
             <div className='text-center'>
