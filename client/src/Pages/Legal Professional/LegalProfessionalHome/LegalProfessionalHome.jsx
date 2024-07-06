@@ -5,13 +5,13 @@ import home from '../../../Assets/legal-home.png';
 
 function LegalProfessionalHome() {
   return (
-    <div className='container-xxl'>
+    <div className='container-fluid'>
       <div className='row'>
-        <div className='col-xl-8 m-auto'>
-          <img src={home} alt='legal girl' className='img-fluid m-auto' />
+        <div className='col-8 m-auto d-flex'>
+          <img src={home} alt='legal girl' className='img-fluid m-auto object-fit-cover ' />
         </div>
-        <div className='col-xl-4 text-center p-5'>
-          <div className="card m-5 shadow-sm rounded bg-purple text-white" style={{ width: '28rem' }}>
+        <div className='col-4 text-center p-5'>
+          <div className="card  shadow-sm rounded bg-purple text-white h-100 m-auto" style={{ width: '28rem' }}>
             <div className="card-body text-start">
               <h2 className="card-title fs-5 fw-bold">Welcome to Your Legal Hub.</h2>
               <h3 className="card-subtitle mb-3  fs-3 text-white">Empowering Legal Assistance for Those in Need.</h3>
