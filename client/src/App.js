@@ -34,6 +34,9 @@ import LegalProfessionalHome from './Pages/Legal Professional/LegalProfessionalH
 import AdminCounsellorViewAll from './Pages/Admin/AdminCounsellorViewAll/AdminCounsellorViewAll';
 import AdminCounsellorDetailedView from './Pages/Admin/AdminCounsellorDetailedView/AdminCounsellorDetailedView';
 import AdminCounsellorDetailedViewAprvd from './Pages/Admin/AdminCounsellorDetailedViewAprvd/AdminCounsellorDetailedViewAprvd';
+import AdminLegalProfessionalDetailedViewAprvd from './Pages/Admin/AdminLegalProfessionalDetailedViewAprvd/AdminLegalProfessionalDetailedViewAprvd';
+import AdminLegalProfessionalDetailedView from './Pages/Admin/AdminLegalProfessionalDetailedView/AdminLegalProfessionalDetailedView';
+import AdminLegalProfessionalViewAll from './Pages/Admin/AdminLegalProfessionalViewAll/AdminLegalProfessionalViewAll';
 function App() {
   return (
     <div className="d-flex flex-column min-vh-100">
@@ -65,7 +68,9 @@ function App() {
             <Route path='/admin-viewdetailedCouncilor-req/:id' element={<AdminCounsellorDetailedView />} />
             <Route path='/admin-viewall-aprvd-councillors' element={<AdminCounsellorViewAll />} />
             <Route path='/admin-viewdetailedCouncilor-aprvd/:id' element={<AdminCounsellorDetailedViewAprvd/>} />
-
+            <Route path='/admin-viewdetailedLegalProfessional/:id' element={<AdminLegalProfessionalDetailedView />} />
+            <Route path='/admin-viewdetailedLegalProfessional-aprvd/:id' element={<AdminLegalProfessionalDetailedViewAprvd/>} />
+            <Route path='/admin-viewall-aprvd-LegalProfessional' element={<AdminLegalProfessionalViewAll />} />
 
             {/* Supporter Paths */}
             <Route path='/supporter-register' element={<SupporterRegister />} />

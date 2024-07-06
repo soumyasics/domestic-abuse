@@ -5,18 +5,19 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ReactPaginate from 'react-paginate';
 import { BsEye } from "react-icons/bs";
+import axiosInstance from '../../../Constant/BaseURL'
 
 const AdminLegalProfessionalViewAll = () => {
   const [legalProfessionals, setLegalProfessionals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
-  const toggleUserActiveState = (counsellors) => {
-    console.log(counsellors.isActive);
-    if(counsellors.isActive){
-      handleDeactive(counsellors._id)
+  const toggleUserActiveState = (legalProfessionals) => {
+    console.log(legalProfessionals.isActive);
+    if(legalProfessionals.isActive){
+      handleDeactive(legalProfessionals._id)
     }
     else{
-      handleActive(counsellors._id)
+      handleActive(legalProfessionals._id)
     }
   }
   const itemsPerPage = 10;
@@ -42,6 +43,34 @@ const AdminLegalProfessionalViewAll = () => {
   useEffect(() => {
     fetchLegalProfessionals();
   }, [fetchLegalProfessionals]);
+  const handleActive = (id) => {
+    console.log(id);
+    axiosInstance.post(`/activateLegalProfessionalById/${id}`)
+    .then((res)=>{
+      if(res.data.status === 200){
+        
+        legalProfessionals.isActive=true   
+        fetchLegalProfessionals(currentPage);
+}
+    })
+    .catch((err) => {
+      console.log("Error",err);
+    })
+  }
+
+  const handleDeactive = (id) => {
+    axiosInstance.post(`/deActivateLegalProfessionalById/${id}`)
+    .then((res) => {
+      if(res.data.status === 200){
+        legalProfessionals.isActive=false   
+        fetchLegalProfessionals(currentPage);
+
+      }
+    })
+    .catch((err) => {
+      console.log("Error",err);
+    })
+  }
 
   const handlePageClick = (event) => {
     setCurrentPage(event.selected);
@@ -92,10 +121,10 @@ const AdminLegalProfessionalViewAll = () => {
                     <div className='text-center'>
                       <i className="m-3 cursor-pointer" onClick={() => {/* navigate to detailed view */}}><BsEye size={22} /></i>
                       <button
-                     className={`toggle-button ${counsellor.isActive ? 'active' : 'inactive'}`} 
-                    onClick={()=>{toggleUserActiveState(counsellor)}}
+                     className={`toggle-button ${professional.isActive ? 'active' : 'inactive'}`} 
+                    onClick={()=>{toggleUserActiveState(professional)}}
                     >
-                      {counsellor.isActive ? 'Active' : 'Inactive'}
+                      {professional.isActive ? 'Active' : 'Inactive'}
                     </button>
                     </div>
                   </td>

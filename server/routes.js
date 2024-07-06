@@ -32,7 +32,7 @@ router.post('/viewSafehouseBySupporterId/:id', safehouse.viewSafehouseBySupporte
 router.post('/viewSafehouseReqsForAdmin', safehouse.viewSafehouseReqsForAdmin);
 
 
-//suppoerter routes
+//Counsellor routes
 router.post('/registerCounsellors', Counsellor.registerCounsellors);
 router.post('/viewCounsellorsById/:id', Counsellor.viewCounsellorsById);
 router.post('/editCounsellorsById/:id', Counsellor.editCounsellorsById);
