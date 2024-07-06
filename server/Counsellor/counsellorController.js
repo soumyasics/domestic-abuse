@@ -60,7 +60,7 @@ const registerCounsellors = async (req, res) => {
 
 // View all Counsellors
 const viewCounsellors = (req, res) => {
-    Counsellors.find({})
+    Counsellors.find({adminApproved:true})
         .exec()
         .then(data => {
             if (data.length > 0) {
@@ -347,6 +347,7 @@ const rejectCounsellorsById = (req, res) => {
 
 // Remove Counsellors by ID
 const removeCounsellorsById = (req, res) => {
+    console.log(req.params.id);
     Counsellors.findByIdAndUpdate({ _id: req.params.id }, { isActive: false })
         .exec()
         .then(data => {
