@@ -38,6 +38,7 @@ import AdminLegalProfessionalViewAll from './Pages/Admin/AdminLegalProfessionalV
 import UserLogin from './Pages/User/login/UserLogin';
 import UserRegister from './Pages/User/register/UserRegister';
 import UserForgotPassword from './Pages/User/UserForgotPassword/UserForgotPassword';
+import UserHome from './Pages/User/UserHome/UserHome';
 import SupprterNavbar from './Pages/Common/Navbar/SupprterNavbar';
 import CouncillorNav from './Pages/Common/Navbar/CouncillorNav';
 import LPNav from './Pages/Common/Navbar/LPNav';
@@ -53,6 +54,8 @@ function App() {
             <Route path='/user-login' element={[<Navbar/>,<UserLogin />]} />
             <Route path='/user-register' element={[<Navbar/>,<UserRegister />]} />
             <Route path='/user-forgot-password' element={[<Navbar/>,<UserForgotPassword/>]} />
+            <Route path='/user-home' element={[<Navbar/>,<UserHome/>]} />
+
 
             {/* Admin Paths */}
             <Route path='/admin-login' element={[<Navbar/>,<AdminLogin />]} />
