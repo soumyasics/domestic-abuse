@@ -22,7 +22,7 @@ const upload = multer({ storage: storage }).fields([
   { name: 'photo', maxCount: 1 },
   { name: 'proof', maxCount: 1 }
 ]);
-
+const uploadSingle = multer({ storage: storage }).single('photo')
 // Register Legal Professionals
 const registerLegalProfessional = async (req, res) => {
   try {
@@ -119,6 +119,7 @@ const editLegalProfessionalById = async (req, res) => {
       }
     }
   });
+  console.log("req.",req.file);
 
   if (flag === 0) {
     await LegalProfessionals.findByIdAndUpdate(req.params.id, {
@@ -130,7 +131,7 @@ const editLegalProfessionalById = async (req, res) => {
       firmName,
       language,
       licenseNumber,
-      photo: req.files['photo'][0],
+      photo: req.file,
     
     })
       .exec()
@@ -428,5 +429,6 @@ module.exports = {
   upload,
   deleteLegalProfessionalById,
   activateLegalProfessionalById,
-  deActivateLegalProfessionalById
+  deActivateLegalProfessionalById,
+  uploadSingle
 };

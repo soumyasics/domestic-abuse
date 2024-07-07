@@ -8,6 +8,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import { registerUsers } from '../../../Services/apiService';
 
 function UserRegister() {
   const [user, setUser] = useState({
@@ -135,13 +136,14 @@ function UserRegister() {
 
     setIsSubmitting(true);
     try {
-      // const response = await registerSupporters(user);
-      // if (response.success) {
-      //   toast.success(response.message);
-      //   navigate('/user-login');
-      // } else {
-      //   toast.error(response.message);
-      // }
+      const response = await registerUsers(user);
+      console.log(response);
+      if (response.success) {
+        toast.success(response.message);
+        navigate('/user-login');
+      } else {
+        toast.error(response.message);
+      }
     } catch (error) {
       console.error('Error Registering User', error);
       toast.error(error.response?.data?.message || 'Registration failed. Please try again.');

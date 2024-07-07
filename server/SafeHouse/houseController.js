@@ -150,7 +150,7 @@ console.log(contact != safehouseData.contact);
 // View safehouse by ID
 const viewSafehouseById = (req, res) => {
     console.log("id",req.params.id);
-    Safehouse.findById({_id:req.params.id})
+    Safehouse.findById({_id:req.params.id}).populate('supporterId')
         .exec()
         .then(data => {
             console.log(data);

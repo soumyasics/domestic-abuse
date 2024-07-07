@@ -3,6 +3,7 @@ const supporter = require('./Supporter/supporterController')
 const safehouse = require('./SafeHouse/houseController')
 const Counsellor = require('./Counsellor/counsellorController')
 const LegalProfessional = require('./LegalProfessional/legalProfessionalController')
+const userController = require('./Users/userController')
 
 //suppoerter routes
 router.post('/registerSupporters', supporter.upload, supporter.registerSupporters);
@@ -51,7 +52,7 @@ router.post('/activateCounsellorsById/:id', Counsellor.activateCounsellorsById);
 //Legal Professional routes
 router.post('/registerLegalProfessional', LegalProfessional.upload, LegalProfessional.registerLegalProfessional);
 router.post('/viewLegalProfessionalById/:id', LegalProfessional.viewLegalProfessionalById);
-router.post('/editLegalProfessionalById/:id', LegalProfessional.upload, LegalProfessional.editLegalProfessionalById);
+router.post('/editLegalProfessionalById/:id', LegalProfessional.uploadSingle, LegalProfessional.editLegalProfessionalById);
 router.post('/forgotPasswordLegalProfessional', LegalProfessional.forgotPassword);
 router.post('/viewLegalProfessionals', LegalProfessional.viewLegalProfessionals);
 router.post('/resetPasswordloginLegalProfessional/:id', LegalProfessional.resetPassword);
@@ -61,4 +62,22 @@ router.post('/approveLegalProfessionalById/:id', LegalProfessional.approveLegalP
 router.post('/deleteLegalProfessionalById/:id', LegalProfessional.deleteLegalProfessionalById);
 router.post('/deActivateLegalProfessionalById/:id', LegalProfessional.deActivateLegalProfessionalById);
 router.post('/activateLegalProfessionalById/:id', LegalProfessional.activateLegalProfessionalById);
+
+
+
+
+//User
+// User routes
+router.post('/registerUser', userController.upload, userController.registerUser);
+router.post('/viewUserById/:id', userController.viewUserById);
+router.post('/editUserById/:id', userController.upload, userController.editUserById);
+router.post('/forgotPasswordUser', userController.forgotPassword);
+router.post('/viewUsers', userController.viewUsers);
+router.post('/resetPasswordLoginUser/:id', userController.resetPassword);
+router.post('/loginUser', userController.login);
+router.post('/requireAuthUser', userController.requireAuth);
+
+
+router.post('/deActivateUserById/:id', userController.deActivateUserById);
+router.post('/activateUserById/:id', userController.activateUserById);
 module.exports = router
