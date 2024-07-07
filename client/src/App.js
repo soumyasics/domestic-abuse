@@ -4,8 +4,6 @@ import Footer from './Pages/Common/Footer/Footer';
 import Home from './Pages/Common/Home/Home';
 import Navbar from './Pages/Common/Navbar/Navbar';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import User_Login from './Pages/User/login/User_Login';
-import User_Register from './Pages/User/register/User_Register';
 import AdminLogin from './Pages/Admin/AdminLogin/AdminLogin';
 import AdminDashboard from './Pages/Admin/AdminDashboard/AdminDashboard';
 import ProtectedRoute from './Pages/Admin/ProtectedRoute/ProtectedRoute';
@@ -37,6 +35,8 @@ import AdminCounsellorDetailedViewAprvd from './Pages/Admin/AdminCounsellorDetai
 import AdminLegalProfessionalDetailedViewAprvd from './Pages/Admin/AdminLegalProfessionalDetailedViewAprvd/AdminLegalProfessionalDetailedViewAprvd';
 import AdminLegalProfessionalDetailedView from './Pages/Admin/AdminLegalProfessionalDetailedView/AdminLegalProfessionalDetailedView';
 import AdminLegalProfessionalViewAll from './Pages/Admin/AdminLegalProfessionalViewAll/AdminLegalProfessionalViewAll';
+import UserLogin from './Pages/User/login/UserLogin';
+import UserRegister from './Pages/User/register/UserRegister';
 function App() {
   return (
     <div className="d-flex flex-column min-vh-100">
@@ -45,8 +45,9 @@ function App() {
           <Routes>
             {/* Common Paths */}
             <Route path="/" element={[<Navbar/>,<Home />]} />
-            <Route path='/user-login' element={[<Navbar/>,<User_Login />]} />
-            <Route path='/user-register' element={[<Navbar/>,<User_Register />]} />
+            {/* User Paths */}
+            <Route path='/user-login' element={[<Navbar/>,<UserLogin />]} />
+            <Route path='/user-register' element={[<Navbar/>,<UserRegister />]} />
 
             {/* Admin Paths */}
             <Route path='/admin-login' element={[<Navbar/>,<AdminLogin />]} />
@@ -96,7 +97,7 @@ function App() {
             <Route path='/legal-professional-register' element={[<Navbar/>,<LegalProfessionalRegister />]} />
             <Route path='/legal-professional-forgot-password' element={[<Navbar/>,<LegalProfessionalForgotPassword/>]} />
             <Route path='/legal-professional-edit-profile' element={<LegalProfessionalEditProfile />} />
-            <Route path='/legal-professional-home' element={<LegalProfessionalHome />} />
+            <Route path='/legal-professional-home' element={[<Navbar/>,<LegalProfessionalHome />]} />
 
           </Routes>
         </div>
