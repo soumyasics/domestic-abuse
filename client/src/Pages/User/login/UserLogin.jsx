@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import "./UserLogin.css";
 import { useNavigate } from 'react-router-dom';
 import Victim from '../../../Assets/user-login.png';
 import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { loginUser } from '../../../Services/apiService';
+import AuthContext from '../../../context/AuthContext';
 
 function UserLogin() {
   const [email, setEmail] = useState('');
@@ -14,6 +16,7 @@ function UserLogin() {
   const togglePasswordVisibility = () => {
     setPasswordShown(!passwordShown);
   };
+  const { login } = useContext(AuthContext);
 
   const validateForm = () => {
     if (!email) {
@@ -32,19 +35,20 @@ function UserLogin() {
 
     try {
       const user = { email, password };
-     // const result = await loginSupporter(supporter, (token, supporterId) => {
-      //  login(token, 'supporter', supporterId); // Pass supporterId to login function
-      //});
+     const result = await loginUser(user, (token, userId) => {
+       login(token, 'supporter', userId); // Pass supporterId to login function
+      });
 
-      // if (result.success) {
-      //   toast.success('Login successful!');
-      //   localStorage.setItem("supporterId", result.user._id);
-      //   setTimeout(() => {
-      //     navigate('/supporter-home');
-      //   }, 2000);
-      // } else {
-      //   toast.error(result.message);
-      // }
+      if (result.success) {
+        toast.success('Login successful!');
+        console.log(result.user._id);
+        // localStorage.setItem("userId", result.user._id);
+        setTimeout(() => {
+          navigate('/user-home');
+        }, 2000);
+      } else {
+        toast.error(result.message);
+      }
     } catch (error) {
       toast.error('An unexpected error occurred during login');
     }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './CounsellorEditProfile.css';
 import counsellorImg from '../../../Assets/counsellor-registration.png';
 import { People } from 'react-bootstrap-icons';
@@ -10,6 +10,8 @@ import { CgOrganisation } from "react-icons/cg";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import { editCounsellorById, getCounsellorById,getCounsellorByIdProfile,IMG_BASE_URL } from '../../../Services/apiService';
+import demo from '../../../Assets/supp-edit-profile.png';
 
 function CounsellorEditProfile() {
   const [counsellor, setCounsellor] = useState({
@@ -24,7 +26,30 @@ function CounsellorEditProfile() {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
+  const [imagePreview, setImagePreview] = useState(demo);
 
+  useEffect(() => {
+    const fetchSupporterData = async () => {
+        const counsellorId = localStorage.getItem('counsellorId');
+        if (counsellorId) {
+            try {
+                const response = await getCounsellorByIdProfile(counsellorId);
+                console.log('Fetch supporter response:', response);
+                if (response.status === 200) {
+                    setCounsellor(response.data);
+                    setImagePreview(response.data.image ? `${IMG_BASE_URL}/${counsellor.image.filename}` : demo);
+                } else {
+                    toast.error('Supporter not found');
+                }
+            } catch (error) {
+                console.error('Error fetching supporter data:', error);
+                toast.error('An error occurred while fetching the supporter data');
+            }
+        }
+    };
+
+    fetchSupporterData();
+}, []);
   const validate = () => {
     const newErrors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -72,27 +97,68 @@ function CounsellorEditProfile() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCounsellor({
-      ...counsellor,
-      [name]: value,
+        ...counsellor,
+        [name]: value,
     });
-  };
+};
 
-  const handleSubmit = async (e) => {
+const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      
+      counsellor.image=file
+    
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setImagePreview(reader.result);
+        };
+        reader.readAsDataURL(file);
+    }
+};
+
+const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validate()) {
-      toast.error('Please fix the errors in the form.');
-      return;
-    }
+    console.log(validate());
+    if (validate()) {
+        setIsSubmitting(true);
+        const formData = new FormData();
+        formData.append('name', counsellor.name);
+        formData.append('email', counsellor.email);
+        formData.append('password', counsellor.password);
+        formData.append('contact', counsellor.contact);
+        formData.append('organization', counsellor.organization);
 
-    setIsSubmitting(true);
-    try {
-      
-    } catch (error) {
-      
-    } finally {
-      setIsSubmitting(false);
+        if (counsellor.image) {
+            formData.append('image', counsellor.image);
+        }
+
+        console.log(formData.entries());
+        // Log formData entries for debugging
+        for (let [key, value] of formData.entries()) {
+            console.log(key, value);
+        }
+
+        const counsellorId = localStorage.getItem('counsellorId');
+        try {
+            const response = await editCounsellorById(counsellorId, counsellor);
+            console.log('Edit supporter response:', response);
+
+            if (response.success) {
+                toast.success('Profile updated successfully');
+                navigate('/counsellor-home');
+            } else {
+                toast.error(response.message || 'Failed to update profile');
+            }
+        } catch (error) {
+            console.error('Error updating profile:', error);
+            toast.error('An error occurred while updating the profile');
+        } finally {
+            setIsSubmitting(false);
+        }
+    } else {
+        toast.error('Please fix the errors in the form.');
     }
-  };
+};
 
   return (
     <>
@@ -119,7 +185,7 @@ function CounsellorEditProfile() {
           <div className="col-md-6 mt-5 text-center align-self-start bg-creamy border rounded">
             <div className="row m-4 mt-0">
               <div className="col">
-                <h3 className='fw-semibold theme-purple m-3'> Counsellors Edit Profile</h3>
+                <h3 className='fw-semibold theme-purple m-3'> Counsellors  Profile</h3>
               </div>
             </div>
             <form onSubmit={handleSubmit} noValidate>

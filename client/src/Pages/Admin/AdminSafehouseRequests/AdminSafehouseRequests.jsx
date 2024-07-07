@@ -80,7 +80,7 @@ function AdminSafehouseRequests() {
   };
 
   const handleView = async (data) => {
-    navigate(`/admin-safehouse-details`, { state: { data } });
+    navigate(`/admin-safehouse-details/${data}`, { state: { data } });
   };
 
   const offset = currentPage * safehousesPerPage;
@@ -125,7 +125,7 @@ function AdminSafehouseRequests() {
                     <div className='bg-purple rounded-circle cursor-pointer mx-2 p-1'>
                       <FaEye 
                         className='mx-2 text-white'
-                        onClick={() => handleView(safehouse)}
+                        onClick={() => handleView(safehouse._id)}
                       />
                     </div>
                     <div className='bg-purple rounded-circle cursor-pointer mx-2 p-1'>

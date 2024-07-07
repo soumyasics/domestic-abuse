@@ -6,7 +6,7 @@ import { Table } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import { FaPen } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
-import { viewSafehouses,rejectSafehouseById } from '../../../Services/apiService'; 
+import { viewSafehouses,rejectSafehouseById, viewSafehousesBySupporterId } from '../../../Services/apiService'; 
 import { Link,useNavigate } from 'react-router-dom';
 import { toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,7 +19,8 @@ function SupporterViewAllSafeHouses() {
 
   const fetchSafehouses = async () => {
     try {
-      const response = await viewSafehouses(localStorage.getItem('supporterId'));
+      const response = await viewSafehousesBySupporterId(localStorage.getItem('supporterId'));
+      console.log(response);
       if (response.status === 200) {
         setSafehouses(response.data);
       } else {
@@ -93,8 +94,9 @@ function SupporterViewAllSafeHouses() {
               <th className='view-all-safehouse-theme text-white'>Address</th>
               <th className='view-all-safehouse-theme text-white'>Contact Number</th>
               <th className='view-all-safehouse-theme text-white'>Landmark</th>
-              <th className='view-all-safehouse-theme text-white'>Accommodation Capacity</th>
+              <th className='view-all-safehouse-theme text-white'>Capacity</th>
               <th className='view-all-safehouse-theme text-white'>Monthly Rent</th>
+              <th className='view-all-safehouse-theme text-white'>Status</th>
               <th className='view-all-safehouse-theme text-white'>Action</th>
             </tr>
           </thead>
@@ -108,6 +110,7 @@ function SupporterViewAllSafeHouses() {
                 <td className='p-2'>{safehouse.landmark}</td>
                 <td className='p-2'>{safehouse.capacity}</td>
                 <td className='p-2'>{safehouse.rent}</td>
+                <td className='p-2'>{safehouse.adminApproved?'Approved':'Pending'}</td>
                 <td className='p-2'>
                   <div className='d-flex justify-content-center'>
                     <div className='bg-purple rounded-circle cursor-pointer mx-2'>

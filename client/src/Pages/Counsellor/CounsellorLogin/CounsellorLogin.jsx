@@ -36,11 +36,14 @@ function CounsellorLogin() {
     try {
       const counsellor = { email, password };
       const result = await loginCounsellor(counsellor, (token, counsellorId) => {
+      
         login(token, 'counsellor', counsellorId); // Pass counsellorId to login function
       });
 
       if (result.success) {
         toast.success('Login successful!');
+        localStorage.setItem('counsellorId',result.user._id)
+        console.log("loc",result);
         setTimeout(() => {
           navigate('/counsellor-home');
         }, 2000);

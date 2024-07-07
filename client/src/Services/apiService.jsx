@@ -1,10 +1,10 @@
 //src/Services/apiService.jsx
 import axios from 'axios';
 
-// export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
-// export const IMG_BASE_URL = 'http://localhost:4039/';
-export const IMG_BASE_URL = 'http://hybrid.srishticampus.in:4039/';
-export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
+export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
+export const IMG_BASE_URL = 'http://localhost:4039/';
+// export const IMG_BASE_URL = 'http://hybrid.srishticampus.in:4039/';
+// export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
 // Api for Viewing all Supporters Request for admin to approve, reject or view
 export const viewSupporterReqsForAdmin = async () => {
   try {
@@ -50,6 +50,8 @@ export const registerSupporters = async (supporterData) => {
     throw error;
   }
 };
+
+
 
 // Api for Supporter Login
 export const loginSupporter = async (supporter, setTokenCallback) => {
@@ -698,6 +700,7 @@ export const rejectLegalProfessionalsById = async (id) => {
     };
   }
 };
+
 // Function to get counsellor by ID
 export const getCounsellorById = async (id) => {
   try {
@@ -710,6 +713,17 @@ export const getCounsellorById = async (id) => {
   }
 };
 
+// Function to get counsellor by ID
+export const getCounsellorByIdProfile = async (id) => {
+  try {
+      const response = await axios.post(`${API_BASE_URL}/viewCounsellorsById/${id}`);
+      console.log(response);
+      return response.data;
+  } catch (error) {
+      console.error('Error fetching counsellor data:', error);
+      throw error;
+  }
+};
 // Function to edit counsellor by ID
 export const editCounsellorById = async (id, data) => {
   try {
@@ -756,5 +770,70 @@ export const editLegalProfessionalById = async (id, formData) => {
   } catch (error) {
     console.error('Error editing legal professional by ID:', error);
     throw error;
+  }
+};
+
+
+
+// Api for Registering User
+export const registerUsers = async (supporterData) => {
+  try {
+    const formData = new FormData();
+    Object.keys(supporterData).forEach(key => {
+      formData.append(key, supporterData[key]);
+    });
+
+    const response = await axios.post(`${API_BASE_URL}/registerUser`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    // Handling responses based on status code
+    switch (response.data.status) {
+      case 200:
+        console.log(response.data.msg); // "Inserted successfully"
+        return { success: true, message: response.data.msg, data: response.data.data };
+      case 409:
+        console.log(response.data.msg); // Either "contact Number Already Registered With Us !!" or "Email already in use"
+        return { success: false, message: response.data.msg };
+      case 500:
+        console.log(response.data.msg); // "Data not Inserted"
+        return { success: false, message: response.data.msg };
+      default:
+        console.log('Unexpected response status:', response.data.status);
+        return { success: false, message: 'Unexpected error occurred' };
+    }
+  } catch (error) {
+    console.error('Error Registering Supporter', error);
+    throw error;
+  }
+};
+
+
+// Api for Supporter Login
+export const loginUser = async (supporter, setTokenCallback) => {
+  try {
+      const response = await axios.post(`${API_BASE_URL}/loginUser`, supporter);
+
+      if (response.data.status === 200) {
+        localStorage.setItem("userId",response.data._id)
+          const { token, data } = response.data;
+          setTokenCallback(token, data._id);
+          return { success: true, user: data };
+      } else {
+          return { success: false, message: response.data.msg };
+      }
+  } catch (error) {
+      if (error.response && error.response.data) {
+          return {
+              success: false,
+              message: error.response.data.msg || 'Login failed',
+          };
+      }
+      return {
+          success: false,
+          message: 'An unexpected error occurred',
+      };
   }
 };
