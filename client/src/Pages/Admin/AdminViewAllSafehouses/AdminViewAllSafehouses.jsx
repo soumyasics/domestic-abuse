@@ -71,7 +71,7 @@ function AdminViewAllSafehouses() {
               <th className='view-all-safehouse-theme text-white fs-6'>Landmark</th>
               <th className='view-all-safehouse-theme text-white fs-6'>Accommodation Capacity</th>
               <th className='view-all-safehouse-theme text-white fs-6'>Monthly Rent</th>
-              <th className='view-all-safehouse-theme text-white fs-6'>Action</th>
+              {/* <th className='view-all-safehouse-theme text-white fs-6'>Action</th> */}
             </tr>
           </thead>
           <tbody className='text-center fs-6'>
@@ -83,7 +83,7 @@ function AdminViewAllSafehouses() {
                 <td className='p-2'>{safehouse.landmark}</td>
                 <td className='p-2'>{safehouse.capacity}</td>
                 <td className='p-2'>{safehouse.rent}</td>
-                <td className='p-2'>
+                {/* <td className='p-2'>
                   <div className='d-flex justify-content-center'>
                     <div className='bg-purple rounded-circle cursor-pointer mx-2'>
                       <FaEye 
@@ -104,7 +104,7 @@ function AdminViewAllSafehouses() {
                       />
                     </div>
                   </div>
-                </td>
+                </td> */}
               </tr>
             ))}
           </tbody>

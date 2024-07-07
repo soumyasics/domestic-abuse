@@ -85,10 +85,9 @@ function SupporterEditProfile() {
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            setSupporter({
-                ...supporter,
-                image: file,
-            });
+          
+               supporter.image=file
+        
             const reader = new FileReader();
             reader.onloadend = () => {
                 setImagePreview(reader.result);
@@ -99,6 +98,7 @@ function SupporterEditProfile() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(validate());
         if (validate()) {
             setIsSubmitting(true);
             const formData = new FormData();
@@ -120,7 +120,7 @@ function SupporterEditProfile() {
 
             const supporterId = localStorage.getItem('supporterId');
             try {
-                const response = await editSupportersById(supporterId, formData);
+                const response = await editSupportersById(supporterId, supporter);
                 console.log('Edit supporter response:', response);
 
                 if (response.success) {
@@ -168,7 +168,7 @@ function SupporterEditProfile() {
                                             type="file"
                                             id="imageUpload"
                                             name="image"
-                                            accept="image/*"
+                                            // accept="image/*"
                                             className="image-upload-input"
                                             onChange={handleImageChange}
                                             style={{ display: 'none' }}

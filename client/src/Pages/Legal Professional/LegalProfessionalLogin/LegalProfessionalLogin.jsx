@@ -49,6 +49,8 @@ function LegalProfessionalLogin() {
 
       if (result.success) {
         login(result.token, 'legalProfessional', result.userId); 
+        console.log(result.userId);
+        localStorage.setItem('lpId',result.userId)
         toast.success('Login successful!');
         setTimeout(() => {
           navigate('/legal-professional-home');

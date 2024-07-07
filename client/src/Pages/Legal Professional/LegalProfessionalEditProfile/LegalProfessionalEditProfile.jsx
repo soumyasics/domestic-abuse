@@ -36,7 +36,7 @@ function LegalProfessionalEditProfile() {
                     const response = await getLegalProfessionalById(legalProfessionalId);
                     if (response.status === 200) {
                         setLegalProfessional(response.data);
-                        setImagePreview(response.data.image ? `${IMG_BASE_URL}/${response.data.image.filename}` : demo);
+                        setImagePreview(response.data.photo ? `${IMG_BASE_URL}/${response.data.photo.filename}` : demo);
                     } else {
                         toast.error('Legal Professional not found');
                     }
@@ -59,40 +59,56 @@ function LegalProfessionalEditProfile() {
         if (!legalProfessional.name) {
             newErrors.name = 'Name is required';
         } else if (!nameRegex.test(legalProfessional.name)) {
+            console.log("nm");
+
             newErrors.name = 'Name should only contain alphabets';
         }
 
         if (!legalProfessional.email) {
             newErrors.email = 'Email is required';
         } else if (!emailRegex.test(legalProfessional.email)) {
+            console.log("eme");
             newErrors.email = 'Invalid email format';
         }
 
         if (!legalProfessional.contact) {
+
+            console.log("con");
+
             newErrors.contact = 'Contact Number is required';
         } else if (!phoneRegex.test(legalProfessional.contact)) {
+            console.log("con");
+
             newErrors.contact = 'Contact number should be 10 digits';
         }
 
         if (!legalProfessional.barAssociationId) {
             newErrors.barAssociationId = 'Bar Association Id is required';
+            console.log("Bar");
+
         }
 
         if (!legalProfessional.firmName) {
             newErrors.firmName = 'Firm Name is required';
+            console.log("Firm");
+
         }
 
         if (!legalProfessional.licenseNumber) {
+            console.log("licenseNumber");
+
             newErrors.licenseNumber = 'License Number is required';
         }
 
-        if (legalProfessional.photo && !['image/jpeg', 'image/png', 'image/gif'].includes(legalProfessional.photo.type)) {
+        if (!legalProfessional.photo && !['image/jpeg', 'image/png', 'image/gif'].includes(legalProfessional.photo.type)) {
             newErrors.photo = 'Only image files (jpeg, png, gif) are allowed';
+            console.log("image",legalProfessional.photo);
+
         }
 
-        if (legalProfessional.proof && !['image/jpeg', 'image/png', 'image/gif'].includes(legalProfessional.proof.type)) {
-            newErrors.proof = 'Only image files (jpeg, png, gif) are allowed';
-        }
+        // if (legalProfessional.proof && !['image/jpeg', 'image/png', 'image/gif'].includes(legalProfessional.proof.type)) {
+        //     newErrors.proof = 'Only image files (jpeg, png, gif) are allowed';
+        // }
 
         return Object.keys(newErrors).length === 0;
     };
@@ -108,10 +124,8 @@ function LegalProfessionalEditProfile() {
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            setLegalProfessional({
-                ...legalProfessional,
-                image: file,
-            });
+         legalProfessional.photo=file
+         console.log(file);
             const reader = new FileReader();
             reader.onloadend = () => {
                 setImagePreview(reader.result);
@@ -122,6 +136,7 @@ function LegalProfessionalEditProfile() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log("lp",legalProfessional);
         if (validate()) {
             setIsSubmitting(true);
             const formData = new FormData();
@@ -133,13 +148,14 @@ function LegalProfessionalEditProfile() {
             formData.append('firmName', legalProfessional.firmName);
             formData.append('licenseNumber', legalProfessional.licenseNumber);
 
-            if (legalProfessional.image) {
-                formData.append('image', legalProfessional.image);
+            if (legalProfessional.photo) {
+                formData.append('photo', legalProfessional.photo);
             }
 
             const legalProfessionalId = localStorage.getItem('legalProfessionalId');
             try {
                 const response = await editLegalProfessionalById(legalProfessionalId, formData);
+                console.log(response);
                 if (response.status === 200) {
                     toast.success('Profile updated successfully');
                     navigate('/legal-professional-home');
@@ -319,7 +335,7 @@ function LegalProfessionalEditProfile() {
                                 </div>
                             </div>
                         </div>
-                        <div className='row m-4 mt-0'>
+                        {/* <div className='row m-4 mt-0'>
                             <div className='col'>
                                 <h3 className='theme-purple'>Proof</h3>
                                 <img
@@ -333,7 +349,7 @@ function LegalProfessionalEditProfile() {
                                     style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                                 />
                             </div>
-                        </div>
+                        </div> */}
                         <div className='row m-4 '>
                             <div className="col">
                                 <button

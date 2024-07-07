@@ -39,6 +39,9 @@ import UserLogin from './Pages/User/login/UserLogin';
 import UserRegister from './Pages/User/register/UserRegister';
 import UserForgotPassword from './Pages/User/UserForgotPassword/UserForgotPassword';
 import UserHome from './Pages/User/UserHome/UserHome';
+import SupprterNavbar from './Pages/Common/Navbar/SupprterNavbar';
+import CouncillorNav from './Pages/Common/Navbar/CouncillorNav';
+import LPNav from './Pages/Common/Navbar/LPNav';
 import UserEditProfile from './Pages/User/UserEditProfile/UserEditProfile';
 
 function App() {
@@ -66,7 +69,7 @@ function App() {
             <Route path='/admin-view-all-safehouses' element={
               [ <AdminNavbar/>, <AdminViewAllSafehouses />]
             } />
-            <Route path='/admin-safehouse-details' element={
+            <Route path='/admin-safehouse-details/:id' element={
                 [<AdminNavbar/>,<AdminSafehouseDetailedView />]
             } />  
             <Route path='/admin-counsellor-requests' element={<AdminCounsellorRequests />} />
@@ -82,29 +85,29 @@ function App() {
             {/* Supporter Paths */}
             <Route path='/supporter-register' element={[<Navbar/>,<SupporterRegister />]} />
             <Route path='/supporter-login' element={[<Navbar/>,<SupporterLogin />]} />
-            <Route path='/supporter-home' element={<SupporterHome />} />
+            <Route path='/supporter-home' element={[<SupprterNavbar/>,<SupporterHome />]} />
             <Route path='/supporter-forgot-password' element={[<Navbar/>,<SupporterForgotPassword />]} />
-            <Route path='/supporter-edit-profile' element={<SupporterEditProfile />} />
-            <Route path='/supporter-add-safe-space' element={<SupporterAddSafeHouse />} />
+            <Route path='/supporter-edit-profile' element={[<SupprterNavbar/>,<SupporterEditProfile />]} />
+            <Route path='/supporter-add-safe-space' element={[<SupprterNavbar/>,<SupporterAddSafeHouse />]} />
             
             {/* Updated route for editing safe house */}
-            <Route path='/supporter-edit-safe-house' element={<SupporterEditSafeHouse />} />
-            <Route path='/supporter-view-all-safehouses' element={<SupporterViewAllSafeHouses />} />
+            <Route path='/supporter-edit-safe-house' element={[<SupprterNavbar/>,<SupporterEditSafeHouse />]} />
+            <Route path='/supporter-view-all-safehouses' element={[<SupprterNavbar/>,<SupporterViewAllSafeHouses />]} />
 
             {/* Counsellor Paths */}
             <Route path='/counsellor-register' element={[<Navbar/>,<CounsellorRegistration />]} />
             <Route path='/counsellor-login' element={[<Navbar/>,<CounsellorLogin/>]} />
             <Route path='/counsellor-forgot-password' element={[<Navbar/>,<CounsellorForgotPassword/>]} />
-            <Route path='/counsellor-home' element={[<CounsellorHome />]} />
-            <Route path='/counsellor-edit-profile' element={[<CounsellorEditProfile />]} />
+            <Route path='/counsellor-home' element={[<CouncillorNav/>,<CounsellorHome />]} />
+            <Route path='/counsellor-edit-profile' element={[<CouncillorNav/>,<CounsellorEditProfile />]} />
 
 
             {/* Legal Professional Paths  */}
             <Route path='/legal-professional-login' element={[<Navbar/>,<LegalProfessionalLogin/>]} />
             <Route path='/legal-professional-register' element={[<Navbar/>,<LegalProfessionalRegister />]} />
             <Route path='/legal-professional-forgot-password' element={[<Navbar/>,<LegalProfessionalForgotPassword/>]} />
-            <Route path='/legal-professional-edit-profile' element={<LegalProfessionalEditProfile />} />
-            <Route path='/legal-professional-home' element={[<Navbar/>,<LegalProfessionalHome />]} />
+            <Route path='/legal-professional-edit-profile' element={[<LPNav/>,<LegalProfessionalEditProfile />]} />
+            <Route path='/legal-professional-home' element={[<LPNav/>,<LegalProfessionalHome />]} />
 
           </Routes>
         </div>

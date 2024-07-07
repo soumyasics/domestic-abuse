@@ -1,27 +1,115 @@
-import React,{useState} from 'react';
-import './AdminSafehouseDetailedView.css';
-import demoSafehouse from '../../../Assets/newhouse.jpeg';
-import { IMG_BASE_URL } from '../../../Services/apiService';
+import React,{useEffect, useState} from 'react';
+// import './AdminsafehousesDetailedView.css';
+import demosafehouses from '../../../Assets/newhouse.jpeg';
 import demo from '../../../Assets/demo-supp.png';
-function AdminSafehouseDetailedView(safehouse) {
-  const [supporter,setSupporter]=useState();
+import { useNavigate, useParams } from 'react-router-dom';
+import demoLegalProfessional from '../../../Assets/legal-professional-registration.png';
+import { Button } from 'react-bootstrap';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import { FaFile } from "react-icons/fa";
+import { approveSafehouseById, IMG_BASE_URL, viewSafehouseById,rejectSafehouseById } from '../../../Services/apiService';
+
+function AdminsafehousesDetailedView() {
+  const { id } = useParams();
+  const [safehouses, setsafehouses] = useState({photo:{filename:''},proof:{
+    filename:''
+  }});
+  const navigate=useNavigate()
+
+  useEffect(() => {
+    const fetchLegalProfessionalData = async () => {
+      if (id) {
+        try {
+          const legalProfessionalData = await viewSafehouseById(id);
+          setsafehouses(legalProfessionalData);
+          console.log(legalProfessionalData);
+        } catch (error) {
+          console.error('Failed to fetch legal professional data:', error);
+        }
+      }
+    };
+    fetchLegalProfessionalData();
+  }, [id]);
+
+  const handleApprove = async (id) => {
+    confirmAlert({
+      title: 'Confirm Approval',
+      message: 'Are you sure you want to approve this Safe house?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: async () => {
+            try {
+              const response = await approveSafehouseById(id);
+              if (response.success) {
+                toast.success('Safe house approved successfully.');
+                navigate('/admin-dashboard')
+              } else {
+                toast.error(response.message || 'Error approving Safe house.');
+              }
+            } catch (error) {
+              toast.error('Error approving Safe house.');
+            }
+          },
+        },
+        {
+          label: 'No',
+        },
+      ],
+    });
+  };
+
+  const handleReject = async (id) => {
+    confirmAlert({
+      title: 'Confirm Rejection',
+      message: 'Are you sure you want to reject this Safe house?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: async () => {
+            try {
+              const response = await rejectSafehouseById(id);
+              if (response.success) {
+                toast.success('Safe house rejected successfully.');
+              } else {
+                toast.error(response.message || 'Error rejecting Safe house.');
+              }
+            } catch (error) {
+              toast.error('Error rejecting Safe house.');
+            }
+          },
+        },
+        {
+          label: 'No',
+        },
+      ],
+    });
+  };
+
+
+
+
+
   return (
     <>
       <div className='container'>
         <div className='row m-5'>
           <div className='col'>
-            <h3 className='text-center theme-purple fw-bold'>{safehouse.name ? safehouse.name : 'Aishwaryas Home'}</h3>
+            <h3 className='text-center theme-purple fw-bold'>{safehouses.name ? safehouses.name : 'Aishwaryas Home'}</h3>
           </div>
         </div>
         <div className='row m-5'>
           <div className='col m-3'>
             <img
-              src={safehouse.image && safehouse.image.filename ? `${IMG_BASE_URL}/${safehouse.image.filename}` : demoSafehouse}
-              alt='Safehouse'
+              src={safehouses.image && safehouses.image.filename ? `${IMG_BASE_URL}/${safehouses.image.filename}` : demosafehouses}
+              alt='safehouses'
               className='img-fluid rounded'
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = demoSafehouse;
+                e.target.src = demosafehouses;
               }}
               style={{ width: '100%', height: '100%' }}
             />
@@ -32,7 +120,7 @@ function AdminSafehouseDetailedView(safehouse) {
                 House Name:
               </div>
               <div className='col-6 text-secondary'>
-                {safehouse.name ? safehouse.name : 'Aishwaryas Home'}
+                {safehouses.name ? safehouses.name : 'Aishwaryas Home'}
               </div>
             </div>
             <div className='row border-bottom m-5'>
@@ -40,7 +128,7 @@ function AdminSafehouseDetailedView(safehouse) {
                 Address:
               </div>
               <div className='col-6 text-secondary'>
-                {safehouse.landmark ? safehouse.landmark : 'Akkulam Rd, Trivandrum'}
+                {safehouses.landmark ? safehouses.landmark : 'Akkulam Rd, Trivandrum'}
               </div>
             </div>
             <div className='row border-bottom m-5'>
@@ -48,7 +136,7 @@ function AdminSafehouseDetailedView(safehouse) {
                 Contact Number:
               </div>
               <div className='col-6 text-secondary'>
-                {safehouse.contact ? safehouse.contact : '9495211400'}
+                {safehouses.contact ? safehouses.contact : '9495211400'}
               </div>
             </div>
             <div className='row border-bottom m-5'>
@@ -56,7 +144,7 @@ function AdminSafehouseDetailedView(safehouse) {
                 Accommodation Capacity:
               </div>
               <div className='col-6 text-secondary'>
-                {safehouse.capacity ? safehouse.capacity : '6'}
+                {safehouses.capacity ? safehouses.capacity : '6'}
               </div>
             </div>
             <div className='row border-bottom m-5'>
@@ -64,7 +152,7 @@ function AdminSafehouseDetailedView(safehouse) {
                 Monthly Rent:
               </div>
               <div className='col-6 text-secondary'>
-                {safehouse.rent ? safehouse.rent : '5000'}
+                {safehouses.rent ? safehouses.rent : '5000'}
               </div>
             </div>
             <div className='row border-bottom m-5'>
@@ -72,7 +160,7 @@ function AdminSafehouseDetailedView(safehouse) {
                 Description:
               </div>
               <div className='col-6 text-secondary'>
-                {safehouse.description ? safehouse.description : 'It is a place where someone can stay and be protected'}
+                {safehouses.description ? safehouses.description : 'It is a place where someone can stay and be protected'}
               </div>
             </div>
           </div>
@@ -88,7 +176,7 @@ function AdminSafehouseDetailedView(safehouse) {
               <div className='col text-center'>
                 <div className="rounded-circle overflow-hidden" style={{ width: '250px', height: '250px', margin: '0 auto' }}>
                   <img
-                    src={supporter.image && supporter.image.filename ? `${IMG_BASE_URL}/${supporter.image.filename}` : demo}
+                    src={safehouses.supporterId.image && safehouses.supporterId.image.filename ? `${IMG_BASE_URL}/${safehouses.supporterId.image.filename}` : demo}
                     alt='Supporter'
                     className='img-fluid'
                     onError={(e) => {
@@ -107,7 +195,7 @@ function AdminSafehouseDetailedView(safehouse) {
                 Name:
               </div>
               <div className='col-6 text-secondary '>
-                {supporter.name}
+                {safehouses.supporterId.name}
               </div>
             </div>
             <div className='row border-bottom m-5'>
@@ -115,7 +203,7 @@ function AdminSafehouseDetailedView(safehouse) {
                 Contact No:
               </div>
               <div className='col-6 text-secondary'>
-                {supporter.contact}
+                {safehouses.supporterId.contact}
               </div>
             </div>
             <div className='row border-bottom m-5'>
@@ -123,7 +211,7 @@ function AdminSafehouseDetailedView(safehouse) {
                 Email Id:
               </div>
               <div className='col-6 text-secondary'>
-                {supporter.email}
+                {safehouses.supporterId.email}
               </div>
             </div>
             <div className='row border-bottom m-5'>
@@ -131,7 +219,7 @@ function AdminSafehouseDetailedView(safehouse) {
                 Organisation Name:
               </div>
               <div className='col-6 text-secondary'>
-                {supporter.organization}
+                {safehouses.supporterId.organization}
               </div>
             </div>
           </div>
@@ -143,4 +231,4 @@ function AdminSafehouseDetailedView(safehouse) {
   );
 }
 
-export default AdminSafehouseDetailedView;
+export default AdminsafehousesDetailedView;
