@@ -42,6 +42,8 @@ import UserHome from './Pages/User/UserHome/UserHome';
 import SupprterNavbar from './Pages/Common/Navbar/SupprterNavbar';
 import CouncillorNav from './Pages/Common/Navbar/CouncillorNav';
 import LPNav from './Pages/Common/Navbar/LPNav';
+import UserEditProfile from './Pages/User/UserEditProfile/UserEditProfile';
+
 function App() {
   return (
     <div className="d-flex flex-column min-vh-100">
@@ -55,7 +57,7 @@ function App() {
             <Route path='/user-register' element={[<Navbar/>,<UserRegister />]} />
             <Route path='/user-forgot-password' element={[<Navbar/>,<UserForgotPassword/>]} />
             <Route path='/user-home' element={[<Navbar/>,<UserHome/>]} />
-
+            <Route path='/user-edit-profile' element={[<Navbar/>,<UserEditProfile/>]} />
 
             {/* Admin Paths */}
             <Route path='/admin-login' element={[<Navbar/>,<AdminLogin />]} />
