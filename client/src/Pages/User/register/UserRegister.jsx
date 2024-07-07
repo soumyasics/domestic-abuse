@@ -118,21 +118,20 @@ function UserRegister() {
       image: file,
     });
   };
-
   const handleCheckboxChange = () => {
     setIsAgreed(!isAgreed);
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!isAgreed) {
-      toast.error('You must agree to the terms and conditions.');
-      return;
-    }
     if (!validate()) {
       toast.error('Please fix the errors in the form.');
       return;
     }
+    if (!isAgreed) {
+      toast.error('You must agree to the terms and conditions.');
+      return;
+    }
+    
 
     setIsSubmitting(true);
     try {
@@ -265,7 +264,7 @@ function UserRegister() {
                       aria-describedby="genderError"
                       required
                     >
-                      <option value="">Select Gender</option>
+                      <option value="" disabled>Select Gender</option>
                       <option value="male">Male</option>
                       <option value="female">Female</option>
                       <option value="other">Other</option>
@@ -306,13 +305,33 @@ function UserRegister() {
                       id="relation"
                       name="relation"
                       className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.relation ? 'is-invalid' : ''}`}
-                      placeholder="Relationship to the abuser"
+                      placeholder="Relationship to the Abuser"
                       value={user.relation}
                       onChange={handleChange}
                       aria-describedby="relationError"
                       required
                     />
                     {errors.relation && <div id="relationError" className="invalid-feedback">{errors.relation}</div>}
+                  </div>
+                </div>
+              </div>
+              <div className="row m-4 mt-0 text-start">
+                <div className="col">
+                  <div className="input-group">
+                    <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
+                      <FaCameraRetro />
+                    </span>
+                    <input
+                      type="file"
+                      id="image"
+                      name="image"
+                      className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.image ? 'is-invalid' : ''}`}
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      aria-describedby="imageError"
+                      required
+                    />
+                    {errors.image && <div id="imageError" className="invalid-feedback">{errors.image}</div>}
                   </div>
                 </div>
               </div>
@@ -331,55 +350,8 @@ function UserRegister() {
                       onChange={handleChange}
                       aria-describedby="safetyPlanError"
                       required
-                    ></textarea>
+                    />
                     {errors.safetyPlan && <div id="safetyPlanError" className="invalid-feedback">{errors.safetyPlan}</div>}
-                  </div>
-                </div>
-              </div>
-              <div className="row m-4 mt-0 text-start">
-                <div className="col">
-                  <div className="input-group">
-                    <input
-                      type="file"
-                      id="image"
-                      name="image"
-                      className={`form-control form-control-lg border home-card-bg rounded-2 ${errors.image ? 'is-invalid' : ''}`}
-                      onChange={handleImageChange}
-                      aria-describedby="imageError"
-                      required
-                    />
-                    {errors.image && <div id="imageError" className="invalid-feedback">{errors.image}</div>}
-                    <label className="input-group-text home-card-bg bg-purple text-white" htmlFor="image">
-                      <FaCameraRetro />
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div className="row m-4 mt-0 text-start">
-                <div className="col">
-                  <div className="input-group">
-                    <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
-                      <MdOutlinePassword />
-                    </span>
-                    <input
-                      type={showPassword ? 'text' : 'password'}
-                      id="password"
-                      name="password"
-                      className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.password ? 'is-invalid' : ''}`}
-                      placeholder="Password"
-                      value={user.password}
-                      onChange={handleChange}
-                      aria-describedby="passwordError"
-                      required
-                    />
-                    <button
-                      type="button"
-                      className="btn btn-outline-secondary border-start-0 border-end-0 home-card-bg bg-transparent"
-                      onClick={togglePasswordVisibility}
-                    >
-                      {showPassword ? <MdVisibility /> : <MdVisibilityOff />}
-                    </button>
-                    {errors.password && <div id="passwordError" className="invalid-feedback">{errors.password}</div>}
                   </div>
                 </div>
               </div>
@@ -390,48 +362,65 @@ function UserRegister() {
                       <RiLockPasswordFill />
                     </span>
                     <input
-                      type={showRePassword ? 'text' : 'password'}
+                      type={showPassword ? "text" : "password"}
+                      id="password"
+                      name="password"
+                      className={`form-control form-control-lg border border-start-0 home-card-bg border-end-0 ${errors.password ? 'is-invalid' : ''}`}
+                      placeholder="Password"
+                      value={user.password}
+                      onChange={handleChange}
+                      aria-describedby="passwordError"
+                      required
+                    />
+                    <span className="input-group-text home-card-bg border-start-0 rounded-end-2 theme-purple" onClick={togglePasswordVisibility} style={{ cursor: 'pointer' }}>
+                      {showPassword ? <MdVisibilityOff /> : <MdVisibility />}
+                    </span>
+                    {errors.password && <div id="passwordError" className="invalid-feedback">{errors.password}</div>}
+                  </div>
+                </div>
+              </div>
+              <div className="row m-4 mt-0 text-start">
+                <div className="col">
+                  <div className="input-group">
+                    <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
+                      <MdOutlinePassword />
+                    </span>
+                    <input
+                      type={showRePassword ? "text" : "password"}
                       id="rePassword"
                       name="rePassword"
-                      className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.rePassword ? 'is-invalid' : ''}`}
-                      placeholder="Re-type Password"
+                      className={`form-control form-control-lg border border-start-0 home-card-bg border-end-0 ${errors.rePassword ? 'is-invalid' : ''}`}
+                      placeholder="Re Type Password"
                       value={user.rePassword}
                       onChange={handleChange}
                       aria-describedby="rePasswordError"
                       required
                     />
-                    <button
-                      type="button"
-                      className="btn btn-outline-secondary border-start-0 border-end-0 home-card-bg bg-transparent"
-                      onClick={toggleRePasswordVisibility}
-                    >
-                      {showRePassword ? <MdVisibility /> : <MdVisibilityOff />}
-                    </button>
+                    <span className="input-group-text home-card-bg border-start-0 rounded-end-2 theme-purple" onClick={toggleRePasswordVisibility} style={{ cursor: 'pointer' }}>
+                      {showRePassword ? <MdVisibilityOff /> : <MdVisibility />}
+                    </span>
                     {errors.rePassword && <div id="rePasswordError" className="invalid-feedback">{errors.rePassword}</div>}
                   </div>
                 </div>
               </div>
-              <div className="form-check">
-                <input
-                  type="checkbox"
-                  id="agreeTerms"
-                  name="agreeTerms"
-                  className="form-check-input"
-                  checked={isAgreed}
-                  onChange={handleCheckboxChange}
-                />
-                <label className="form-check-label" htmlFor="agreeTerms">
-                  I agree to the terms and conditions
-                </label>
+              <div className="row m-4 mt-0 text-center">
+                <div className="col d-flex ">
+                  <div className="form-check align-items-center">
+                    <input className="form-check-input bg-purple" type="checkbox"
+                      id="agreeTerms"
+                      name="agreeTerms"
+                      checked={isAgreed}
+                      onChange={handleCheckboxChange} />
+                    <label className="form-check-label text-secondary" htmlFor="agreeTerms">
+                      Agree Terms & Conditions
+                    </label>
+                  </div>
+                </div>
               </div>
-              <div className="row m-4 mt-3 text-center">
+              <div className="row m-4 mt-0 text-center">
                 <div className="col">
-                  <button
-                    type="submit"
-                    className="btn btn-purple rounded-pill w-50"
-                    disabled={!isAgreed || isSubmitting}
-                  >
-                    {isSubmitting ? 'Submitting...' : 'Register'}
+                  <button type="submit" className="btn bg-theme btn-lg fw-bolder px-5 text-white rounded-pill" disabled={isSubmitting}>
+                    {isSubmitting ? 'Registering...' : 'Register'}
                   </button>
                 </div>
               </div>
