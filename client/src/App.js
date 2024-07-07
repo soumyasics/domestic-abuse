@@ -37,6 +37,7 @@ import AdminLegalProfessionalDetailedView from './Pages/Admin/AdminLegalProfessi
 import AdminLegalProfessionalViewAll from './Pages/Admin/AdminLegalProfessionalViewAll/AdminLegalProfessionalViewAll';
 import UserLogin from './Pages/User/login/UserLogin';
 import UserRegister from './Pages/User/register/UserRegister';
+import UserForgotPassword from './Pages/User/UserForgotPassword/UserForgotPassword';
 function App() {
   return (
     <div className="d-flex flex-column min-vh-100">
@@ -48,6 +49,7 @@ function App() {
             {/* User Paths */}
             <Route path='/user-login' element={[<Navbar/>,<UserLogin />]} />
             <Route path='/user-register' element={[<Navbar/>,<UserRegister />]} />
+            <Route path='/user-forgot-password' element={[<Navbar/>,<UserForgotPassword/>]} />
 
             {/* Admin Paths */}
             <Route path='/admin-login' element={[<Navbar/>,<AdminLogin />]} />
