@@ -44,6 +44,7 @@ import CouncillorNav from './Pages/Common/Navbar/CouncillorNav';
 import LPNav from './Pages/Common/Navbar/LPNav';
 import UserEditProfile from './Pages/User/UserEditProfile/UserEditProfile';
 import UserViewSafehouses from './Pages/User/UserViewSafehouses/UserViewSafehouses';
+import UserViewSupporters from './Pages/User/UserViewSupporters/UserViewSupporters';
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
             <Route path='/user-home' element={[<Navbar/>,<UserHome/>]} />
             <Route path='/user-edit-profile' element={[<Navbar/>,<UserEditProfile/>]} />
             <Route path='/user-view-all-safehouses' element={[<Navbar/>,<UserViewSafehouses/>]} />
+            <Route path='/user-view-all-supporters' element={[<Navbar/>,<UserViewSupporters/>]} />
 
 
             {/* Admin Paths */}
