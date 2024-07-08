@@ -19,6 +19,7 @@ const AdminSidebar = ({ changeActivePage }) => {
     safeSpace: false,
     counsellors: false,
     legalProfessionals:false,
+    users:false,
   });
 
   const navigate = useNavigate();
@@ -146,13 +147,28 @@ const AdminSidebar = ({ changeActivePage }) => {
                   </li>
                 </ul>
               </li>
-              <li className='admin-list w-100 border-bottom border-dark-subtle'>
-                <Link to="/users" className="nav-link d-flex justify-content-between align-items-center ">
+              <li className='border-bottom border-dark-subtle w-100'>
+                <button onClick={() => toggleMenu('users')} className="nav-link btn btn-link text-decoration-none d-flex justify-content-between align-items-center w-100">
                   <div className="d-flex align-items-center">
                     <People size={24} className='theme-purple' />
                     <span className="ms-1 d-none d-sm-inline theme-purple">Users</span>
                   </div>
-                </Link>
+                  <MdArrowDropDown size={25} className="theme-purple" />
+                </button>
+                <ul className={`collapse nav flex-column border-bottom border-dark-subtle ms-1 ${menuOpen.users ? 'show' : ''}`} id="usersSubmenu" data-bs-parent="#menu">
+                  <li className="w-100 ms-3">
+                    <Link to="#" className="nav-link admin-list px-0" onClick={() => changeActivePage("request-users")}>
+                      <span className="ms-2 d-none d-sm-inline theme-purple"><IoMdArrowDropright size={25} /></span>
+                      <span className="d-none d-sm-inline theme-purple">New Request</span>
+                    </Link>
+                  </li>
+                  <li className="w-100 ms-3">
+                    <Link to="#" className="nav-link admin-list px-0">
+                      <span className="ms-2 d-none d-sm-inline theme-purple" onClick={() => changeActivePage("all-users")}><IoMdArrowDropright size={25} /></span>
+                      <span className="d-none d-sm-inline theme-purple" onClick={() => changeActivePage("all-users")}>View All</span>
+                    </Link>
+                  </li>
+                </ul>
               </li>
               <li className='admin-list w-100 border-bottom border-dark-subtle'>
                 <Link to="/blogs" className="nav-link d-flex justify-content-between align-items-center ">

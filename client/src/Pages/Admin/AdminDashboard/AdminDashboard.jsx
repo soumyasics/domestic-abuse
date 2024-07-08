@@ -15,6 +15,8 @@ import AdminSafehouseRequests from '../AdminSafehouseRequests/AdminSafehouseRequ
 import AdminLegalProfessionalDetailedView from '../AdminLegalProfessionalDetailedView/AdminLegalProfessionalDetailedView';
 import AdminLegalProfessionalDetailedViewAprvd from '../AdminLegalProfessionalDetailedViewAprvd/AdminLegalProfessionalDetailedViewAprvd';
 import AdminLegalProfessionalViewAll from '../AdminLegalProfessionalViewAll/AdminLegalProfessionalViewAll';
+import AdminUserRequests from '../AdminUserRequests/AdminUserRequests';
+import AdminUserViewAll from '../AdminUserViewAll/AdminUserViewAll';
 function AdminDashboard() {
   const [activePage, setActivePage] = useState("home");
   const changeActivePage = (page) => {
@@ -63,7 +65,8 @@ function AdminDashboard() {
               {activePage === "vadmin-viewdetailedLegalProfessional" && <AdminLegalProfessionalDetailedViewAprvd activePage={activePage} />}
               {activePage === "admin-viewall-aprvd-LegalProfessional" && <AdminLegalProfessionalViewAll activePage={activePage} />}
               {activePage === "admin-viewdetailedLegalProfessional-aprvd" && <AdminLegalProfessionalDetailedViewAprvd activePage={activePage} />}
-
+              {activePage === "request-users" && <AdminUserRequests activePage={activePage} />}
+              {activePage === "all-users" && <AdminUserViewAll activePage={activePage} />}
 
             </div>
           </div>
