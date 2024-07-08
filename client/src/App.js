@@ -43,6 +43,7 @@ import SupprterNavbar from './Pages/Common/Navbar/SupprterNavbar';
 import CouncillorNav from './Pages/Common/Navbar/CouncillorNav';
 import LPNav from './Pages/Common/Navbar/LPNav';
 import UserEditProfile from './Pages/User/UserEditProfile/UserEditProfile';
+import UserViewSafehouses from './Pages/User/UserViewSafehouses/UserViewSafehouses';
 
 function App() {
   return (
@@ -58,6 +59,8 @@ function App() {
             <Route path='/user-forgot-password' element={[<Navbar/>,<UserForgotPassword/>]} />
             <Route path='/user-home' element={[<Navbar/>,<UserHome/>]} />
             <Route path='/user-edit-profile' element={[<Navbar/>,<UserEditProfile/>]} />
+            <Route path='/user-view-all-safehouses' element={[<Navbar/>,<UserViewSafehouses/>]} />
+
 
             {/* Admin Paths */}
             <Route path='/admin-login' element={[<Navbar/>,<AdminLogin />]} />
