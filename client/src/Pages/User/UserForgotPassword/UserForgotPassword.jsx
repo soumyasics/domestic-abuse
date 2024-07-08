@@ -4,6 +4,7 @@ import Victim from '../../../Assets/user-login.png';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './UserForgotPassword.css';
+import { resetPasswordUser } from '../../../Services/apiService';
 
 function UserForgotPassword() {
   const [email, setEmail] = useState('');
@@ -49,12 +50,12 @@ function UserForgotPassword() {
       return;
     }
     try {
-    //   const response = await resetPasswordLegalProfessional(email, password);
-    //   console.log(response);
-    //   toast.success("Password reset successful. Redirecting to login page...");
-    //   setTimeout(() => {
-    //     navigate('/legal-professional-login');
-    //   }, 3000);
+      const response = await resetPasswordUser(email, password);
+      console.log(response);
+      toast.success("Password reset successful. Redirecting to login page...");
+      setTimeout(() => {
+        navigate('/legal-professional-login');
+      }, 3000);
     } catch (error) {
       console.error('Password reset failed', error);
       toast.error(error.response?.data?.msg || 'Password reset failed');

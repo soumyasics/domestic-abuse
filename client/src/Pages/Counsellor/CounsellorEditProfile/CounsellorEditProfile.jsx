@@ -143,7 +143,7 @@ const handleSubmit = async (e) => {
             const response = await editCounsellorById(counsellorId, counsellor);
             console.log('Edit supporter response:', response);
 
-            if (response.success) {
+            if (response.success==200) {
                 toast.success('Profile updated successfully');
                 navigate('/counsellor-home');
             } else {

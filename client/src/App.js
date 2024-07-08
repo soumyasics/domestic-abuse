@@ -46,6 +46,7 @@ import UserEditProfile from './Pages/User/UserEditProfile/UserEditProfile';
 import UserViewSafehouses from './Pages/User/UserViewSafehouses/UserViewSafehouses';
 import UserViewSupporters from './Pages/User/UserViewSupporters/UserViewSupporters';
 import UserAddIssue from './Pages/User/UserAddIssue/UserAddIssue';
+import UserNav from './Pages/Common/Navbar/UserNav';
 
 function App() {
   return (
