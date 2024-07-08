@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './UserAddIssue.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { registerIssue } from '../../../Services/apiService';
+import { useNavigate } from 'react-router-dom';
 
 function UserAddIssue() {
     const [issue, setIssue] = useState({
@@ -11,7 +13,8 @@ function UserAddIssue() {
         location: '',
         file: null,
         dateTime: '',
-        contact: ''
+        contact: '',
+        userId:localStorage.getItem('userId')
     });
     const [errors, setErrors] = useState({});
     const allowedFileTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document']; // PDF, DOC, DOCX
@@ -58,6 +61,7 @@ function UserAddIssue() {
             [name]: value,
         });
     };
+    const navigate = useNavigate();
 
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
@@ -74,14 +78,14 @@ function UserAddIssue() {
         }
         setIsSubmitting(true);
         try {
-            //   const response = await registerUsers(user);
-            //   console.log(response);
-            //   if (response.success) {
-            //     toast.success(response.message);
-            //     navigate('/user-login');
-            //   } else {
-            //     toast.error(response.message);
-            //   }
+              const response = await registerIssue(issue);
+              console.log(response);
+              if (response.success) {
+                toast.success(response.message);
+                navigate('/user-home');
+              } else {
+                toast.error(response.message);
+              }
         } catch (error) {
             console.error('Error Adding Issue', error);
             toast.error(error.response?.data?.message || 'failed to Add Issue. Please try again.');
@@ -170,14 +174,14 @@ function UserAddIssue() {
                                     {errors.location && <div id="locationError" className="invalid-feedback m-2">{errors.location}</div>}
                             </div>
                             <div className='col text-start'>
-                                    <label htmlFor='file' className='form-label theme-purple mx-2'>Attachments </label>
+                                    <label for='file' className='form-label theme-purple mx-2'>Attachments </label>
                                     <input
                                         type="file"
                                         id="file"
                                         name='file'
                                         className={`form-control  border  bg-creamy m-2 ${errors.file ? 'is-invalid' : ''}`}
                                         placeholder=""
-                                        value={issue.file}
+                                        // value={issue.file}
                                         onChange={handleFileChange}
                                         aria-describedby="fileError"
                                     />

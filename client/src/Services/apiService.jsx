@@ -1,10 +1,10 @@
 //src/Services/apiService.jsx
 import axios from 'axios';
 
-// export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
-// export const IMG_BASE_URL = 'http://localhost:4039/';
-export const IMG_BASE_URL = 'http://hybrid.srishticampus.in:4039/';
-export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
+export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
+export const IMG_BASE_URL = 'http://localhost:4039/';
+// export const IMG_BASE_URL = 'http://hybrid.srishticampus.in:4039/';
+// export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
 // Api for Viewing all Supporters Request for admin to approve, reject or view
 export const viewSupporterReqsForAdmin = async () => {
   try {
@@ -131,6 +131,7 @@ export const rejectSupportersById = async (id) => {
 export const viewSupporters = async () => {
   try {
     const response = await axios.post(`${API_BASE_URL}/viewSupporters`);
+    console.log("in ",response);
     return response.data;
   } catch (error) {
     console.error(' Error fetching Supporter List ', error);
@@ -886,6 +887,57 @@ export const resetPasswordUser = async (email, password) => {
     });
     return response.data;
   } catch (error) {
+    throw error;
+  }
+};
+export const viewAllSafehouses=async()=>{
+  try {
+    console.log("in fun");
+    const response = await axios.post(`${API_BASE_URL}/viewSafehouses`);
+    console.log("in fun",response);
+
+    return response;
+  } catch (error) {
+    console.error('Error fetching legal professional by ID:', error);
+    throw error;
+  }
+}
+
+
+
+
+
+// Api for Registering User
+export const registerIssue = async (issues) => {
+  try {
+    const formData = new FormData();
+    Object.keys(issues).forEach(key => {
+      formData.append(key, issues[key]);
+    });
+
+    const response = await axios.post(`${API_BASE_URL}/registerIssue/${issues.userId}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    // Handling responses based on status code
+    switch (response.data.status) {
+      case 200:
+        console.log(response.data.msg); // "Inserted successfully"
+        return { success: true, message: response.data.msg, data: response.data.data };
+      case 409:
+        console.log(response.data.msg); // Either "contact Number Already Registered With Us !!" or "Email already in use"
+        return { success: false, message: response.data.msg };
+      case 500:
+        console.log(response.data.msg); // "Data not Inserted"
+        return { success: false, message: response.data.msg };
+      default:
+        console.log('Unexpected response status:', response.data.status);
+        return { success: false, message: 'Unexpected error occurred' };
+    }
+  } catch (error) {
+    console.error('Error Registering Supporter', error);
     throw error;
   }
 };
