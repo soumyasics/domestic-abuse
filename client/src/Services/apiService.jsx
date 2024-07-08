@@ -1,10 +1,10 @@
 //src/Services/apiService.jsx
 import axios from 'axios';
 
-// export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
-// export const IMG_BASE_URL = 'http://localhost:4039/';
-export const IMG_BASE_URL = 'http://hybrid.srishticampus.in:4039/';
-export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
+export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
+export const IMG_BASE_URL = 'http://localhost:4039/';
+// export const IMG_BASE_URL = 'http://hybrid.srishticampus.in:4039/';
+// export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
 // Api for Viewing all Supporters Request for admin to approve, reject or view
 export const viewSupporterReqsForAdmin = async () => {
   try {
@@ -211,6 +211,7 @@ export const editSupportersById = async (id, supporterData) => {
     };
   }
 };
+
 //View  Supporters by id
 export const getSupporterById = async (supporterId) => {
   try {
@@ -728,8 +729,12 @@ export const getCounsellorByIdProfile = async (id) => {
 export const editCounsellorById = async (id, data) => {
   try {
       const response = await axios.post(`${API_BASE_URL}/editCounsellorsById/${id}`, data);
-      return response.data;
-  } catch (error) {
+      console.log(response);
+      if (response.data.status === 200) {
+        return { success: true, message: response.data.msg };
+      } else {
+        return { success: false, message: response.data.msg || 'Rejection failed' };
+      }  } catch (error) {
       console.error('Error editing counsellor data:', error);
       throw error;
   }
@@ -815,7 +820,7 @@ export const registerUsers = async (supporterData) => {
 export const loginUser = async (supporter, setTokenCallback) => {
   try {
       const response = await axios.post(`${API_BASE_URL}/loginUser`, supporter);
-
+console.log(response);
       if (response.data.status === 200) {
         localStorage.setItem("userId",response.data._id)
           const { token, data } = response.data;
@@ -835,5 +840,52 @@ export const loginUser = async (supporter, setTokenCallback) => {
           success: false,
           message: 'An unexpected error occurred',
       };
+  }
+};
+
+
+//View  User by id
+export const getUserById = async (supporterId) => {
+  try {
+      const response = await axios.post(`${API_BASE_URL}/viewUserById/${supporterId}`);
+      if (response.data.status === 200) {
+          const { data } = response.data;
+          return { success: true, user: data };
+      } else {
+          return { success: false, message: response.data.msg };
+      }
+  } catch (error) {
+      console.error(`Error fetching supporter with ID ${supporterId}:`, error);
+      throw error; 
+  }
+};
+
+export const updateUser = async (id, data) => {
+  try {
+      const response = await axios.post(`${API_BASE_URL}/editUserById/${id}`, data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      console.log(response);
+      if (response.data.status === 200) {
+        return { success: true, message: response.data.msg };
+      } else {
+        return { success: false, message: response.data.msg || 'Rejection failed' };
+      }  } catch (error) {
+      console.error('Error editing user data:', error);
+      throw error;
+  }
+};
+//Api for Legal Professional Forgot Password
+export const resetPasswordUser = async (email, password) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/forgotPasswordUser`, {
+      email,
+      password
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
   }
 };

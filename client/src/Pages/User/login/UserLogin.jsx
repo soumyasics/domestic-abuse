@@ -42,7 +42,7 @@ function UserLogin() {
       if (result.success) {
         toast.success('Login successful!');
         console.log(result.user._id);
-        // localStorage.setItem("userId", result.user._id);
+        localStorage.setItem("userId", result.user._id);
         setTimeout(() => {
           navigate('/user-home');
         }, 2000);

@@ -8,27 +8,29 @@ import { PiPencilDuotone } from "react-icons/pi";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate, useParams } from 'react-router-dom';
+import { getUserById, updateUser ,IMG_BASE_URL} from '../../../Services/apiService';
+import demo from '../../../Assets/supp-edit-profile.png';
 
 function UserEditProfile() {
   const [user, setUser] = useState({
     name: '',
     email: '',
     contact: '',
-    password: '',
-    rePassword: '',
+  
     dob: '',
     gender: '',
     address: '',
     relation: '',
     safetyPlan: '',
-    image: null,
+    image: {filename:''},
   });
 
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
-  const { userId } = useParams();
+  const userId  = localStorage.getItem('userId')
 
+  const [imagePreview, setImagePreview] = useState(demo);
 
   const validate = () => {
     const newErrors = {};
@@ -38,25 +40,28 @@ function UserEditProfile() {
 
     if (!user.name) {
       newErrors.name = 'Name is required';
+      console.log("in name");
     } else if (!nameRegex.test(user.name)) {
       newErrors.name = 'Name should only contain alphabets';
+      console.log("in name");
+
     }
 
     if (!user.email) {
       newErrors.email = 'Email is required';
+      console.log("in em");
     } else if (!emailRegex.test(user.email)) {
       newErrors.email = 'Invalid email format';
+      console.log("in en");
     }
 
     if (!user.contact) {
       newErrors.contact = 'Contact Number is required';
     } else if (!phoneRegex.test(user.contact)) {
-      newErrors.contact = 'Contact number should be 10 digits';
+      newErrors.contact = 'Contact number should be 10 digits'; console.log("in con");
     }
 
-    if (user.password && user.password !== user.rePassword) {
-      newErrors.rePassword = 'Passwords do not match';
-    }
+   
 
     if (!user.dob) {
       newErrors.dob = 'Date of Birth is required';
@@ -80,6 +85,7 @@ function UserEditProfile() {
 
     if (user.image && !['image/jpeg', 'image/png', 'image/gif'].includes(user.image.type)) {
       newErrors.image = 'Only image files (jpeg, png, gif) are allowed';
+      console.log("in im");
     }
 
     setErrors(newErrors);
@@ -89,13 +95,17 @@ function UserEditProfile() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        // Fetch user data from the backend
-        // const response = await getUserById(userId); // Replace with your API call
-        // if (response.success) {
-        //   setUser(response.data);
-        // } else {
-        //   toast.error(response.message);
-        // }
+        const response = await getUserById(userId); 
+        console.log(response.user);
+        if (response.success) {
+          setUser(response.user);
+          console.log(response.user.image.filename);
+          setImagePreview(response.user.image.filename ? `${IMG_BASE_URL}/${response.user.image.filename}` : demo);
+
+          console.log(user);
+        } else {
+          toast.error(response.message);
+        }
       } catch (error) {
         console.error('Error fetching user data', error);
         toast.error('Error fetching user data. Please try again.');
@@ -103,7 +113,7 @@ function UserEditProfile() {
     };
 
     fetchUserData();
-  }, [userId]);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -130,13 +140,13 @@ function UserEditProfile() {
 
     setIsSubmitting(true);
     try {
-      // const response = await updateUser(userId, user); // Replace with your API call
-      // if (response.success) {
-      //   toast.success(response.message);
-      //   navigate('/user-home');
-      // } else {
-      //   toast.error(response.message);
-      // }
+      const response = await updateUser(userId, user); 
+      if (response.success) {
+        toast.success(response.message);
+        navigate('/user-home');
+      } else {
+        toast.error(response.message);
+      }
     } catch (error) {
       console.error('Error updating user', error);
       toast.error(error.response?.data?.message || 'Update failed. Please try again.');
@@ -147,6 +157,7 @@ function UserEditProfile() {
 
   return (
     <>
+    {console.log(user.name)}
       <div className="container px-5 m-auto my-5  bg-creamy text-center">
         <div className='row  m-5'>
           <div className='col'>
@@ -161,7 +172,7 @@ function UserEditProfile() {
                   <div className='legal-professional-edit-profile-border-box p-3 position-relative'>
                     <div className="rounded-circle overflow-hidden" style={{ width: '150px', height: '150px', margin: '0 auto' }}>
                       <img
-                        src={userImg}
+                        src={imagePreview}
                         alt='profile demo'
                         className='img-fluid rounded-circle'
                         onError={(e) => {

@@ -43,6 +43,7 @@ import SupprterNavbar from './Pages/Common/Navbar/SupprterNavbar';
 import CouncillorNav from './Pages/Common/Navbar/CouncillorNav';
 import LPNav from './Pages/Common/Navbar/LPNav';
 import UserEditProfile from './Pages/User/UserEditProfile/UserEditProfile';
+import UserNav from './Pages/Common/Navbar/UserNav';
 
 function App() {
   return (
@@ -56,8 +57,8 @@ function App() {
             <Route path='/user-login' element={[<Navbar/>,<UserLogin />]} />
             <Route path='/user-register' element={[<Navbar/>,<UserRegister />]} />
             <Route path='/user-forgot-password' element={[<Navbar/>,<UserForgotPassword/>]} />
-            <Route path='/user-home' element={[<Navbar/>,<UserHome/>]} />
-            <Route path='/user-edit-profile' element={[<Navbar/>,<UserEditProfile/>]} />
+            <Route path='/user-home' element={[<UserNav/>,<UserHome/>]} />
+            <Route path='/user-edit-profile' element={[<UserNav/>,<UserEditProfile/>]} />
 
             {/* Admin Paths */}
             <Route path='/admin-login' element={[<Navbar/>,<AdminLogin />]} />

@@ -41,7 +41,7 @@ const registerUser = async (req, res) => {
       address,
       relation,
       safetyPlan,
-      image: req.file ? req.file.path : null
+      image: req.file ? req.file : null
     });
 
     let existingUser = await User.findOne({ email });
@@ -76,7 +76,7 @@ const viewUsers = (req, res) => {
 // Update User by ID
 const editUserById = async (req, res) => {
   let flag = 0;
-  const { name, email, contact, password, rePassword, dob, gender, address, relation, safetyPlan } = req.body;
+  const { name, email, contact, dob, gender, address, relation, safetyPlan } = req.body;
 
   let existingUser = await User.find({ contact });
   let userData = await User.findById({ _id: req.params.id });
@@ -99,17 +99,10 @@ const editUserById = async (req, res) => {
       address,
       relation,
       safetyPlan,
-      image: req.file ? req.file.path : null
+      image: req.file ? req.file : null
     };
 
-    if (password && password !== rePassword) {
-      return res.status(400).json({ message: "Passwords do not match" });
-    }
-
-    if (password) {
-      updatedData.password = await bcrypt.hash(password, 10);
-      updatedData.rePassword = updatedData.password;
-    }
+   
 
     await User.findByIdAndUpdate({ _id: req.params.id }, updatedData)
       .exec()
@@ -207,9 +200,9 @@ const resetPassword = async (req, res) => {
 // User Login
 const login = async (req, res) => {
     const { email, password } = req.body;
-  
+  console.log("data",email,password);
     await User.findOne({ email }).then(user => {
-     
+     console.log(user);
   
       if (!user) {
         return res.json({status:405,msg: 'User not found' });
