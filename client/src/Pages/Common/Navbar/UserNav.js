@@ -82,8 +82,18 @@ function UserNav() {
                                 Report Issues
                                 </a>
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown1">
-                                    <li><Link className="dropdown-item theme-purple fw-semibold" to="/">Add New</Link></li>
+                                    <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-add-issue">Add New</Link></li>
                                     <li><Link className="dropdown-item theme-purple fw-semibold" to="/">View Suggestions</Link></li>
+                                  
+                                </ul>
+                            </li>
+                            <li className="nav-item dropdown">
+                                <a className="nav-link dropdown-toggle mx-3 theme-purple fw-semibold" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                               Services
+                                </a>
+                                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown1">
+                                    <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-view-all-safehouses">Safe Spaces</Link></li>
+                                    <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-view-all-supporters">Supporters</Link></li>
                                   
                                 </ul>
                             </li>

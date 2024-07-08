@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './UserViewSafehouses.css';
 import safehouseDemo from '../../../Assets/ADMIN VIEW DETAILS.png';
-import { IMG_BASE_URL } from '../../../Services/apiService';
+import { IMG_BASE_URL,viewAllSafehouses } from '../../../Services/apiService';
 import ReactPaginate from 'react-paginate';
 
 function UserViewSafehouses() {
@@ -12,12 +12,12 @@ function UserViewSafehouses() {
     // Fetch safehouses data from the backend
     const fetchSafehouses = async () => {
         try {
-            // const response = await viewAllSafehouses();
-            // if (response.success) {
-            //     setSafehouses(response.data);
-            // } else {
-            //     console.error('Failed to fetch safehouses:', response.message);
-            // }
+            const response = await viewAllSafehouses();
+            if (response.data.status==200) {
+                setSafehouses(response.data.data);
+            } else {
+                console.error('Failed to fetch safehouses:', response.message);
+            }
         } catch (error) {
             console.error('Error fetching safehouses:', error);
         }

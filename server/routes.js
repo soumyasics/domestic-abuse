@@ -4,6 +4,7 @@ const safehouse = require('./SafeHouse/houseController')
 const Counsellor = require('./Counsellor/counsellorController')
 const LegalProfessional = require('./LegalProfessional/legalProfessionalController')
 const userController = require('./Users/userController')
+const issue=require('./UserIssues/IssueController')
 
 //suppoerter routes
 router.post('/registerSupporters', supporter.upload, supporter.registerSupporters);
@@ -76,8 +77,15 @@ router.post('/viewUsers', userController.viewUsers);
 router.post('/resetPasswordLoginUser/:id', userController.resetPassword);
 router.post('/loginUser', userController.login);
 router.post('/requireAuthUser', userController.requireAuth);
-
-
 router.post('/deActivateUserById/:id', userController.deActivateUserById);
 router.post('/activateUserById/:id', userController.activateUserById);
+
+
+
+//Issues
+router.post('/registerIssue/:id', issue.upload, issue.registerIssue);
+router.post('/viewIssueById/:id', issue.viewIssueById);
+router.post('/editIssueById/:id', issue.upload, issue.editIssueById);
+router.post('/deleteIssueById/:id', issue.deleteIssueById);
+router.get('/viewIssues', issue.viewIssues);
 module.exports = router

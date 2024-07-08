@@ -60,11 +60,11 @@ function App() {
             <Route path='/user-login' element={[<Navbar/>,<UserLogin />]} />
             <Route path='/user-register' element={[<Navbar/>,<UserRegister />]} />
             <Route path='/user-forgot-password' element={[<Navbar/>,<UserForgotPassword/>]} />
-            <Route path='/user-home' element={[<Navbar/>,<UserHome/>]} />
-            <Route path='/user-edit-profile' element={[<Navbar/>,<UserEditProfile/>]} />
-            <Route path='/user-view-all-safehouses' element={[<Navbar/>,<UserViewSafehouses/>]} />
-            <Route path='/user-view-all-supporters' element={[<Navbar/>,<UserViewSupporters/>]} />
-            <Route path='/user-add-issue' element={[<Navbar/>,<UserAddIssue/>]} />
+            <Route path='/user-home' element={[<UserNav/>,<UserHome/>]} />
+            <Route path='/user-edit-profile' element={[<UserNav/>,<UserEditProfile/>]} />
+            <Route path='/user-view-all-safehouses' element={[<UserNav/>,<UserViewSafehouses/>]} />
+            <Route path='/user-view-all-supporters' element={[<UserNav/>,<UserViewSupporters/>]} />
+            <Route path='/user-add-issue' element={[<UserNav/>,<UserAddIssue/>]} />
 
 
             {/* Admin Paths */}

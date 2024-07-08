@@ -68,7 +68,7 @@ const registerSupporters = async (req, res) => {
 
 // View all Supporterss
 const viewSupporters = (req, res) => {
-    Supporters.find({})
+    Supporters.find({adminApproved:true})
         .exec()
         .then(data => {
             if (data.length > 0) {

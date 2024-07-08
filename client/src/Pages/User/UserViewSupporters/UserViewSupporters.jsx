@@ -21,7 +21,7 @@ function UserViewSupporters() {
   const fetchSupporters = useCallback(async () => {
     try {
       const supporterData = await viewSupporters();
-      if (supporterData.success) {
+      if (supporterData.status==200) {
         setSupporters(supporterData.data);
       } else {
         toast.error('Error fetching supporters');
