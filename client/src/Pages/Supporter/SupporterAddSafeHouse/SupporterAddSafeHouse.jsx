@@ -14,7 +14,6 @@ import 'react-toastify/dist/ReactToastify.css';
 function SupporterAddSafeHouse() {
   const [safehouse, setSafehouse] = useState({
     name: '',
-    address: '',
     contact: '',
     landmark: '',
     licenseNo: '',
@@ -47,10 +46,6 @@ function SupporterAddSafeHouse() {
       newErrors.name = 'House Name is required';
     } else if (!nameRegex.test(safehouse.name)) {
       newErrors.name = 'House Name should only contain alphabets';
-    }
-
-    if (!safehouse.address) {
-      newErrors.address = 'Address is required';
     }
 
     if (!safehouse.contact) {
@@ -193,27 +188,7 @@ function SupporterAddSafeHouse() {
                 </div>
               </div>
             </div>
-            <div className="row m-3 mt-0 text-start">
-              <div className="col">
-                <div className="input-group">
-                  <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
-                    <FaLocationDot />
-                  </span>
-                  <input
-                    type="text"
-                    id="address"
-                    name="address"
-                    className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.address ? 'is-invalid' : ''}`}
-                    placeholder="Address"
-                    value={safehouse.address}
-                    onChange={handleChange}
-                    aria-describedby="addressError"
-                    required
-                  />
-                  {errors.address && <div id="addressError" className="invalid-feedback">{errors.address}</div>}
-                </div>
-              </div>
-            </div>
+  
             <div className="row m-3 mt-0 text-start">
               <div className="col">
                 <div className="input-group">
