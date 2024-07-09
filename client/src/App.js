@@ -47,6 +47,7 @@ import UserViewSafehouses from './Pages/User/UserViewSafehouses/UserViewSafehous
 import UserViewSupporters from './Pages/User/UserViewSupporters/UserViewSupporters';
 import UserAddIssue from './Pages/User/UserAddIssue/UserAddIssue';
 import UserNav from './Pages/Common/Navbar/UserNav';
+import UserViewAllSuggestions from './Pages/User/UserViewAllSuggestions/UserViewAllSuggestions';
 
 function App() {
   return (
@@ -65,7 +66,7 @@ function App() {
             <Route path='/user-view-all-safehouses' element={[<UserNav/>,<UserViewSafehouses/>]} />
             <Route path='/user-view-all-supporters' element={[<UserNav/>,<UserViewSupporters/>]} />
             <Route path='/user-add-issue' element={[<UserNav/>,<UserAddIssue/>]} />
-
+            <Route path='/user-view-all-suggestions' element={[<UserNav/>,<UserViewAllSuggestions/>]} />
 
             {/* Admin Paths */}
             <Route path='/admin-login' element={[<Navbar/>,<AdminLogin />]} />
