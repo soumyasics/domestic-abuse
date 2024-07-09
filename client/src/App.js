@@ -47,7 +47,8 @@ import UserViewSafehouses from './Pages/User/UserViewSafehouses/UserViewSafehous
 import UserViewSupporters from './Pages/User/UserViewSupporters/UserViewSupporters';
 import UserAddIssue from './Pages/User/UserAddIssue/UserAddIssue';
 import UserNav from './Pages/Common/Navbar/UserNav';
-import UserViewAllIssues from './Pages/User/UserViewAllIssues/UserViewAllIssues';
+import SupporterViewAllIssues from './Pages/Supporter/SupporterViewAllIssues/SupporterViewAllIssues';
+import SupporterAddSuggestion from './Pages/Supporter/SupporterAddSuggestion/SupporterAddSuggestion';
 
 function App() {
   return (
@@ -66,7 +67,7 @@ function App() {
             <Route path='/user-view-all-safehouses' element={[<UserNav/>,<UserViewSafehouses/>]} />
             <Route path='/user-view-all-supporters' element={[<UserNav/>,<UserViewSupporters/>]} />
             <Route path='/user-add-issue' element={[<UserNav/>,<UserAddIssue/>]} />
-            <Route path='/user-view-all-suggestions' element={[<UserNav/>,<UserViewAllIssues/>]} />
+
 
             {/* Admin Paths */}
             <Route path='/admin-login' element={[<Navbar/>,<AdminLogin />]} />
@@ -98,6 +99,9 @@ function App() {
             <Route path='/supporter-forgot-password' element={[<Navbar/>,<SupporterForgotPassword />]} />
             <Route path='/supporter-edit-profile' element={[<SupprterNavbar/>,<SupporterEditProfile />]} />
             <Route path='/supporter-add-safe-space' element={[<SupprterNavbar/>,<SupporterAddSafeHouse />]} />
+            <Route path='/supporter-view-all-issues' element={[<SupprterNavbar/>,<SupporterViewAllIssues/>]} />
+            <Route path='/supporter-suggestions' element={[<SupprterNavbar/>,<SupporterAddSuggestion/>]} />
+
             
             {/* Updated route for editing safe house */}
             <Route path='/supporter-edit-safe-house' element={[<SupprterNavbar/>,<SupporterEditSafeHouse />]} />
