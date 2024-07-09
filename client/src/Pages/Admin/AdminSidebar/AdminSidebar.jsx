@@ -156,12 +156,12 @@ const AdminSidebar = ({ changeActivePage }) => {
                   <MdArrowDropDown size={25} className="theme-purple" />
                 </button>
                 <ul className={`collapse nav flex-column border-bottom border-dark-subtle ms-1 ${menuOpen.users ? 'show' : ''}`} id="usersSubmenu" data-bs-parent="#menu">
-                  <li className="w-100 ms-3">
+                  {/* <li className="w-100 ms-3">
                     <Link to="#" className="nav-link admin-list px-0" onClick={() => changeActivePage("request-users")}>
                       <span className="ms-2 d-none d-sm-inline theme-purple"><IoMdArrowDropright size={25} /></span>
                       <span className="d-none d-sm-inline theme-purple">New Request</span>
                     </Link>
-                  </li>
+                  </li> */}
                   <li className="w-100 ms-3">
                     <Link to="#" className="nav-link admin-list px-0">
                       <span className="ms-2 d-none d-sm-inline theme-purple" onClick={() => changeActivePage("all-users")}><IoMdArrowDropright size={25} /></span>
