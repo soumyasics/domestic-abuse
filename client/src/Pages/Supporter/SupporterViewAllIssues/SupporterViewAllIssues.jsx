@@ -3,10 +3,10 @@ import { Table } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './UserViewAllIssues.css';
+import './SupporterViewAllIssues.css';
 //import { fetchUserSuggestions } from '../../../Services/apiService';
 
-const UserViewAllIssues= () => {
+const SupporterViewAllIssues= () => {
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
@@ -107,4 +107,4 @@ const UserViewAllIssues= () => {
   );
 };
 
-export default UserViewAllIssues;
+export default SupporterViewAllIssues;
