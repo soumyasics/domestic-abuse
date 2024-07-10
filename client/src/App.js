@@ -49,6 +49,7 @@ import UserAddIssue from './Pages/User/UserAddIssue/UserAddIssue';
 import UserNav from './Pages/Common/Navbar/UserNav';
 import SupporterViewAllIssues from './Pages/Supporter/SupporterViewAllIssues/SupporterViewAllIssues';
 import SupporterAddSuggestion from './Pages/Supporter/SupporterAddSuggestion/SupporterAddSuggestion';
+import UserPayment from './Pages/User/UserPayment/UserPayment';
 
 function App() {
   return (
@@ -67,7 +68,7 @@ function App() {
             <Route path='/user-view-all-safehouses' element={[<UserNav/>,<UserViewSafehouses/>]} />
             <Route path='/user-view-all-supporters' element={[<UserNav/>,<UserViewSupporters/>]} />
             <Route path='/user-add-issue' element={[<UserNav/>,<UserAddIssue/>]} />
-
+            <Route path='/user-payment' element={[<UserNav/>,<UserPayment/>]} />
 
             {/* Admin Paths */}
             <Route path='/admin-login' element={[<Navbar/>,<AdminLogin />]} />
