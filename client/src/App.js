@@ -50,6 +50,7 @@ import UserNav from './Pages/Common/Navbar/UserNav';
 import SupporterViewAllIssues from './Pages/Supporter/SupporterViewAllIssues/SupporterViewAllIssues';
 import SupporterAddSuggestion from './Pages/Supporter/SupporterAddSuggestion/SupporterAddSuggestion';
 import UserPayment from './Pages/User/UserPayment/UserPayment';
+import SupporterAddBlogs from './Pages/Supporter/SupporterAddBlogs/SupporterAddBlogs';
 
 function App() {
   return (
@@ -102,6 +103,8 @@ function App() {
             <Route path='/supporter-add-safe-space' element={[<SupprterNavbar/>,<SupporterAddSafeHouse />]} />
             <Route path='/supporter-view-all-issues' element={[<SupprterNavbar/>,<SupporterViewAllIssues/>]} />
             <Route path='/supporter-suggestions' element={[<SupprterNavbar/>,<SupporterAddSuggestion/>]} />
+            <Route path='/supporter-add-blogs' element={[<SupprterNavbar/>,<SupporterAddBlogs/>]} />
+
 
             
             {/* Updated route for editing safe house */}
