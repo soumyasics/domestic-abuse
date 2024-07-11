@@ -6,6 +6,8 @@ const LegalProfessional = require('./LegalProfessional/legalProfessionalControll
 const userController = require('./Users/userController')
 const issue=require('./UserIssues/IssueController')
 const suggestionController=require('./Suggestions/suggestionController')
+const blog=require('./Blogs/blogController')
+
 //suppoerter routes
 router.post('/registerSupporters', supporter.upload, supporter.registerSupporters);
 router.post('/viewSupportersById/:id', supporter.viewSupportersById);
@@ -99,4 +101,17 @@ router.get('/viewSuggestions', suggestionController.viewSuggestions);
 router.put('/editSuggestionById/:id', suggestionController.editSuggestionById);
 router.get('/viewSuggestionById/:id', suggestionController.viewSuggestionById);
 router.delete('/deleteSuggestionById/:id', suggestionController.deleteSuggestionById);
+
+
+
+
+//blogs
+//blogs
+router.post('/addBlog/:id',blog.upload,blog.addBlog)
+router.post('/viewBlogsById/:id',blog.viewBlogsById)
+router.post('/editBlogsById/:id',blog.upload,blog.editBlogsById)
+router.post('/deleteBlogsById/:id',blog.deleteBlogsById)
+router.post('/viewAllBlogs',blog.viewAllBlogs)
+router.post('/viewMyBlogsBysupporterId/:id',blog.viewMyBlogsBysupporterId)
+
 module.exports = router
