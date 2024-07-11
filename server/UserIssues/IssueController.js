@@ -80,6 +80,32 @@ const viewIssues = (req, res) => {
     });
 };
 
+// View all issues
+const viewPendingIssues = (req, res) => {
+  Issue.find({suppStatus:false}).populate('userId')
+    .exec()
+    .then(data => {
+      if (data.length > 0) {
+        res.json({
+          status: 200,
+          msg: 'Data obtained successfully',
+          data: data,
+        });
+      } else {
+        res.json({
+          status: 200,
+          msg: 'No data obtained',
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({
+        status: 500,
+        msg: 'Data not obtained',
+        Error: err,
+      });
+    });
+};
 // Update issue by ID
 const editIssueById = async (req, res) => {
   const { type, description, severity, location, dateTime, contact } = req.body;
@@ -114,7 +140,7 @@ const editIssueById = async (req, res) => {
 
 // View issue by ID
 const viewIssueById = (req, res) => {
-  Issue.findById({ _id: req.params.id })
+  Issue.findById({ _id: req.params.id }).populate('userId')
     .exec()
     .then(data => {
       res.json({
@@ -177,4 +203,5 @@ module.exports = {
   deleteIssueById,
   upload,
   requireAuth,
+  viewPendingIssues
 };

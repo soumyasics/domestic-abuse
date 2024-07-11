@@ -80,6 +80,16 @@ function SupprterNavbar() {
                                     <Link className="nav-link mx-3 theme-purple fw-semibold" to="/supporter-view-all-safehouses">Safe House</Link>
                                
                             </li>
+
+                            <li className="nav-item dropdown">
+                                <a className="nav-link dropdown-toggle mx-3 theme-purple fw-semibold" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    User Issues
+                                </a>
+                                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown1">
+                                    <li><Link className="dropdown-item theme-purple fw-semibold" to="/supporter-view-all-issues">Reviews</Link></li>
+                                    <li><Link className="dropdown-item theme-purple fw-semibold" to="/supporter-suggestions">History</Link></li>
+                                </ul>
+                            </li>
                             <li className="nav-item">
                                 <Link className="nav-link mx-3 theme-purple fw-semibold" to="/supporter-edit-profile">Profile</Link>
                             </li>

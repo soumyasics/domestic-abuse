@@ -4,6 +4,8 @@ import ReactPaginate from 'react-paginate';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './SupporterViewAllIssues.css';
+import { viewPendingIssues } from '../../../Services/apiService';
+import { Link } from 'react-router-dom';
 //import { fetchUserSuggestions } from '../../../Services/apiService';
 
 const SupporterViewAllIssues= () => {
@@ -15,8 +17,8 @@ const SupporterViewAllIssues= () => {
 
   const fetchSuggestions = useCallback(async () => {
     try {
-    //   const response = await fetchUserSuggestions();
-    //   setSuggestions(response.data || []);
+      const response = await viewPendingIssues();
+      setSuggestions(response.data || []);
     } catch (error) {
       console.error('Error fetching suggestions:', error);
       toast.error('Error fetching suggestions.');
@@ -65,16 +67,16 @@ const SupporterViewAllIssues= () => {
             <tbody className='text-center'>
               {paginatedSuggestions.map((suggestion, index) => (
                 <tr key={index}>
-                  <td>{suggestion.name}</td>
-                  <td>{suggestion.gender}</td>
-                  <td>{suggestion.dob}</td>
-                  <td>{suggestion.typeOfIssue}</td>
+                  <td>{suggestion.userId.name}</td>
+                  <td>{suggestion.userId.gender}</td>
+                  <td>{suggestion.userId.dob.slice(0, 10)}</td>
+                  <td>{suggestion.type}</td>
                   <td>{suggestion.severity}</td>
                   <td>{suggestion.location}</td>
-                  <td>{suggestion.date}</td>
+                  <td>{suggestion.dateTime.slice(0, 10)}</td>
                   <td>
                     <div className='text-center'>
-                      <button className="btn bg-purple opacity-50 m-1">Suggestions</button>
+                     <Link to={`/supporter-suggestions/${suggestion._id}`} ><button className="btn bg-purple opacity-50 m-1">Suggestions</button></Link>
                     </div>
                   </td>
                 </tr>
