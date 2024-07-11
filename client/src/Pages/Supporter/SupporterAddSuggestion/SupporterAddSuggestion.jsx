@@ -1,53 +1,110 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './SupporterAddSuggestion.css';
 import { FaDownload } from "react-icons/fa";
-import { IMG_BASE_URL } from '../../../Services/apiService';
-
+import { addSuggestions, getSuggestionById, IMG_BASE_URL } from '../../../Services/apiService';
+import { useParams } from 'react-router-dom';
+import { Table } from 'react-bootstrap';
+import ReactPaginate from 'react-paginate';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function SupporterAddSuggestion() {
+  const {id}=useParams()
   const [user, setUser] = useState({
-    name: '',
-    email: '',
-    dob: '',
-    gender: '',
-    safetyPlan: '',
-    contact: '',
-    address: '',
-    relation: ''
-  });
-
-  const [issue, setIssue] = useState({
     type: '',
     description: '',
     severity: '',
     location: '',
     contact: '',
-    dateTime: ''
+    dateTime: '',
+    userId:{
+      
+      address:'',
+      contact:'',
+      dob:'',
+      email:'',
+      gender:'',
+            relation:'',
+    file:{filename:''},
+      safetyPlan:''
+      
+    }
+  });
+
+  const [issue, setIssue] = useState({
+   
   });
 
   const [suggestion, setSuggestion] = useState({
-    meetAdvocate: false,
-    moveToSafehouse: false,
-    meetCounsellor: false
+   
+    supporterId:localStorage.getItem('supporterId'),
+    issueId:id,
+    sug1:false,
+    sug2: false,
+    sug3: false
   });
 
+  useEffect(() => {
+    const fetchSuggestions = async () => {
+   
+            try {
+                const response = await getSuggestionById(id);
+                if (response.status === 200) {
+                    setUser(response.data);
+                    // setImagePreview(response.data.photo ? `${IMG_BASE_URL}/${response.data.photo.filename}` : demo);
+                } else {
+                   console.log(response);
+                }
+            } catch (error) {
+                console.error('Error fetching legal professional data:', error);
+                toast.error('An error occurred while fetching the legal professional data');
+            }
+        
+    };
+
+    fetchSuggestions();
+}, []);
+
+
+useEffect(() => {
+  console.log("user",user);
+})
   const handleSuggestionChange = (event) => {
     const { name, checked } = event.target;
+    console.log(name)
+    if(name=="sug1"){
+      suggestion.sug1=checked
+    }
+   else if(name=="sug2"){
+      suggestion.sug2=checked
+    }
+   else if(name=="sug3"){
+      suggestion.sug3=checked
+    }
     setSuggestion(prevState => ({
       ...prevState,
-      [name]: checked
+      [name]: true
     }));
+    
+
+    console.log(suggestion);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit =async (event) => {
     event.preventDefault();
     // Here you can add the logic to save the suggestion to the backend
     console.log(suggestion);
-    // Reset the form after submission
-    setSuggestion({
-      meetAdvocate: false,
-      moveToSafehouse: false,
-      meetCounsellor: false
-    });
+    try {
+      const response = await addSuggestions(suggestion);
+      console.log('Fetch supporter response:', response);
+      if (response.success) {
+        alert("Suggestion Send Successfully")
+      } else {
+          toast.error('not found');
+      }
+  } catch (error) {
+      console.error('Error fetching supporter data:', error);
+      toast.error('An error occurred while fetching the supporter data');
+  }
   };
 
   return (
@@ -68,35 +125,35 @@ function SupporterAddSuggestion() {
               </div>
               <div className='row border-bottom m-3 card-text'>
                 <div className='col'>Name</div>
-                <div className='col theme-purple'>{user.name}</div>
+                <div className='col theme-purple'>{user?.userId?.name}</div>
               </div>
               <div className='row border-bottom m-3 card-text'>
                 <div className='col'>Email Id</div>
-                <div className='col theme-purple'>{user.email}</div>
+                <div className='col theme-purple'>{user?.userId?.email}</div>
               </div>
               <div className='row border-bottom m-3 card-text'>
                 <div className='col'>Date of Birth</div>
-                <div className='col theme-purple'>{user.dob}</div>
+                <div className='col theme-purple'>{user?.userId?.dob}</div>
               </div>
               <div className='row border-bottom m-3 card-text'>
                 <div className='col'>Gender</div>
-                <div className='col theme-purple'>{user.gender}</div>
+                <div className='col theme-purple'>{user?.userId?.gender}</div>
               </div>
               <div className='row border-bottom m-3 card-text'>
                 <div className='col'>Safety Plan</div>
-                <div className='col theme-purple'>{user.safetyPlan}</div>
+                <div className='col theme-purple'>{user?.userId?.safetyPlan}</div>
               </div>
               <div className='row border-bottom m-3 card-text'>
                 <div className='col'>Contact No</div>
-                <div className='col theme-purple'>{user.contact}</div>
+                <div className='col theme-purple'>{user?.userId?.contact}</div>
               </div>
               <div className='row border-bottom m-3 card-text'>
                 <div className='col'>Address</div>
-                <div className='col theme-purple card-text'>{user.address}</div>
+                <div className='col theme-purple card-text'>{user?.userId?.address}</div>
               </div>
               <div className='row border-bottom m-3 card-text'>
                 <div className='col'>Relationship to Abuser</div>
-                <div className='col theme-purple'>{user.relation}</div>
+                <div className='col theme-purple'>{user?.userId?.relation}</div>
               </div>
             </div>
           </div>
@@ -111,37 +168,37 @@ function SupporterAddSuggestion() {
               </div>
               <div className='row border-bottom m-3 card-text'>
                 <div className='col'>Type of Issue</div>
-                <div className='col theme-purple'>{issue.type}</div>
+                <div className='col theme-purple'>{user?.type}</div>
               </div>
               <div className='row border-bottom m-3 card-text'>
                 <div className='col'>Description</div>
-                <div className='col theme-purple'>{issue.description}</div>
+                <div className='col theme-purple'>{user?.description}</div>
               </div>
               <div className='row border-bottom m-3 card-text'>
                 <div className='col'>Severity</div>
-                <div className='col theme-purple'>{issue.severity}</div>
+                <div className='col theme-purple'>{user?.severity}</div>
               </div>
               <div className='row border-bottom m-3 card-text'>
                 <div className='col'>Attachments</div>
                 <div className='col theme-purple'>
-                  {/* <a href={`${IMG_BASE_URL}/${issue.file.filename}`} target="_blank" rel="noopener noreferrer"> <FaDownload className='theme-purple mx-1' /> File</a> */}
+                  <a href={`${IMG_BASE_URL}/${user?.file?.filename}`} target="_blank" rel="noopener noreferrer"> <FaDownload className='theme-purple mx-1' /> File</a>
                 </div>
               </div>
               <div className='row border-bottom m-3 card-text'>
                 <div className='col'>Location</div>
-                <div className='col theme-purple card-text'>{issue.location}</div>
+                <div className='col theme-purple card-text'>{user?.location}</div>
               </div>
               <div className='row border-bottom m-3 card-text'>
                 <div className='col'>Contact No</div>
-                <div className='col theme-purple'>{issue.contact}</div>
+                <div className='col theme-purple'>{user?.contact}</div>
               </div>
               <div className='row border-bottom m-3 card-text'>
                 <div className='col'>Date</div>
-                <div className='col theme-purple'>{issue.dateTime}</div>
+                <div className='col theme-purple'>{user?.dateTime.slice(0, 10)}</div>
               </div>
               <div className='row border-bottom m-3 card-text'>
                 <div className='col'>Time</div>
-                <div className='col theme-purple'>{issue.dateTime}</div>
+                <div className='col theme-purple'>{user?.dateTime.slice(11,16)}</div>
               </div>
             </div>
           </div>
@@ -160,8 +217,8 @@ function SupporterAddSuggestion() {
                 className="form-check-input mx-1"
                 type="checkbox"
                 id="meetAdvocate"
-                name="meetAdvocate"
-                checked={suggestion.meetAdvocate}
+                name="sug1"
+                checked={suggestion.sug1}
                 onChange={handleSuggestionChange}
               />
               <label className="form-check-label" htmlFor="meetAdvocate">
@@ -177,8 +234,9 @@ function SupporterAddSuggestion() {
                 className="form-check-input mx-1"
                 type="checkbox"
                 id="moveToSafehouse"
-                name="moveToSafehouse"
-                checked={suggestion.moveToSafehouse}
+                name="sug2"
+                checked={suggestion.sug2}
+               
                 onChange={handleSuggestionChange}
               />
               <label className="form-check-label" htmlFor="moveToSafehouse">
@@ -194,8 +252,9 @@ function SupporterAddSuggestion() {
                 className="form-check-input mx-1"
                 type="checkbox"
                 id="meetCounsellor"
-                name="meetCounsellor"
-                checked={suggestion.meetCounsellor}
+                name="sug3"
+                checked={suggestion.sug3}
+                
                 onChange={handleSuggestionChange}
               />
               <label className="form-check-label" htmlFor="meetCounsellor">

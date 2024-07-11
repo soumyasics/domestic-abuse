@@ -5,7 +5,7 @@ const Counsellor = require('./Counsellor/counsellorController')
 const LegalProfessional = require('./LegalProfessional/legalProfessionalController')
 const userController = require('./Users/userController')
 const issue=require('./UserIssues/IssueController')
-
+const suggestionController=require('./Suggestions/suggestionController')
 //suppoerter routes
 router.post('/registerSupporters', supporter.upload, supporter.registerSupporters);
 router.post('/viewSupportersById/:id', supporter.viewSupportersById);
@@ -88,4 +88,15 @@ router.post('/viewIssueById/:id', issue.viewIssueById);
 router.post('/editIssueById/:id', issue.upload, issue.editIssueById);
 router.post('/deleteIssueById/:id', issue.deleteIssueById);
 router.get('/viewIssues', issue.viewIssues);
+router.post('/viewPendingIssues', issue.viewPendingIssues);
+
+
+//suggestions
+
+
+router.post('/registerSuggestion', suggestionController.registerSuggestion);
+router.get('/viewSuggestions', suggestionController.viewSuggestions);
+router.put('/editSuggestionById/:id', suggestionController.editSuggestionById);
+router.get('/viewSuggestionById/:id', suggestionController.viewSuggestionById);
+router.delete('/deleteSuggestionById/:id', suggestionController.deleteSuggestionById);
 module.exports = router
