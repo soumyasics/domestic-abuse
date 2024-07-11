@@ -33,6 +33,10 @@ ref:'users'
   contact: {
     type: Number,
     required: true
+  },
+  suppStatus:{
+    type:Boolean,
+    default:false
   }
 });
 
