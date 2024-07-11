@@ -5,7 +5,7 @@ function SupporterAddBlogs() {
     const [formValues, setFormValues] = useState({
         name: '',
         description: '',
-        image: ''
+        image: null,
     });
 
     const [errors, setErrors] = useState({});

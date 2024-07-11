@@ -51,6 +51,7 @@ import SupporterViewAllIssues from './Pages/Supporter/SupporterViewAllIssues/Sup
 import SupporterAddSuggestion from './Pages/Supporter/SupporterAddSuggestion/SupporterAddSuggestion';
 import UserPayment from './Pages/User/UserPayment/UserPayment';
 import SupporterAddBlogs from './Pages/Supporter/SupporterAddBlogs/SupporterAddBlogs';
+import SupporterEditBlogs from './Pages/Supporter/SupporterEditBlogs/SupporterEditBlogs';
 
 function App() {
   return (
@@ -104,6 +105,7 @@ function App() {
             <Route path='/supporter-view-all-issues' element={[<SupprterNavbar/>,<SupporterViewAllIssues/>]} />
             <Route path='/supporter-suggestions/:id' element={[<SupprterNavbar/>,<SupporterAddSuggestion/>]} />
             <Route path='/supporter-add-blogs' element={[<SupprterNavbar/>,<SupporterAddBlogs/>]} />
+            <Route path='/supporter-edit-blogs' element={[<SupprterNavbar/>,<SupporterEditBlogs/>]} />
 
 
             
