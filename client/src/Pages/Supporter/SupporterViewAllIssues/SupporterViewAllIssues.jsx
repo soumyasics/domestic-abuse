@@ -76,7 +76,7 @@ const SupporterViewAllIssues= () => {
                   <td>{suggestion.dateTime.slice(0, 10)}</td>
                   <td>
                     <div className='text-center'>
-                     <Link to={`/supporter-suggestions/${suggestion._id}`} ><button className="btn bg-purple opacity-50 m-1">Suggestions</button></Link>
+                     <Link to={`/supporter-suggestions/${suggestion._id}`} ><button className="btn bg-purple opacity-50 m-1 text-white">Suggestions</button></Link>
                     </div>
                   </td>
                 </tr>
