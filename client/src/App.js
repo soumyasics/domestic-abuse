@@ -58,6 +58,7 @@ import SupporterViewBlogs from './Pages/Supporter/SupporterViewBlogs/SupporterVi
 import SupporterViewAllIssuesHistory from './Pages/Supporter/SupporterViewAllIssuesHistory/SupporterViewAllIssuesHistory';
 import SupporterViewAllSafehouses from './Pages/Supporter/SupporterViewAllSafehouses/SupporterViewAllSafehouses';
 import SupporterViewSuggestionDetails from './Pages/Supporter/SupporterViewSuggestionDetails/SupporterViewSuggestionDetails';
+import UserEditIssue from './Pages/User/UserEditIssue/UserEditIssue';
 
 function App() {
   return (
@@ -76,6 +77,7 @@ function App() {
             <Route path='/user-view-all-safehouses' element={[<UserNav/>,<UserViewSafehouses/>]} />
             <Route path='/user-view-all-supporters' element={[<UserNav/>,<UserViewSupporters/>]} />
             <Route path='/user-add-issue' element={[<UserNav/>,<UserAddIssue/>]} />
+            <Route path='/user-edit-issue' element={[<UserNav/>,<UserEditIssue/>]} />
             <Route path='/user-payment' element={[<UserNav/>,<UserPayment/>]} />
 
             {/* Admin Paths */}
