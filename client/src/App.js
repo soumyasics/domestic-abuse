@@ -55,6 +55,7 @@ import SupporterEditBlogs from './Pages/Supporter/SupporterEditBlogs/SupporterEd
 import SupporterViewBlogs from './Pages/Supporter/SupporterViewBlogs/SupporterViewBlogs';
 import SupporterViewAllIssuesHistory from './Pages/Supporter/SupporterViewAllIssuesHistory/SupporterViewAllIssuesHistory';
 import SupporterViewAllSafehouses from './Pages/Supporter/SupporterViewAllSafehouses/SupporterViewAllSafehouses';
+import SupporterViewSuggestionDetails from './Pages/Supporter/SupporterViewSuggestionDetails/SupporterViewSuggestionDetails';
 
 function App() {
   return (
@@ -109,12 +110,11 @@ function App() {
             <Route path='/supporter-view-all-issues' element={[<SupprterNavbar/>,<SupporterViewAllIssues/>]} />
             <Route path='/supporter-view-all-issues-history' element={[<SupprterNavbar/>,<SupporterViewAllIssuesHistory/>]} />
             <Route path='/supporter-suggestions/:id' element={[<SupprterNavbar/>,<SupporterAddSuggestion/>]} />
+            <Route path='/supporter-suggestion-details' element={[<SupprterNavbar/>,<SupporterViewSuggestionDetails/>]} />
             <Route path='/supporter-add-blogs' element={[<SupprterNavbar/>,<SupporterAddBlogs/>]} />
             <Route path='/supporter-edit-blogs' element={[<SupprterNavbar/>,<SupporterEditBlogs/>]} />
             <Route path='/supporter-view-blogs' element={[<SupprterNavbar/>,<SupporterViewBlogs/>]} />
 
-
-            
             {/* Updated route for editing safe house */}
             <Route path='/supporter-edit-safe-house' element={[<SupprterNavbar/>,<SupporterEditSafeHouse />]} />
             <Route path='/supporter-view-all-safehouses' element={[<SupprterNavbar/>,<SupporterViewAllSafehouses />]} />

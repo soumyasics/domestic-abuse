@@ -104,10 +104,10 @@ function SupprterNavbar() {
                                 </ul>
                             </li>
                             <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle mx-3 theme-purple fw-semibold" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a className="nav-link dropdown-toggle mx-3 theme-purple fw-semibold" href="#" id="navbarDropdown4" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Settings
                                 </a>
-                                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown3">
+                                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown4">
                                     <li><Link className="dropdown-item theme-purple fw-semibold" to="/supporter-edit-profile">Profile View</Link></li>
                                     <li><Link className="dropdown-item theme-purple fw-semibold" to="#">Change Password</Link></li>
                                     <li><button className="dropdown-item theme-purple fw-semibold" to="#" onClick={handleLogout}>Logout</button></li>
