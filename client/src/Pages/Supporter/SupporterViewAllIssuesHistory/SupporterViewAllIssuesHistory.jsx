@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback }  from 'react';
 import { Table } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './SupporterViewAllIssues.css';
+import './SupporterViewAllIssuesHistory.css';
 import { viewPendingIssues } from '../../../Services/apiService';
 import { Link } from 'react-router-dom';
-//import { fetchUserSuggestions } from '../../../Services/apiService';
 
-const SupporterViewAllIssues= () => {
+function SupporterViewAllIssuesHistory() {
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
@@ -77,7 +76,7 @@ const SupporterViewAllIssues= () => {
                   <td>{suggestion.dateTime.slice(0, 10)}</td>
                   <td>
                     <div className='text-center'>
-                     <Link to={`/supporter-suggestions/${suggestion._id}`} ><button className="btn bg-purple opacity-50 m-1 text-white">Suggestions</button></Link>
+                     <Link to={`/supporter-suggestions/${suggestion._id}`} ><button className="btn bg-purple opacity-50 m-1 text-white">View Details</button></Link>
                     </div>
                   </td>
                 </tr>
@@ -110,4 +109,5 @@ const SupporterViewAllIssues= () => {
   );
 };
 
-export default SupporterViewAllIssues;
+
+export default SupporterViewAllIssuesHistory

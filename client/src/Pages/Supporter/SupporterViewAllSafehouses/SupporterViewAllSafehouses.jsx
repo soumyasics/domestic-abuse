@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import './UserViewSafehouses.css';
+import './SupporterViewAllSafehouses.css';
 import safehouseDemo from '../../../Assets/ADMIN VIEW DETAILS.png';
-import { IMG_BASE_URL,viewAllSafehouses } from '../../../Services/apiService';
+import { IMG_BASE_URL, viewAllSafehouses } from '../../../Services/apiService';
 import ReactPaginate from 'react-paginate';
 
-function UserViewSafehouses() {
+function SupporterViewAllSafehouses() {
     const [safehouses, setSafehouses] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
     const safehousesPerPage = 4;
@@ -84,6 +84,12 @@ function UserViewSafehouses() {
                                             <p className='card-text'>{safehouse.description ? safehouse.description : 'Description not available'}</p>
                                         </div>
                                     </div>
+                                    <div className='row m-3'>
+                                        <div className='col text-end'>
+                                            <span className='m-2'><button className='btn text-primary-emphasis btn-light'>Edit</button></span>
+                                            <span className='m-2'><button className='btn text-danger btn-light'>Delete</button></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -118,4 +124,4 @@ function UserViewSafehouses() {
     );
 }
 
-export default UserViewSafehouses;
+export default SupporterViewAllSafehouses;
