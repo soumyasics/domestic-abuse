@@ -990,3 +990,93 @@ console.log(response);
     throw error;
   }
 };
+
+export const viewUsersForAdmin = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewUsers`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+
+
+
+// Api for Approving Counsellor Request by ID
+export const activateUserById = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/activateUserById/${id}`);
+    if (response.data.status === 200) {
+      return { success: true, data: response.data.data, message: response.data.msg };
+    } else {
+      return { success: false, message: response.data.msg || 'Approval failed' };
+    }
+  } catch (error) {
+    if (error.response && error.response.data) {
+      return {
+        success: false,
+        message: error.response.data.msg || 'Approval failed'
+      };
+    }
+    return {
+      success: false,
+      message: 'An unexpected error occurred'
+    };
+  }
+};
+
+export const deactivateUserById = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/deActivateUserById/${id}`);
+    if (response.data.status === 200) {
+      return { success: true, data: response.data.data, message: response.data.msg };
+    } else {
+      return { success: false, message: response.data.msg || 'Approval failed' };
+    }
+  } catch (error) {
+    if (error.response && error.response.data) {
+      return {
+        success: false,
+        message: error.response.data.msg || 'Approval failed'
+      };
+    }
+    return {
+      success: false,
+      message: 'An unexpected error occurred'
+    };
+  }
+};
+
+
+
+// Api for Registering addBlog
+export const addBlog = async (suggestions,id) => {
+  try {
+  console.log("in trt");
+
+    const response = await axios.post(`${API_BASE_URL}/addBlog/${id}`, suggestions ,{
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+console.log(response);
+    // Handling responses based on status code
+    switch (response.data.status) {
+      case 200:
+        console.log(response.data.msg); // "Inserted successfully"
+        return { success: true, message: response.data.msg, data: response.data.data };
+      
+      case 500:
+        console.log(response.data.msg); // "Data not Inserted"
+        return { success: false, message: response.data.msg };
+      default:
+        console.log('Unexpected response status:', response.data.status);
+        return { success: false, message: 'Unexpected error occurred' };
+    }
+  } catch (error) {
+    console.error('Error Registering suggestions', error);
+    throw error;
+  }
+};

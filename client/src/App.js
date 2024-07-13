@@ -51,6 +51,8 @@ import SupporterViewAllIssues from './Pages/Supporter/SupporterViewAllIssues/Sup
 import SupporterAddSuggestion from './Pages/Supporter/SupporterAddSuggestion/SupporterAddSuggestion';
 import UserPayment from './Pages/User/UserPayment/UserPayment';
 import SupporterAddBlogs from './Pages/Supporter/SupporterAddBlogs/SupporterAddBlogs';
+import AdminUserViewAll from './Pages/Admin/AdminUserViewAll/AdminUserViewAll';
+import AdminSidebar from './Pages/Admin/AdminSidebar/AdminSidebar';
 
 function App() {
   return (
@@ -94,7 +96,14 @@ function App() {
             <Route path='/admin-viewdetailedLegalProfessional-aprvd/:id' element={[<AdminNavbar/>,<AdminLegalProfessionalDetailedViewAprvd/>]} />
             <Route path='/admin-viewall-aprvd-LegalProfessional' element={[<AdminNavbar/>,<AdminLegalProfessionalViewAll />]} />
 
-            {/* Supporter Paths */}
+
+            <Route path='/admin-viewall-users' element={[<AdminNavbar/>,<AdminUserViewAll />]} />
+
+
+
+            {/* Supporter Paths */
+            
+            }
             <Route path='/supporter-register' element={[<Navbar/>,<SupporterRegister />]} />
             <Route path='/supporter-login' element={[<Navbar/>,<SupporterLogin />]} />
             <Route path='/supporter-home' element={[<SupprterNavbar/>,<SupporterHome />]} />

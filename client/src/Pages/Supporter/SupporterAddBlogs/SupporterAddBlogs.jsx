@@ -1,24 +1,30 @@
 import React, { useState } from 'react';
 import './SupporterAddBlogs.css';
-
+import { addBlog } from '../../../Services/apiService';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 function SupporterAddBlogs() {
     const [formValues, setFormValues] = useState({
-        name: '',
-        description: '',
+        supporterId:localStorage.getItem('supporterId'),
+        title: '',
+        content: '',
         image: ''
     });
+    const navigate = useNavigate();
 
     const [errors, setErrors] = useState({});
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const validate = () => {
         const errors = {};
 
-        if (!formValues.name) {
-            errors.name = "Blog name is required";
+        if (!formValues.title) {
+            errors.title = "Blog title is required";
         }
 
-        if (!formValues.description) {
-            errors.description = "Description is required";
+        if (!formValues.content) {
+            errors.content = "content is required";
         }
 
         if (!formValues.image) {
@@ -41,13 +47,36 @@ function SupporterAddBlogs() {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
-        if (validate()) {
-            // Perform the add blog action
-            console.log("Blog added successfully", formValues);
+        console.log("vla",validate());
+        if (!validate()) {
+         
+              toast.error('Please fix the errors in the form.');
+              return;
+            }
+        
+            setIsSubmitting(true);
+            try {
+              const response = await addBlog(formValues,localStorage.getItem('supporterId'));
+              if (response.success) {
+                toast.success('Blog registered successfully!');
+                setTimeout(() => {
+                  navigate('/supporter-view-all-blogs');
+                }, 1000);
+        
+                // Reset form or perform additional actions on success
+              } else {
+                toast.error(response.message);
+              }
+            } catch (error) {
+              console.error('Error Registering Blog', error);
+              toast.error('Registration failed. Please try again.');
+            } finally {
+              setIsSubmitting(false);
+            }            console.log("Blog added successfully", formValues);
         }
-    };
+    
 
     return (
         <div className='container-fluid'>
@@ -61,36 +90,36 @@ function SupporterAddBlogs() {
                     <form onSubmit={handleSubmit}>
                         <div className='row m-5'>
                             <div className='col-4 text-center d-flex align-items-center '>
-                                <h4 className='theme-purple justify-content-center'>Blog Name</h4>
+                                <h4 className='theme-purple justify-content-center'>Blog title</h4>
                             </div>
                             <div className='col-8'>
                                 <div className='input-group'>
                                     <input
                                         type='text'
-                                        name='name'
-                                        value={formValues.name}
+                                        name='title'
+                                        value={formValues.title}
                                         onChange={handleChange}
-                                        className={`form-control form-control-lg supporter-add-blog-input opacity-50 shadow m-2 me-0 border ${errors.name ? 'is-invalid' : ''}`}
+                                        className={`form-control form-control-lg supporter-add-blog-input opacity-50 shadow m-2 me-0 border ${errors.title ? 'is-invalid' : ''}`}
                                         required
                                     />
-                                    {errors.name && <div id="nameError" className="invalid-feedback ms-2">{errors.name}</div>}
+                                    {errors.title && <div id="nameError" className="invalid-feedback ms-2">{errors.title}</div>}
                                 </div>
                             </div>
                         </div>
                         <div className='row m-5'>
                             <div className='col-4 text-center d-flex align-items-center'>
-                                <h4 className='theme-purple justify-content-center'>Description</h4>
+                                <h4 className='theme-purple justify-content-center'>content</h4>
                             </div>
                             <div className='col-8'>
                                 <div className='input-group'>
                                     <textarea
-                                        name='description'
-                                        value={formValues.description}
+                                        name='content'
+                                        value={formValues.content}
                                         onChange={handleChange}
-                                        className={`form-control form-control-lg supporter-add-blog-input opacity-50 shadow m-2 me-0 border ${errors.description ? 'is-invalid' : ''}`}
+                                        className={`form-control form-control-lg supporter-add-blog-input opacity-50 shadow m-2 me-0 border ${errors.content ? 'is-invalid' : ''}`}
                                         required
                                     />
-                                    {errors.description && <div id="descriptionError" className="invalid-feedback ms-2">{errors.description}</div>}
+                                    {errors.content && <div id="contentError" className="invalid-feedback ms-2">{errors.content}</div>}
                                 </div>
                             </div>
                         </div>

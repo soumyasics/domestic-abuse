@@ -10,8 +10,10 @@ import ReactPaginate from 'react-paginate';
 import { BsEye } from "react-icons/bs";
 import axiosInstance from '../../../Constant/BaseURL';
 import { useNavigate } from 'react-router-dom';
+import { activateUserById, deactivateUserById, viewUsersForAdmin } from '../../../Services/apiService';
 
 const AdminUserViewAll = () => {
+  console.log("here");
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
@@ -20,8 +22,8 @@ const AdminUserViewAll = () => {
 
   const fetchUsers = useCallback(async () => {
     try {
-      // const response = await viewUsersForAdmin();
-      // setUsers(response.data || []);
+      const response = await viewUsersForAdmin();
+      setUsers(response.data || []);
     } catch (error) {
       console.error('Error fetching users:', error);
       toast.error('Error fetching user requests.');
@@ -44,13 +46,13 @@ const AdminUserViewAll = () => {
 
   const handleActivate = async (id) => {
     try {
-      // const response = await activateUserById(id);
-      // if (response.success) {
-      //   toast.success('User activated successfully.');
-      //   fetchUsers(currentPage);
-      // } else {
-      //   toast.error(response.message || 'Error activating user.');
-      // }
+      const response = await activateUserById(id);
+      if (response.success) {
+        toast.success('User activated successfully.');
+        fetchUsers(currentPage);
+      } else {
+        toast.error(response.message || 'Error activating user.');
+      }
     } catch (error) {
       toast.error('Error activating user.');
     }
@@ -58,13 +60,13 @@ const AdminUserViewAll = () => {
 
   const handleDeactivate = async (id) => {
     try {
-      // const response = await deactivateUserById(id);
-      // if (response.success) {
-      //   toast.success('User deactivated successfully.');
-      //   fetchUsers(currentPage);
-      // } else {
-      //   toast.error(response.message || 'Error deactivating user.');
-      // }
+      const response = await deactivateUserById(id);
+      if (response.success) {
+        toast.success('User deactivated successfully.');
+        fetchUsers(currentPage);
+      } else {
+        toast.error(response.message || 'Error deactivating user.');
+      }
     } catch (error) {
       toast.error('Error deactivating user.');
     }
