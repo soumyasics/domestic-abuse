@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import './SupporterViewAllSafehouses.css';
 import safehouseDemo from '../../../Assets/ADMIN VIEW DETAILS.png';
-import { IMG_BASE_URL, viewAllSafehouses } from '../../../Services/apiService';
+import { IMG_BASE_URL, rejectSafehouseById, viewAllSafehouses } from '../../../Services/apiService';
 import ReactPaginate from 'react-paginate';
-
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import { useNavigate } from 'react-router-dom';
 function SupporterViewAllSafehouses() {
     const [safehouses, setSafehouses] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
     const safehousesPerPage = 4;
-
+const navigate=useNavigate()
     // Fetch safehouses data from the backend
     const fetchSafehouses = async () => {
         try {
@@ -36,6 +38,32 @@ function SupporterViewAllSafehouses() {
     const handlePageClick = ({ selected }) => {
         setCurrentPage(selected);
     };
+    const deleteHouse=(id)=>{
+        
+    confirmAlert({
+      title: 'Confirm Deletion',
+      message: 'Are you sure you want to delete this safe house?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: async () => {
+            const response = await rejectSafehouseById(id);
+            if (response.success) {
+              console.log(`Safehouse with ID: ${id} rejected successfully`);
+              fetchSafehouses(); // Refresh the list after rejection
+            } else {
+              console.error('Failed to reject safehouse:', response.message);
+            }
+          }
+        },
+        {
+          label: 'No',
+          onClick: () => console.log('Rejection cancelled')
+        }
+      ]
+    });
+  };
+    
 
     return (
         <div className='container-fluid'>
@@ -65,9 +93,9 @@ function SupporterViewAllSafehouses() {
                                         <div className='col'>
                                             <p className='card-text'>Shared by {safehouse.capacity}</p>
                                         </div>
-                                        <div className='col text-end'>
+                                        {/* <div className='col text-end'>
                                             <button className='btn bg-purple text-white rounded-4 mx-5'>Request</button>
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <div className='row m-3'>
                                         <div className='col'>
@@ -86,8 +114,8 @@ function SupporterViewAllSafehouses() {
                                     </div>
                                     <div className='row m-3'>
                                         <div className='col text-end'>
-                                            <span className='m-2'><button className='btn text-primary-emphasis btn-light'>Edit</button></span>
-                                            <span className='m-2'><button className='btn text-danger btn-light'>Delete</button></span>
+                                            <span className='m-2'><button className='btn text-primary-emphasis btn-light' onClick={()=>{navigate(`/supporter-edit-safe-house/${safehouse._id}`)}}>Edit</button></span>
+                                            <span className='m-2'><button className='btn text-danger btn-light' onClick={()=>{deleteHouse(safehouse._id)}}>Delete</button></span>
                                         </div>
                                     </div>
                                 </div>
