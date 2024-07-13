@@ -59,6 +59,7 @@ import SupporterViewAllIssuesHistory from './Pages/Supporter/SupporterViewAllIss
 import SupporterViewAllSafehouses from './Pages/Supporter/SupporterViewAllSafehouses/SupporterViewAllSafehouses';
 import SupporterViewSuggestionDetails from './Pages/Supporter/SupporterViewSuggestionDetails/SupporterViewSuggestionDetails';
 import UserEditIssue from './Pages/User/UserEditIssue/UserEditIssue';
+import UserViewCounsellors from './Pages/User/UserViewCounsellors/UserViewCounsellors';
 
 function App() {
   return (
@@ -76,6 +77,7 @@ function App() {
             <Route path='/user-edit-profile' element={[<UserNav/>,<UserEditProfile/>]} />
             <Route path='/user-view-all-safehouses' element={[<UserNav/>,<UserViewSafehouses/>]} />
             <Route path='/user-view-all-supporters' element={[<UserNav/>,<UserViewSupporters/>]} />
+            <Route path='/user-view-all-counsellors' element={[<UserNav/>,<UserViewCounsellors/>]} />
             <Route path='/user-add-issue' element={[<UserNav/>,<UserAddIssue/>]} />
             <Route path='/user-edit-issue' element={[<UserNav/>,<UserEditIssue/>]} />
             <Route path='/user-payment' element={[<UserNav/>,<UserPayment/>]} />
