@@ -34,6 +34,8 @@ import AdminCounsellorDetailedView from './Pages/Admin/AdminCounsellorDetailedVi
 import AdminCounsellorDetailedViewAprvd from './Pages/Admin/AdminCounsellorDetailedViewAprvd/AdminCounsellorDetailedViewAprvd';
 import AdminLegalProfessionalDetailedViewAprvd from './Pages/Admin/AdminLegalProfessionalDetailedViewAprvd/AdminLegalProfessionalDetailedViewAprvd';
 import AdminLegalProfessionalDetailedView from './Pages/Admin/AdminLegalProfessionalDetailedView/AdminLegalProfessionalDetailedView';
+import AdminUserViewAll from './Pages/Admin/AdminUserViewAll/AdminUserViewAll';
+
 import AdminLegalProfessionalViewAll from './Pages/Admin/AdminLegalProfessionalViewAll/AdminLegalProfessionalViewAll';
 import UserLogin from './Pages/User/login/UserLogin';
 import UserRegister from './Pages/User/register/UserRegister';
@@ -103,7 +105,14 @@ function App() {
             <Route path='/admin-viewdetailedLegalProfessional-aprvd/:id' element={[<AdminNavbar/>,<AdminLegalProfessionalDetailedViewAprvd/>]} />
             <Route path='/admin-viewall-aprvd-LegalProfessional' element={[<AdminNavbar/>,<AdminLegalProfessionalViewAll />]} />
 
-            {/* Supporter Paths */}
+
+            <Route path='/admin-viewall-users' element={[<AdminNavbar/>,<AdminUserViewAll />]} />
+
+
+
+            {/* Supporter Paths */
+            
+            }
             <Route path='/supporter-register' element={[<Navbar/>,<SupporterRegister />]} />
             <Route path='/supporter-login' element={[<Navbar/>,<SupporterLogin />]} />
             <Route path='/supporter-home' element={[<SupprterNavbar/>,<SupporterHome />]} />
@@ -120,7 +129,7 @@ function App() {
             <Route path='/supporter-view-blogs' element={[<SupprterNavbar/>,<SupporterViewBlogs/>]} />
 
             {/* Updated route for editing safe house */}
-            <Route path='/supporter-edit-safe-house' element={[<SupprterNavbar/>,<SupporterEditSafeHouse />]} />
+            <Route path='/supporter-edit-safe-house/:id' element={[<SupprterNavbar/>,<SupporterEditSafeHouse />]} />
             <Route path='/supporter-view-all-safehouses' element={[<SupprterNavbar/>,<SupporterViewAllSafehouses />]} />
 
             {/* Counsellor Paths */}
