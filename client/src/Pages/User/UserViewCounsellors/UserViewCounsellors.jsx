@@ -76,14 +76,14 @@ function UserViewCounsellors() {
                                     <tbody className='text-center'>
                                         {paginatedCounsellors.map((counsellor, index) => (
                                             <tr key={counsellor._id}>
-                                                <td className='theme-purple'>{index + 1 + currentPage * itemsPerPage}</td>
-                                                <td className='theme-purple'>{counsellor.name}</td>
-                                                <td className='theme-purple'>{counsellor.email}</td>
-                                                <td className='theme-purple'>{counsellor.contact}</td>
-                                                <td className='theme-purple'>{counsellor.location}</td>
+                                                <td className='theme-purple text-center'>{index + 1 + currentPage * itemsPerPage}</td>
+                                                <td className='theme-purple text-center'>{counsellor.name}</td>
+                                                <td className='theme-purple text-center'>{counsellor.email}</td>
+                                                <td className='theme-purple text-center'>{counsellor.contact}</td>
+                                                <td className='theme-purple text-center'>{counsellor.location}</td>
                                                 <td className='theme-purple'>
                                                     <div className='text-center'>
-                                                        <Link className="btn text-decoration-underline"
+                                                        <Link className=" theme-purple link-dark"
                                                             onClick={() => navigateToDetails(counsellor._id)}>View Details</Link>
                                                     </div>
                                                 </td>
