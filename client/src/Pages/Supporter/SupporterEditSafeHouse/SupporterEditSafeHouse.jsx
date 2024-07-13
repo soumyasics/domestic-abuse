@@ -8,11 +8,12 @@ import { CgOrganisation } from "react-icons/cg";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { viewSafehouseById, editSafehouseById } from '../../../Services/apiService';
-import { useLocation,useNavigate } from 'react-router-dom';
+import { useLocation,useNavigate, useParams } from 'react-router-dom';
 
 function SupporterEditSafeHouse() {
   const location = useLocation();
   const { safehouseId } = location.state || {};
+  const {id}=useParams()
   const [safehouse, setSafehouse] = useState({
     name: '',
     contact: '',
@@ -29,7 +30,8 @@ function SupporterEditSafeHouse() {
   useEffect(() => {
     const fetchSafehouseData = async () => {
       try {
-        const safehouseData = await viewSafehouseById(safehouseId);
+        const safehouseData = await viewSafehouseById(id);
+        console.log(safehouseData);
         setSafehouse({
           name: safehouseData.name,
           contact: safehouseData.contact,
@@ -123,7 +125,7 @@ function SupporterEditSafeHouse() {
 
     setIsSubmitting(true);
     try {
-      const updateResponse = await editSafehouseById(safehouseId, safehouse);
+      const updateResponse = await editSafehouseById(id, safehouse);
       if (updateResponse.success) {
         toast.success('Safe house details updated successfully!');
         navigate('/supporter-view-all-safehouses');
