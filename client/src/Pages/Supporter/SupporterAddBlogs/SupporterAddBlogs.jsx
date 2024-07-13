@@ -9,7 +9,7 @@ function SupporterAddBlogs() {
         supporterId:localStorage.getItem('supporterId'),
         title: '',
         content: '',
-        image: ''
+        image: null,
     });
     const navigate = useNavigate();
 

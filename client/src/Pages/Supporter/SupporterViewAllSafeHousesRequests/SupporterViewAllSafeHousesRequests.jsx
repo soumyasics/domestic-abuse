@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './SupporterViewAllSafeHouses.css';
+import './SupporterViewAllSafeHousesRequests.css';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { Table } from 'react-bootstrap';
@@ -11,7 +11,7 @@ import { Link,useNavigate } from 'react-router-dom';
 import { toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function SupporterViewAllSafeHouses() {
+function SupporterViewAllSafeHousesRequests() {
   const [safehouses, setSafehouses] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const safehousesPerPage = 10;
@@ -158,4 +158,4 @@ function SupporterViewAllSafeHouses() {
   );
 }
 
-export default SupporterViewAllSafeHouses;
+export default SupporterViewAllSafeHousesRequests;

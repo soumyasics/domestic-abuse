@@ -15,7 +15,7 @@ import SupporterForgotPassword from './Pages/Supporter/SupporterForgotPassword/S
 import SupporterEditProfile from './Pages/Supporter/SupporterEditProfile/SupporterEditProfile';
 import SupporterAddSafeHouse from './Pages/Supporter/SupporterAddSafeHouse/SupporterAddSafeHouse';
 import SupporterEditSafeHouse from './Pages/Supporter/SupporterEditSafeHouse/SupporterEditSafeHouse';
-import SupporterViewAllSafeHouses from './Pages/Supporter/SupporterViewAllSafeHouses/SupporterViewAllSafeHouses';
+import SupporterViewAllSafeHousesRequests from './Pages/Supporter/SupporterViewAllSafeHousesRequests/SupporterViewAllSafeHousesRequests';
 import AdminViewAllSafehouses from './Pages/Admin/AdminViewAllSafehouses/AdminViewAllSafehouses';
 import AdminSafehouseDetailedView from './Pages/Admin/AdminSafehouseDetailedView/AdminSafehouseDetailedView';
 import CounsellorRegistration from './Pages/Counsellor/CounsellorRegistration/CounsellorRegistration';
@@ -51,8 +51,11 @@ import SupporterViewAllIssues from './Pages/Supporter/SupporterViewAllIssues/Sup
 import SupporterAddSuggestion from './Pages/Supporter/SupporterAddSuggestion/SupporterAddSuggestion';
 import UserPayment from './Pages/User/UserPayment/UserPayment';
 import SupporterAddBlogs from './Pages/Supporter/SupporterAddBlogs/SupporterAddBlogs';
-import AdminUserViewAll from './Pages/Admin/AdminUserViewAll/AdminUserViewAll';
-import AdminSidebar from './Pages/Admin/AdminSidebar/AdminSidebar';
+import SupporterEditBlogs from './Pages/Supporter/SupporterEditBlogs/SupporterEditBlogs';
+import SupporterViewBlogs from './Pages/Supporter/SupporterViewBlogs/SupporterViewBlogs';
+import SupporterViewAllIssuesHistory from './Pages/Supporter/SupporterViewAllIssuesHistory/SupporterViewAllIssuesHistory';
+import SupporterViewAllSafehouses from './Pages/Supporter/SupporterViewAllSafehouses/SupporterViewAllSafehouses';
+import SupporterViewSuggestionDetails from './Pages/Supporter/SupporterViewSuggestionDetails/SupporterViewSuggestionDetails';
 
 function App() {
   return (
@@ -110,15 +113,18 @@ function App() {
             <Route path='/supporter-forgot-password' element={[<Navbar/>,<SupporterForgotPassword />]} />
             <Route path='/supporter-edit-profile' element={[<SupprterNavbar/>,<SupporterEditProfile />]} />
             <Route path='/supporter-add-safe-space' element={[<SupprterNavbar/>,<SupporterAddSafeHouse />]} />
+            <Route path='/supporter-view-all-safehouses-requests' element={[<SupprterNavbar/>,<SupporterViewAllSafeHousesRequests />]} />
             <Route path='/supporter-view-all-issues' element={[<SupprterNavbar/>,<SupporterViewAllIssues/>]} />
+            <Route path='/supporter-view-all-issues-history' element={[<SupprterNavbar/>,<SupporterViewAllIssuesHistory/>]} />
             <Route path='/supporter-suggestions/:id' element={[<SupprterNavbar/>,<SupporterAddSuggestion/>]} />
+            <Route path='/supporter-suggestion-details' element={[<SupprterNavbar/>,<SupporterViewSuggestionDetails/>]} />
             <Route path='/supporter-add-blogs' element={[<SupprterNavbar/>,<SupporterAddBlogs/>]} />
+            <Route path='/supporter-edit-blogs' element={[<SupprterNavbar/>,<SupporterEditBlogs/>]} />
+            <Route path='/supporter-view-blogs' element={[<SupprterNavbar/>,<SupporterViewBlogs/>]} />
 
-
-            
             {/* Updated route for editing safe house */}
             <Route path='/supporter-edit-safe-house' element={[<SupprterNavbar/>,<SupporterEditSafeHouse />]} />
-            <Route path='/supporter-view-all-safehouses' element={[<SupprterNavbar/>,<SupporterViewAllSafeHouses />]} />
+            <Route path='/supporter-view-all-safehouses' element={[<SupprterNavbar/>,<SupporterViewAllSafehouses />]} />
 
             {/* Counsellor Paths */}
             <Route path='/counsellor-register' element={[<Navbar/>,<CounsellorRegistration />]} />
