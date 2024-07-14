@@ -35,6 +35,10 @@ const UserViewLegalProfessionals = () => {
     setCurrentPage(event.selected);
   };
 
+  const handleCardClick = (id) => {
+    navigate(`/user-legal-professional-detail/${id}`);
+  };
+
   const paginatedProfessionals = legalProfessionals.slice(
     currentPage * itemsPerPage,
     (currentPage + 1) * itemsPerPage
@@ -62,8 +66,11 @@ const UserViewLegalProfessionals = () => {
           <p className="m-5 text-center fs-1">No legal professionals found</p>
         ) : (
           paginatedProfessionals.map((legalProfessional, index) => (
-            <div key={index} className='col-md-3'>
-              <div className='card m-3 cursor-pointer user-view-legal-professionals-card'>
+            <div key={legalProfessional._id} className='col-md-3'>
+              <div
+                className='card m-3 cursor-pointer user-view-legal-professionals-card'
+                onClick={() => handleCardClick(legalProfessional._id)}
+              >
                 <img
                   src={legalProfessional.photo && legalProfessional.photo.filename ? `${IMG_BASE_URL}/${legalProfessional.photo.filename}` : demoLegalProfessional}
                   alt='Legal Professional'
