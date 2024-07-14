@@ -62,7 +62,7 @@ function SupporterAddBlogs() {
               if (response.success) {
                 toast.success('Blog registered successfully!');
                 setTimeout(() => {
-                  navigate('/supporter-view-all-blogs');
+                  navigate('/supporter-view-blogs');
                 }, 1000);
         
                 // Reset form or perform additional actions on success

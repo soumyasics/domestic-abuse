@@ -92,7 +92,7 @@ const viewAllBlogs = (req, res) => {
 
 const viewMyBlogsBysupporterId = (req, res) => {
   blogSchema
-    .find({ supporterId: req.params.id }).popuate('issueId')
+    .find({ supporterId: req.params.id })
    
     .exec()
     .then((data) => {
@@ -137,7 +137,9 @@ const deleteBlogsById = (req, res) => {
 //View   blogs by  id
 
 const editBlogsById = (req, res) => {
+  console.log( req.params.id);
   blogSchema
+  
     .findByIdAndUpdate({ _id: req.params.id },{
       title: req.body.title,
       content: req.body.content,
@@ -148,7 +150,7 @@ const editBlogsById = (req, res) => {
     .then((data) => {
       res.json({
         status: 200,
-        msg: "Data deleted successfully",
+        msg: "Data Updated successfully",
       });
     })
     .catch((err) => {

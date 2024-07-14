@@ -144,7 +144,7 @@ function App() {
             <Route path='/supporter-suggestions/:id' element={[<SupprterNavbar/>,<SupporterAddSuggestion/>]} />
             <Route path='/supporter-suggestion-details' element={[<SupprterNavbar/>,<SupporterViewSuggestionDetails/>]} />
             <Route path='/supporter-add-blogs' element={[<SupprterNavbar/>,<SupporterAddBlogs/>]} />
-            <Route path='/supporter-edit-blogs' element={[<SupprterNavbar/>,<SupporterEditBlogs/>]} />
+            <Route path='/supporter-edit-blogs/:id' element={[<SupprterNavbar/>,<SupporterEditBlogs/>]} />
             <Route path='/supporter-view-blogs' element={[<SupprterNavbar/>,<SupporterViewBlogs/>]} />
 
             {/* Updated route for editing safe house */}

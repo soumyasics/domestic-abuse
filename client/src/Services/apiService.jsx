@@ -1080,3 +1080,53 @@ console.log(response);
     throw error;
   }
 };
+
+
+//Api for View all suggestion by supp id
+export const viewMySuggestions = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewSuggestionBySuppId/${id}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+
+//Api for View all suggestion by supp id
+export const getBlogsBySuppId = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewMyBlogsBysupporterId/${id}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+
+export const editBlogsById = async (id,dtats) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/editBlogsById/${id}`,dtats,{
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    console.log("in ",response.data.status);
+  return response.data
+} catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+export const viewBlogsById = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewBlogsById/${id}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};

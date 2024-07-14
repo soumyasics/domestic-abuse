@@ -101,6 +101,7 @@ router.get('/viewSuggestions', suggestionController.viewSuggestions);
 router.put('/editSuggestionById/:id', suggestionController.editSuggestionById);
 router.get('/viewSuggestionById/:id', suggestionController.viewSuggestionById);
 router.delete('/deleteSuggestionById/:id', suggestionController.deleteSuggestionById);
+router.delete('/viewSuggestionBySuppId/:id', suggestionController.viewSuggestionBySuppId);
 
 
 

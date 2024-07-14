@@ -4,7 +4,7 @@ import ReactPaginate from 'react-paginate';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './SupporterViewAllIssuesHistory.css';
-import { viewPendingIssues } from '../../../Services/apiService';
+import { viewMySuggestions } from '../../../Services/apiService';
 import { Link } from 'react-router-dom';
 
 function SupporterViewAllIssuesHistory() {
@@ -13,10 +13,10 @@ function SupporterViewAllIssuesHistory() {
   const [currentPage, setCurrentPage] = useState(0);
 
   const itemsPerPage = 20;
-
+console.log("in view his");
   const fetchSuggestions = useCallback(async () => {
     try {
-      const response = await viewPendingIssues();
+      const response = await viewMySuggestions(localStorage.getItem('supporterId'));
       setSuggestions(response.data || []);
     } catch (error) {
       console.error('Error fetching suggestions:', error);
