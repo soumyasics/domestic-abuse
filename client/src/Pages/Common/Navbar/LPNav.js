@@ -83,9 +83,6 @@ function LPNav() {
                                 {/* <li className="nav-item">
                                     <Link className="nav-link mx-3 theme-purple fw-semibold" to="/">Our Services</Link>
                                 </li> */}
-                                <li className="nav-item">
-                                    <Link className="nav-link mx-3 theme-purple fw-semibold" to="/legal-professional-edit-profile">Profile</Link>
-                                </li>
                                 {/* {isLoggedIn ? (
                                     <>
                                         <li className="nav-item dropdown">
@@ -101,12 +98,37 @@ function LPNav() {
                                         </li>
                                     </>
                                 ) : ( */}
-                                    <li className="nav-item dropdown">
-                                    <button className="nav-link mx-3 theme-purple fw-semibold btn btn-link" onClick={handleLogout}>Logout</button>
-                                    
-                                        
-                                      
-                                    </li>
+                                <li className="nav-item dropdown">
+                            <a className="nav-link dropdown-toggle mx-3 theme-purple fw-semibold" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Case
+                            </a>
+                            <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown3">
+                                <li><Link className="dropdown-item theme-purple fw-semibold" to="#">Add Case</Link></li>
+                                <li><Link className="dropdown-item theme-purple fw-semibold" to="#">Request</Link></li>
+                                <li><button className="dropdown-item theme-purple fw-semibold" to="#">History</button></li>
+                            </ul>
+                        </li>
+                               
+                                <li className="nav-item dropdown">
+                            <a className="nav-link dropdown-toggle mx-3 theme-purple fw-semibold" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Blogs
+                            </a>
+                            <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown1">
+                                <li><Link className="dropdown-item theme-purple fw-semibold" to="/legal-professional-add-blogs">Add New</Link></li>
+                                <li><Link className="dropdown-item theme-purple fw-semibold" to="/legal-professional-view-blogs">View All</Link></li>
+                            </ul>
+                        </li>
+                        <li className="nav-item dropdown">
+                            <a className="nav-link dropdown-toggle mx-3 theme-purple fw-semibold" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Settings
+                            </a>
+                            <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown2">
+                                <li><Link className="dropdown-item theme-purple fw-semibold" to="/legal-professional-edit-profile">Profile View</Link></li>
+                                <li><Link className="dropdown-item theme-purple fw-semibold" to="#">Change Password</Link></li>
+                                <li><button className="dropdown-item theme-purple fw-semibold" to="#" onClick={handleLogout}>Logout</button></li>
+                            </ul>
+                        </li>
+                                 
                                 {/* )} */}
                             </ul>
                         </div>

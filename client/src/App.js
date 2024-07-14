@@ -68,6 +68,9 @@ import UserLegalProfessionalDetails from './Pages/User/UserLegalProfessionalDeta
 import CounsellorAddBlogs from './Pages/Counsellor/CounsellorAddBlogs/CounsellorAddBlogs';
 import CounsellorEditBlogs from './Pages/Counsellor/CounsellorEditBlogs/CounsellorEditBlogs';
 import CounsellorViewBlogs from './Pages/Counsellor/CounsellorViewBlogs/CounsellorViewBlogs';
+import LegalProfessionalAddBlogs from './Pages/Legal Professional/LegalProfessionalAddBlogs/LegalProfessionalAddBlogs';
+import LegalProfessionalEditBlogs from './Pages/Legal Professional/LegalProfessionalEditBlogs/LegalProfessionalEditBlogs';
+import LegalProfessionalViewBlogs from './Pages/Legal Professional/LegalProfessionalViewBlogs/LegalProfessionalViewBlogs';
 
 function App() {
   return (
@@ -161,6 +164,10 @@ function App() {
             <Route path='/legal-professional-forgot-password' element={[<Navbar/>,<LegalProfessionalForgotPassword/>]} />
             <Route path='/legal-professional-edit-profile' element={[<LPNav/>,<LegalProfessionalEditProfile />]} />
             <Route path='/legal-professional-home' element={[<LPNav/>,<LegalProfessionalHome />]} />
+            <Route path='/legal-professional-add-blogs' element={[<LPNav/>,<LegalProfessionalAddBlogs/>]} />
+            <Route path='/legal-professional-edit-blogs' element={[<LPNav/>,<LegalProfessionalEditBlogs/>]} />
+            <Route path='/legal-professional-view-blogs' element={[<LPNav/>,<LegalProfessionalViewBlogs/>]} />
+
 
           </Routes>
         </div>
