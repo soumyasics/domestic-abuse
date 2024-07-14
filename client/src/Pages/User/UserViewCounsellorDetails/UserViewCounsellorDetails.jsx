@@ -1,0 +1,201 @@
+import React, { useState, useEffect } from 'react';
+import { FaArrowLeftLong } from "react-icons/fa6";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getCounsellorById, bookCounsellorAppointment } from '../../../Services/apiService';
+
+function UserViewCounsellorDetails() {
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const [counsellor, setCounsellor] = useState({});
+    const [appointmentDate, setAppointmentDate] = useState('');
+    const [errors, setErrors] = useState({});
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    useEffect(() => {
+        const fetchCounsellorDetails = async () => {
+            try {
+                const response = await getCounsellorById(id);
+                setCounsellor(response);
+            } catch (error) {
+                toast.error('Error fetching counsellor details.');
+            }
+        };
+
+        fetchCounsellorDetails();
+    }, [id]);
+
+    const validate = () => {
+        const newErrors = {};
+        if (!appointmentDate) {
+            newErrors.appointmentDate = 'Appointment date is required.';
+        } else if (new Date(appointmentDate) <= new Date()) {
+            newErrors.appointmentDate = 'Appointment date must be in the future.';
+        }
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
+    const handleChange = (e) => {
+        setAppointmentDate(e.target.value);
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!validate()) {
+            toast.error('Please fix the errors in the form.');
+            return;
+        }
+        setIsSubmitting(true);
+        try {
+            // const response = await bookCounsellorAppointment(id, { appointmentDate });
+            // if (response.success) {
+            //     toast.success('Appointment booked successfully.');
+            //     navigate('/user-viewCounsellors');
+            // } else {
+            //     toast.error(response.message || 'Error booking appointment.');
+            // }
+        } catch (error) {
+            toast.error('Error booking appointment.');
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
+    return (
+        <div className='container-fluid'>
+            <ToastContainer />
+            <div className='row my-5 mx-3'>
+                <div className='col'>
+                    <FaArrowLeftLong size={35} className='cursor-pointer' onClick={() => navigate(-1)} />
+                </div>
+            </div>
+            <div className='row m-5'>
+                <div className='col text-center'>
+                    <h3 className='theme-purple'>Counsellor Details</h3>
+                </div>
+            </div>
+            <div className='row m-5 d-flex justify-content-center align-items-center'>
+                <div className='col-8 bg-creamy'>
+                    <div className='row m-5'>
+                        <div className='col'>
+                            <div className='row'>
+                                <div className='col text-secondary'>
+                                    Name
+                                </div>
+                                <div className='col theme-purple'>
+                                    {counsellor.name}
+                                </div>
+                            </div>
+                        </div>
+                        <div className='col'>
+                            <div className='row'>
+                                <div className='col text-secondary'>
+                                    Email Id
+                                </div>
+                                <div className='col theme-purple'>
+                                    {counsellor.email}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='row m-5'>
+                        <div className='col'>
+                            <div className='row'>
+                                <div className='col text-secondary'>
+                                    Contact Number
+                                </div>
+                                <div className='col theme-purple'>
+                                    {counsellor.contact}
+                                </div>
+                            </div>
+                        </div>
+                        <div className='col'>
+                            <div className='row'>
+                                <div className='col text-secondary'>
+                                    Language
+                                </div>
+                                <div className='col theme-purple'>
+                                    {counsellor.language}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='row m-5'>
+                        <div className='col'>
+                            <div className='row'>
+                                <div className='col text-secondary'>
+                                    Experience
+                                </div>
+                                <div className='col theme-purple'>
+                                    {counsellor.experience}
+                                </div>
+                            </div>
+                        </div>
+                        <div className='col'>
+                            <div className='row'>
+                                <div className='col text-secondary'>
+                                    Location
+                                </div>
+                                <div className='col theme-purple'>
+                                    {counsellor.location}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='row m-5'>
+                        <div className='col'>
+                            <div className='row'>
+                                <div className='col text-secondary'>
+                                    Specialisation
+                                </div>
+                                <div className='col theme-purple'>
+                                    {counsellor.specialisation}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='row m-5'>
+                        <div className='col'>
+                            <h3 className='theme-purple'>Add Details</h3>
+                        </div>
+                    </div>
+                    <form onSubmit={handleSubmit} noValidate>
+                        <div className='row m-5'>
+                            <div className='col-6'>
+                                <label htmlFor='appointmentDate' className='form-label theme-purple'>Counselling Date</label>
+                            </div>
+                        </div>
+                        <div className='row m-5'>
+                            <div className='col-6'>
+                                <div className="input-group">
+                                    <input
+                                        type='datetime-local'
+                                        id="appointmentDate"
+                                        name="appointmentDate"
+                                        className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.appointmentDate ? 'is-invalid' : ''}`}
+                                        value={appointmentDate}
+                                        onChange={handleChange}
+                                        aria-describedby="appointmentDateError"
+                                        required
+                                    />
+                                    {errors.appointmentDate && <div id="appointmentDateError" className="invalid-feedback">{errors.appointmentDate}</div>}
+                                </div>
+                            </div>
+                        </div>
+                        <div className='row m-5'>
+                            <div className='col text-end'>
+                                <button type="submit" className="btn bg-theme btn-lg fw-bolder px-5 text-white rounded-4 mx-5" disabled={isSubmitting}>
+                                    {isSubmitting ? 'Booking...' : 'Book Now'}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default UserViewCounsellorDetails;
