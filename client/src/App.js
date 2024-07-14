@@ -59,6 +59,19 @@ import SupporterViewAllIssuesHistory from './Pages/Supporter/SupporterViewAllIss
 import SupporterViewAllSafehouses from './Pages/Supporter/SupporterViewAllSafehouses/SupporterViewAllSafehouses';
 import SupporterViewSuggestionDetails from './Pages/Supporter/SupporterViewSuggestionDetails/SupporterViewSuggestionDetails';
 import UserEditIssue from './Pages/User/UserEditIssue/UserEditIssue';
+import UserViewCounsellors from './Pages/User/UserViewCounsellors/UserViewCounsellors';
+import UserViewCounsellorDetails from './Pages/User/UserViewCounsellorDetails/UserViewCounsellorDetails';
+import CounsellorViewClients from './Pages/Counsellor/CounsellorViewClients/CounsellorViewClients';
+import CounsellorAppointmentRequests from './Pages/Counsellor/CounsellorAppointmentRequests/CounsellorAppointmentRequests';
+import UserViewLegalProfessionals from './Pages/User/UserViewLegalProfessionals/UserViewLegalProfessionals';
+import UserLegalProfessionalDetails from './Pages/User/UserLegalProfessionalDetails/UserLegalProfessionalDetails';
+import CounsellorAddBlogs from './Pages/Counsellor/CounsellorAddBlogs/CounsellorAddBlogs';
+import CounsellorEditBlogs from './Pages/Counsellor/CounsellorEditBlogs/CounsellorEditBlogs';
+import CounsellorViewBlogs from './Pages/Counsellor/CounsellorViewBlogs/CounsellorViewBlogs';
+import LegalProfessionalAddBlogs from './Pages/Legal Professional/LegalProfessionalAddBlogs/LegalProfessionalAddBlogs';
+import LegalProfessionalEditBlogs from './Pages/Legal Professional/LegalProfessionalEditBlogs/LegalProfessionalEditBlogs';
+import LegalProfessionalViewBlogs from './Pages/Legal Professional/LegalProfessionalViewBlogs/LegalProfessionalViewBlogs';
+import UserViewBlogs from './Pages/User/UserViewBlogs/UserViewBlogs';
 
 function App() {
   return (
@@ -76,9 +89,15 @@ function App() {
             <Route path='/user-edit-profile' element={[<UserNav/>,<UserEditProfile/>]} />
             <Route path='/user-view-all-safehouses' element={[<UserNav/>,<UserViewSafehouses/>]} />
             <Route path='/user-view-all-supporters' element={[<UserNav/>,<UserViewSupporters/>]} />
+            <Route path='/user-view-all-counsellors' element={[<UserNav/>,<UserViewCounsellors/>]} />
+            <Route path='/user-view-all-counsellor-details' element={[<UserNav/>,<UserViewCounsellorDetails/>]} />
+            <Route path='/user-view-all-legal-professionals' element={[<UserNav/>,<UserViewLegalProfessionals/>]} />
+            <Route path='/user-legal-professional-detail/:id' element={[<UserNav/>,<UserLegalProfessionalDetails/>]} />
             <Route path='/user-add-issue' element={[<UserNav/>,<UserAddIssue/>]} />
             <Route path='/user-edit-issue' element={[<UserNav/>,<UserEditIssue/>]} />
             <Route path='/user-payment' element={[<UserNav/>,<UserPayment/>]} />
+            <Route path='/user-view-blogs' element={[<UserNav/>,<UserViewBlogs/>]} />
+
 
             {/* Admin Paths */}
             <Route path='/admin-login' element={[<Navbar/>,<AdminLogin />]} />
@@ -136,7 +155,11 @@ function App() {
             <Route path='/counsellor-forgot-password' element={[<Navbar/>,<CounsellorForgotPassword/>]} />
             <Route path='/counsellor-home' element={[<CouncillorNav/>,<CounsellorHome />]} />
             <Route path='/counsellor-edit-profile' element={[<CouncillorNav/>,<CounsellorEditProfile />]} />
-
+            <Route path='/counsellor-appointment-requests' element={[<CouncillorNav/>,<CounsellorAppointmentRequests/>]} />
+            <Route path='/counsellor-view-clients' element={[<CouncillorNav/>,<CounsellorViewClients />]} />
+            <Route path='/counsellor-add-blogs' element={[<CouncillorNav/>,<CounsellorAddBlogs/>]} />
+            <Route path='/counsellor-edit-blogs' element={[<CouncillorNav/>,<CounsellorEditBlogs/>]} />
+            <Route path='/counsellor-view-blogs' element={[<CouncillorNav/>,<CounsellorViewBlogs/>]} />
 
             {/* Legal Professional Paths  */}
             <Route path='/legal-professional-login' element={[<Navbar/>,<LegalProfessionalLogin/>]} />
@@ -144,6 +167,10 @@ function App() {
             <Route path='/legal-professional-forgot-password' element={[<Navbar/>,<LegalProfessionalForgotPassword/>]} />
             <Route path='/legal-professional-edit-profile' element={[<LPNav/>,<LegalProfessionalEditProfile />]} />
             <Route path='/legal-professional-home' element={[<LPNav/>,<LegalProfessionalHome />]} />
+            <Route path='/legal-professional-add-blogs' element={[<LPNav/>,<LegalProfessionalAddBlogs/>]} />
+            <Route path='/legal-professional-edit-blogs' element={[<LPNav/>,<LegalProfessionalEditBlogs/>]} />
+            <Route path='/legal-professional-view-blogs' element={[<LPNav/>,<LegalProfessionalViewBlogs/>]} />
+
 
           </Routes>
         </div>

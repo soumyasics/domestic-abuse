@@ -13,7 +13,6 @@ const AdminLegalProfessionalViewAll = () => {
   const [legalProfessionals, setLegalProfessionals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
-  console.log("im here");
   const toggleUserActiveState = (legalProfessionals) => {
     console.log(legalProfessionals.isActive);
     if(legalProfessionals.isActive){
