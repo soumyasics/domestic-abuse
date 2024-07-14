@@ -86,7 +86,7 @@ function CouncillorNav() {
                             <Link className="nav-link mx-3 theme-purple fw-semibold" to="/counsellor-appointment-requests">Appointments</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link mx-3 theme-purple fw-semibold" to="#">My Clients</Link>
+                            <Link className="nav-link mx-3 theme-purple fw-semibold" to="/counsellor-view-clients">My Clients</Link>
                         </li>
                         <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle mx-3 theme-purple fw-semibold" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -98,10 +98,10 @@ function CouncillorNav() {
                             </ul>
                         </li>
                         <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle mx-3 theme-purple fw-semibold" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a className="nav-link dropdown-toggle mx-3 theme-purple fw-semibold" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Account Settings
                             </a>
-                            <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown1">
+                            <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown2">
                                 <li><Link className="dropdown-item theme-purple fw-semibold" to="/counsellor-edit-profile">Profile View</Link></li>
                                 <li><Link className="dropdown-item theme-purple fw-semibold" to="#">Change Password</Link></li>
                                 <li><button className="dropdown-item theme-purple fw-semibold" to="#" onClick={handleLogout}>Logout</button></li>
