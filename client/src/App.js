@@ -61,6 +61,7 @@ import SupporterViewSuggestionDetails from './Pages/Supporter/SupporterViewSugge
 import UserEditIssue from './Pages/User/UserEditIssue/UserEditIssue';
 import UserViewCounsellors from './Pages/User/UserViewCounsellors/UserViewCounsellors';
 import UserViewCounsellorDetails from './Pages/User/UserViewCounsellorDetails/UserViewCounsellorDetails';
+import CounsellorViewClients from './Pages/Counsellor/CounsellorViewClients/CounsellorViewClients';
 import CounsellorAppointmentRequests from './Pages/Counsellor/CounsellorAppointmentRequests/CounsellorAppointmentRequests';
 
 function App() {
@@ -141,9 +142,8 @@ function App() {
             <Route path='/counsellor-forgot-password' element={[<Navbar/>,<CounsellorForgotPassword/>]} />
             <Route path='/counsellor-home' element={[<CouncillorNav/>,<CounsellorHome />]} />
             <Route path='/counsellor-edit-profile' element={[<CouncillorNav/>,<CounsellorEditProfile />]} />
-            <Route path='/counsellor-appointment-requests' element={[<CouncillorNav/>,<CounsellorAppointmentRequests />]} />
-
-
+            <Route path='/counsellor-appointment-requests' element={[<CouncillorNav/>,<CounsellorAppointmentRequests/>]} />
+            <Route path='/counsellor-view-clients' element={[<CouncillorNav/>,<CounsellorViewClients />]} />
 
             {/* Legal Professional Paths  */}
             <Route path='/legal-professional-login' element={[<Navbar/>,<LegalProfessionalLogin/>]} />
