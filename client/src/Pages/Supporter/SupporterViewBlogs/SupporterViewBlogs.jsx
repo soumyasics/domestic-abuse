@@ -4,6 +4,7 @@ import { IMG_BASE_URL,getBlogsBySuppId} from '../../../Services/apiService'; // 
 import demo from '../../../Assets/blog-demo.png';
 import { FaRegCalendarAlt } from "react-icons/fa";
 import ReactPaginate from 'react-paginate';
+import { Link } from 'react-router-dom';
 
 function SupporterViewBlogs() {
   const [blogs, setBlogs] = useState([]);
@@ -71,7 +72,7 @@ function SupporterViewBlogs() {
           </div>
           <div className='row m-5'>
             <div className='col text-end'>
-              <span><button className='btn rounded bg-purple px-5 m-2 text-white'>Edit</button></span>
+              <span><Link to={`/supporter-edit-blogs/${blog._id}`}><button className='btn rounded bg-purple px-5 m-2 text-white'>Edit</button></Link></span>
               <span><button className='btn rounded bg-purple px-5 m-2 text-white'>Remove</button></span>
             </div>
           </div>
