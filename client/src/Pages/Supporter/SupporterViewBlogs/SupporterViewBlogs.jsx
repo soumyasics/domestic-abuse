@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './SupporterViewBlogs.css';
-import { IMG_BASE_URL } from '../../../Services/apiService'; // Assuming getBlogs is the function to fetch blogs from backend
+import { IMG_BASE_URL,getBlogsBySuppId} from '../../../Services/apiService'; // Assuming getBlogs is the function to fetch blogs from backend
 import demo from '../../../Assets/blog-demo.png';
 import { FaRegCalendarAlt } from "react-icons/fa";
 import ReactPaginate from 'react-paginate';
@@ -14,8 +14,9 @@ function SupporterViewBlogs() {
     // Fetch blogs from backend
     const fetchBlogs = async () => {
       try {
-        // const response = await getBlogs();
-        // setBlogs(response.data);
+        const response = await getBlogsBySuppId(localStorage.getItem('supporterId'));
+        console.log("bol",response);
+        setBlogs(response.data);
       } catch (error) {
         console.error('Error fetching blogs:', error);
       }
@@ -29,8 +30,11 @@ function SupporterViewBlogs() {
   };
 
   const displayBlogs = blogs
-    .slice(currentPage * blogsPerPage, (currentPage + 1) * blogsPerPage)
-    .map((blog) => (
+    // .slice(currentPage * blogsPerPage, (currentPage + 1) * blogsPerPage)
+    .map((blog) => {
+      return(
+        <div>
+      {blog.title}
       <div className='row bg-creamy m-5' key={blog.id}>
         <div className='col m-5'>
           <img
@@ -57,12 +61,12 @@ function SupporterViewBlogs() {
           </div>
           <div className='row m-5'>
             <div className='col'>
-              <h5 className='theme-purple'>{blog.name}</h5>
+              <h5 className='theme-purple'>{blog.title}</h5>
             </div>
           </div>
           <div className='row m-5'>
             <div className='col'>
-              <p className='fs-6'>{blog.description}</p>
+              <p className='fs-6'>{blog.content}</p>
             </div>
           </div>
           <div className='row m-5'>
@@ -73,7 +77,9 @@ function SupporterViewBlogs() {
           </div>
         </div>
       </div>
-    ));
+      </div>
+      )
+});
 
   return (
     <div className='container-fluid'>

@@ -92,7 +92,7 @@ const viewAllBlogs = (req, res) => {
 
 const viewMyBlogsBysupporterId = (req, res) => {
   blogSchema
-    .find({ supporterId: req.params.id }).popuate('issueId')
+    .find({ supporterId: req.params.id })
    
     .exec()
     .then((data) => {
