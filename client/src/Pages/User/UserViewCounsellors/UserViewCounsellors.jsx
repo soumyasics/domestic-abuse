@@ -6,6 +6,7 @@ import './UserViewCounsellors.css';
 import 'react-toastify/dist/ReactToastify.css';
 import ReactPaginate from 'react-paginate';
 import {Link, useNavigate } from 'react-router-dom';
+import { FaArrowLeftLong } from "react-icons/fa6";
 
 function UserViewCounsellors() {
     const [counsellors, setCounsellors] = useState([]);
@@ -48,6 +49,11 @@ function UserViewCounsellors() {
 
     return (
         <div className='container-fluid'>
+            <div className='row my-5 mx-3'>
+                <div className='col'>
+                    <FaArrowLeftLong  size={35} className='cursor-pointer' onClick={() => navigate('/user-home')}/>
+                </div>
+            </div>
             <div className='row m-5'>
                 <div className='col'>
                     <h3 className='theme-purple'>All Counsellors</h3>
