@@ -88,21 +88,23 @@ function UserNav() {
                                 </ul>
                             </li>
                             <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle mx-3 theme-purple fw-semibold" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a className="nav-link dropdown-toggle mx-3 theme-purple fw-semibold" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                Services
                                 </a>
-                                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown1">
+                                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown2">
                                     <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-view-all-safehouses">Safe Spaces</Link></li>
                                     <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-view-all-supporters">Supporters</Link></li>
+                                    <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-view-all-counsellors">Counsellors</Link></li>
+                                    <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-view-all-legal-professionals">Legal LegalProfessionalRegister</Link></li>
                                   
                                 </ul>
                             </li>
                             <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle mx-3 theme-purple fw-semibold" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a className="nav-link dropdown-toggle mx-3 theme-purple fw-semibold" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Settings
                                 </a>
-                                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown1">
-                                    <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-edit-profile">Profile</Link></li>
+                                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown3">
+                                    <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-edit-profile">Profile View</Link></li>
                                     <li><button className="dropdown-item theme-purple fw-semibold" onClick={handleLogout}>Logout</button></li>
                                   
                                 </ul>
