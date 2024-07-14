@@ -64,6 +64,10 @@ import UserViewCounsellorDetails from './Pages/User/UserViewCounsellorDetails/Us
 import CounsellorViewClients from './Pages/Counsellor/CounsellorViewClients/CounsellorViewClients';
 import CounsellorAppointmentRequests from './Pages/Counsellor/CounsellorAppointmentRequests/CounsellorAppointmentRequests';
 import UserViewLegalProfessionals from './Pages/User/UserViewLegalProfessionals/UserViewLegalProfessionals';
+import UserLegalProfessionalDetails from './Pages/User/UserLegalProfessionalDetails/UserLegalProfessionalDetails';
+import CounsellorAddBlogs from './Pages/Counsellor/CounsellorAddBlogs/CounsellorAddBlogs';
+import CounsellorEditBlogs from './Pages/Counsellor/CounsellorEditBlogs/CounsellorEditBlogs';
+import CounsellorViewBlogs from './Pages/Counsellor/CounsellorViewBlogs/CounsellorViewBlogs';
 
 function App() {
   return (
@@ -84,6 +88,7 @@ function App() {
             <Route path='/user-view-all-counsellors' element={[<UserNav/>,<UserViewCounsellors/>]} />
             <Route path='/user-view-all-counsellor-details' element={[<UserNav/>,<UserViewCounsellorDetails/>]} />
             <Route path='/user-view-all-legal-professionals' element={[<UserNav/>,<UserViewLegalProfessionals/>]} />
+            <Route path='/user-legal-professional-detail/:id' element={[<UserNav/>,<UserLegalProfessionalDetails/>]} />
             <Route path='/user-add-issue' element={[<UserNav/>,<UserAddIssue/>]} />
             <Route path='/user-edit-issue' element={[<UserNav/>,<UserEditIssue/>]} />
             <Route path='/user-payment' element={[<UserNav/>,<UserPayment/>]} />
@@ -146,6 +151,9 @@ function App() {
             <Route path='/counsellor-edit-profile' element={[<CouncillorNav/>,<CounsellorEditProfile />]} />
             <Route path='/counsellor-appointment-requests' element={[<CouncillorNav/>,<CounsellorAppointmentRequests/>]} />
             <Route path='/counsellor-view-clients' element={[<CouncillorNav/>,<CounsellorViewClients />]} />
+            <Route path='/counsellor-add-blogs' element={[<CouncillorNav/>,<CounsellorAddBlogs/>]} />
+            <Route path='/counsellor-edit-blogs' element={[<CouncillorNav/>,<CounsellorEditBlogs/>]} />
+            <Route path='/counsellor-view-blogs' element={[<CouncillorNav/>,<CounsellorViewBlogs/>]} />
 
             {/* Legal Professional Paths  */}
             <Route path='/legal-professional-login' element={[<Navbar/>,<LegalProfessionalLogin/>]} />
