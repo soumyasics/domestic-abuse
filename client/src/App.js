@@ -71,6 +71,7 @@ import CounsellorViewBlogs from './Pages/Counsellor/CounsellorViewBlogs/Counsell
 import LegalProfessionalAddBlogs from './Pages/Legal Professional/LegalProfessionalAddBlogs/LegalProfessionalAddBlogs';
 import LegalProfessionalEditBlogs from './Pages/Legal Professional/LegalProfessionalEditBlogs/LegalProfessionalEditBlogs';
 import LegalProfessionalViewBlogs from './Pages/Legal Professional/LegalProfessionalViewBlogs/LegalProfessionalViewBlogs';
+import UserViewBlogs from './Pages/User/UserViewBlogs/UserViewBlogs';
 
 function App() {
   return (
@@ -95,6 +96,8 @@ function App() {
             <Route path='/user-add-issue' element={[<UserNav/>,<UserAddIssue/>]} />
             <Route path='/user-edit-issue' element={[<UserNav/>,<UserEditIssue/>]} />
             <Route path='/user-payment' element={[<UserNav/>,<UserPayment/>]} />
+            <Route path='/user-view-blogs' element={[<UserNav/>,<UserViewBlogs/>]} />
+
 
             {/* Admin Paths */}
             <Route path='/admin-login' element={[<Navbar/>,<AdminLogin />]} />
