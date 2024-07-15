@@ -69,14 +69,14 @@ console.log("in view his");
                 <tr key={index}>
                   <td>{suggestion.userId.name}</td>
                   <td>{suggestion.userId.gender}</td>
-                  <td>{suggestion.userId.dob.slice(0, 10)}</td>
-                  <td>{suggestion.type}</td>
-                  <td>{suggestion.severity}</td>
-                  <td>{suggestion.location}</td>
-                  <td>{suggestion.dateTime.slice(0, 10)}</td>
+                  <td>{(suggestion.userId.dob).slice(0, 10)}</td>
+                  <td>{suggestion.issueId.type}</td>
+                  <td>{suggestion.issueId.severity}</td>
+                  <td>{suggestion.issueId.location}</td>
+                  <td>{suggestion.issueId.dateTime.slice(0, 10)}</td>
                   <td>
                     <div className='text-center'>
-                     <Link to={`/supporter-suggestions/${suggestion._id}`} ><button className="btn bg-purple opacity-50 m-1 text-white">View Details</button></Link>
+                     <Link to={`/supporter-suggestion-details/${suggestion._id}`} ><button className="btn bg-purple opacity-50 m-1 text-white">View Details</button></Link>
                     </div>
                   </td>
                 </tr>

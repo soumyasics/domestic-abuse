@@ -144,7 +144,7 @@ function App() {
             <Route path='/supporter-view-all-issues' element={[<SupprterNavbar/>,<SupporterViewAllIssues/>]} />
             <Route path='/supporter-view-all-issues-history' element={[<SupprterNavbar/>,<SupporterViewAllIssuesHistory/>]} />
             <Route path='/supporter-suggestions/:id' element={[<SupprterNavbar/>,<SupporterAddSuggestion/>]} />
-            <Route path='/supporter-suggestion-details' element={[<SupprterNavbar/>,<SupporterViewSuggestionDetails/>]} />
+            <Route path='/supporter-suggestion-details/:id' element={[<SupprterNavbar/>,<SupporterViewSuggestionDetails/>]} />
             <Route path='/supporter-add-blogs' element={[<SupprterNavbar/>,<SupporterAddBlogs/>]} />
             <Route path='/supporter-edit-blogs/:id' element={[<SupprterNavbar/>,<SupporterEditBlogs/>]} />
             <Route path='/supporter-view-blogs' element={[<SupprterNavbar/>,<SupporterViewBlogs/>]} />

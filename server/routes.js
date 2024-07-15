@@ -97,11 +97,11 @@ router.post('/viewPendingIssues', issue.viewPendingIssues);
 
 
 router.post('/registerSuggestion', suggestionController.registerSuggestion);
-router.get('/viewSuggestions', suggestionController.viewSuggestions);
-router.put('/editSuggestionById/:id', suggestionController.editSuggestionById);
-router.get('/viewSuggestionById/:id', suggestionController.viewSuggestionById);
-router.delete('/deleteSuggestionById/:id', suggestionController.deleteSuggestionById);
-router.delete('/viewSuggestionBySuppId/:id', suggestionController.viewSuggestionBySuppId);
+router.post('/viewSuggestions', suggestionController.viewSuggestions);
+router.post('/editSuggestionById/:id', suggestionController.editSuggestionById);
+router.post('/viewSuggestionById/:id', suggestionController.viewSuggestionById);
+router.post('/deleteSuggestionById/:id', suggestionController.deleteSuggestionById);
+router.post('/viewSuggestionBySuppId/:id', suggestionController.viewSuggestionBySuppId);
 
 
 

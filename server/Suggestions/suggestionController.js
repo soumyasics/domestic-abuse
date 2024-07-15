@@ -99,6 +99,7 @@ const editSuggestionById = async (req, res) => {
 
 // View suggestion by ID
 const viewSuggestionById = (req, res) => {
+    console.log(req.params.id);
     Suggestion.findById(req.params.id)
         .populate('userId')
         .populate('supporterId')
@@ -113,6 +114,7 @@ const viewSuggestionById = (req, res) => {
             });
         })
         .catch(err => {
+            console.log(err);
             res.status(500).json({
                 status: 500,
                 msg: "No data obtained",
