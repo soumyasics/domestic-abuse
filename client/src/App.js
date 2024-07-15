@@ -74,6 +74,7 @@ import LegalProfessionalViewBlogs from './Pages/Legal Professional/LegalProfessi
 import UserViewBlogs from './Pages/User/UserViewBlogs/UserViewBlogs';
 import UserViewRequestHistory from './Pages/User/UserViewRequestHistory/UserViewRequestHistory';
 import CounsellorViewAppointmentDetails from './Pages/Counsellor/CounsellorViewAppointmentDetails/CounsellorViewAppointmentDetails';
+import UserAddCase from './Pages/User/UserAddCase/UserAddCase';
 
 function App() {
   return (
@@ -97,10 +98,10 @@ function App() {
             <Route path='/user-legal-professional-detail/:id' element={[<UserNav/>,<UserLegalProfessionalDetails/>]} />
             <Route path='/user-add-issue' element={[<UserNav/>,<UserAddIssue/>]} />
             <Route path='/user-edit-issue' element={[<UserNav/>,<UserEditIssue/>]} />
+            <Route path='/user-add-case' element={[<UserNav/>,<UserAddCase/>]} />
             <Route path='/user-payment' element={[<UserNav/>,<UserPayment/>]} />
             <Route path='/user-view-blogs' element={[<UserNav/>,<UserViewBlogs/>]} />
             <Route path='/user-view-request-history' element={[<UserNav/>,<UserViewRequestHistory/>]} />
-
 
             {/* Admin Paths */}
             <Route path='/admin-login' element={[<Navbar/>,<AdminLogin />]} />
@@ -164,7 +165,7 @@ function App() {
             <Route path='/counsellor-add-blogs' element={[<CouncillorNav/>,<CounsellorAddBlogs/>]} />
             <Route path='/counsellor-edit-blogs' element={[<CouncillorNav/>,<CounsellorEditBlogs/>]} />
             <Route path='/counsellor-view-blogs' element={[<CouncillorNav/>,<CounsellorViewBlogs/>]} />
-
+            
             {/* Legal Professional Paths  */}
             <Route path='/legal-professional-login' element={[<Navbar/>,<LegalProfessionalLogin/>]} />
             <Route path='/legal-professional-register' element={[<Navbar/>,<LegalProfessionalRegister />]} />
