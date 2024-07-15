@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import './UserViewLegalProfessionals.css';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowLeftLong } from "react-icons/fa6";
+import { FaSearch } from "react-icons/fa";
 import demoLegalProfessional from '../../../Assets/legal-professional-registration.png';
 import { IMG_BASE_URL, viewAllApprovedLegalProfessionals } from '../../../Services/apiService';
 import ReactPaginate from 'react-paginate';
@@ -53,6 +54,18 @@ const UserViewLegalProfessionals = () => {
         <div className='col'>
           <FaArrowLeftLong size={35} className='cursor-pointer' onClick={() => navigate('/user-home')} />
         </div>
+        <div className='col text-end d-flex justify-content-end'>
+          <div className='input-group w-50'>
+            <input
+              type='text'
+              id='search'
+              name='search'
+              className='form-control bg-creamy  border border-end-0 rounded-start-2'
+              placeholder='Search Legal Professionals'
+            />
+            <span className='bg-purple text-white  text-center px-4 d-flex align-items-center justify-content-center border border-start-0 rounded-end-2 cursor-pointer'><FaSearch /></span>
+          </div>
+        </div>
       </div>
       <div className='row m-5'>
         <div className='col text-center'>
@@ -63,7 +76,7 @@ const UserViewLegalProfessionals = () => {
         {loading ? (
           <p className="theme-purple fs-1">Loading...</p>
         ) : paginatedProfessionals.length === 0 ? (
-          <p className="m-5 text-center fs-1">No legal professionals found</p>
+          <p className="m-5 text-center fs-3 theme-purple">No legal professionals found</p>
         ) : (
           paginatedProfessionals.map((legalProfessional, index) => (
             <div key={legalProfessional._id} className='col-md-3'>

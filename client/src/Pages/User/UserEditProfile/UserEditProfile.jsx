@@ -16,7 +16,6 @@ function UserEditProfile() {
     name: '',
     email: '',
     contact: '',
-  
     dob: '',
     gender: '',
     address: '',
