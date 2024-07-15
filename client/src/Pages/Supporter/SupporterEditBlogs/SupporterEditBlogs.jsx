@@ -170,7 +170,7 @@ const navigate=useNavigate()
                                 <button type='submit' className='btn text-white bg-purple py-2 px-5 ' onClick={handleSubmit}>Update</button>
                             </div>
                             <div className='col-4 text-end'>
-                                <button type='button' className='btn text-white bg-purple py-2 px-5 ' onClick={deleteBlog}>Cancel</button>
+                                <button type='button' className='btn text-white bg-purple py-2 px-5 ' >Cancel</button>
                             </div>
                         </div>
                     </form>
