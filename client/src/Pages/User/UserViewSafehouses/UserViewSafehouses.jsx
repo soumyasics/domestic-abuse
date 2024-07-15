@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import './UserViewSafehouses.css';
 import safehouseDemo from '../../../Assets/ADMIN VIEW DETAILS.png';
-import { IMG_BASE_URL,viewAllSafehouses } from '../../../Services/apiService';
+import { IMG_BASE_URL, viewAllSafehouses } from '../../../Services/apiService';
 import ReactPaginate from 'react-paginate';
+import { Link, useNavigate } from 'react-router-dom';
+import { FaArrowLeftLong } from "react-icons/fa6";
+import { FaSearch } from "react-icons/fa";
 
 function UserViewSafehouses() {
     const [safehouses, setSafehouses] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
     const safehousesPerPage = 4;
+    const navigate = useNavigate();
 
     // Fetch safehouses data from the backend
     const fetchSafehouses = async () => {
@@ -39,6 +43,27 @@ function UserViewSafehouses() {
 
     return (
         <div className='container-fluid'>
+            <div className='row my-5 mx-3'>
+                <div className='col'>
+                    <FaArrowLeftLong size={35} className='cursor-pointer' onClick={() => navigate(-1)} />
+                </div>
+                <div className='col text-end'>
+                    <button className='btn bg-purple text-white rounded-4 mx-5'>Request History</button>
+
+                </div>
+                <div className='col text-start'>
+                    <div className='input-group'>
+                        <input
+                            type='text'
+                            id='search'
+                            name='search'
+                            className='form-control bg-creamy  border border-end-0 rounded-start-2'
+                            placeholder='Search Safe House'
+                        />
+                        <span className='bg-purple text-white  text-center px-4 d-flex align-items-center justify-content-center border border-start-0 rounded-end-2 cursor-pointer'><FaSearch /></span>
+                    </div>
+                </div>
+            </div>
             {currentSafehouses.length > 0 ? (
                 currentSafehouses.map((safehouse) => (
                     <div className='row m-5' key={safehouse._id}>
