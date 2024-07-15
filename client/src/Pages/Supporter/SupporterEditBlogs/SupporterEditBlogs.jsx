@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './SupporterEditBlogs.css';
-import { editBlogsById, IMG_BASE_URL, viewBlogsById } from '../../../Services/apiService';
+import { deleteBlogsById, editBlogsById, IMG_BASE_URL, viewBlogsById } from '../../../Services/apiService';
 import demo from '../../../Assets/blog-demo.png';
 import { PiPencilDuotone } from "react-icons/pi";
 import { useParams,Link,useNavigate } from 'react-router-dom';
@@ -83,29 +83,25 @@ const navigate=useNavigate()
     
         
     };
-    const deleteBlog=async()=>{
-        // const response = await axios.post(`${API_BASE_URL}/deleteBlogsById/${id}`)
-        // console.log("response",response);
 
-    }
 
     return (
-        <div classtitle='container-fluid'>
-            <div classtitle='row m-5'>
-                <div classtitle='col text-center'>
-                    <h3 classtitle='theme-purple'>Edit Blogs</h3>
+        <div className='container-fluid'>
+            <div className='row m-5'>
+                <div className='col text-center'>
+                    <h3 className='theme-purple'>Edit Blogs</h3>
                 </div>
             </div>
-            <div classtitle='row m-5  d-flex justify-content-center align-items-center '>
-                <div classtitle='col-8 border border-5 mb-5'>
+            <div className='row m-5  d-flex justify-content-center align-items-center '>
+                <div className='col-8 border border-5 mb-5'>
                     <form onSubmit={handleSubmit}>
-                        <div classtitle='row m-5'>
-                            <div classtitle='col position-relative'>
-                                <div classtitle='overflow-hidden'>
+                        <div className='row m-5'>
+                            <div className='col position-relative'>
+                                <div className='overflow-hidden'>
                                     <img
                                         src={formValues.image && formValues.image.filename ? `${IMG_BASE_URL}/${formValues.image.filename}` : demo}
                                         alt='blog demo'
-                                        classtitle='img-fluid'
+                                        className='img-fluid'
                                         onError={(e) => {
                                             e.target.onerror = null;
                                             e.target.src = demo;
@@ -114,8 +110,8 @@ const navigate=useNavigate()
                                     />
                                 </div>
 
-                                <div classtitle='rounded-circle p-2 m-3 bg-white top-0 end-0 border-light position-absolute cursor-pointer'>
-                                    <label htmlFor="imageUpload" classtitle="image-upload-label cursor-pointer">
+                                <div className='rounded-circle p-2 m-3 bg-white top-0 end-0 border-light position-absolute cursor-pointer'>
+                                    <label htmlFor="imageUpload" className="image-upload-label cursor-pointer">
                                         <PiPencilDuotone color={'#59244C'} size={30} />
                                     </label>
                                     <input
@@ -123,58 +119,58 @@ const navigate=useNavigate()
                                         id="imageUpload"
                                         title="image"
                                         // accept="image/*"
-                                        classtitle={`image-upload-input cursor-pointer ${errors.image ? 'is-invalid' : ''}`}
+                                        className={`image-upload-input cursor-pointer ${errors.image ? 'is-invalid' : ''}`}
                                         onChange={handleChange}
                                         style={{ display: 'none' }}
                                     />
                                 </div>
-                                {errors.image && <div id="imageError" classtitle="invalid-feedback ms-2">{errors.image}</div>}
+                                {errors.image && <div id="imageError" className="invalid-feedback ms-2">{errors.image}</div>}
                             </div>
-                            <div classtitle='col'>
-                                <div classtitle='row m-5'>
-                                    <div classtitle='col-4 text-center d-flex align-items-center '>
-                                        <h5 classtitle='theme-purple justify-content-center'>Blog title</h5>
+                            <div className='col'>
+                                <div className='row m-5'>
+                                    <div className='col-4 text-center d-flex align-items-center '>
+                                        <h5 className='theme-purple justify-content-center'>Blog title</h5>
                                     </div>
-                                    <div classtitle='col-8'>
-                                        <div classtitle='input-group w-100'>
+                                    <div className='col-8'>
+                                        <div className='input-group w-100'>
                                             <input
                                                 type='text'
                                                 title='title'
                                                 value={formValues.title}
                                                 onChange={handleChange}
-                                                classtitle={`form-control  supporter-add-blog-input opacity-50 shadow m-2 me-0 border ${errors.title ? 'is-invalid' : ''}`}
+                                                className={`form-control  supporter-add-blog-input opacity-50 shadow m-2 me-0 border ${errors.title ? 'is-invalid' : ''}`}
                                                 required
                                             />
-                                            {errors.title && <div id="titleError" classtitle="invalid-feedback ms-2">{errors.title}</div>}
+                                            {errors.title && <div id="titleError" className="invalid-feedback ms-2">{errors.title}</div>}
                                         </div>
                                     </div>
                                 </div>
-                                <div classtitle='row m-5'>
-                                    <div classtitle='col-4 text-center d-flex align-items-center'>
-                                        <h5 classtitle='theme-purple justify-content-center'>content</h5>
+                                <div className='row m-5'>
+                                    <div className='col-4 text-center d-flex align-items-center'>
+                                        <h5 className='theme-purple justify-content-center'>content</h5>
                                     </div>
-                                    <div classtitle='col-8'>
-                                        <div classtitle='input-group w-100'>
+                                    <div className='col-8'>
+                                        <div className='input-group w-100'>
                                             <textarea
                                                 title='content'
                                                 value={formValues.content}
                                                 onChange={handleChange}
-                                                classtitle={`form-control  supporter-add-blog-input opacity-50 shadow m-2 me-0 border ${errors.content ? 'is-invalid' : ''}`}
+                                                className={`form-control  supporter-add-blog-input opacity-50 shadow m-2 me-0 border ${errors.content ? 'is-invalid' : ''}`}
                                                 required
                                             />
-                                            {errors.content && <div id="contentError" classtitle="invalid-feedback ms-2">{errors.content}</div>}
+                                            {errors.content && <div id="contentError" className="invalid-feedback ms-2">{errors.content}</div>}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div classtitle='row m-5'>
-                            <div classtitle='col-4 text-center d-flex align-items-center'></div>
-                            <div classtitle='col-4 text-end'>
-                                <button type='submit' classtitle='btn text-white bg-purple py-2 px-5 ' onClick={handleSubmit}>Update</button>
+                        <div className='row m-5'>
+                            <div className='col-4 text-center d-flex align-items-center'></div>
+                            <div className='col-4 text-end'>
+                                <button type='submit' className='btn text-white bg-purple py-2 px-5 ' onClick={handleSubmit}>Update</button>
                             </div>
-                            <div classtitle='col-4 text-end'>
-                                <button type='button' classtitle='btn text-white bg-purple py-2 px-5 ' onClick={deleteBlog}>Cancel</button>
+                            <div className='col-4 text-end'>
+                                {/* <button type='button' className='btn text-white bg-purple py-2 px-5 ' >Cancel</button> */}
                             </div>
                         </div>
                     </form>
