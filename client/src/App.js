@@ -72,6 +72,7 @@ import LegalProfessionalAddBlogs from './Pages/Legal Professional/LegalProfessio
 import LegalProfessionalEditBlogs from './Pages/Legal Professional/LegalProfessionalEditBlogs/LegalProfessionalEditBlogs';
 import LegalProfessionalViewBlogs from './Pages/Legal Professional/LegalProfessionalViewBlogs/LegalProfessionalViewBlogs';
 import UserViewBlogs from './Pages/User/UserViewBlogs/UserViewBlogs';
+import UserViewRequestHistory from './Pages/User/UserViewRequestHistory/UserViewRequestHistory';
 
 function App() {
   return (
@@ -97,6 +98,7 @@ function App() {
             <Route path='/user-edit-issue' element={[<UserNav/>,<UserEditIssue/>]} />
             <Route path='/user-payment' element={[<UserNav/>,<UserPayment/>]} />
             <Route path='/user-view-blogs' element={[<UserNav/>,<UserViewBlogs/>]} />
+            <Route path='/user-view-request-history' element={[<UserNav/>,<UserViewRequestHistory/>]} />
 
 
             {/* Admin Paths */}
