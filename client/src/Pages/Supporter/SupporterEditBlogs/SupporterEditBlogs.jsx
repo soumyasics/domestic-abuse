@@ -84,8 +84,8 @@ const navigate=useNavigate()
         
     };
     const deleteBlog=async()=>{
-        const response = await axios.post(`${API_BASE_URL}/deleteBlogsById/${id}`)
-        console.log("response",response);
+        // const response = await axios.post(`${API_BASE_URL}/deleteBlogsById/${id}`)
+        // console.log("response",response);
 
     }
 
