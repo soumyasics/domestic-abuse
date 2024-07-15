@@ -117,7 +117,7 @@ const navigate=useNavigate()
                                     <input
                                         type="file"
                                         id="imageUpload"
-                                        title="image"
+                                        name="image"
                                         // accept="image/*"
                                         className={`image-upload-input cursor-pointer ${errors.image ? 'is-invalid' : ''}`}
                                         onChange={handleChange}
@@ -135,7 +135,7 @@ const navigate=useNavigate()
                                         <div className='input-group w-100'>
                                             <input
                                                 type='text'
-                                                title='title'
+                                                name='title'
                                                 value={formValues.title}
                                                 onChange={handleChange}
                                                 className={`form-control  supporter-add-blog-input opacity-50 shadow m-2 me-0 border ${errors.title ? 'is-invalid' : ''}`}
@@ -152,7 +152,7 @@ const navigate=useNavigate()
                                     <div className='col-8'>
                                         <div className='input-group w-100'>
                                             <textarea
-                                                title='content'
+                                                name='content'
                                                 value={formValues.content}
                                                 onChange={handleChange}
                                                 className={`form-control  supporter-add-blog-input opacity-50 shadow m-2 me-0 border ${errors.content ? 'is-invalid' : ''}`}

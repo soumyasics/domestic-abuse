@@ -108,11 +108,13 @@ router.delete('/viewSuggestionBySuppId/:id', suggestionController.viewSuggestion
 
 //blogs
 //blogs
-router.post('/addBlog/:id',blog.upload,blog.addBlog)
+router.post('/addBlog',blog.upload,blog.addBlog)
 router.post('/viewBlogsById/:id',blog.viewBlogsById)
 router.post('/editBlogsById/:id',blog.upload,blog.editBlogsById)
 router.post('/deleteBlogsById/:id',blog.deleteBlogsById)
 router.post('/viewAllBlogs',blog.viewAllBlogs)
 router.post('/viewMyBlogsBysupporterId/:id',blog.viewMyBlogsBysupporterId)
+router.post('/viewMyBlogsByCounsellorId/:id',blog.viewMyBlogsByCounsellorId)
+router.post('/viewMyBlogsByLPId/:id',blog.viewMyBlogsByLPId)
 
 module.exports = router

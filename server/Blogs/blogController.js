@@ -17,7 +17,9 @@ const addBlog = (req, res) => {
   const newBlog = new blogSchema({
    title: req.body.title,
     content: req.body.content,
-    supporterId: req.params.id,
+    supporterId: req.body.supporterId,
+    lpId: req.body.lpId,
+    counsellorId: req.body.counsellorId,
     date:new Date(),
     image: req.file,
   });
@@ -112,7 +114,51 @@ const viewMyBlogsBysupporterId = (req, res) => {
     });
 };
 
+const viewMyBlogsByCounsellorId = (req, res) => {
+  blogSchema
+    .find({ counsellorId: req.params.id })
+   
+    .exec()
+    .then((data) => {
+      res.json({
+        status: 200,
+        msg: "Data obtained successfully",
+        data: data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json({
+        status: 500,
+        msg: "No Data obtained",
+        Error: err,
+      });
+    });
+};
 //View   blogs by  id
+
+
+const viewMyBlogsByLPId = (req, res) => {
+  blogSchema
+    .find({ lpId: req.params.id })
+   
+    .exec()
+    .then((data) => {
+      res.json({
+        status: 200,
+        msg: "Data obtained successfully",
+        data: data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json({
+        status: 500,
+        msg: "No Data obtained",
+        Error: err,
+      });
+    });
+};
 
 const deleteBlogsById = (req, res) => {
   blogSchema
@@ -170,5 +216,7 @@ module.exports = {
   viewBlogsById,
 viewMyBlogsBysupporterId,
     deleteBlogsById,
-    editBlogsById
+    editBlogsById,
+    viewMyBlogsByCounsellorId,
+    viewMyBlogsByLPId
 };
