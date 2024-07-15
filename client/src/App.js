@@ -73,6 +73,7 @@ import LegalProfessionalEditBlogs from './Pages/Legal Professional/LegalProfessi
 import LegalProfessionalViewBlogs from './Pages/Legal Professional/LegalProfessionalViewBlogs/LegalProfessionalViewBlogs';
 import UserViewBlogs from './Pages/User/UserViewBlogs/UserViewBlogs';
 import UserViewRequestHistory from './Pages/User/UserViewRequestHistory/UserViewRequestHistory';
+import CounsellorViewAppointmentDetails from './Pages/Counsellor/CounsellorViewAppointmentDetails/CounsellorViewAppointmentDetails';
 
 function App() {
   return (
@@ -158,6 +159,7 @@ function App() {
             <Route path='/counsellor-home' element={[<CouncillorNav/>,<CounsellorHome />]} />
             <Route path='/counsellor-edit-profile' element={[<CouncillorNav/>,<CounsellorEditProfile />]} />
             <Route path='/counsellor-appointment-requests' element={[<CouncillorNav/>,<CounsellorAppointmentRequests/>]} />
+            <Route path='/counsellor-view-appointment-details' element={[<CouncillorNav/>,<CounsellorViewAppointmentDetails/>]} />
             <Route path='/counsellor-view-clients' element={[<CouncillorNav/>,<CounsellorViewClients />]} />
             <Route path='/counsellor-add-blogs' element={[<CouncillorNav/>,<CounsellorAddBlogs/>]} />
             <Route path='/counsellor-edit-blogs' element={[<CouncillorNav/>,<CounsellorEditBlogs/>]} />
