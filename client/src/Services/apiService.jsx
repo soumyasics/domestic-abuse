@@ -1130,3 +1130,13 @@ export const viewBlogsById = async (id) => {
     throw error;
   }
 };
+export const deleteBlogsById = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/deleteBlogsById/${id}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error deleting Blogs List ', error);
+    throw error;
+  }
+};

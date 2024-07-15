@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './SupporterEditBlogs.css';
-import { editBlogsById, IMG_BASE_URL, viewBlogsById } from '../../../Services/apiService';
+import { deleteBlogsById, editBlogsById, IMG_BASE_URL, viewBlogsById } from '../../../Services/apiService';
 import demo from '../../../Assets/blog-demo.png';
 import { PiPencilDuotone } from "react-icons/pi";
 import { useParams,Link,useNavigate } from 'react-router-dom';
@@ -83,11 +83,7 @@ const navigate=useNavigate()
     
         
     };
-    const deleteBlog=async()=>{
-        const response = await axios.post(`${API_BASE_URL}/deleteBlogsById/${id}`)
-        console.log("response",response);
 
-    }
 
     return (
         <div className='container-fluid'>
