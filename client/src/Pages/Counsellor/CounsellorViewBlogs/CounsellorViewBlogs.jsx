@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import './CounsellorViewBlogs.css';
-import { IMG_BASE_URL } from '../../../Services/apiService'; // Assuming getBlogs is the function to fetch blogs from backend
+import { getBlogsByCounsellorId, IMG_BASE_URL } from '../../../Services/apiService'; // Assuming getBlogs is the function to fetch blogs from backend
 import demo from '../../../Assets/blog-demo.png';
 import { FaRegCalendarAlt } from "react-icons/fa";
 import ReactPaginate from 'react-paginate';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function CounsellorViewBlogs() {
   const [blogs, setBlogs] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const blogsPerPage = 3;
-
+const navigate=useNavigate()
   useEffect(() => {
     // Fetch blogs from backend
     const fetchBlogs = async () => {
       try {
-        // const response = await getBlogs();
-        // setBlogs(response.data);
+        const response = await getBlogsByCounsellorId(localStorage.getItem('counsellorId'));
+        console.log("bol",response);
+        setBlogs(response.data);
       } catch (error) {
         console.error('Error fetching blogs:', error);
       }
@@ -27,10 +31,30 @@ function CounsellorViewBlogs() {
   const handlePageClick = (data) => {
     setCurrentPage(data.selected);
   };
+ const deleteBlogsById=(id)=>{
+    try {
+        const response =  deleteBlogsById(id);
+        console.log('del supporter response:', response);
+
+        if (response.status==200) {
+            toast.success('Blog Removed successfully');
+            navigate('/counsellor-view-blogs');
+        } else {
+            toast.success(response.message || 'Blog updated successfully');
+        }
+    } catch (error) {
+        console.error('Error updating profile:', error);
+        toast.error('An error occurred while updating the profile');
+    }
+
+
+ }
 
   const displayBlogs = blogs
     .slice(currentPage * blogsPerPage, (currentPage + 1) * blogsPerPage)
     .map((blog) => (
+      <div>
+     
       <div className='row bg-creamy m-5' key={blog.id}>
         <div className='col m-5'>
           <img
@@ -57,21 +81,22 @@ function CounsellorViewBlogs() {
           </div>
           <div className='row m-5'>
             <div className='col'>
-              <h5 className='theme-purple'>{blog.name}</h5>
+              <h5 className='theme-purple'>{blog.title}</h5>
             </div>
           </div>
           <div className='row m-5'>
             <div className='col'>
-              <p className='fs-6'>{blog.description}</p>
+              <p className='fs-6'>{blog.content}</p>
             </div>
           </div>
           <div className='row m-5'>
             <div className='col text-end'>
-              <span><button className='btn rounded bg-purple px-5 m-2 text-white'>Edit</button></span>
-              <span><button className='btn rounded bg-purple px-5 m-2 text-white'>Remove</button></span>
+              <span><Link to={`/counsellor-edit-blogs/${blog._id}`}><button className='btn rounded bg-purple px-5 m-2 text-white'>Edit</button></Link></span>
+              <span><button className='btn rounded bg-purple px-5 m-2 text-white' onClick={()=>{deleteBlogsById(blog._id)}}>Remove</button></span>
             </div>
           </div>
         </div>
+      </div>
       </div>
     ));
 

@@ -53,7 +53,7 @@ const navigate=useNavigate()
     .map((blog) => {
       return(
         <div>
-      {blog.title}
+     
       <div className='row bg-creamy m-5' key={blog.id}>
         <div className='col m-5'>
           <img

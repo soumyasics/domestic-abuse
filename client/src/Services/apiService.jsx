@@ -1052,11 +1052,11 @@ export const deactivateUserById = async (id) => {
 
 
 // Api for Registering addBlog
-export const addBlog = async (suggestions,id) => {
+export const addBlog = async (suggestions) => {
   try {
   console.log("in trt");
 
-    const response = await axios.post(`${API_BASE_URL}/addBlog/${id}`, suggestions ,{
+    const response = await axios.post(`${API_BASE_URL}/addBlog`, suggestions ,{
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -1093,7 +1093,17 @@ export const viewMySuggestions = async (id) => {
     throw error;
   }
 };
-
+//Api for View all suggestion by supp id
+export const viewMySuggestionById = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewSuggestionById/${id}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
 //Api for View all suggestion by supp id
 export const getBlogsBySuppId = async (id) => {
   try {
@@ -1137,6 +1147,29 @@ export const deleteBlogsById = async (id) => {
     return response.data;
   } catch (error) {
     console.error(' Error deleting Blogs List ', error);
+    throw error;
+  }
+};
+
+
+//Api for View all suggestion by supp id
+export const getBlogsByCounsellorId = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewMyBlogsByCounsellorId/${id}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+export const getBlogsByLPId = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewMyBlogsByLPId/${id}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
     throw error;
   }
 };

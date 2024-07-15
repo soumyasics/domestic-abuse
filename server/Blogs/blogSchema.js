@@ -14,8 +14,18 @@ const blogSchema = mongoose.Schema(
     },
     supporterId: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
+      
       ref: "supporters",
+    },
+    lpId: {
+      type: mongoose.Schema.Types.ObjectId,
+      
+      ref: "legalprofessionals",
+    },
+   counsellorId: {
+      type: mongoose.Schema.Types.ObjectId,
+      
+      ref: "counsellors",
     },
     image: {
       type: Object,

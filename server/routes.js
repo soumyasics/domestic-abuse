@@ -97,22 +97,24 @@ router.post('/viewPendingIssues', issue.viewPendingIssues);
 
 
 router.post('/registerSuggestion', suggestionController.registerSuggestion);
-router.get('/viewSuggestions', suggestionController.viewSuggestions);
-router.put('/editSuggestionById/:id', suggestionController.editSuggestionById);
-router.get('/viewSuggestionById/:id', suggestionController.viewSuggestionById);
-router.delete('/deleteSuggestionById/:id', suggestionController.deleteSuggestionById);
-router.delete('/viewSuggestionBySuppId/:id', suggestionController.viewSuggestionBySuppId);
+router.post('/viewSuggestions', suggestionController.viewSuggestions);
+router.post('/editSuggestionById/:id', suggestionController.editSuggestionById);
+router.post('/viewSuggestionById/:id', suggestionController.viewSuggestionById);
+router.post('/deleteSuggestionById/:id', suggestionController.deleteSuggestionById);
+router.post('/viewSuggestionBySuppId/:id', suggestionController.viewSuggestionBySuppId);
 
 
 
 
 //blogs
 //blogs
-router.post('/addBlog/:id',blog.upload,blog.addBlog)
+router.post('/addBlog',blog.upload,blog.addBlog)
 router.post('/viewBlogsById/:id',blog.viewBlogsById)
 router.post('/editBlogsById/:id',blog.upload,blog.editBlogsById)
 router.post('/deleteBlogsById/:id',blog.deleteBlogsById)
 router.post('/viewAllBlogs',blog.viewAllBlogs)
 router.post('/viewMyBlogsBysupporterId/:id',blog.viewMyBlogsBysupporterId)
+router.post('/viewMyBlogsByCounsellorId/:id',blog.viewMyBlogsByCounsellorId)
+router.post('/viewMyBlogsByLPId/:id',blog.viewMyBlogsByLPId)
 
 module.exports = router
