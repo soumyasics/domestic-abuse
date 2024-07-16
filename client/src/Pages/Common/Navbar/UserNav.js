@@ -83,6 +83,8 @@ function UserNav() {
                                 </a>
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown1">
                                     <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-add-issue">Add New</Link></li>
+                                    <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-view-issue">View Issues</Link></li>
+
                                     <li><Link className="dropdown-item theme-purple fw-semibold" to="/">View Suggestions</Link></li>
                                   
                                 </ul>
