@@ -8,6 +8,7 @@ const issue=require('./UserIssues/IssueController')
 const suggestionController=require('./Suggestions/suggestionController')
 const blog=require('./Blogs/blogController')
 const cases=require('./Cases/caseController')
+const casReqs=require('./LP-UserRequests/reqController')
 
 //suppoerter routes
 router.post('/registerSupporters', supporter.upload, supporter.registerSupporters);
@@ -127,5 +128,16 @@ router.get('/viewCaseByUserId/:id', cases.viewCaseByUserId);
 router.post('/viewPendingCases', cases.viewPendingCases);
 router.get('/viewCaseByLPId/:id', cases.viewCaseByLPId);
 router.get('/viewCases', cases.viewCases);
+
+
+router.post('/addReq/:id',casReqs.addReq);
+router.post('/viewCaseApprovedReqsByLpId/:id',casReqs.viewCaseApprovedReqsByLpId);
+router.post('/viewCaseReqById/:id',casReqs.viewCaseReqById);
+router.post('/viewCasePendingReqsByLpId/:id',casReqs.viewCasePendingReqsByLpId);
+router.post('/approveCaseByUserId/:id',casReqs.approveCaseByUserId);
+router.post('/rejectCaseByUserId/:id',casReqs.rejectCaseByUserId);
+
+router.post('/viewCaseReqsByUserId/:id',casReqs.viewCaseReqsByUserId);
+
 
 module.exports = router
