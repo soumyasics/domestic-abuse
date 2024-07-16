@@ -7,25 +7,10 @@ const caseeSchema = new mongoose.Schema({
     ref: 'users'
   },
 
-  title: {
-    type: String,
-    required: true
-  },
-  location: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String,
-    required: true
-  },
-  location: {
-    type: String,
-    required: true
-  },
-  file: {
-    type: Object,
-    default: null
+ 
+  caseId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'cases'
   },
   date: {
     type: Date,
@@ -36,8 +21,8 @@ const caseeSchema = new mongoose.Schema({
     ref: 'legalprofessionals'
   },
   lpStatus:{
-    type:Boolean,
-    default:false
+    type:String,
+    default:'pending'
   }
 
 });

@@ -1,21 +1,26 @@
-const Case = require('./caseSchema');
+const Case = require('./reqSchema');
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
 
 
 
 // Register a new issue
-const registerCase= async (req, res) => {
+const addReq= async (req, res) => {
   try {
-    const { description,location, title,lpId,date } = req.body;
-
+    const { caseId,lpId,date } = req.body;
+   let cases= await Case.findOne({caseId:caseId,userId:req.params.id})
+if(cases){
+  return res.json({
+    status: 409,
+    msg: 'You Have already send Request to this Advocate successfully'
+})
+}
     const newCase= new Case({
-      title,
-      description,
-      location,
+      caseId,
+     
       userId:req.params.id,
-      lpId:lpId,
-      date:date
+      lpId,
+      date:new Date()
     });
 
     await newCase.save()
@@ -40,8 +45,8 @@ const registerCase= async (req, res) => {
 };
 
 // View all 
-const viewCases = (req, res) => {
-  Case.find()
+const viewCasePendingReqsByLpId= (req, res) => {
+  Case.find({lpId:req.params.id,lpStatus:'pending'}).populate('userId caseId')
     .exec()
     .then(data => {
       if (data.length > 0) {
@@ -65,10 +70,34 @@ const viewCases = (req, res) => {
       });
     });
 };
-
+const viewCaseApprovedReqsByLpId= (req, res) => {
+  Case.find({lpId:req.params.id,lpStatus:'approved'}).populate('userId caseId')
+    .exec()
+    .then(data => {
+      if (data.length > 0) {
+        res.json({
+          status: 200,
+          msg: 'Data obtained successfully',
+          data: data,
+        });
+      } else {
+        res.json({
+          status: 200,
+          msg: 'No data obtained',
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({
+        status: 500,
+        msg: 'Data not obtained',
+        Error: err,
+      });
+    });
+};
 // View all issues
-const viewPendingCases = (req, res) => {
-  Case.find({lpStatus:false}).populate('userId')
+const viewCaseReqsByUserId = (req, res) => {
+  Case.find({userId:req.params.id}).populate('lpid caseId')
     .exec()
     .then(data => {
       if (data.length > 0) {
@@ -92,38 +121,11 @@ const viewPendingCases = (req, res) => {
       });
     });
 };
-// Update issue by ID
-const editCaseById = async (req, res) => {
-  const {description,location, title,date} = req.body;
 
-  await Case.findByIdAndUpdate(
-    { _id: req.params.id },
-    {
-      title,
-      description,
-      location,
-      date
-    }
-  )
-    .exec()
-    .then(data => {
-      res.json({
-        status: 200,
-        msg: 'Updated successfully',
-      });
-    })
-    .catch(err => {
-      res.status(500).json({
-        status: 500,
-        msg: 'Data not updated',
-        Error: err,
-      });
-    });
-};
 
 // View issue by ID
-const viewCaseById = (req, res) => {
-  Case.findById({ _id: req.params.id }).populate('userId')
+const viewCaseReqById = (req, res) => {
+  Case.findById({ _id: req.params.id }).populate('userId caseId lpId')
     .exec()
     .then(data => {
       res.json({
@@ -142,8 +144,8 @@ const viewCaseById = (req, res) => {
 };
 
 // View issue by ID
-const viewCaseByUserId = (req, res) => {
-  Case.find({ userId: req.params.id }).populate('lpId')
+const approveCaseByUserId = (req, res) => {
+  Case.findByIdAndUpdate({ _id: req.params.id },{lpStatus:"approved"})
     .exec()
     .then(data => {
       res.json({
@@ -161,10 +163,8 @@ const viewCaseByUserId = (req, res) => {
     });
 };
 
-
-// View issue by ID
-const viewCaseByLPId = (req, res) => {
-  Case.find({ lpId: req.params.id }).populate('userId')
+const rejectCaseByUserId = (req, res) => {
+  Case.findByIdAndUpdate({ _id: req.params.id },{lpStatus:"rejected"})
     .exec()
     .then(data => {
       res.json({
@@ -181,34 +181,15 @@ const viewCaseByLPId = (req, res) => {
       });
     });
 };
-// Delete issue by ID
-const deleteCaseById = (req, res) => {
-  Case.findByIdAndDelete({ _id: req.params.id })
-    .exec()
-    .then(data => {
-      res.json({
-        status: 200,
-        msg: 'Deleted successfully',
-        data: data,
-      });
-    })
-    .catch(err => {
-      res.status(500).json({
-        status: 500,
-        msg: 'Data not deleted',
-        Error: err,
-      });
-    });
-};
+
 
 
 module.exports = {
-  registerCase,
-  viewCases,
-  editCaseById,
-  viewCaseById,
-  deleteCaseById,
-  viewCaseByLPId,
-  viewCaseByUserId,
-  viewPendingCases
+  addReq,
+  viewCaseApprovedReqsByLpId,
+  viewCaseReqById,
+  viewCasePendingReqsByLpId,
+  approveCaseByUserId,
+  rejectCaseByUserId,
+  viewCaseReqsByUserId,
 };

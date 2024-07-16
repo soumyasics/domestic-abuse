@@ -23,10 +23,7 @@ const caseeSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  file: {
-    type: Object,
-    default: null
-  },
+ 
   date: {
     type: Date,
     required: true
