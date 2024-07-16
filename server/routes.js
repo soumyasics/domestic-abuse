@@ -7,6 +7,7 @@ const userController = require('./Users/userController')
 const issue=require('./UserIssues/IssueController')
 const suggestionController=require('./Suggestions/suggestionController')
 const blog=require('./Blogs/blogController')
+const cases=require('./Cases/caseController')
 
 //suppoerter routes
 router.post('/registerSupporters', supporter.upload, supporter.registerSupporters);
@@ -107,7 +108,6 @@ router.post('/viewSuggestionBySuppId/:id', suggestionController.viewSuggestionBy
 
 
 //blogs
-//blogs
 router.post('/addBlog',blog.upload,blog.addBlog)
 router.post('/viewBlogsById/:id',blog.viewBlogsById)
 router.post('/editBlogsById/:id',blog.upload,blog.editBlogsById)
@@ -116,5 +116,16 @@ router.post('/viewAllBlogs',blog.viewAllBlogs)
 router.post('/viewMyBlogsBysupporterId/:id',blog.viewMyBlogsBysupporterId)
 router.post('/viewMyBlogsByCounsellorId/:id',blog.viewMyBlogsByCounsellorId)
 router.post('/viewMyBlogsByLPId/:id',blog.viewMyBlogsByLPId)
+
+
+//cases
+router.post('/registerCase/:id',  cases.registerCase);
+router.post('/viewCaseById/:id', cases.viewCaseById);
+router.post('/editCaseById/:id', cases.editCaseById);
+router.post('/deleteCaseById/:id', cases.deleteCaseById);
+router.get('/viewCaseByUserId/:id', cases.viewCaseByUserId);
+router.post('/viewPendingCases', cases.viewPendingCases);
+router.get('/viewCaseByLPId/:id', cases.viewCaseByLPId);
+router.get('/viewCases', cases.viewCases);
 
 module.exports = router

@@ -71,7 +71,7 @@ const viewBlogsById = (req, res) => {
 const viewAllBlogs = (req, res) => {
   blogSchema
     .find({})
-    .populate("supporterId")
+    .populate("supporterId lpId counsellorId")
     .exec()
     .then((data) => {
       res.json({
