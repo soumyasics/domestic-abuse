@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './UserViewBlogs.css';
-import { IMG_BASE_URL } from '../../../Services/apiService'; // Assuming getBlogs is the function to fetch blogs from backend
+import { getBlogs, IMG_BASE_URL } from '../../../Services/apiService'; // Assuming getBlogs is the function to fetch blogs from backend
 import demo from '../../../Assets/blog-demo.png';
 import { FaRegCalendarAlt } from "react-icons/fa";
 import ReactPaginate from 'react-paginate';
@@ -14,8 +14,8 @@ function UserViewBlogs() {
         // Fetch blogs from backend
         const fetchBlogs = async () => {
             try {
-                // const response = await getBlogs();
-                // setBlogs(response.data);
+                const response = await getBlogs();
+                setBlogs(response.data);
             } catch (error) {
                 console.error('Error fetching blogs:', error);
             }
@@ -44,9 +44,14 @@ function UserViewBlogs() {
                     />
                 </div>
                 <div className='col'>
-                    <div className='row theme-purple m-5'>
+
+                    <div className='row theme-purple m-5'>      
+                                  <h5>{blog.counsellorId?'Councellor Blog':blog.lpId?'Legal Professional Blog':'Supporter Blog'}</h5>
+
                         <div className='col'>
-                            <h5>{blog.author}</h5>
+                            <h5>{blog.counsellorId?blog.counsellorId.name:blog.lpId?blog.lpId.name:blog.supporterId.name}</h5>
+
+
                         </div>
                         <div className='col d-flex justify-content-center align-items-center'>
                             <h5>
@@ -57,12 +62,12 @@ function UserViewBlogs() {
                     </div>
                     <div className='row m-5'>
                         <div className='col'>
-                            <h5 className='theme-purple'>{blog.name}</h5>
+                            <h5 className='theme-purple'>{blog.title}</h5>
                         </div>
                     </div>
                     <div className='row m-5'>
                         <div className='col'>
-                            <p className='fs-6'>{blog.description}</p>
+                            <p className='fs-6'>{blog.content}</p>
                         </div>
                     </div>
                 </div>
@@ -73,7 +78,7 @@ function UserViewBlogs() {
         <div className='container-fluid'>
             <div className='row m-5 mb-2'>
                 <div className='col text-center theme-purple'>
-                    <h5 className=''>User Blogs</h5>
+                    <h5 className=''>Blogs</h5>
                     <h3 className='supporter-view-blogs-heading-border border-bottom border-5 rounded w-50 d-flex justify-content-center m-auto'>
                         Come and Join Our Family
                     </h3>

@@ -79,12 +79,15 @@ function UserNav() {
 
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle mx-3 theme-purple fw-semibold" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Report Issues
+                                Issues
                                 </a>
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown1">
                                     <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-add-issue">Add New</Link></li>
+                                    <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-view-issues">View Issues</Link></li>
+
                                     <li><Link className="dropdown-item theme-purple fw-semibold" to="/">View Suggestions</Link></li>
-                                  
+                                    <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-add-case">Add A Case</Link></li>
+
                                 </ul>
                             </li>
                             <li className="nav-item dropdown">
@@ -95,8 +98,9 @@ function UserNav() {
                                     <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-view-all-safehouses">Safe Spaces</Link></li>
                                     <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-view-all-supporters">Supporters</Link></li>
                                     <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-view-all-counsellors">Counsellors</Link></li>
-                                    <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-view-all-legal-professionals">Legal LegalProfessionalRegister</Link></li>
-                                  
+                                    <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-view-all-legal-professionals">LegalProfessionals</Link></li>
+                                    <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-view-blogs">Blogs</Link></li>
+
                                 </ul>
                             </li>
                             <li className="nav-item dropdown">

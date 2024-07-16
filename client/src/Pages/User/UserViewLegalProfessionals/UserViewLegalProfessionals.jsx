@@ -19,7 +19,7 @@ const UserViewLegalProfessionals = () => {
   const fetchLegalProfessionals = useCallback(async () => {
     try {
       const response = await viewAllApprovedLegalProfessionals();
-      setLegalProfessionals(response.data || []);
+      setLegalProfessionals(response || []);
     } catch (error) {
       console.error('Error fetching legal professionals:', error);
       toast.error('Error fetching legal professionals.');
