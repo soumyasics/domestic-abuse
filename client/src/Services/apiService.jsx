@@ -902,10 +902,44 @@ export const viewAllSafehouses=async()=>{
     throw error;
   }
 }
+export const viewAllSafehousesBySuppId=async(id)=>{
+  try {
+    console.log("in fun");
+    const response = await axios.post(`${API_BASE_URL}/viewSafehouseBySupporterId/${id}`);
+    console.log("in fun",response);
 
+    return response;
+  } catch (error) {
+    console.error('Error fetching legal professional by ID:', error);
+    throw error;
+  }
+}
+export const searchhouseByName=async(id)=>{
+  try {
+    console.log("in fun");
+    const response = await axios.post(`${API_BASE_URL}/searchhouseByName/${id}`);
+    console.log("in fun",response);
 
+    return response;
+  } catch (error) {
+    console.error('Error fetching legal professional by ID:', error);
+    throw error;
+  }
+}
 
+export const addHouseReqs=async(reqs)=>{
+  try {
+    console.log("in fun req",reqs);
+    
+    const response = await axios.post(`${API_BASE_URL}/addhouseReq`,reqs);
+    console.log("in fun",response);
 
+    return response;
+  } catch (error) {
+    console.error('Error fetching legal professional by ID:', error);
+    throw error;
+  }
+}
 
 // Api for Registering User
 export const registerIssue = async (issues) => {
