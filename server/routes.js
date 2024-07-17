@@ -9,6 +9,7 @@ const suggestionController=require('./Suggestions/suggestionController')
 const blog=require('./Blogs/blogController')
 const cases=require('./Cases/caseController')
 const casReqs=require('./LP-UserRequests/reqController')
+const houseReqs=require('./SafeHouse/HouseReqs/houseReqController')
 
 //suppoerter routes
 router.post('/registerSupporters', supporter.upload, supporter.registerSupporters);
@@ -36,6 +37,7 @@ router.post('/deActivateSafehouseById/:id', safehouse.deActivateSafehouseById);
 router.post('/rejectSafehouseById/:id', safehouse.rejectSafehouseById);
 router.post('/viewSafehouseBySupporterId/:id', safehouse.viewSafehouseBySupporterId);
 router.post('/viewSafehouseReqsForAdmin', safehouse.viewSafehouseReqsForAdmin);
+router.post('/searchhouseByName/:landmark', safehouse.searchhouseByName);
 
 
 //Counsellor routes
@@ -138,6 +140,15 @@ router.post('/approveCaseByUserId/:id',casReqs.approveCaseByUserId);
 router.post('/rejectCaseByUserId/:id',casReqs.rejectCaseByUserId);
 
 router.post('/viewCaseReqsByUserId/:id',casReqs.viewCaseReqsByUserId);
+
+//House Requests
+router.post('/addhouseReq',houseReqs.addReq);
+router.post('/viewHouseReqById/:id',houseReqs.viewHouseReqById);
+router.post('/viewpendingReqsBySuppId/:id',houseReqs.viewpendingReqsBySuppId);
+router.post('/approveReqByUserId/:id',houseReqs.approveReqByUserId);
+router.post('/rejectHouseByUserId/:id',houseReqs.rejectHouseByUserId);
+router.post('/viewHouseReqsByUserId/:id',houseReqs.viewhouseReqsByUserId);
+
 
 
 module.exports = router
