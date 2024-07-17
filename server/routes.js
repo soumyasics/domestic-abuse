@@ -95,6 +95,7 @@ router.post('/editIssueById/:id', issue.upload, issue.editIssueById);
 router.post('/deleteIssueById/:id', issue.deleteIssueById);
 router.get('/viewIssues', issue.viewIssues);
 router.post('/viewPendingIssues', issue.viewPendingIssues);
+router.post('/viewPendingIssuesByUserId/:id', issue.viewPendingIssuesByUserId);
 
 
 //suggestions
