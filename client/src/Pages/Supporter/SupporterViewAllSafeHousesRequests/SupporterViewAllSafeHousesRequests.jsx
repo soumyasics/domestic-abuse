@@ -13,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function SupporterViewAllSafeHousesRequests() {
   const [safehouses, setSafehouses] = useState([]);
+  const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const safehousesPerPage = 10;
   const navigate=useNavigate();
@@ -90,38 +91,35 @@ function SupporterViewAllSafeHousesRequests() {
             <tr className="text-center">
               <th className='view-all-safehouse-theme text-white'>SI.No</th>
               <th className='view-all-safehouse-theme text-white'>Name</th>
-              <th className='view-all-safehouse-theme text-white'>Address</th>
-              <th className='view-all-safehouse-theme text-white'>Contact Number</th>
-              <th className='view-all-safehouse-theme text-white'>Landmark</th>
-              <th className='view-all-safehouse-theme text-white'>Capacity</th>
-              <th className='view-all-safehouse-theme text-white'>Monthly Rent</th>
-              <th className='view-all-safehouse-theme text-white'>Status</th>
+                <th className='view-all-safehouse-theme text-white'>Email-Id</th>
+                <th className='view-all-safehouse-theme text-white'>Contact Number</th>
+                <th className='view-all-safehouse-theme text-white'>Gender</th>
+                <th className='view-all-safehouse-theme text-white'>Address</th>
               <th className='view-all-safehouse-theme text-white'>Action</th>
             </tr>
           </thead>
           <tbody className='text-center'>
-            {currentSafehouses.map((safehouse, index) => (
-              <tr key={safehouse._id} className='view-all-safehouse-theme-table-body'>
+            {currentSafehouses.map((user, index) => (
+              <tr key={user._id} className='view-all-safehouse-theme-table-body'>
                 <td className='p-2'>{offset + index + 1}</td>
-                <td className='p-2'>{safehouse.name}</td>
-                <td className='p-2'>{safehouse.address}</td>
-                <td className='p-2'>{safehouse.contact}</td>
-                <td className='p-2'>{safehouse.landmark}</td>
-                <td className='p-2'>{safehouse.capacity}</td>
-                <td className='p-2'>{safehouse.rent}</td>
-                <td className='p-2'>{safehouse.adminApproved?'Approved':'Pending'}</td>
+                <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td>{user.contact}</td>
+                  <td>{user.gender}</td>
+                  <td>{user.address}</td>
+                <td className='p-2'>{user.adminApproved?'Approved':'Pending'}</td>
                 <td className='p-2'>
                   <div className='d-flex justify-content-center'>
                     <div className='bg-purple rounded-circle cursor-pointer mx-2'>
                       <FaPen
                         className='mx-2 text-white'
-                        onClick={() => handleEdit(safehouse._id)}
+                        onClick={() => handleEdit(user._id)}
                       />
                     </div>
                     <div className='bg-purple rounded-circle cursor-pointer mx-2'>
                       <RxCross1
                         className='mx-2 cursor-pointer text-white'
-                        onClick={() => handleRemove(safehouse._id)}
+                        onClick={() => handleRemove(user._id)}
                       />
                     </div>
                   </div>
