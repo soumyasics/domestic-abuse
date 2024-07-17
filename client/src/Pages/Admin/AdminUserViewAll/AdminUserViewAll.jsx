@@ -13,7 +13,6 @@ import { useNavigate } from 'react-router-dom';
 import { activateUserById, deactivateUserById, viewUsersForAdmin } from '../../../Services/apiService';
 
 const AdminUserViewAll = () => {
-  console.log("here");
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
