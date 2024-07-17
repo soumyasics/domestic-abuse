@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './SupporterEditBlogs.css';
-import { editBlogsById, IMG_BASE_URL, viewBlogsById } from '../../../Services/apiService';
+import { deleteBlogsById, editBlogsById, IMG_BASE_URL, viewBlogsById } from '../../../Services/apiService';
 import demo from '../../../Assets/blog-demo.png';
 import { PiPencilDuotone } from "react-icons/pi";
 import { useParams,Link,useNavigate } from 'react-router-dom';
@@ -86,11 +86,7 @@ const navigate=useNavigate()
     
         
     };
-    const deleteBlog=async()=>{
-        const response = await axios.post(`${API_BASE_URL}/deleteBlogsById/${id}`)
-        console.log("response",response);
 
-    }
 
     return (
         <div className='container-fluid'>
@@ -124,7 +120,7 @@ const navigate=useNavigate()
                                     <input
                                         type="file"
                                         id="imageUpload"
-                                        title="image"
+                                        name="image"
                                         // accept="image/*"
                                         className={`image-upload-input cursor-pointer ${errors.image ? 'is-invalid' : ''}`}
                                         onChange={handleChange}
@@ -142,7 +138,7 @@ const navigate=useNavigate()
                                         <div className='input-group w-100'>
                                             <input
                                                 type='text'
-                                                title='title'
+                                                name='title'
                                                 value={formValues.title}
                                                 onChange={handleChange}
                                                 className={`form-control  supporter-add-blog-input opacity-50 shadow m-2 me-0 border ${errors.title ? 'is-invalid' : ''}`}
@@ -159,7 +155,7 @@ const navigate=useNavigate()
                                     <div className='col-8'>
                                         <div className='input-group w-100'>
                                             <textarea
-                                                title='content'
+                                                name='content'
                                                 value={formValues.content}
                                                 onChange={handleChange}
                                                 className={`form-control  supporter-add-blog-input opacity-50 shadow m-2 me-0 border ${errors.content ? 'is-invalid' : ''}`}
@@ -177,7 +173,7 @@ const navigate=useNavigate()
                                 <button type='submit' className='btn text-white bg-purple py-2 px-5 ' onClick={handleSubmit}>Update</button>
                             </div>
                             <div className='col-4 text-end'>
-                                <button type='button' className='btn text-white bg-purple py-2 px-5 ' onClick={deleteBlog}>Cancel</button>
+                                <button type='button' className='btn text-white bg-purple py-2 px-5 ' >Cancel</button>
                             </div>
                         </div>
                     </form>

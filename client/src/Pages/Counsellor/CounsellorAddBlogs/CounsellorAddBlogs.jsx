@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 function CounsellorAddBlogs() {
     const [formValues, setFormValues] = useState({
-        counsellorId: localStorage.getItem('counsellorId'),
+        counsellorId:localStorage.getItem('counsellorId'),
         title: '',
         content: '',
         image: null,
@@ -25,7 +25,7 @@ function CounsellorAddBlogs() {
         }
 
         if (!formValues.content) {
-            errors.content = "Content is required";
+            errors.content = "content is required";
         }
 
         if (!formValues.image) {
@@ -48,32 +48,36 @@ function CounsellorAddBlogs() {
         }
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
+        console.log("vla",validate());
         if (!validate()) {
-            toast.error('Please fix the errors in the form.');
-            return;
-        }
-
-        setIsSubmitting(true);
-        try {
-            const response = await addBlog(formValues, localStorage.getItem('counsellorId'));
-            if (response.success) {
+         
+              toast.error('Please fix the errors in the form.');
+              return;
+            }
+        
+            setIsSubmitting(true);
+            try {
+              const response = await addBlog(formValues);
+              if (response.success) {
                 toast.success('Blog registered successfully!');
                 setTimeout(() => {
-                    navigate('/counsellor-view-all-blogs');
+                  navigate('/counsellor-view-blogs');
                 }, 1000);
-            } else {
+        
+                // Reset form or perform additional actions on success
+              } else {
                 toast.error(response.message);
-            }
-        } catch (error) {
-            console.error('Error registering blog', error);
-            toast.error('Registration failed. Please try again.');
-        } finally {
-            setIsSubmitting(false);
+              }
+            } catch (error) {
+              console.error('Error Registering Blog', error);
+              toast.error('Registration failed. Please try again.');
+            } finally {
+              setIsSubmitting(false);
+            }            console.log("Blog added successfully", formValues);
         }
-    };
-
+    
     return (
         <div className='container-fluid'>
             <div className='row m-5'>

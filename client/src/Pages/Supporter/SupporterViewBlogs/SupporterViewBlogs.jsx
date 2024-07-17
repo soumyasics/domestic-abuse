@@ -4,13 +4,14 @@ import { IMG_BASE_URL,getBlogsBySuppId} from '../../../Services/apiService'; // 
 import demo from '../../../Assets/blog-demo.png';
 import { FaRegCalendarAlt } from "react-icons/fa";
 import ReactPaginate from 'react-paginate';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import { toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function SupporterViewBlogs() {
   const [blogs, setBlogs] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const blogsPerPage = 3;
-
+const navigate=useNavigate()
   useEffect(() => {
     // Fetch blogs from backend
     const fetchBlogs = async () => {
@@ -29,13 +30,30 @@ function SupporterViewBlogs() {
   const handlePageClick = (data) => {
     setCurrentPage(data.selected);
   };
+ const deleteBlogsById=(id)=>{
+    try {
+        const response =  deleteBlogsById(id);
+        console.log('del supporter response:', response);
 
+        if (response.status==200) {
+            toast.success('Blog Removed successfully');
+            navigate('/supporter-view-blogs');
+        } else {
+            toast.success(response.message || 'Blog updated successfully');
+        }
+    } catch (error) {
+        console.error('Error updating profile:', error);
+        toast.error('An error occurred while updating the profile');
+    }
+
+
+ }
   const displayBlogs = blogs
     // .slice(currentPage * blogsPerPage, (currentPage + 1) * blogsPerPage)
     .map((blog) => {
       return(
         <div>
-      {blog.title}
+     
       <div className='row bg-creamy m-5' key={blog.id}>
         <div className='col m-5'>
           <img
@@ -73,7 +91,7 @@ function SupporterViewBlogs() {
           <div className='row m-5'>
             <div className='col text-end'>
               <span><Link to={`/supporter-edit-blogs/${blog._id}`}><button className='btn rounded bg-purple px-5 m-2 text-white'>Edit</button></Link></span>
-              <span><button className='btn rounded bg-purple px-5 m-2 text-white'>Remove</button></span>
+              <span><button className='btn rounded bg-purple px-5 m-2 text-white' onClick={()=>{deleteBlogsById(blog._id)}}>Remove</button></span>
             </div>
           </div>
         </div>

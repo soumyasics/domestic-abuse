@@ -7,6 +7,8 @@ const userController = require('./Users/userController')
 const issue=require('./UserIssues/IssueController')
 const suggestionController=require('./Suggestions/suggestionController')
 const blog=require('./Blogs/blogController')
+const cases=require('./Cases/caseController')
+const casReqs=require('./LP-UserRequests/reqController')
 
 //suppoerter routes
 router.post('/registerSupporters', supporter.upload, supporter.registerSupporters);
@@ -97,22 +99,45 @@ router.post('/viewPendingIssues', issue.viewPendingIssues);
 
 
 router.post('/registerSuggestion', suggestionController.registerSuggestion);
-router.get('/viewSuggestions', suggestionController.viewSuggestions);
-router.put('/editSuggestionById/:id', suggestionController.editSuggestionById);
-router.get('/viewSuggestionById/:id', suggestionController.viewSuggestionById);
-router.delete('/deleteSuggestionById/:id', suggestionController.deleteSuggestionById);
-router.delete('/viewSuggestionBySuppId/:id', suggestionController.viewSuggestionBySuppId);
+router.post('/viewSuggestions', suggestionController.viewSuggestions);
+router.post('/editSuggestionById/:id', suggestionController.editSuggestionById);
+router.post('/viewSuggestionById/:id', suggestionController.viewSuggestionById);
+router.post('/deleteSuggestionById/:id', suggestionController.deleteSuggestionById);
+router.post('/viewSuggestionBySuppId/:id', suggestionController.viewSuggestionBySuppId);
 
 
 
 
 //blogs
-//blogs
-router.post('/addBlog/:id',blog.upload,blog.addBlog)
+router.post('/addBlog',blog.upload,blog.addBlog)
 router.post('/viewBlogsById/:id',blog.viewBlogsById)
 router.post('/editBlogsById/:id',blog.upload,blog.editBlogsById)
 router.post('/deleteBlogsById/:id',blog.deleteBlogsById)
 router.post('/viewAllBlogs',blog.viewAllBlogs)
 router.post('/viewMyBlogsBysupporterId/:id',blog.viewMyBlogsBysupporterId)
+router.post('/viewMyBlogsByCounsellorId/:id',blog.viewMyBlogsByCounsellorId)
+router.post('/viewMyBlogsByLPId/:id',blog.viewMyBlogsByLPId)
+
+
+//cases
+router.post('/registerCase/:id',  cases.registerCase);
+router.post('/viewCaseById/:id', cases.viewCaseById);
+router.post('/editCaseById/:id', cases.editCaseById);
+router.post('/deleteCaseById/:id', cases.deleteCaseById);
+router.get('/viewCaseByUserId/:id', cases.viewCaseByUserId);
+router.post('/viewPendingCases', cases.viewPendingCases);
+router.get('/viewCaseByLPId/:id', cases.viewCaseByLPId);
+router.get('/viewCases', cases.viewCases);
+
+
+router.post('/addReq/:id',casReqs.addReq);
+router.post('/viewCaseApprovedReqsByLpId/:id',casReqs.viewCaseApprovedReqsByLpId);
+router.post('/viewCaseReqById/:id',casReqs.viewCaseReqById);
+router.post('/viewCasePendingReqsByLpId/:id',casReqs.viewCasePendingReqsByLpId);
+router.post('/approveCaseByUserId/:id',casReqs.approveCaseByUserId);
+router.post('/rejectCaseByUserId/:id',casReqs.rejectCaseByUserId);
+
+router.post('/viewCaseReqsByUserId/:id',casReqs.viewCaseReqsByUserId);
+
 
 module.exports = router

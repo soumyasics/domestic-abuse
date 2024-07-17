@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getSuggestionById, IMG_BASE_URL } from '../../../Services/apiService';
+import { IMG_BASE_URL, viewMySuggestionById } from '../../../Services/apiService';
 import './SupporterViewSuggestionDetails.css';
 import { RiMessage2Fill } from "react-icons/ri";
 import { useParams } from 'react-router-dom';
@@ -10,12 +10,19 @@ import { FaDownload } from "react-icons/fa";
 function SupporterViewSuggestionDetails() {
     const { id } = useParams();
     const [user, setUser] = useState({
-        type: '',
+        supporterId: localStorage.getItem('supporterId'),
+        issueId: {
+             type: '',
         description: '',
         severity: '',
         location: '',
         contact: '',
-        dateTime: '',
+        dateTime: ''
+        },
+        sug1: false,
+        sug2: false,
+        sug3: false,
+       
         userId: {
 
             address: '',
@@ -42,6 +49,23 @@ function SupporterViewSuggestionDetails() {
         sug2: false,
         sug3: false
     });
+
+    const fetchSuggestions = async () => {
+        try {
+          const response = await viewMySuggestionById(id)
+          setUser(response.data);
+          console.log("use",user);
+        } catch (error) {
+          console.error('Error fetching suggestions:', error);
+          toast.error('Error fetching suggestions.');
+        }
+      };
+    
+      useEffect(() => {
+        fetchSuggestions();
+      }, [id]);
+    
+
 
     return (
         <div className='container-fluid'>
@@ -104,37 +128,37 @@ function SupporterViewSuggestionDetails() {
                             </div>
                             <div className='row border-bottom m-3 card-text'>
                                 <div className='col'>Type of Issue</div>
-                                <div className='col theme-purple'>{user?.type}</div>
+                                <div className='col theme-purple'>{user?.issueId.type}</div>
                             </div>
                             <div className='row border-bottom m-3 card-text'>
                                 <div className='col'>Description</div>
-                                <div className='col theme-purple'>{user?.description}</div>
+                                <div className='col theme-purple'>{user?.issueId?.description}</div>
                             </div>
                             <div className='row border-bottom m-3 card-text'>
                                 <div className='col'>Severity</div>
-                                <div className='col theme-purple'>{user?.severity}</div>
+                                <div className='col theme-purple'>{user?.issueId?.severity}</div>
                             </div>
                             <div className='row border-bottom m-3 card-text'>
                                 <div className='col'>Attachments</div>
                                 <div className='col theme-purple'>
-                                    <a href={`${IMG_BASE_URL}/${user?.file?.filename}`} target="_blank" rel="noopener noreferrer"> <FaDownload className='theme-purple mx-1' /> File</a>
+                                    <a href={`${IMG_BASE_URL}/${user?.issueId?.file?.filename}`} target="_blank" rel="noopener noreferrer"> <FaDownload className='theme-purple mx-1' /> File</a>
                                 </div>
                             </div>
                             <div className='row border-bottom m-3 card-text'>
                                 <div className='col'>Location</div>
-                                <div className='col theme-purple card-text'>{user?.location}</div>
+                                <div className='col theme-purple card-text'>{user?.issueId?.location}</div>
                             </div>
                             <div className='row border-bottom m-3 card-text'>
                                 <div className='col'>Contact No</div>
-                                <div className='col theme-purple'>{user?.contact}</div>
+                                <div className='col theme-purple'>{user?.issueId?.contact}</div>
                             </div>
                             <div className='row border-bottom m-3 card-text'>
                                 <div className='col'>Date</div>
-                                <div className='col theme-purple'>{user?.dateTime.slice(0, 10)}</div>
+                                <div className='col theme-purple'>{user.issueId?.dateTime.slice(0, 10)}</div>
                             </div>
                             <div className='row border-bottom m-3 card-text'>
                                 <div className='col'>Time</div>
-                                <div className='col theme-purple'>{user?.dateTime.slice(11, 16)}</div>
+                                <div className='col theme-purple'>{user.issueId.dateTime.slice(11, 16)}</div>
                             </div>
                         </div>
                     </div>
@@ -145,6 +169,11 @@ function SupporterViewSuggestionDetails() {
                     <h3 className='theme-purple'>Current Status</h3>
                 </div>
             </div>
+
+          
+            {
+                (user.sug1)?
+                <>
             <div className='row m-5 supporter-add-suggestion-box1 rounded-3 py-1 text-center'>
                 <div className='col '>
                     <h3 className='text-white'>Moved to Legal Professional Option</h3>
@@ -154,7 +183,7 @@ function SupporterViewSuggestionDetails() {
                 <div className='col'>
                     <table className="table table-borderless">
                         <thead>
-                            <tr className=' h5'>
+                            {/* <tr className=' h5'>
                                 <th scope="col" className='theme-purple'>#</th>
                                 <th scope="col" className='theme-purple'>Advocate Name</th>
                                 <th scope="col" className='theme-purple'>Mail Id</th>
@@ -163,10 +192,10 @@ function SupporterViewSuggestionDetails() {
                                 <th scope="col" className='theme-purple'>Firm Address</th>
                                 <th scope="col" className='theme-purple'>License Number</th>
                                 <th scope="col" className='theme-purple'>Status</th>
-                            </tr>
+                            </tr> */}
                         </thead>
                         <tbody>
-                            <tr>
+                            {/* <tr>
                                 <th scope="row">1</th>
                                 <td>Mark</td>
                                 <td>Otto</td>
@@ -175,11 +204,16 @@ function SupporterViewSuggestionDetails() {
                                 <td>@mdo</td>
                                 <td>@mdo</td>
                                 <td>@mdo</td>
-                            </tr>
+                            </tr> */}
                         </tbody>
                     </table>
                 </div>
             </div>
+            </>
+
+            :(user.sug2)?
+
+         <>
             <div className='row m-5 supporter-add-suggestion-box2 rounded-3 py-1 text-center'>
                 <div className='col '>
                     <h3 className='text-white'>Moved to Safe House Option</h3>
@@ -189,7 +223,7 @@ function SupporterViewSuggestionDetails() {
                 <div className='col'>
                     <table className="table table-borderless">
                         <thead>
-                            <tr className=' h5'>
+                            {/* <tr className=' h5'>
                                 <th scope="col" className='theme-purple'>#</th>
                                 <th scope="col" className='theme-purple'>House Name</th>
                                 <th scope="col" className='theme-purple'>Address</th>
@@ -197,10 +231,10 @@ function SupporterViewSuggestionDetails() {
                                 <th scope="col" className='theme-purple'>Accommodation Capacity</th>
                                 <th scope="col" className='theme-purple'>Monthly Rent</th>
                                 <th scope="col" className='theme-purple'>Status</th>
-                            </tr>
+                            </tr> */}
                         </thead>
                         <tbody>
-                            <tr>
+                            {/* <tr>
                                 <th scope="row">1</th>
                                 <td>Mark</td>
                                 <td>Otto</td>
@@ -208,12 +242,14 @@ function SupporterViewSuggestionDetails() {
                                 <td>@mdo</td>
                                 <td>@mdo</td>
                                 <td>@mdo</td>
-                            </tr>
+                            </tr> */}
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div className='row m-5 supporter-add-suggestion-box3 rounded-3 py-1 text-center'>
+            </> :(
+            <>  
+                <div className='row m-5 supporter-add-suggestion-box3 rounded-3 py-1 text-center'>
                 <div className='col '>
                     <h3 className='text-white'>Moved to Safe Counselor Option</h3>
                 </div>
@@ -222,7 +258,7 @@ function SupporterViewSuggestionDetails() {
                 <div className='col'>
                     <table className="table table-borderless">
                         <thead>
-                            <tr className=' h5'>
+                            {/* <tr className=' h5'>
                                 <th scope="col" className='theme-purple'>#</th>
                                 <th scope="col" className='theme-purple'>Counsellor Name</th>
                                 <th scope="col" className='theme-purple'>Mail Id</th>
@@ -231,10 +267,10 @@ function SupporterViewSuggestionDetails() {
                                 <th scope="col" className='theme-purple'>Location</th>
                                 <th scope="col" className='theme-purple'>Specialisation</th>
                                 <th scope="col" className='theme-purple'>Status</th>
-                            </tr>
+                            </tr> */}
                         </thead>
                         <tbody>
-                            <tr>
+                            {/* <tr>
                                 <th scope="row">1</th>
                                 <td>Mark</td>
                                 <td>Otto</td>
@@ -243,11 +279,14 @@ function SupporterViewSuggestionDetails() {
                                 <td>@mdo</td>
                                 <td>@mdo</td>
                                 <td>@mdo</td>
-                            </tr>
+                            </tr> */}
                         </tbody>
                     </table>
                 </div>
             </div>
+            </>
+            )
+        }
         </div>
     )
 }

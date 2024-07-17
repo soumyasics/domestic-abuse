@@ -1,32 +1,52 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './CounsellorEditBlogs.css';
-import { IMG_BASE_URL } from '../../../Services/apiService';
 import demo from '../../../Assets/blog-demo.png';
 import { PiPencilDuotone } from "react-icons/pi";
+import { useParams,Link,useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import {  editBlogsById, IMG_BASE_URL, viewBlogsById } from '../../../Services/apiService';
 
 function CounsellorEditBlogs() {
+   
+    const {id}=useParams()
     const [formValues, setFormValues] = useState({
-        name: '',
-        description: '',
-        image: null,
+        title: '',
+        content: '',
+        image: {filename:''},
     });
 
-    const [errors, setErrors] = useState({});
+    
+  useEffect(() => {
+    // Fetch blogs from backend
+    const fetchBlogs = async () => {
+      try {
+        const response = await viewBlogsById(id);
+        console.log("bol",response);
+        setFormValues(response.data);
+      } catch (error) {
+        console.error('Error fetching blogs:', error);
+      }
+    };
 
+    fetchBlogs();
+  }, []);
+const navigate=useNavigate()
+    const [errors, setErrors] = useState({});
     const validate = () => {
         const errors = {};
 
-        if (!formValues.name) {
-            errors.name = "Blog name is required";
+        if (!formValues.title) {
+            errors.title = "Blog title is required";
         }
 
-        if (!formValues.description) {
-            errors.description = "Description is required";
+        if (!formValues.content) {
+            errors.content = "content is required";
         }
 
         if (!formValues.image) {
             errors.image = "Cover image is required";
-        } else if (!/\.(jpg|jpeg|png|gif)$/i.test(formValues.image.name)) {
+        } else if (!/\.(jpg|jpeg|png|gif)$/i.test(formValues.image.title)) {
             errors.image = "Only image files are allowed (jpg, jpeg, png, gif)";
         }
 
@@ -45,11 +65,24 @@ function CounsellorEditBlogs() {
     };
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        if (validate()) {
-            // Perform the add blog action
-            console.log("Blog added successfully", formValues);
-        }
+       e.preventDefault()
+             
+                try {
+                    const response =  editBlogsById(id,formValues);
+                    console.log('Edit counc response:', response);
+    
+                    if (response.status==200) {
+                        toast.success('Blog updated successfully');
+                        navigate('/counsellor-view-blogs');
+                    } else {
+                        toast.success(response.message || 'Blog updated successfully');
+                    }
+                } catch (error) {
+                    console.error('Error updating profile:', error);
+                    toast.error('An error occurred while updating the profile');
+                }
+    
+        
     };
 
     return (
@@ -95,36 +128,36 @@ function CounsellorEditBlogs() {
                             <div className='col'>
                                 <div className='row m-5'>
                                     <div className='col-4 text-center d-flex align-items-center '>
-                                        <h5 className='theme-purple justify-content-center'>Blog Name</h5>
+                                        <h5 className='theme-purple justify-content-center'>Blog title</h5>
                                     </div>
                                     <div className='col-8'>
                                         <div className='input-group w-100'>
                                             <input
                                                 type='text'
-                                                name='name'
-                                                value={formValues.name}
+                                                name='title'
+                                                value={formValues.title}
                                                 onChange={handleChange}
-                                                className={`form-control  supporter-add-blog-input opacity-50 shadow m-2 me-0 border ${errors.name ? 'is-invalid' : ''}`}
+                                                className={`form-control  supporter-add-blog-input opacity-50 shadow m-2 me-0 border ${errors.title ? 'is-invalid' : ''}`}
                                                 required
                                             />
-                                            {errors.name && <div id="nameError" className="invalid-feedback ms-2">{errors.name}</div>}
+                                            {errors.title && <div id="titleError" className="invalid-feedback ms-2">{errors.title}</div>}
                                         </div>
                                     </div>
                                 </div>
                                 <div className='row m-5'>
                                     <div className='col-4 text-center d-flex align-items-center'>
-                                        <h5 className='theme-purple justify-content-center'>Description</h5>
+                                        <h5 className='theme-purple justify-content-center'>content</h5>
                                     </div>
                                     <div className='col-8'>
                                         <div className='input-group w-100'>
                                             <textarea
-                                                name='description'
-                                                value={formValues.description}
+                                                name='content'
+                                                value={formValues.content}
                                                 onChange={handleChange}
-                                                className={`form-control  supporter-add-blog-input opacity-50 shadow m-2 me-0 border ${errors.description ? 'is-invalid' : ''}`}
+                                                className={`form-control  supporter-add-blog-input opacity-50 shadow m-2 me-0 border ${errors.content ? 'is-invalid' : ''}`}
                                                 required
                                             />
-                                            {errors.description && <div id="descriptionError" className="invalid-feedback ms-2">{errors.description}</div>}
+                                            {errors.content && <div id="contentError" className="invalid-feedback ms-2">{errors.content}</div>}
                                         </div>
                                     </div>
                                 </div>
@@ -133,10 +166,10 @@ function CounsellorEditBlogs() {
                         <div className='row m-5'>
                             <div className='col-4 text-center d-flex align-items-center'></div>
                             <div className='col-4 text-end'>
-                                <button type='submit' className='btn text-white bg-purple py-2 px-5 '>Update</button>
+                                <button type='submit' className='btn text-white bg-purple py-2 px-5 ' onClick={handleSubmit}>Update</button>
                             </div>
                             <div className='col-4 text-end'>
-                                <button type='button' className='btn text-white bg-purple py-2 px-5 '>Cancel</button>
+                                <button type='button' className='btn text-white bg-purple py-2 px-5 ' >Cancel</button>
                             </div>
                         </div>
                     </form>

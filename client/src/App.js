@@ -95,7 +95,7 @@ function App() {
             <Route path='/user-view-all-counsellors' element={[<UserNav/>,<UserViewCounsellors/>]} />
             <Route path='/user-view-all-counsellor-details' element={[<UserNav/>,<UserViewCounsellorDetails/>]} />
             <Route path='/user-view-all-legal-professionals' element={[<UserNav/>,<UserViewLegalProfessionals/>]} />
-            <Route path='/user-legal-professional-detail/:id' element={[<UserNav/>,<UserLegalProfessionalDetails/>]} />
+            <Route path='/user-legal-professional-detail' element={[<UserNav/>,<UserLegalProfessionalDetails/>]} />
             <Route path='/user-add-issue' element={[<UserNav/>,<UserAddIssue/>]} />
             <Route path='/user-edit-issue' element={[<UserNav/>,<UserEditIssue/>]} />
             <Route path='/user-add-case' element={[<UserNav/>,<UserAddCase/>]} />
@@ -144,7 +144,7 @@ function App() {
             <Route path='/supporter-view-all-issues' element={[<SupprterNavbar/>,<SupporterViewAllIssues/>]} />
             <Route path='/supporter-view-all-issues-history' element={[<SupprterNavbar/>,<SupporterViewAllIssuesHistory/>]} />
             <Route path='/supporter-suggestions/:id' element={[<SupprterNavbar/>,<SupporterAddSuggestion/>]} />
-            <Route path='/supporter-suggestion-details' element={[<SupprterNavbar/>,<SupporterViewSuggestionDetails/>]} />
+            <Route path='/supporter-suggestion-details/:id' element={[<SupprterNavbar/>,<SupporterViewSuggestionDetails/>]} />
             <Route path='/supporter-add-blogs' element={[<SupprterNavbar/>,<SupporterAddBlogs/>]} />
             <Route path='/supporter-edit-blogs/:id' element={[<SupprterNavbar/>,<SupporterEditBlogs/>]} />
             <Route path='/supporter-view-blogs' element={[<SupprterNavbar/>,<SupporterViewBlogs/>]} />
@@ -163,7 +163,7 @@ function App() {
             <Route path='/counsellor-view-appointment-details' element={[<CouncillorNav/>,<CounsellorViewAppointmentDetails/>]} />
             <Route path='/counsellor-view-clients' element={[<CouncillorNav/>,<CounsellorViewClients />]} />
             <Route path='/counsellor-add-blogs' element={[<CouncillorNav/>,<CounsellorAddBlogs/>]} />
-            <Route path='/counsellor-edit-blogs' element={[<CouncillorNav/>,<CounsellorEditBlogs/>]} />
+            <Route path='/counsellor-edit-blogs/:id' element={[<CouncillorNav/>,<CounsellorEditBlogs/>]} />
             <Route path='/counsellor-view-blogs' element={[<CouncillorNav/>,<CounsellorViewBlogs/>]} />
             
             {/* Legal Professional Paths  */}
@@ -173,7 +173,7 @@ function App() {
             <Route path='/legal-professional-edit-profile' element={[<LPNav/>,<LegalProfessionalEditProfile />]} />
             <Route path='/legal-professional-home' element={[<LPNav/>,<LegalProfessionalHome />]} />
             <Route path='/legal-professional-add-blogs' element={[<LPNav/>,<LegalProfessionalAddBlogs/>]} />
-            <Route path='/legal-professional-edit-blogs' element={[<LPNav/>,<LegalProfessionalEditBlogs/>]} />
+            <Route path='/legal-professional-edit-blogs/:id' element={[<LPNav/>,<LegalProfessionalEditBlogs/>]} />
             <Route path='/legal-professional-view-blogs' element={[<LPNav/>,<LegalProfessionalViewBlogs/>]} />
 
 

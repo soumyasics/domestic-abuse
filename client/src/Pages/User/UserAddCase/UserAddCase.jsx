@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import './UserAddCase.css';
-
+import { addCase } from '../../../Services/apiService';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 function UserAddCase() {
   const [formData, setFormData] = useState({
     title: '',
@@ -19,7 +22,7 @@ function UserAddCase() {
     if (!formData.date) newErrors.date = 'Date is required';
     return newErrors;
   };
-
+const navigate=useNavigate()
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -31,22 +34,19 @@ function UserAddCase() {
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length === 0) {
       try {
-        // Add your form submission logic here, e.g., an API call
-        console.log('Form data submitted:', formData);
-        // Reset form data after successful submission
-        setFormData({
-          title: '',
-          description: '',
-          location: '',
-          date: '',
-        });
-        setErrors({});
-      } catch (error) {
-        console.error('Error submitting form:', error);
-        // Display error message to the user
-        setErrors({ form: 'An error occurred while submitting the form. Please try again.' });
-      }
-    }
+        const response = await addCase(formData,localStorage.getItem('userId'));
+        console.log(response);
+        if (response.success) {
+          toast.success(response.message);
+          navigate('/user-home');
+        } else {
+          toast.error(response.message);
+        }
+  } catch (error) {
+      console.error('Error Adding Cases', error);
+      toast.error(error.response?.data?.message || 'failed to Add Issue. Please try again.');
+  }
+}
   };
 
   return (

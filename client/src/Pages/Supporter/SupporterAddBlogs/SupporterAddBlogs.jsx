@@ -58,7 +58,7 @@ function SupporterAddBlogs() {
         
             setIsSubmitting(true);
             try {
-              const response = await addBlog(formValues,localStorage.getItem('supporterId'));
+              const response = await addBlog(formValues);
               if (response.success) {
                 toast.success('Blog registered successfully!');
                 setTimeout(() => {

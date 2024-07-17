@@ -1052,11 +1052,11 @@ export const deactivateUserById = async (id) => {
 
 
 // Api for Registering addBlog
-export const addBlog = async (suggestions,id) => {
+export const addBlog = async (suggestions) => {
   try {
   console.log("in trt");
 
-    const response = await axios.post(`${API_BASE_URL}/addBlog/${id}`, suggestions ,{
+    const response = await axios.post(`${API_BASE_URL}/addBlog`, suggestions ,{
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -1093,7 +1093,17 @@ export const viewMySuggestions = async (id) => {
     throw error;
   }
 };
-
+//Api for View all suggestion by supp id
+export const viewMySuggestionById = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewSuggestionById/${id}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
 //Api for View all suggestion by supp id
 export const getBlogsBySuppId = async (id) => {
   try {
@@ -1127,6 +1137,78 @@ export const viewBlogsById = async (id) => {
     return response.data;
   } catch (error) {
     console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+export const deleteBlogsById = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/deleteBlogsById/${id}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error deleting Blogs List ', error);
+    throw error;
+  }
+};
+
+
+//Api for View all suggestion by supp id
+export const getBlogsByCounsellorId = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewMyBlogsByCounsellorId/${id}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+export const getBlogsByLPId = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewMyBlogsByLPId/${id}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+
+//Api for View all suggestion by supp id
+export const getBlogs= async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewAllBlogs`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+
+
+// Api for Registering addBlog
+export const addCase = async (cases,id) => {
+  try {
+  console.log("in trt");
+
+    const response = await axios.post(`${API_BASE_URL}/registerCase/${id}`, cases )
+console.log(response);
+    // Handling responses based on status code
+    switch (response.data.status) {
+      case 200:
+        console.log(response.data.msg); // "Inserted successfully"
+        return { success: true, message: response.data.msg, data: response.data.data };
+      
+      case 500:
+        console.log(response.data.msg); // "Data not Inserted"
+        return { success: false, message: response.data.msg };
+      default:
+        console.log('Unexpected response status:', response.data.status);
+        return { success: false, message: 'Unexpected error occurred' };
+    }
+  } catch (error) {
+    console.error('Error Registering Cases', error);
     throw error;
   }
 };
