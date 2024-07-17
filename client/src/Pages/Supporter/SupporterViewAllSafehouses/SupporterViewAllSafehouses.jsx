@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './SupporterViewAllSafehouses.css';
 import safehouseDemo from '../../../Assets/ADMIN VIEW DETAILS.png';
-import { IMG_BASE_URL, rejectSafehouseById, viewAllSafehouses } from '../../../Services/apiService';
+import { IMG_BASE_URL, rejectSafehouseById, viewAllSafehouses, viewAllSafehousesBySuppId } from '../../../Services/apiService';
 import ReactPaginate from 'react-paginate';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
@@ -14,7 +14,7 @@ const navigate=useNavigate()
     // Fetch safehouses data from the backend
     const fetchSafehouses = async () => {
         try {
-            const response = await viewAllSafehouses();
+            const response = await viewAllSafehousesBySuppId(localStorage.getItem('supporterId'));
             console.log('Response:', response); // Log the response to debug
             if (response.status === 200) {
                 setSafehouses(response.data.data || []);

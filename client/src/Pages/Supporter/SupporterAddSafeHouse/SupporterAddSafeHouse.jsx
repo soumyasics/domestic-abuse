@@ -216,8 +216,7 @@ function SupporterAddSafeHouse() {
                   <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
                     <FaLocationDot />
                   </span>
-                  <input
-                    type="text"
+                 <select
                     id="landmark"
                     name="landmark"
                     className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.landmark ? 'is-invalid' : ''}`}
@@ -226,7 +225,23 @@ function SupporterAddSafeHouse() {
                     onChange={handleChange}
                     aria-describedby="landmarkError"
                     required
-                  />
+                  >
+<option value="alappuzha">Alappuzha</option>
+  <option value="ernakulam">Ernakulam</option>
+  <option value="idukki">Idukki</option>
+  <option value="kannur">Kannur</option>
+  <option value="kasaragod">Kasaragod</option>
+  <option value="kollam">Kollam</option>
+  <option value="kottayam">Kottayam</option>
+  <option value="kozhikode">Kozhikode</option>
+  <option value="malappuram">Malappuram</option>
+  <option value="palakkad">Palakkad</option>
+  <option value="pathanamthitta">Pathanamthitta</option>
+  <option value="thiruvananthapuram">Thiruvananthapuram</option>
+  <option value="thrissur">Thrissur</option>
+  <option value="wayanad">Wayanad</option>
+
+                  </select>
                   {errors.landmark && <div id="landmarkError" className="invalid-feedback">{errors.landmark}</div>}
                 </div>
               </div>

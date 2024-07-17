@@ -6,25 +6,25 @@ const caseeSchema = new mongoose.Schema({
     required: true,
     ref: 'users'
   },
-
- 
-  caseId: {
+  houseId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'cases'
+    required: true,
+    ref: 'safehouses'
   },
   date: {
     type: Date,
     required: true
   },
-  lpId: {
+  suppId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'legalprofessionals'
+    ref: 'supporters',
+    required: true,
   },
-  lpStatus:{
+  status:{
     type:String,
     default:'pending'
   }
 
 });
 
-module.exports = mongoose.model('lprequests', caseeSchema);
+module.exports = mongoose.model('houserequests', caseeSchema);

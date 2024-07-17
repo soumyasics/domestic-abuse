@@ -290,6 +290,32 @@ const activateSafehouseById = (req, res) => {
         });
 };
 
+const searchhouseByName = async (req, res) => {
+    try {
+      const landmark = req.params.landmark;
+      const user = await Safehouse.find({ landmark: new RegExp(landmark, 'i'),adminApproved:true })
+  
+      if (!user) {
+        return res.json({
+          status: 404,
+          data: null,
+          msg: 'Safe House  not found'
+        });
+      }
+  
+      res.json({
+        status: 200,
+        data: user,
+        msg: 'User found'
+      });
+    } catch (err) {
+      res.json({
+        status: 500,
+        data: null,
+        msg: 'An error occurred'
+      });
+    }
+  }
 module.exports = {
     registerSafehouse,
     viewSafehouses,
@@ -301,5 +327,6 @@ module.exports = {
     deActivateSafehouseById,
     rejectSafehouseById,
     activateSafehouseById,
-    viewSafehouseBySupporterId
+    viewSafehouseBySupporterId,
+    searchhouseByName
 };
