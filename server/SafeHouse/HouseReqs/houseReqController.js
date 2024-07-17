@@ -39,10 +39,12 @@ let suppdata=await houseSchema.findById({_id:houseId})
 
 // View all 
 const viewpendingReqsBySuppId= (req, res) => {
+  console.log(req.params.id);
     houseReqSchema.find({suppId:req.params.id,status:'pending'}).populate('userId houseId')
     .exec()
     .then(data => {
       if (data.length > 0) {
+        console.log(data);
         res.json({
           status: 200,
           msg: 'Data obtained successfully',
