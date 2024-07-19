@@ -82,7 +82,7 @@ const navigate=useNavigate()
                             />
                         </div>
                         <div className='col '>
-                            <div className='card w-100 shadow user-view-safehouse-dimension m-5'>
+                            <div className='card w-100 shadow user-view-safehouse-dimension m-5 h-auto'>
                                 <div className='card-body'>
                                     <div className='row m-3'>
                                         <div className='col'>
