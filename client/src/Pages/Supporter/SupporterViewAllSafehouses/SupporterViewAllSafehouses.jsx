@@ -70,19 +70,19 @@ const navigate=useNavigate()
             {currentSafehouses.length > 0 ? (
                 currentSafehouses.map((safehouse) => (
                     <div className='row m-5' key={safehouse._id}>
-                        <div className='col user-view-safehouse-dimension d-flex m-auto'>
+                        <div className='col user-view-safehouse-dimension text-end'>
                             <img
                                 src={safehouse.image && safehouse.image.filename ? `${IMG_BASE_URL}/${safehouse.image.filename}` : safehouseDemo}
                                 alt='safehouses'
-                                className='img-fluid rounded object-fit-cover'
+                                className='img-fluid rounded object-fit-cover m-5'
                                 onError={(e) => {
                                     e.target.onerror = null;
                                     e.target.src = safehouseDemo;
                                 }}
                             />
                         </div>
-                        <div className='col d-flex align-items-center'>
-                            <div className='card shadow user-view-safehouse-dimension'>
+                        <div className='col '>
+                            <div className='card w-100 shadow user-view-safehouse-dimension m-5'>
                                 <div className='card-body'>
                                     <div className='row m-3'>
                                         <div className='col'>
@@ -126,7 +126,7 @@ const navigate=useNavigate()
             ) : (
                 <div className='text-center m-5'><h3 className='theme-purple m-5'> No safehouses available.</h3></div>
             )}
-            <div className="d-flex justify-content-center">
+            <div className="d-flex justify-content-center m-5">
                 <ReactPaginate
                     previousLabel={'Previous'}
                     nextLabel={'Next'}
