@@ -96,6 +96,7 @@ router.post('/deleteIssueById/:id', issue.deleteIssueById);
 router.get('/viewIssues', issue.viewIssues);
 router.post('/viewPendingIssues', issue.viewPendingIssues);
 router.post('/viewPendingIssuesByUserId/:id', issue.viewPendingIssuesByUserId);
+router.post('/viewSupportedIssues/:id', issue.viewSupportedIssues);
 
 
 //suggestions
@@ -107,6 +108,7 @@ router.post('/editSuggestionById/:id', suggestionController.editSuggestionById);
 router.post('/viewSuggestionById/:id', suggestionController.viewSuggestionById);
 router.post('/deleteSuggestionById/:id', suggestionController.deleteSuggestionById);
 router.post('/viewSuggestionBySuppId/:id', suggestionController.viewSuggestionBySuppId);
+router.post('/viewSuggestionByIssueId/:id', suggestionController.viewSuggestionByIssueId);
 
 
 

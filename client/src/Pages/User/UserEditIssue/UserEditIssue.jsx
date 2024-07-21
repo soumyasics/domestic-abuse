@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './UserEditIssue.css';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getIssueById, updateIssue } from '../../../Services/apiService';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -124,7 +124,7 @@ console.log("issues",issue);
             console.log("resp",response.success);
             if (response.success==true) {
                 toast.success('Updated Successfully');
-                // navigate('/user-home');
+                navigate('/user-view-issues');
             } else {
                 toast.error(response.message);
             }
@@ -138,6 +138,7 @@ console.log("issues",issue);
 
     return (
         <div className='container-fluid'>
+                  <ToastContainer />
             <div className='row m-5'>
                 <div className='col text-center'>
                     <h3 className='theme-purple'>Edit Issue</h3>
