@@ -177,8 +177,8 @@ function UserLegalProfessionalCaseDetails() {
             </div>
             <div className='row m-5'>
                 <div className='col text-end'>
-                    <button className='btn bg-purple text-white px-3 m-5 my-0'>Request</button>
-                    <button className='btn bg-purple text-white px-3 m-5 my-0'>Cancel</button>
+                    <button className='btn bg-purple text-white px-3 mx-5 '>Request</button>
+                    <button className='btn bg-purple text-white px-3 mx-5 '>Cancel</button>
                 </div>
             </div>
         </div>

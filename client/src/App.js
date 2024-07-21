@@ -78,6 +78,7 @@ import UserAddCase from './Pages/User/UserAddCase/UserAddCase';
 import UserViewIssue from './Pages/User/UserViewIssue/UserViewIssue';
 import UserLegalProfessionalCaseDetails from './Pages/User/UserLegalProfessionalCaseDetails/UserLegalProfessionalCaseDetails';
 import UserViewIssues from './Pages/User/UserViewIssues/UserViewIssues';
+import LegalProfessionalCaseRequestDetail from './Pages/Legal Professional/LegalProfessionalCaseRequestDetail/LegalProfessionalCaseRequestDetail';
 
 function App() {
   return (
@@ -182,6 +183,8 @@ function App() {
             <Route path='/legal-professional-add-blogs' element={[<LPNav/>,<LegalProfessionalAddBlogs/>]} />
             <Route path='/legal-professional-edit-blogs/:id' element={[<LPNav/>,<LegalProfessionalEditBlogs/>]} />
             <Route path='/legal-professional-view-blogs' element={[<LPNav/>,<LegalProfessionalViewBlogs/>]} />
+            <Route path='/legal-professional-view-case-details' element={[<LPNav/>,<LegalProfessionalCaseRequestDetail/>]} />
+
 
 
           </Routes>
