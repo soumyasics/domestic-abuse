@@ -149,6 +149,30 @@ const viewSuggestionBySuppId = (req, res) => {
 };
 
 
+
+// View suggestion by ID
+const viewSuggestionByIssueId = (req, res) => {
+    Suggestion.findOne({ issueId: req.params.id })
+        .populate('userId')
+        .populate('supporterId')
+        .populate('issueId')
+
+        .exec()
+        .then(data => {
+            res.json({
+                status: 200,
+                msg: "Data obtained successfully",
+                data: data
+            });
+        })
+        .catch(err => {
+            res.status(500).json({
+                status: 500,
+                msg: "No data obtained",
+                Error: err
+            });
+        });
+};
 // Delete suggestion by ID
 const deleteSuggestionById = (req, res) => {
     Suggestion.findByIdAndDelete(req.params.id)
@@ -175,5 +199,6 @@ module.exports = {
     editSuggestionById,
     viewSuggestionById,
     deleteSuggestionById,
-    viewSuggestionBySuppId
+    viewSuggestionBySuppId,
+    viewSuggestionByIssueId
 };
