@@ -1,10 +1,10 @@
 //src/Services/apiService.jsx
 import axios from 'axios';
 
-// export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
-// export const IMG_BASE_URL = 'http://localhost:4039/';
-export const IMG_BASE_URL = 'http://hybrid.srishticampus.in:4039/';
-export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
+export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
+export const IMG_BASE_URL = 'http://localhost:4039/';
+// export const IMG_BASE_URL = 'http://hybrid.srishticampus.in:4039/';
+// export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
 // Api for Viewing all Supporters Request for admin to approve, reject or view
 export const viewSupporterReqsForAdmin = async () => {
   try {
@@ -1313,5 +1313,60 @@ export const approveHouseReqsById = async (id) => {
       success: false,
       message: 'An unexpected error occurred'
     };
+  }
+};
+
+
+// Api for Accepting Supporter Request by Id
+export const deleteIssueById = async (id) => {
+  try {
+    console.log("in serv",id);
+    const response = await axios.post(`${API_BASE_URL}/deleteIssueById/${id}`);
+    console.log(response);
+    if (response.data.status === 200) {
+      return { success: true, data: response.data };
+    } else {
+      return { success: false, message: response.data.msg };
+    }
+  } catch (error) {
+    if (error.response && error.response.data) {
+      return {
+        success: false,
+        message: error.response.data.msg || 'Deletion failed'
+      };
+    }
+    return {
+      success: false,
+      message: 'An unexpected error occurred'
+    };
+  }
+};
+
+export const getIssueById = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewIssueById/${id}`);
+    console.log("in ",response);
+    if (response.data.status === 200) {
+      return { success: true, data: response.data };
+    } else {
+      return { success: false, message: response.data.msg };
+    }
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+export const updateIssue = async (id,data) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/editIssueById/${id}`,data);
+    console.log("in ",response);
+    if (response.data.status === 200) {
+      return { success: true, data: response.data };
+    } else {
+      return { success: false, message: response.data.msg };
+    }
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
   }
 };

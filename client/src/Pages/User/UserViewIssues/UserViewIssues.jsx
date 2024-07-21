@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Table } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
+import '../../Supporter/SupporterViewAllIssues/SupporterViewAllIssues.css';
+import { viewPendingIssues,IMG_BASE_URL, viewUserIssuesBYUserId,deleteIssueById } from '../../../Services/apiService';
+import { Link } from 'react-router-dom';
+import { FaFile } from "react-icons/fa";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import '../../Supporter/SupporterViewAllIssues/SupporterViewAllIssues.css';
-import { viewPendingIssues, viewUserIssuesBYUserId } from '../../../Services/apiService';
-import { Link } from 'react-router-dom';
+import { confirmAlert } from 'react-confirm-alert';
 //import { fetchUserSuggestions } from '../../../Services/apiService';
 const UserViewIssues=()=> {
   
@@ -20,7 +22,10 @@ const UserViewIssues=()=> {
         try {
           const response = await viewUserIssuesBYUserId(localStorage.getItem('userId'));
           console.log(response);
+          if(response.data)
 setIssues(response.data) 
+          else
+          setIssues([])
    } catch (error) {
           console.error('Error fetching suggestions:', error);
           toast.error('Error fetching suggestions.');
@@ -31,19 +36,54 @@ setIssues(response.data)
     
       useEffect(() => {
         fetchSuggestions();
-      }, [fetchSuggestions]);
-    
+        console.log("issu",issues);
+      }, []);
+      useEffect(() => {
+        console.log("issu",issues);
+      }, []);
       const handlePageClick = (event) => {
         setCurrentPage(event.selected);
       };
     
-      const paginatedSuggestions = issues.slice(
+      const paginatedSuggestions =issues.length? issues.slice(
         currentPage * itemsPerPage,
         (currentPage + 1) * itemsPerPage
-      );
+      ):0
     
       const pageCount = Math.ceil(issues.length / itemsPerPage);
-    
+    const deleteIssue=async (id)=>{
+console.log('delleted');
+  confirmAlert({
+    title: 'Confirm Deletion',
+    message: 'Are you sure you want to delete this Issue ?',
+    buttons: [
+      {
+        label: 'Yes',
+        onClick: async () => {
+          try {
+            const response = await deleteIssueById(id);
+            console.log("resp",response);
+            if (response.success) {
+              toast.success('Deleted rejected successfully.');
+              await fetchSuggestions();
+
+            } else {
+              console.log(response);
+              toast.error(response.message || 'Error rejecting legal professional.');
+            }
+          } catch (error) {
+            toast.error('Error rejecting legal professional.');
+          }
+        },
+      },
+      {
+        label: 'No',
+      },
+    ],
+  });
+
+
+    }
       return (
         <div className="table-responsive">
           <ToastContainer />
@@ -57,29 +97,32 @@ setIssues(response.data)
               <Table striped bordered hover className="suggestions-table">
                 <thead>
                   <tr className="text-center">
-                    <th className='bg-purple text-white'>User Name</th>
-                    <th className='bg-purple text-white'>Gender</th>
-                    <th className='bg-purple text-white'>Date of Birth</th>
+                    <th className='bg-purple text-white'>Date</th>
+                 
                     <th className='bg-purple text-white'>Type of Issue</th>
                     <th className='bg-purple text-white'>Severity</th>
                     <th className='bg-purple text-white'>Location</th>
-                    <th className='bg-purple text-white'>Date</th>
+                    <th className='bg-purple text-white'>Time</th>
+                    <th className='bg-purple text-white'>Attachments</th>
+
                     <th className='bg-purple text-white'>Action</th>
                   </tr>
                 </thead>
                 <tbody className='text-center'>
                   {paginatedSuggestions.map((suggestion, index) => (
                     <tr key={index}>
-                      {/* <td>{issues.userId.name}</td>
-                      <td>{issues.userId.gender}</td>
-                      <td>{issues.userId.dob.slice(0, 10)}</td>
-                      <td>{issues.type}</td>
-                      <td>{issues.severity}</td>
-                      <td>{issues.location}</td>
-                      <td>{issues.dateTime.slice(0, 10)}</td> */}
+                      <td>{suggestion.dateTime.slice(0, 10)}</td>
+                      <td>{suggestion.type}</td>
+                      <td>{suggestion.severity}</td>
+                      <td>{suggestion.location}</td>
+                      <td>{suggestion.dateTime.slice(11, 16)}</td>
+                      <td><a href={ `${IMG_BASE_URL}/${suggestion.file.filename}`} target="_blank" rel="noopener noreferrer"> <FaFile className='theme-purple mx-1'/> Click Here</a>
+                      </td>
                       <td>
                         <div className='text-center'>
-                         {/* <Link to={`/supporter-suggestions/${suggestion._id}`} ><button className="btn bg-purple opacity-50 m-1 text-white">Suggestions</button></Link> */}
+                         <Link to={`/user-edit-issue/${suggestion._id}`} ><button className="btn bg-purple opacity-50 m-1 text-white">Edit</button></Link>
+                         <button className="btn bg-purple opacity-50 m-1 text-white" onClick={()=>{deleteIssue(suggestion._id)}}>Delete</button>
+
                         </div>
                       </td>
                     </tr>
