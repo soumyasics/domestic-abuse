@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 import './SupporterViewAllSafeHousesRequests.css';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { Table } from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import { FaPen } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
-import { viewSafehouses,rejectSafehouseById, viewSafehousesBySupporterId } from '../../../Services/apiService'; 
+import { viewSafehouses,rejectSafehouseById, viewSafehousesBySupporterId, viewSafehousesReqsBySupporterId, rejectHouseReqsById, approveCounsellorsById, approveHouseReqsById } from '../../../Services/apiService'; 
 import { Link,useNavigate } from 'react-router-dom';
 import { toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { BsEye } from "react-icons/bs";
 
 function SupporterViewAllSafeHousesRequests() {
   const [safehouses, setSafehouses] = useState([]);
@@ -20,11 +21,15 @@ function SupporterViewAllSafeHousesRequests() {
 
   const fetchSafehouses = async () => {
     try {
-      const response = await viewSafehousesBySupporterId(localStorage.getItem('supporterId'));
+      const response = await viewSafehousesReqsBySupporterId(localStorage.getItem('supporterId'));
       console.log(response);
-      if (response.status === 200) {
-        setSafehouses(response.data);
+      console.log(
+        "ppp",response.data.data
+      );
+      if (response.data.status === 200) {
+        setSafehouses(response.data.data);
       } else {
+        setSafehouses([])
         console.error('Failed to fetch safehouses:', response.msg);
       }
     } catch (error) {
@@ -33,30 +38,30 @@ function SupporterViewAllSafeHousesRequests() {
   };
   useEffect(() => {
     fetchSafehouses();
+    console.log(safehouses);
   }, []); // Empty dependency array ensures it runs only once on component mount
 
-  const handleEdit = (id) => {
-    navigate('/supporter-edit-safe-house',{ state: { safehouseId: id } })
-  };
 
-  const handleRemove = async (id) => {
+
+  const handleReject = async (id) => {
     confirmAlert({
-      title: 'Confirm Removal',
-      message: 'Are you sure you want to remove this safehouse?',
+      title: 'Confirm Rejection',
+      message: 'Are you sure you want to reject this Request?',
       buttons: [
         {
           label: 'Yes',
           onClick: async () => {
             try {
-              const response = await rejectSafehouseById(id);
+              const response = await rejectHouseReqsById(id);
               if (response.success) {
-                toast.success('Safehouse removed successfully.');
-                fetchSafehouses();
+                toast.success('Request rejected successfully.');
+                fetchSafehouses(currentPage);
               } else {
-                toast.error(response.message || 'Error removing safehouse.');
+
+                toast.error(response.message || 'Error rejecting Request.');
               }
             } catch (error) {
-              toast.error('Error removing safehouse.');
+              toast.error('Error rejecting Request.');
             }
           },
         },
@@ -66,11 +71,39 @@ function SupporterViewAllSafeHousesRequests() {
       ],
     });
   };
-
+  
+  const handleApprove = async (id) => {
+    confirmAlert({
+      title: 'Confirm Approval',
+      message: 'Are you sure you want to approve this Request?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: async () => {
+            try {
+              const response = await approveHouseReqsById(id);
+              console.log(response);
+              if (response.success) {
+                toast.success('Request approved successfully.');
+                fetchSafehouses(currentPage);
+              } else {
+                toast.error(response.message || 'Error approving Request.');
+              }
+            } catch (error) {
+              toast.error('Error approving Request.');
+            }
+          },
+        },
+        {
+          label: 'No',
+        },
+      ],
+    });
+  };
   // Pagination logic
   const offset = currentPage * safehousesPerPage;
-  const currentSafehouses = safehouses.slice(offset, offset + safehousesPerPage);
-  const pageCount = Math.ceil(safehouses.length / safehousesPerPage);
+  // const currentSafehouses = safehouses?.length>0?(safehouses.slice(offset, offset + safehousesPerPage)):0;
+  // const pageCount = Math.ceil(safehouses.length / safehousesPerPage);
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
@@ -95,41 +128,46 @@ function SupporterViewAllSafeHousesRequests() {
                 <th className='view-all-safehouse-theme text-white'>Contact Number</th>
                 <th className='view-all-safehouse-theme text-white'>Gender</th>
                 <th className='view-all-safehouse-theme text-white'>Address</th>
+              <th className='view-all-safehouse-theme text-white'>Status</th>
               <th className='view-all-safehouse-theme text-white'>Action</th>
+
             </tr>
           </thead>
           <tbody className='text-center'>
-            {currentSafehouses.map((user, index) => (
+            {safehouses&&safehouses.map((user, index) => (
               <tr key={user._id} className='view-all-safehouse-theme-table-body'>
-                <td className='p-2'>{offset + index + 1}</td>
-                <td>{user.name}</td>
-                  <td>{user.email}</td>
-                  <td>{user.contact}</td>
-                  <td>{user.gender}</td>
-                  <td>{user.address}</td>
+                 <td className='p-2'>{index+1}</td> 
+                <td>{user.userId.name}</td>
+                  <td>{user.userId.email}</td>
+                  <td>{user.userId.contact}</td>
+                  <td>{user.userId.gender}</td>
+                  <td>{user.userId.address}</td>
                 <td className='p-2'>{user.adminApproved?'Approved':'Pending'}</td>
-                <td className='p-2'>
-                  <div className='d-flex justify-content-center'>
-                    <div className='bg-purple rounded-circle cursor-pointer mx-2'>
-                      <FaPen
-                        className='mx-2 text-white'
-                        onClick={() => handleEdit(user._id)}
-                      />
+                <td className=''>
+                    <div className='text-center'>
+                      {/* <i className="m-3 cursor-pointer" onClick={()=>{navigateToInd(counsellor._id)}}><BsEye size={22} /></i> */}
+                      <Button
+                        variant="outline-success"
+                        className="m-2 px-5"
+                        onClick={() => handleApprove(user._id)}
+                      >
+                        Approve
+                      </Button>
+                      <Button
+                        variant="outline-danger"
+                        className="m-2 px-5"
+                        onClick={() => handleReject(user._id)}
+                      >
+                        Reject
+                      </Button>
                     </div>
-                    <div className='bg-purple rounded-circle cursor-pointer mx-2'>
-                      <RxCross1
-                        className='mx-2 cursor-pointer text-white'
-                        onClick={() => handleRemove(user._id)}
-                      />
-                    </div>
-                  </div>
-                </td>
+                  </td>
               </tr>
             ))}
           </tbody>
         </Table>
         <div className="d-flex justify-content-center">
-          <ReactPaginate
+          {/* <ReactPaginate
             previousLabel={'Previous'}
             nextLabel={'Next'}
             breakLabel={'...'}
@@ -148,7 +186,7 @@ function SupporterViewAllSafeHousesRequests() {
             nextLinkClassName={'page-link'}
             breakLinkClassName={'page-link'}
             activeLinkClassName={'bg-purple text-white'}
-          />  
+          />   */}
         </div>
       </div>
     </div>

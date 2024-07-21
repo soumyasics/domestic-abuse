@@ -1246,3 +1246,127 @@ console.log(response);
     throw error;
   }
 };
+
+export const viewUserIssuesBYUserId = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewPendingIssuesByUserId/${id}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+
+export const viewSafehousesReqsBySupporterId = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewpendingReqsBySuppId/${id}`);
+    return response;
+  } catch (error) {
+    console.error('Error fetching safehouses:', error);
+    throw error;
+  }
+};
+
+
+// Api for Accepting Supporter Request by Id
+export const rejectHouseReqsById = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/rejectHouseByUserId/${id}`);
+    if (response.data.status === 200) {
+      return { success: true, data: response.data };
+    } else {
+      return { success: false, message: response.data.msg };
+    }
+  } catch (error) {
+    if (error.response && error.response.data) {
+      return {
+        success: false,
+        message: error.response.data.msg || 'Approval failed'
+      };
+    }
+    return {
+      success: false,
+      message: 'An unexpected error occurred'
+    };
+  }
+};
+
+// Api for Accepting Supporter Request by Id
+export const approveHouseReqsById = async (id) => {
+  try {
+    console.log("in api");
+    const response = await axios.post(`${API_BASE_URL}/approveReqByUserId/${id}`);
+    if (response.data.status === 200) {
+      return { success: true, data: response.data };
+    } else {
+      return { success: false, message: response.data.msg };
+    }
+  } catch (error) {
+    if (error.response && error.response.data) {
+      return {
+        success: false,
+        message: error.response.data.msg || 'Approval failed'
+      };
+    }
+    return {
+      success: false,
+      message: 'An unexpected error occurred'
+    };
+  }
+};
+
+
+// Api for Accepting Supporter Request by Id
+export const deleteIssueById = async (id) => {
+  try {
+    console.log("in serv",id);
+    const response = await axios.post(`${API_BASE_URL}/deleteIssueById/${id}`);
+    console.log(response);
+    if (response.data.status === 200) {
+      return { success: true, data: response.data };
+    } else {
+      return { success: false, message: response.data.msg };
+    }
+  } catch (error) {
+    if (error.response && error.response.data) {
+      return {
+        success: false,
+        message: error.response.data.msg || 'Deletion failed'
+      };
+    }
+    return {
+      success: false,
+      message: 'An unexpected error occurred'
+    };
+  }
+};
+
+export const getIssueById = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewIssueById/${id}`);
+    console.log("in ",response);
+    if (response.data.status === 200) {
+      return { success: true, data: response.data };
+    } else {
+      return { success: false, message: response.data.msg };
+    }
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+export const updateIssue = async (id,data) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/editIssueById/${id}`,data);
+    console.log("in ",response);
+    if (response.data.status === 200) {
+      return { success: true, data: response.data };
+    } else {
+      return { success: false, message: response.data.msg };
+    }
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};

@@ -6,41 +6,49 @@ import { getIssueById, updateIssue } from '../../../Services/apiService';
 import { useNavigate, useParams } from 'react-router-dom';
 
 function UserEditIssue() {
-    const { issueId } = useParams(); 
+    const { id } = useParams(); 
     const [issue, setIssue] = useState({
-        type: '',
-        description: '',
-        severity: '',
-        location: '',
-        file: null,
-        dateTime: '',
-        contact: '',
-        userId: localStorage.getItem('userId')
+        type: "",
+        description: "",
+        severity: "",
+        location: "",
+        file: {
+        
+          "filename": "",
+       
+        },
+        dateTime:'',
+        contact:''
+        // userId: localStorage.getItem('userId')
     });
     const [errors, setErrors] = useState({});
     const allowedFileTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
     const maxFileSize = 5 * 1024 * 1024;
     const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
-
-    useEffect(() => {
-        const fetchIssue = async () => {
-            try {
-                // const response = await getIssueById(issueId);
-                // if (response.success) {
-                //     setIssue(response.data);
-                // } else {
-                //     toast.error(response.message);
-                // }
-            } catch (error) {
-                console.error('Error fetching issue data', error);
-                toast.error('Failed to fetch issue data. Please try again.');
+    const fetchIssue = async () => {
+        try {
+            const response = await getIssueById(id);
+            if (response.success) {
+                setIssue(response.data.data);
+                console.log(response.data.data);
+            } else {
+                toast.error(response.message);
             }
-        };
+        } catch (error) {
+            console.error('Error fetching issue data', error);
+            toast.error('Failed to fetch issue data. Please try again.');
+        }
+    };
+    useEffect(() => {
+      
 
         fetchIssue();
-    }, [issueId]);
-
+    }, []);
+    useEffect(() => {
+    
+console.log("issues",issue);
+    }, []);
     const validate = () => {
         const newErrors = {};
         const phoneRegex = /^\d{10}$/;
@@ -64,14 +72,14 @@ function UserEditIssue() {
         } else if (!phoneRegex.test(issue.contact)) {
             newErrors.contact = 'Contact number should be 10 digits';
         }
-        if (issue.file) {
-            if (!allowedFileTypes.includes(issue.file.type)) {
-                newErrors.file = 'Only PDF and DOC files are allowed';
-            }
-            if (issue.file.size > maxFileSize) {
-                newErrors.file = 'File size should not exceed 5MB';
-            }
-        }
+        // if (issue.file) {
+        //     if (!allowedFileTypes.includes(issue.file.type)) {
+        //         newErrors.file = 'Only PDF and DOC files are allowed';
+        //     }
+        //     if (issue.file.size > maxFileSize) {
+        //         newErrors.file = 'File size should not exceed 5MB';
+        //     }
+        // }
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
@@ -112,13 +120,14 @@ function UserEditIssue() {
                 formData.append('file', issue.file);
             }
 
-            // const response = await updateIssue(issueId, formData);
-            // if (response.success) {
-            //     toast.success(response.message);
-            //     navigate('/user-home');
-            // } else {
-            //     toast.error(response.message);
-            // }
+            const response = await updateIssue(id, formData);
+            console.log("resp",response.success);
+            if (response.success==true) {
+                toast.success('Updated Successfully');
+                // navigate('/user-home');
+            } else {
+                toast.error(response.message);
+            }
         } catch (error) {
             console.error('Error updating issue', error);
             toast.error(error.response?.data?.message || 'Failed to update issue. Please try again.');
@@ -134,6 +143,7 @@ function UserEditIssue() {
                     <h3 className='theme-purple'>Edit Issue</h3>
                 </div>
             </div>
+            {console.log(issue)}
             <form onSubmit={handleSubmit} noValidate>
                 <div className='row m-5 bg-creamy border'>
                     <div className='col text-center'>
@@ -222,10 +232,10 @@ function UserEditIssue() {
                             </div>
                         </div>
                         <div className='row m-5'>
-                            <div className='col text-start'>
+                            {/* <div className='col text-start'>
                                     <label htmlFor='dateTime' className='form-label theme-purple mx-2'>Date and Time </label>
                                     <input
-                                        type='datetime-local'
+                                        type='text'
                                         id="dateTime"
                                         name='dateTime'
                                         className={`form-control  border  bg-creamy m-2 ${errors.dateTime ? 'is-invalid' : ''}`}
@@ -236,7 +246,7 @@ function UserEditIssue() {
                                         required
                                     />
                                     {errors.dateTime && <div id="dateTimeError" className="invalid-feedback m-2">{errors.dateTime}</div>}
-                            </div>
+                            </div> */}
                             <div className='col text-start'>
                                     <label htmlFor='contact' className='form-label theme-purple mx-2'>Contact Number </label>
                                     <input
