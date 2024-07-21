@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { IMG_BASE_URL, viewMySuggestionById } from '../../../Services/apiService';
-import './SupporterViewSuggestionDetails.css';
+import React,{useState} from 'react';
+import { IMG_BASE_URL } from '../../../Services/apiService';
 import { RiMessage2Fill } from "react-icons/ri";
 import { useParams } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaDownload } from "react-icons/fa";
+import './UserViewIssue.css';
 
-function SupporterViewSuggestionDetails() {
-    const { id } = useParams();
+function UserViewIssue() {
+  const { id } = useParams();
     const [user, setUser] = useState({
         supporterId: localStorage.getItem('supporterId'),
         issueId: {
@@ -49,26 +49,8 @@ function SupporterViewSuggestionDetails() {
         sug2: false,
         sug3: false
     });
-
-    const fetchSuggestions = async () => {
-        try {
-          const response = await viewMySuggestionById(id)
-          setUser(response.data);
-          console.log("use",user);
-        } catch (error) {
-          console.error('Error fetching suggestions:', error);
-          toast.error('Error fetching suggestions.');
-        }
-      };
-    
-      useEffect(() => {
-        fetchSuggestions();
-      }, [id]);
-    
-
-
-    return (
-        <div className='container-fluid'>
+  return (
+    <div className='container-fluid'>
             <div className='row m-5'>
                 <div className='col text-end'>
                     <button className='btn bg-purple text-white rounded-4 p-3 py-1 fw-semibold'><span className='mx-2'><RiMessage2Fill size={30} /></span>Chat Now</button>
@@ -183,7 +165,7 @@ function SupporterViewSuggestionDetails() {
                 <div className='col'>
                     <table className="table table-borderless">
                         <thead>
-                            {/* <tr className=' h5'>
+                            <tr className=' h5'>
                                 <th scope="col" className='theme-purple'>#</th>
                                 <th scope="col" className='theme-purple'>Advocate Name</th>
                                 <th scope="col" className='theme-purple'>Mail Id</th>
@@ -192,10 +174,10 @@ function SupporterViewSuggestionDetails() {
                                 <th scope="col" className='theme-purple'>Firm Address</th>
                                 <th scope="col" className='theme-purple'>License Number</th>
                                 <th scope="col" className='theme-purple'>Status</th>
-                            </tr> */}
+                            </tr>
                         </thead>
                         <tbody>
-                            {/* <tr>
+                            <tr>
                                 <th scope="row">1</th>
                                 <td>Mark</td>
                                 <td>Otto</td>
@@ -204,7 +186,7 @@ function SupporterViewSuggestionDetails() {
                                 <td>@mdo</td>
                                 <td>@mdo</td>
                                 <td>@mdo</td>
-                            </tr> */}
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -223,7 +205,7 @@ function SupporterViewSuggestionDetails() {
                 <div className='col'>
                     <table className="table table-borderless">
                         <thead>
-                            {/* <tr className=' h5'>
+                            <tr className=' h5'>
                                 <th scope="col" className='theme-purple'>#</th>
                                 <th scope="col" className='theme-purple'>House Name</th>
                                 <th scope="col" className='theme-purple'>Address</th>
@@ -231,10 +213,10 @@ function SupporterViewSuggestionDetails() {
                                 <th scope="col" className='theme-purple'>Accommodation Capacity</th>
                                 <th scope="col" className='theme-purple'>Monthly Rent</th>
                                 <th scope="col" className='theme-purple'>Status</th>
-                            </tr> */}
+                            </tr>
                         </thead>
                         <tbody>
-                            {/* <tr>
+                            <tr>
                                 <th scope="row">1</th>
                                 <td>Mark</td>
                                 <td>Otto</td>
@@ -242,7 +224,7 @@ function SupporterViewSuggestionDetails() {
                                 <td>@mdo</td>
                                 <td>@mdo</td>
                                 <td>@mdo</td>
-                            </tr> */}
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -258,7 +240,7 @@ function SupporterViewSuggestionDetails() {
                 <div className='col'>
                     <table className="table table-borderless">
                         <thead>
-                            {/* <tr className=' h5'>
+                            <tr className=' h5'>
                                 <th scope="col" className='theme-purple'>#</th>
                                 <th scope="col" className='theme-purple'>Counsellor Name</th>
                                 <th scope="col" className='theme-purple'>Mail Id</th>
@@ -267,10 +249,10 @@ function SupporterViewSuggestionDetails() {
                                 <th scope="col" className='theme-purple'>Location</th>
                                 <th scope="col" className='theme-purple'>Specialisation</th>
                                 <th scope="col" className='theme-purple'>Status</th>
-                            </tr> */}
+                            </tr>
                         </thead>
                         <tbody>
-                            {/* <tr>
+                            <tr>
                                 <th scope="row">1</th>
                                 <td>Mark</td>
                                 <td>Otto</td>
@@ -279,7 +261,7 @@ function SupporterViewSuggestionDetails() {
                                 <td>@mdo</td>
                                 <td>@mdo</td>
                                 <td>@mdo</td>
-                            </tr> */}
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -288,7 +270,7 @@ function SupporterViewSuggestionDetails() {
             )
         }
         </div>
-    )
+  )
 }
 
-export default SupporterViewSuggestionDetails;
+export default UserViewIssue
