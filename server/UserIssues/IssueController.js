@@ -81,8 +81,36 @@ const viewIssues = (req, res) => {
 };
 
 // View all issues
+
 const viewPendingIssues = (req, res) => {
   Issue.find({suppStatus:false}).populate('userId')
+    .exec()
+    .then(data => {
+      if (data.length > 0) {
+        res.json({
+          status: 200,
+          msg: 'Data obtained successfully',
+          data: data,
+        });
+      } else {
+        res.json({
+          status: 200,
+          msg: 'No data obtained',
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({
+        status: 500,
+        msg: 'Data not obtained',
+        Error: err,
+      });
+    });
+};
+
+
+const viewPendingIssuesByUserId = (req, res) => {
+  Issue.find({userId:req.params.id,suppStatus:false})
     .exec()
     .then(data => {
       if (data.length > 0) {
@@ -203,5 +231,6 @@ module.exports = {
   deleteIssueById,
   upload,
   requireAuth,
-  viewPendingIssues
+  viewPendingIssues,
+  viewPendingIssuesByUserId
 };
