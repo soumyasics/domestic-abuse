@@ -23,11 +23,12 @@ const caseeSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'legalprofessionals'
   },
-  lpStatus:{
-    type:String,
-    default:'pending'
-  }
+  
+  update: {
+    type: String,
+    required: true
+  },
 
 });
 
-module.exports = mongoose.model('lprequests', caseeSchema);
+module.exports = mongoose.model('casupdates', caseeSchema);

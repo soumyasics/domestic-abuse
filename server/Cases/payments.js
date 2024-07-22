@@ -23,11 +23,15 @@ const caseeSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'legalprofessionals'
   },
-  lpStatus:{
+  paymentStatus:{
     type:String,
     default:'pending'
-  }
+  },
+  payment: {
+    type: Number,
+    required: true
+  },
 
 });
 
-module.exports = mongoose.model('lprequests', caseeSchema);
+module.exports = mongoose.model('payments', caseeSchema);

@@ -143,6 +143,7 @@ router.post('/approveCaseByUserId/:id',casReqs.approveCaseByUserId);
 router.post('/rejectCaseByUserId/:id',casReqs.rejectCaseByUserId);
 
 router.post('/viewCaseReqsByUserId/:id',casReqs.viewCaseReqsByUserId);
+router.post('/viewCaseReqsByIssueId/:id',casReqs.viewCaseReqsByIssueId);
 
 //House Requests
 router.post('/addhouseReq',houseReqs.addReq);
@@ -151,7 +152,5 @@ router.post('/viewpendingReqsBySuppId/:id',houseReqs.viewpendingReqsBySuppId);
 router.post('/approveReqByUserId/:id',houseReqs.approveReqByUserId);
 router.post('/rejectHouseByUserId/:id',houseReqs.rejectHouseByUserId);
 router.post('/viewHouseReqsByUserId/:id',houseReqs.viewhouseReqsByUserId);
-
-
 
 module.exports = router

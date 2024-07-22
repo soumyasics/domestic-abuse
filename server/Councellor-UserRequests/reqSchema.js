@@ -30,4 +30,4 @@ const caseeSchema = new mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('lprequests', caseeSchema);
+module.exports = mongoose.model('councillorrequests', caseeSchema);

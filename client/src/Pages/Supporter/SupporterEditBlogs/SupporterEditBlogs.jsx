@@ -3,113 +3,101 @@ import './SupporterEditBlogs.css';
 import { deleteBlogsById, editBlogsById, IMG_BASE_URL, viewBlogsById } from '../../../Services/apiService';
 import demo from '../../../Assets/blog-demo.png';
 import { PiPencilDuotone } from "react-icons/pi";
-import { useParams,Link,useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { API_BASE_URL } from '../../../Services/apiService';
-import axios from 'axios';
 
 function SupporterEditBlogs() {
-
-    const {id}=useParams()
+    const { id } = useParams();
     const [formValues, setFormValues] = useState({
         title: '',
         content: '',
-        image: {filename:''},
+        image: null,
     });
 
-    
-  useEffect(() => {
-    // Fetch blogs from backend
-    const fetchBlogs = async () => {
-      try {
-        const response = await viewBlogsById(id);
-        console.log("bol",response);
-        setFormValues(response.data);
-      } catch (error) {
-        console.error('Error fetching blogs:', error);
-      }
-    };
+    useEffect(() => {
+        // Fetch blogs from backend
+        const fetchBlogs = async () => {
+            try {
+                const response = await viewBlogsById(id);
+                console.log("Blog", response);
+                setFormValues(response.data);
+            } catch (error) {
+                console.error('Error fetching blogs:', error);
+            }
+        };
 
-    fetchBlogs();
-  }, []);
-const navigate=useNavigate()
+        fetchBlogs();
+    }, [id]);
+
+    const navigate = useNavigate();
     const [errors, setErrors] = useState({});
+
     const validate = () => {
         const errors = {};
-
-        if (!formValues.title) {
-            errors.title = "Blog title is required";
-        }
-
-        if (!formValues.content) {
-            errors.content = "content is required";
-        }
-
-        if (!formValues.image) {
-            errors.image = "Cover image is required";
-        } else if (!/\.(jpg|jpeg|png|gif)$/i.test(formValues.image.title)) {
-            errors.image = "Only image files are allowed (jpg, jpeg, png, gif)";
-        }
+        if (!formValues.title) errors.title = "Blog title is required";
+        if (!formValues.content) errors.content = "Content is required";
 
         setErrors(errors);
-
         return Object.keys(errors).length === 0;
     };
 
     const handleChange = (e) => {
-        const { title, value, files } = e.target;
-        if (title === 'image') {
-            setFormValues({ ...formValues, [title]: files[0] });
+        const { name, value, files } = e.target;
+        if (name === 'image') {
+            setFormValues({ ...formValues, image: files[0] });
         } else {
-            setFormValues({ ...formValues, [title]: value });
+            setFormValues({ ...formValues, [name]: value });
         }
     };
 
-    const handleSubmit = (e) => {
-       e.preventDefault()
-             
-                try {
-                    const response =  editBlogsById(id,formValues);
-                    console.log('Edit supporter response:', response);
-    
-                    if (response.status==200) {
-                        toast.success('Blog updated successfully');
-                        navigate('/supporter-view-blogs');
-                    } else {
-                        toast.success(response.message || 'Blog updated successfully');
-                    }
-                } catch (error) {
-                    console.error('Error updating profile:', error);
-                    toast.error('An error occurred while updating the profile');
-                }
-    
-        
-    };
+    const handleSubmit = async (e) => {
+        console.log("fun called",validate());
+        e.preventDefault();
+        if (!validate()) return;
 
+        const formData = new FormData();
+        formData.append('title', formValues.title);
+        formData.append('content', formValues.content);
+        if (formValues.image) formData.append('image', formValues.image);
+
+        try {
+            const response = await editBlogsById(id, formData);
+            console.log('Edit blog response:', response);
+
+            if (response.status === 200) {
+                toast.success('Blog updated successfully');
+                navigate('/supporter-view-blogs');
+            } else {
+                toast.error(response.message || 'Failed to update blog');
+            }
+        } catch (error) {
+            console.error('Error updating blog:', error);
+            toast.error('An error occurred while updating the blog');
+        }
+    };
 
     return (
         <div className='container-fluid'>
             <div className='row m-5'>
                 <div className='col text-center'>
-                    <h3 className='theme-purple'>Edit Blogs</h3>
+                    <h3 className='theme-purple'>Edit Blog</h3>
                 </div>
             </div>
-            <div className='row m-5  d-flex justify-content-center align-items-center '>
+            <div className='row m-5 d-flex justify-content-center align-items-center'>
                 <div className='col-8 border border-5 mb-5'>
                     <form onSubmit={handleSubmit}>
                         <div className='row m-5'>
                             <div className='col position-relative'>
                                 <div className='overflow-hidden'>
                                     <img
-                                        src={formValues.image && formValues.image.filename ? `${IMG_BASE_URL}/${formValues.image.filename}` : demo}
+                                        src={formValues.image ? `${IMG_BASE_URL}/${formValues.image.filename}` : demo}
                                         alt='blog demo'
                                         className='img-fluid'
                                         onError={(e) => {
                                             e.target.onerror = null;
                                             e.target.src = demo;
                                         }}
-
                                     />
                                 </div>
 
@@ -121,7 +109,7 @@ const navigate=useNavigate()
                                         type="file"
                                         id="imageUpload"
                                         name="image"
-                                        // accept="image/*"
+                                        accept="image/*"
                                         className={`image-upload-input cursor-pointer ${errors.image ? 'is-invalid' : ''}`}
                                         onChange={handleChange}
                                         style={{ display: 'none' }}
@@ -131,8 +119,8 @@ const navigate=useNavigate()
                             </div>
                             <div className='col'>
                                 <div className='row m-5'>
-                                    <div className='col-4 text-center d-flex align-items-center '>
-                                        <h5 className='theme-purple justify-content-center'>Blog title</h5>
+                                    <div className='col-4 text-center d-flex align-items-center'>
+                                        <h5 className='theme-purple'>Blog Title</h5>
                                     </div>
                                     <div className='col-8'>
                                         <div className='input-group w-100'>
@@ -141,7 +129,7 @@ const navigate=useNavigate()
                                                 name='title'
                                                 value={formValues.title}
                                                 onChange={handleChange}
-                                                className={`form-control  supporter-add-blog-input opacity-50 shadow m-2 me-0 border ${errors.title ? 'is-invalid' : ''}`}
+                                                className={`form-control supporter-add-blog-input opacity-50 shadow m-2 me-0 border ${errors.title ? 'is-invalid' : ''}`}
                                                 required
                                             />
                                             {errors.title && <div id="titleError" className="invalid-feedback ms-2">{errors.title}</div>}
@@ -150,7 +138,7 @@ const navigate=useNavigate()
                                 </div>
                                 <div className='row m-5'>
                                     <div className='col-4 text-center d-flex align-items-center'>
-                                        <h5 className='theme-purple justify-content-center'>content</h5>
+                                        <h5 className='theme-purple'>Content</h5>
                                     </div>
                                     <div className='col-8'>
                                         <div className='input-group w-100'>
@@ -158,7 +146,7 @@ const navigate=useNavigate()
                                                 name='content'
                                                 value={formValues.content}
                                                 onChange={handleChange}
-                                                className={`form-control  supporter-add-blog-input opacity-50 shadow m-2 me-0 border ${errors.content ? 'is-invalid' : ''}`}
+                                                className={`form-control supporter-add-blog-input opacity-50 shadow m-2 me-0 border ${errors.content ? 'is-invalid' : ''}`}
                                                 required
                                             />
                                             {errors.content && <div id="contentError" className="invalid-feedback ms-2">{errors.content}</div>}
@@ -170,10 +158,10 @@ const navigate=useNavigate()
                         <div className='row m-5'>
                             <div className='col-4 text-center d-flex align-items-center'></div>
                             <div className='col-4 text-end'>
-                                <button type='submit' className='btn text-white bg-purple py-2 px-5 ' onClick={handleSubmit}>Update</button>
+                                <button type='submit' className='btn text-white bg-purple py-2 px-5'>Update</button>
                             </div>
                             <div className='col-4 text-end'>
-                                <button type='button' className='btn text-white bg-purple py-2 px-5 ' >Cancel</button>
+                                <button type='button' className='btn text-white bg-purple py-2 px-5' onClick={() => navigate('/supporter-view-blogs')}>Cancel</button>
                             </div>
                         </div>
                     </form>
@@ -183,5 +171,4 @@ const navigate=useNavigate()
     );
 }
 
-
-export default SupporterEditBlogs
+export default SupporterEditBlogs;
