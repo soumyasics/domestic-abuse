@@ -1127,6 +1127,7 @@ export const viewMySuggestions = async (id) => {
     throw error;
   }
 };
+
 //Api for View all suggestion by supp id
 export const viewMySuggestionById = async (id) => {
   try {
@@ -1365,6 +1366,30 @@ export const updateIssue = async (id,data) => {
     } else {
       return { success: false, message: response.data.msg };
     }
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+
+export const viewSupportedUserIssuesBYUserId = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewSupportedIssues/${id}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+
+
+//Api for View all suggestion by supp id
+export const viewMySuggestionByIssueId = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewSuggestionByIssueId/${id}`);
+    console.log("in ",response);
+    return response.data;
   } catch (error) {
     console.error(' Error fetching Supporter List ', error);
     throw error;
