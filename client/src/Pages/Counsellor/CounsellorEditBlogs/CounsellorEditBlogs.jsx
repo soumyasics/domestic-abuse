@@ -3,7 +3,7 @@ import './CounsellorEditBlogs.css';
 import demo from '../../../Assets/blog-demo.png';
 import { PiPencilDuotone } from "react-icons/pi";
 import { useParams,Link,useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {  editBlogsById, IMG_BASE_URL, viewBlogsById } from '../../../Services/apiService';
 
@@ -87,6 +87,7 @@ const navigate=useNavigate()
 
     return (
         <div className='container-fluid'>
+            <ToastContainer/>
             <div className='row m-5'>
                 <div className='col text-center'>
                     <h3 className='theme-purple'>Edit Blogs</h3>
