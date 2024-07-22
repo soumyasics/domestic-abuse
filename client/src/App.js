@@ -79,6 +79,7 @@ import UserViewIssue from './Pages/User/UserViewIssue/UserViewIssue';
 import UserLegalProfessionalCaseDetails from './Pages/User/UserLegalProfessionalCaseDetails/UserLegalProfessionalCaseDetails';
 import UserViewIssues from './Pages/User/UserViewIssues/UserViewIssues';
 import LegalProfessionalCaseRequestDetail from './Pages/Legal Professional/LegalProfessionalCaseRequestDetail/LegalProfessionalCaseRequestDetail';
+import UserViewSuggestionDetails from './Pages/User/UserViewSuggestionDetails/UserViewSuggestionDetails';
 import UserViewSuggestions from './Pages/User/UserViewIssues/UserViewSuggestions';
 
 function App() {
@@ -107,7 +108,7 @@ function App() {
             <Route path='/user-view-suggestions' element={[<UserNav/>,<UserViewSuggestions/>]} />
 
             <Route path='/user-view-issues' element={[<UserNav/>,<UserViewIssues/>]} />
-
+            <Route path='/user-view-suggestion-details' element={[<UserNav/>,<UserViewSuggestionDetails/>]} />
             <Route path='/user-add-case' element={[<UserNav/>,<UserAddCase/>]} />
             <Route path='/user-legal-professional-case-details' element={[<UserNav/>,<UserLegalProfessionalCaseDetails/>]} />
             <Route path='/user-payment' element={[<UserNav/>,<UserPayment/>]} />
@@ -136,8 +137,6 @@ function App() {
             <Route path='/admin-viewdetailedLegalProfessional/:id' element={[<AdminNavbar/>,<AdminLegalProfessionalDetailedView />]} />
             <Route path='/admin-viewdetailedLegalProfessional-aprvd/:id' element={[<AdminNavbar/>,<AdminLegalProfessionalDetailedViewAprvd/>]} />
             <Route path='/admin-viewall-aprvd-LegalProfessional' element={[<AdminNavbar/>,<AdminLegalProfessionalViewAll />]} />
-
-
             <Route path='/admin-viewall-users' element={[<AdminNavbar/>,<AdminUserViewAll />]} />
 
 
@@ -159,8 +158,6 @@ function App() {
             <Route path='/supporter-add-blogs' element={[<SupprterNavbar/>,<SupporterAddBlogs/>]} />
             <Route path='/supporter-edit-blogs/:id' element={[<SupprterNavbar/>,<SupporterEditBlogs/>]} />
             <Route path='/supporter-view-blogs' element={[<SupprterNavbar/>,<SupporterViewBlogs/>]} />
-
-            {/* Updated route for editing safe house */}
             <Route path='/supporter-edit-safe-house/:id' element={[<SupprterNavbar/>,<SupporterEditSafeHouse />]} />
             <Route path='/supporter-view-all-safehouses' element={[<SupprterNavbar/>,<SupporterViewAllSafehouses />]} />
 
