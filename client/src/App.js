@@ -81,6 +81,7 @@ import UserViewIssues from './Pages/User/UserViewIssues/UserViewIssues';
 import LegalProfessionalCaseRequestDetail from './Pages/Legal Professional/LegalProfessionalCaseRequestDetail/LegalProfessionalCaseRequestDetail';
 import UserViewSuggestionDetails from './Pages/User/UserViewSuggestionDetails/UserViewSuggestionDetails';
 import UserViewSuggestions from './Pages/User/UserViewIssues/UserViewSuggestions';
+import LegalProfessionalUpdateCaseDetails from './Pages/Legal Professional/LegalProfessionalUpdateCaseDetails/LegalProfessionalUpdateCaseDetails';
 
 function App() {
   return (
@@ -184,8 +185,7 @@ function App() {
             <Route path='/legal-professional-edit-blogs/:id' element={[<LPNav/>,<LegalProfessionalEditBlogs/>]} />
             <Route path='/legal-professional-view-blogs' element={[<LPNav/>,<LegalProfessionalViewBlogs/>]} />
             <Route path='/legal-professional-view-case-details' element={[<LPNav/>,<LegalProfessionalCaseRequestDetail/>]} />
-
-
+            <Route path='/legal-professional-update-case-details' element={[<LPNav/>,<LegalProfessionalUpdateCaseDetails/>]} />
 
           </Routes>
         </div>
