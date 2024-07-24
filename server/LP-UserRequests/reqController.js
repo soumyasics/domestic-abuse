@@ -15,6 +15,7 @@ if(cases){
     msg: 'You Have already send Request to this Advocate successfully'
 })
 }
+console.log("ok",req.params.id,lpId,issueId);
     const newCase= new Case({
 
       issueId,
@@ -69,6 +70,37 @@ const viewCasePendingReqsByLpId= (req, res) => {
         Error: err,
       });
     });
+};
+
+// View all 
+const getLpReqStatusForSugge=async(req, res) => {
+  let approved=0,pending=0,rejected=0
+  try{
+ const apprData=await Case.find({issueId:req.params.id,lpStatus:'approved'}).populate('lpId')
+ const pendData=await Case.find({issueId:req.params.id,lpStatus:'pending'}).populate('lpId')
+ const rejData=await Case.find({issueId:req.params.id,lpStatus:'rejected'}).populate('lpId')
+if(apprData.length>0)
+  approved=apprData.length
+if(pendData.length>0)
+  pending=pendData.length
+if(rejData.length>0)
+  rejected=rejData.length
+   
+        res.json({
+          status: 200,
+          msg: 'Data obtained successfully',
+          data: {rejected,
+          approved,
+          pending}
+        });
+      }
+     catch (error) {
+      res.status(500).json({
+        status: 500,
+        msg: 'Data not obtained',
+        Error: error,
+      });
+    }
 };
 const viewCaseApprovedReqsByLpId= (req, res) => {
   Case.find({lpId:req.params.id,lpStatus:'approved'}).populate('userId issueId caseId')
@@ -217,5 +249,6 @@ module.exports = {
   approveCaseByUserId,
   rejectCaseByUserId,
   viewCaseReqsByUserId,
-  viewCaseReqsByIssueId
+  viewCaseReqsByIssueId,
+  getLpReqStatusForSugge
 };

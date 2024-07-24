@@ -1,11 +1,151 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { getSuggestionById, fetchLegalReqss,IMG_BASE_URL, viewMySuggestionByIssueId, fetchHouseReqss, fetchCouncReqss } from '../../../Services/apiService';
 import { RiMessage2Fill } from "react-icons/ri";
-import './UserViewSuggestionDetails.css';
+import { Link, useParams } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { FaDownload } from "react-icons/fa";
-import { IMG_BASE_URL } from '../../../Services/apiService';
+import './UserViewSuggestionDetails.css';
 
 function UserViewSuggestionDetails() {
   const [issue, setIssue] = useState({});
+  const [datas, setDatas] = useState({
+    approved:0,
+    rejected:0,
+    pending:0
+  });
+  const [houses, setHouses] = useState({
+    approved:0,
+    rejected:0,
+    pending:0
+  });
+  const [couns, setCouns] = useState({
+    approved:0,
+    rejected:0,
+    pending:0
+  });
+  const { id } = useParams();
+  const [user, setUser] = useState({
+    type: '',
+    description: '',
+    severity: '',
+    location: '',
+    contact: '',
+    dateTime: '',
+    userId: {
+      address: '',
+      contact: '',
+      dob: '',
+      email: '',
+      gender: '',
+      relation: '',
+      file: { filename: '' },
+      safetyPlan: ''
+    }
+  });
+
+  const [suggestion, setSuggestion] = useState({
+    sug1: false,
+    sug2: false,
+    sug3: false
+  });
+
+  const fetchSuggestionsByIssues = async () => {
+    try {
+      const response = await viewMySuggestionByIssueId(id);
+      console.log("Suggestions API response:", response.data);
+      
+      setSuggestion({
+        sug1: response.data.sug1,
+        sug2: response.data.sug2,
+        sug3: response.data.sug3
+      });
+      console.log("Updated suggestion state:", {
+        sug1: response.data.sug1,
+        sug2: response.data.sug2,
+        sug3: response.data.sug3
+      });
+    } catch (error) {
+      console.error('Error fetching suggestions:', error);
+      toast.error('Error fetching suggestions.');
+    }
+  };
+
+  const fetchSuggestions = async () => {
+    try {
+      const response = await getSuggestionById(id);
+      if (response.status === 200) {
+        setUser(response.data);
+      } else {
+        console.log(response);
+      }
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      toast.error('An error occurred while fetching the user data');
+    }
+  };
+  
+  const fetchLegalReqs = async () => {
+    try {
+      const response = await fetchLegalReqss(id);
+      if (response.status === 200) {
+       console.log("count",response);
+       setDatas(response.data)
+      } else {
+        console.log(response);
+      }
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      toast.error('An error occurred while fetching the user data');
+    }
+  };
+    
+  const fetchHouseReqs = async () => {
+    try {
+      const response = await fetchHouseReqss(id);
+      if (response.status === 200) {
+       console.log("count",response);
+       setHouses(response.data)
+      } else {
+        console.log(response);
+      }
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      toast.error('An error occurred while fetching the user data');
+    }
+  };
+    
+  const fetchCouncReqs = async () => {
+    try {
+      const response = await fetchCouncReqss(id);
+      if (response.status === 200) {
+       console.log("count",response);
+       setCouns(response.data)
+      } else {
+        console.log(response);
+      }
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      toast.error('An error occurred while fetching the user data');
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchSuggestions();
+      await fetchSuggestionsByIssues();
+      await fetchLegalReqs()
+      // await fetchCouncReqs()
+      await fetchHouseReqs()
+    };
+    fetchData();
+  }, []);
+
+
+  useEffect(() => {
+    console.log("sug1",suggestion);
+  }, []);
+
   return (
     <div className='container-fluid'>
       <div className='row m-5'>
@@ -29,7 +169,7 @@ function UserViewSuggestionDetails() {
               </div>
               <div className='row m-2'>
                 <div className='col'>
-                  <div className='col theme-purple'>{issue.type}</div>
+                  <div className='col theme-purple'>{user.type}</div>
                 </div>
               </div>
             </div>
@@ -39,7 +179,7 @@ function UserViewSuggestionDetails() {
               </div>
               <div className='row m-2'>
                 <div className='col'>
-                  <div className='col theme-purple '>{issue.location}</div>
+                  <div className='col theme-purple '>{user.location}</div>
                 </div>
               </div>
             </div>
@@ -53,7 +193,7 @@ function UserViewSuggestionDetails() {
               </div>
               <div className='row m-2'>
                 <div className='col'>
-                  <div className='col theme-purple'>{issue.description}</div>
+                  <div className='col theme-purple'>{user.description}</div>
                 </div>
               </div>
             </div>
@@ -63,7 +203,7 @@ function UserViewSuggestionDetails() {
               </div>
               <div className='row m-2'>
                 <div className='col'>
-                  <div className='col theme-purple'>{issue?.dateTime?.slice(0, 10)}</div>
+                  <div className='col theme-purple'>{user?.dateTime?.slice(0, 10)}</div>
                 </div>
               </div>
             </div>
@@ -75,7 +215,7 @@ function UserViewSuggestionDetails() {
               </div>
               <div className='row m-2'>
                 <div className='col'>
-                  <div className='col theme-purple'>{issue.severity}</div>
+                  <div className='col theme-purple'>{user.severity}</div>
                 </div>
               </div>
             </div>
@@ -88,7 +228,7 @@ function UserViewSuggestionDetails() {
               </div>
               <div className='row m-2'>
                 <div className='col theme-purple'>
-                  <div className='col theme-purple'>{issue?.dateTime?.slice(11, 16)}</div>
+                  <div className='col theme-purple'>{user?.dateTime?.slice(11, 16)}</div>
                 </div>
               </div>
             </div>
@@ -102,7 +242,7 @@ function UserViewSuggestionDetails() {
               </div>
               <div className='row m-2'>
                 <div className='col theme-purple'>
-                  <a href={`${IMG_BASE_URL}/${issue.file?.filename}`} target="_blank" rel="noopener noreferrer"> <FaDownload className='theme-purple mx-1' /> File</a>
+                  <a href={`${IMG_BASE_URL}/${user.file?.filename}`} target="_blank" rel="noopener noreferrer"> <FaDownload className='theme-purple mx-1' /> File</a>
                 </div>
               </div>
             </div>
@@ -114,55 +254,106 @@ function UserViewSuggestionDetails() {
               <h2 className='theme-purple'>Supporter Suggestions</h2>
             </div>
           </div>
+          {(suggestion.sug1)?(
+            <>
           <div className='row mx-5 '>
+            {console.log(suggestion)}
+           
+             
             <div className='col text-end'>
-              <span className='text-info m-2'>Status</span> <span className='m-2'> Pending</span>
+              <span className='text-info m-2'>Status</span> 
+              {datas.pending==1?<span className='m-2'>Pending </span>
+               :datas.rejected==1?<span className='m-2'>Rejected </span>:
+               <span className='m-2'> Approved  </span>
+              }
+             
             </div>
+          
           </div>
+ 
           <div className='row m-5 fw-semibold mt-0'>
             <div className='col text-white supporter-add-suggestion-box1 rounded-4 text-center p-2'>
               Meet an Advocate
             </div>
-            <div className='col text-center'>
-              <button className='btn bg-purple text-white rounded-4 px-5'>Request</button>
+            {datas.pending==0?(
+              <> 
+               <div className='col text-center'>
+             <Link to={`/user-view-all-legal-professionals/${user._id}`}> <button className='btn bg-purple text-white rounded-4 px-5'>Request</button></Link>
             </div>
+            </>):('')
+             }
             <div className='col text-center'>
               <button className='btn bg-purple text-white rounded-4 px-5'>View Details</button>
             </div>
+          
+         
           </div>
+          </>):('')
+}
+{(suggestion.sug2)?(
+            <>
           <div className='row mx-5'>
-            <div className='col text-end'>
-              <span className='text-info m-2'>Status</span> <span className='m-2'> Pending</span>
+            
+           
+              <div className='col text-end'>
+              <span className='text-info m-2'>Status</span> <span className='m-2'> 
+              {houses.pending==1?<span className='m-2'>Pending </span>
+               :houses.rejected==1?<span className='m-2'>Rejected </span>:
+               <span className='m-2'> Approved  </span>
+              }
+              </span>
             </div>
           </div>
+         
           <div className='row m-5 fw-semibold mt-0'>
             <div className='col text-white supporter-add-suggestion-box2 rounded-4 text-center p-2'>
               Move to Safehouse
             </div>
+            {(houses.pending==0||houses.rejected==1)?(
+              <> 
             <div className='col text-center'>
               <button className='btn bg-purple text-white rounded-4 px-5'>Request</button>
             </div>
+            </>):('')
+          }
             <div className='col text-center'>
               <button className='btn bg-purple text-white rounded-4 px-5'>View Details</button>
             </div>
           </div>
+          </>):('')
+        }
+            {(suggestion.sug3)?(
+            <>
           <div className='row mx-5'>
             <div className='col text-end'>
-              <span className='text-info m-2'>Status</span> <span className='m-2'> Pending</span>
+              <span className='text-info m-2'>Status</span> <span className='m-2'> 
+              {couns.pending==1?<span className='m-2'>Pending </span>
+               :couns.rejected==1?<span className='m-2'>Rejected </span>:
+               <span className='m-2'> Approved  </span>
+              }
+              </span>
             </div>
           </div>
+        
           <div className='row m-5 fw-semibold mt-0'>
             <div className='col text-white supporter-add-suggestion-box3 rounded-4 text-center p-2'>
               Meet a Counselor
             </div>
+            {datas.pending==0?(
+              <> 
             <div className='col text-center'>
               <button className='btn bg-purple text-white rounded-4 px-5'>Request</button>
             </div>
+            </>):('')
+        }
             <div className='col text-center'>
               <button className='btn bg-purple text-white rounded-4 px-5'>View Details</button>
             </div>
           </div>
+          </>):('')
+        }
         </div>
+          
       </div>
     </div>
   )

@@ -153,6 +153,36 @@ const rejectHouseByUserId = (req, res) => {
 };
 
 
+// View all 
+const getHouseReqStatusForSugge=async(req, res) => {
+  let approved=0,pending=0,rejected=0
+  try{
+ const apprData=await houseReqSchema.find({issueId:req.params.id,status:'approved'})
+ const pendData=await houseReqSchema.find({issueId:req.params.id,status:'pending'})
+ const rejData=await houseReqSchema.find({issueId:req.params.id,status:'rejected'})
+if(apprData.length>0)
+  approved=apprData.length
+if(pendData.length>0)
+  pending=pendData.length
+if(rejData.length>0)
+  rejected=rejData.length
+   
+        res.json({
+          status: 200,
+          msg: 'Data obtained successfully',
+          data: {rejected,
+          approved,
+          pending}
+        });
+      }
+     catch (error) {
+      res.status(500).json({
+        status: 500,
+        msg: 'Data not obtained',
+        Error: error,
+      });
+    }
+};
 
 module.exports = {
   addReq,
@@ -161,4 +191,5 @@ module.exports = {
   viewpendingReqsBySuppId,
   approveReqByUserId,
   rejectHouseByUserId,
+  getHouseReqStatusForSugge
 };
