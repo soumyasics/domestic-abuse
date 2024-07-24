@@ -11,19 +11,16 @@ const caseeSchema = new mongoose.Schema({
     ref: 'issues'
   },
  
-  caseId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'cases'
-  },
+  
   date: {
     type: Date,
     required: true
   },
-  lpId: {
+  cId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'legalprofessionals'
+    ref: 'counsellors'
   },
-  lpStatus:{
+ status:{
     type:String,
     default:'pending'
   }

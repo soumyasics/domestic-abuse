@@ -86,7 +86,7 @@ setIssues(response.data)
                     </td>
                     <td>
                       <div className='text-center'>
-                       <Link to={`/user-view-issue/${suggestion._id}`} ><button className="btn bg-purple opacity-50 m-1 text-white">View Details</button></Link>
+                       <Link to={`/user-view-suggestion-details/${suggestion._id}`} ><button className="btn bg-purple opacity-50 m-1 text-white">View Details</button></Link>
 
                       </div>
                     </td>

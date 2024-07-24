@@ -101,15 +101,15 @@ function App() {
             <Route path='/user-view-all-supporters' element={[<UserNav/>,<UserViewSupporters/>]} />
             <Route path='/user-view-all-counsellors' element={[<UserNav/>,<UserViewCounsellors/>]} />
             <Route path='/user-view-all-counsellor-details' element={[<UserNav/>,<UserViewCounsellorDetails/>]} />
-            <Route path='/user-view-all-legal-professionals' element={[<UserNav/>,<UserViewLegalProfessionals/>]} />
-            <Route path='/user-legal-professional-detail' element={[<UserNav/>,<UserLegalProfessionalDetails/>]} />
+            <Route path='/user-view-all-legal-professionals/:id' element={[<UserNav/>,<UserViewLegalProfessionals/>]} />
+            <Route path='/user-legal-professional-detail/:issueId/:advId' element={[<UserNav/>,<UserLegalProfessionalDetails/>]} />
             <Route path='/user-add-issue' element={[<UserNav/>,<UserAddIssue/>]} />
             <Route path='/user-edit-issue/:id' element={[<UserNav/>,<UserEditIssue/>]} />
             <Route path='/user-view-issue/:id' element={[<UserNav/>,<UserViewIssue/>]} />
             <Route path='/user-view-suggestions' element={[<UserNav/>,<UserViewSuggestions/>]} />
 
             <Route path='/user-view-issues' element={[<UserNav/>,<UserViewIssues/>]} />
-            <Route path='/user-view-suggestion-details' element={[<UserNav/>,<UserViewSuggestionDetails/>]} />
+            <Route path='/user-view-suggestion-details/:id' element={[<UserNav/>,<UserViewSuggestionDetails/>]} />
             <Route path='/user-add-case' element={[<UserNav/>,<UserAddCase/>]} />
             <Route path='/user-legal-professional-case-details' element={[<UserNav/>,<UserLegalProfessionalCaseDetails/>]} />
             <Route path='/user-payment' element={[<UserNav/>,<UserPayment/>]} />

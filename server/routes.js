@@ -10,6 +10,7 @@ const blog=require('./Blogs/blogController')
 const cases=require('./Cases/caseController')
 const casReqs=require('./LP-UserRequests/reqController')
 const houseReqs=require('./SafeHouse/HouseReqs/houseReqController')
+const councReqs=require('./Councellor-UserRequests/reqController')
 
 //suppoerter routes
 router.post('/registerSupporters', supporter.upload, supporter.registerSupporters);
@@ -38,6 +39,7 @@ router.post('/rejectSafehouseById/:id', safehouse.rejectSafehouseById);
 router.post('/viewSafehouseBySupporterId/:id', safehouse.viewSafehouseBySupporterId);
 router.post('/viewSafehouseReqsForAdmin', safehouse.viewSafehouseReqsForAdmin);
 router.post('/searchhouseByName/:landmark', safehouse.searchhouseByName);
+router.post('/getHouseReqStatusForSugge/:id', safehouse.getHouseReqStatusForSugge);
 
 
 //Counsellor routes
@@ -141,6 +143,7 @@ router.post('/viewCaseReqById/:id',casReqs.viewCaseReqById);
 router.post('/viewCasePendingReqsByLpId/:id',casReqs.viewCasePendingReqsByLpId);
 router.post('/approveCaseByUserId/:id',casReqs.approveCaseByUserId);
 router.post('/rejectCaseByUserId/:id',casReqs.rejectCaseByUserId);
+router.post('/getLpReqStatusForSugge/:id',casReqs.getLpReqStatusForSugge);
 
 router.post('/viewCaseReqsByUserId/:id',casReqs.viewCaseReqsByUserId);
 router.post('/viewCaseReqsByIssueId/:id',casReqs.viewCaseReqsByIssueId);
@@ -152,5 +155,18 @@ router.post('/viewpendingReqsBySuppId/:id',houseReqs.viewpendingReqsBySuppId);
 router.post('/approveReqByUserId/:id',houseReqs.approveReqByUserId);
 router.post('/rejectHouseByUserId/:id',houseReqs.rejectHouseByUserId);
 router.post('/viewHouseReqsByUserId/:id',houseReqs.viewhouseReqsByUserId);
+
+
+//councellor req
+router.post('/addReqCounc/:id',councReqs.addReq);
+router.post('/viewCaseApprovedReqsByCouncId/:id',councReqs.viewCaseApprovedReqsByLpId);
+router.post('/viewCouncCaseReqById/:id',councReqs.viewCaseReqById);
+router.post('/viewCasePendingReqsByCouncId/:id',councReqs.viewCasePendingReqsByLpId);
+router.post('/approveCouncCaseByUserId/:id',councReqs.approveCaseByUserId);
+router.post('/rejectCouncCaseByUserId/:id',councReqs.rejectCaseByUserId);
+router.post('/getCouncReqStatusForSugge/:id',councReqs.getCouncellrReqStatusForSugge);
+
+router.post('/viewCouncCaseReqsByUserId/:id',councReqs.viewCaseReqsByUserId);
+router.post('/viewCouncCaseReqsByIssueId/:id',councReqs.viewCaseReqsByIssueId);
 
 module.exports = router

@@ -1395,3 +1395,48 @@ export const viewMySuggestionByIssueId = async (id) => {
     throw error;
   }
 };
+//Api for send req to LP
+export const sendRequesttoLP = async (issueId,advId,userId) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/addReq/${userId}`,{
+      issueId:issueId,lpId:advId});
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+//Api for send req to LP
+export const fetchLegalReqss = async (issueId) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/getLpReqStatusForSugge/${issueId}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+//Api for send req to LP
+export const fetchHouseReqss = async (issueId) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/getHouseReqStatusForSugge/${issueId}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+//Api for send req to LP
+export const fetchCouncReqss = async (issueId) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/getCouncellrReqStatusForSugge/${issueId}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};

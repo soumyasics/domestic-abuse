@@ -2,25 +2,35 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import './UserLegalProfessionalDetails.css';
 import demoLegalProfessional from '../../../Assets/legal-professional-registration.png';
-import { IMG_BASE_URL, getLegalProfessionalById } from '../../../Services/apiService';
+import { IMG_BASE_URL, getLegalProfessionalById, sendRequesttoLP } from '../../../Services/apiService';
 import { Button } from 'react-bootstrap';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaFile } from "react-icons/fa";
+import demo from '../../../Assets/supp-edit-profile.png';
 
 function UserLegalProfessionalDetails() {
-  const { id } = useParams();
+  const { advId } = useParams();
+  const { issueId } = useParams();
+
   const [legalProfessional, setLegalProfessional] = useState({
-    photo: { filename: '' },
-    proof: { filename: '' }
-  });
+    name: '',
+    email: '',
+    contact: '',
+    barAssociationId: '',
+    firmName: '',
+    licenseNumber: '',
+    photo: null,
+    proof: null,
+});
+const [imagePreview, setImagePreview] = useState(demo);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchLegalProfessionalData = async () => {
-      if (id) {
+      if (advId) {
         try {
-          const legalProfessionalData = await getLegalProfessionalById(id);
+          const legalProfessionalData = await getLegalProfessionalById(advId);
           setLegalProfessional(legalProfessionalData.data);
           console.log(legalProfessionalData.data);
         } catch (error) {
@@ -29,11 +39,24 @@ function UserLegalProfessionalDetails() {
       }
     };
     fetchLegalProfessionalData();
-  }, [id]);
+  }, [advId]);
 
   const handleRequest = async () => {
-    toast.success('Request sent successfully.');
-    // Implement request logic here
+    try {
+      const response = await sendRequesttoLP(issueId,advId,localStorage.getItem('userId'));
+      if (response.status === 200) {
+        toast.success('Request sent successfully.');
+        navigate('/user-home')
+
+      } else {
+        console.log(response);
+      }
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      toast.error('An error occurred while fetching the user data');
+    }
+
+   
   };
 
   const handleCancel = () => {
@@ -116,16 +139,16 @@ function UserLegalProfessionalDetails() {
                 {legalProfessional.barAssociationId}
               </div>
             </div>
-            <div className='row border-bottom m-5'>
+            {/* <div className='row border-bottom m-5'>
               <div className='col-6'>
                 Id Proof:
-              </div>
-              <div className='col-6 text-secondary'>
-                <a href={`${IMG_BASE_URL}/${legalProfessional.proof.filename}`} target="_blank" rel="noopener noreferrer">
+              </div> */}
+              {/* <div className='col-6 text-secondary'>
+                <a href={`${IMG_BASE_URL}${legalProfessional.proof.filename}`} target="_blank" rel="noopener noreferrer">
                   <FaFile className='theme-purple mx-1' /> Click Here
                 </a>
-              </div>
-            </div>
+              </div> */}
+            {/* </div> */}
             <div className='text-center'>
               <Button
                 className="m-2 px-5 bg-purple text-white"

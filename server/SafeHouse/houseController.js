@@ -1,3 +1,4 @@
+const { getHouseReqStatusForSugge } = require('./HouseReqs/houseReqController');
 const Safehouse = require('./houseSchema');
 
 const multer = require('multer');
@@ -328,5 +329,6 @@ module.exports = {
     rejectSafehouseById,
     activateSafehouseById,
     viewSafehouseBySupporterId,
-    searchhouseByName
+    searchhouseByName,
+    getHouseReqStatusForSugge
 };
