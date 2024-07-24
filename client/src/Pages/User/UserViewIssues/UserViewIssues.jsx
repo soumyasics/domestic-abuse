@@ -93,18 +93,16 @@ console.log('delleted');
             <p className="m-5 text-center fs-1">No issues available</p>
           ) : (
             <>
-              <h3 className='theme-purple'>Reported Issues</h3>
-              <Table striped bordered hover className="suggestions-table">
-                <thead>
+              <h3 className='theme-purple m-5 text-center'>Reported Issues</h3>
+              <Table striped bordered hover className="suggestions-table my-5">
+                <thead> 
                   <tr className="text-center">
                     <th className='bg-purple text-white'>Date</th>
-                 
                     <th className='bg-purple text-white'>Type of Issue</th>
                     <th className='bg-purple text-white'>Severity</th>
                     <th className='bg-purple text-white'>Location</th>
                     <th className='bg-purple text-white'>Time</th>
                     <th className='bg-purple text-white'>Attachments</th>
-
                     <th className='bg-purple text-white'>Action</th>
                   </tr>
                 </thead>
@@ -116,7 +114,7 @@ console.log('delleted');
                       <td>{suggestion.severity}</td>
                       <td>{suggestion.location}</td>
                       <td>{suggestion.dateTime.slice(11, 16)}</td>
-                      <td><a href={ `${IMG_BASE_URL}/${suggestion.file.filename}`} target="_blank" rel="noopener noreferrer"> <FaFile className='theme-purple mx-1'/> Click Here</a>
+                      <td><a href={ `${IMG_BASE_URL}/${suggestion?.file?.filename}`} target="_blank" rel="noopener noreferrer"> <FaFile className='theme-purple mx-1'/> Click Here</a>
                       </td>
                       <td>
                         <div className='text-center'>
