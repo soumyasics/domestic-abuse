@@ -7,7 +7,7 @@ const multer = require('multer');
 // Register a new issue
 const addReq= async (req, res) => {
   try {
-    const { issueId,lpId,date } = req.body;
+    const { issueId,cId,date } = req.body;
    let cases= await Case.findOne({issueId:issueId,userId:req.params.id})
 if(cases){
   return res.json({
@@ -19,7 +19,7 @@ if(cases){
 
       issueId,
       userId:req.params.id,
-      lpId,
+      cId,
       date:new Date()
     });
 
@@ -46,7 +46,7 @@ if(cases){
 
 // View all 
 const viewCasePendingReqsByLpId= (req, res) => {
-  Case.find({lpId:req.params.id,lpStatus:'pending'}).populate('userId issueId')
+  Case.find({cId:req.params.id,status:'pending'}).populate('userId issueId')
     .exec()
     .then(data => {
       if (data.length > 0) {
@@ -71,7 +71,7 @@ const viewCasePendingReqsByLpId= (req, res) => {
     });
 };
 const viewCaseApprovedReqsByLpId= (req, res) => {
-  Case.find({lpId:req.params.id,lpStatus:'approved'}).populate('userId issueId caseId')
+  Case.find({cId:req.params.id,lpStatus:'approved'}).populate('userId issueId caseId')
     .exec()
     .then(data => {
       if (data.length > 0) {
@@ -150,7 +150,7 @@ const viewCaseReqsByIssueId = (req, res) => {
 
 // View issue by ID
 const viewCaseReqById = (req, res) => {
-  Case.findById({ _id: req.params.id }).populate('userId issueId caseId lpId')
+  Case.findById({ _id: req.params.id }).populate('userId issueId caseId cId')
     .exec()
     .then(data => {
       res.json({
@@ -207,6 +207,36 @@ const rejectCaseByUserId = (req, res) => {
     });
 };
 
+// View all 
+const getCouncellrReqStatusForSugge=async(req, res) => {
+  let approved=0,pending=0,rejected=0
+  try{
+ const apprData=await Case.find({issueId:req.params.id,status:'approved'})
+ const pendData=await Case.find({issueId:req.params.id,status:'pending'})
+ const rejData=await Case.find({issueId:req.params.id,status:'rejected'})
+if(apprData.length>0)
+  approved=apprData.length
+if(pendData.length>0)
+  pending=pendData.length
+if(rejData.length>0)
+  rejected=rejData.length
+   
+        res.json({
+          status: 200,
+          msg: 'Data obtained successfully',
+          data: {rejected,
+          approved,
+          pending}
+        });
+      }
+     catch (error) {
+      res.status(500).json({
+        status: 500,
+        msg: 'Data not obtained',
+        Error: error,
+      });
+    }
+};
 
 
 module.exports = {
@@ -217,5 +247,6 @@ module.exports = {
   approveCaseByUserId,
   rejectCaseByUserId,
   viewCaseReqsByUserId,
-  viewCaseReqsByIssueId
+  viewCaseReqsByIssueId,
+  getCouncellrReqStatusForSugge
 };

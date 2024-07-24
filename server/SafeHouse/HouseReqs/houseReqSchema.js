@@ -23,8 +23,11 @@ const caseeSchema = new mongoose.Schema({
   status:{
     type:String,
     default:'pending'
-  }
-
+  },
+  issueId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'issues'
+  },
 });
 
 module.exports = mongoose.model('houserequests', caseeSchema);

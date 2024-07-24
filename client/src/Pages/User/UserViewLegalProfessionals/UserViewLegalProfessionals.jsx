@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './UserViewLegalProfessionals.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import demoLegalProfessional from '../../../Assets/legal-professional-registration.png';
@@ -10,6 +10,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const UserViewLegalProfessionals = () => {
+  const {id}=useParams()
   const [legalProfessionals, setLegalProfessionals] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -36,8 +37,8 @@ const UserViewLegalProfessionals = () => {
     setCurrentPage(event.selected);
   };
 
-  const handleCardClick = (id) => {
-    navigate(`/user-legal-professional-detail/${id}`);
+  const handleCardClick = (advId) => {
+    navigate(`/user-legal-professional-detail/${id}/${advId}`);
   };
 
   const paginatedProfessionals = legalProfessionals.slice(

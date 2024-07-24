@@ -1,10 +1,10 @@
 //src/Services/apiService.jsx
 import axios from 'axios';
 
-// export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
-// export const IMG_BASE_URL = 'http://localhost:4039/';
-export const IMG_BASE_URL = 'http://hybrid.srishticampus.in:4039/';
-export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
+export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
+export const IMG_BASE_URL = 'http://localhost:4039/';
+// export const IMG_BASE_URL = 'http://hybrid.srishticampus.in:4039/';
+// export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
 // Api for Viewing all Supporters Request for admin to approve, reject or view
 export const viewSupporterReqsForAdmin = async () => {
   try {
@@ -1388,6 +1388,51 @@ export const viewSupportedUserIssuesBYUserId = async (id) => {
 export const viewMySuggestionByIssueId = async (id) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/viewSuggestionByIssueId/${id}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+//Api for send req to LP
+export const sendRequesttoLP = async (issueId,advId,userId) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/addReq/${userId}`,{
+      issueId:issueId,lpId:advId});
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+//Api for send req to LP
+export const fetchLegalReqss = async (issueId) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/getLpReqStatusForSugge/${issueId}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+//Api for send req to LP
+export const fetchHouseReqss = async (issueId) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/getHouseReqStatusForSugge/${issueId}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+//Api for send req to LP
+export const fetchCouncReqss = async (issueId) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/getCouncellrReqStatusForSugge/${issueId}`);
     console.log("in ",response);
     return response.data;
   } catch (error) {
