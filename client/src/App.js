@@ -82,6 +82,7 @@ import LegalProfessionalCaseRequestDetail from './Pages/Legal Professional/Legal
 import UserViewSuggestionDetails from './Pages/User/UserViewSuggestionDetails/UserViewSuggestionDetails';
 import UserViewSuggestions from './Pages/User/UserViewIssues/UserViewSuggestions';
 import LegalProfessionalUpdateCaseDetails from './Pages/Legal Professional/LegalProfessionalUpdateCaseDetails/LegalProfessionalUpdateCaseDetails';
+import UserViewLPStatus from './Pages/User/UserLegalProfessionalDetails/UserViewLPStatus';
 
 function App() {
   return (
@@ -112,6 +113,8 @@ function App() {
             <Route path='/user-view-suggestion-details/:id' element={[<UserNav/>,<UserViewSuggestionDetails/>]} />
             <Route path='/user-add-case' element={[<UserNav/>,<UserAddCase/>]} />
             <Route path='/user-legal-professional-case-details' element={[<UserNav/>,<UserLegalProfessionalCaseDetails/>]} />
+            <Route path='/user-legal-professional-view-Status/:id' element={[<UserNav/>,<UserViewLPStatus/>]} />
+
             <Route path='/user-payment' element={[<UserNav/>,<UserPayment/>]} />
             <Route path='/user-view-blogs' element={[<UserNav/>,<UserViewBlogs/>]} />
             <Route path='/user-view-request-history' element={[<UserNav/>,<UserViewRequestHistory/>]} />

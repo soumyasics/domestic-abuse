@@ -1440,3 +1440,14 @@ export const fetchCouncReqss = async (issueId) => {
     throw error;
   }
 };
+//Api for send req to LP
+export const fetchLegalStatusByIssueId = async (issueId) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewCaseReqsByIssueId/${issueId}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};

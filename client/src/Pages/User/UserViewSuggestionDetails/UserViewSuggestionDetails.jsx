@@ -283,7 +283,7 @@ function UserViewSuggestionDetails() {
             </>):('')
              }
             <div className='col text-center'>
-              <button className='btn bg-purple text-white rounded-4 px-5'>View Details</button>
+            <Link to={`/user-legal-professional-view-Status/${id}`}>    <button className='btn bg-purple text-white rounded-4 px-5'>View Details</button></Link>
             </div>
           
          
@@ -317,7 +317,7 @@ function UserViewSuggestionDetails() {
             </>):('')
           }
             <div className='col text-center'>
-              <button className='btn bg-purple text-white rounded-4 px-5'>View Details</button>
+            <button className='btn bg-purple text-white rounded-4 px-5'>View Details</button>
             </div>
           </div>
           </>):('')
