@@ -84,6 +84,7 @@ import UserViewSuggestions from './Pages/User/UserViewIssues/UserViewSuggestions
 import LegalProfessionalUpdateCaseDetails from './Pages/Legal Professional/LegalProfessionalUpdateCaseDetails/LegalProfessionalUpdateCaseDetails';
 import UserViewLPStatus from './Pages/User/UserLegalProfessionalDetails/UserViewLPStatus';
 import UserViewSafeHousewitIssue from './Pages/User/UserViewSafehouses/UserViewSafeHousewitIssue';
+import CouncillorviewClintDetailed from './Pages/Counsellor/CounsellorViewClients/CouncillorviewClintDetailed';
 
 function App() {
   return (
@@ -179,7 +180,8 @@ function App() {
             <Route path='/counsellor-add-blogs' element={[<CouncillorNav/>,<CounsellorAddBlogs/>]} />
             <Route path='/counsellor-edit-blogs/:id' element={[<CouncillorNav/>,<CounsellorEditBlogs/>]} />
             <Route path='/counsellor-view-blogs' element={[<CouncillorNav/>,<CounsellorViewBlogs/>]} />
-            
+            <Route path='/counsellor-view-detaild-client/:id' element={[<CouncillorNav/>,<CouncillorviewClintDetailed/>]} />
+
             {/* Legal Professional Paths  */}
             <Route path='/legal-professional-login' element={[<Navbar/>,<LegalProfessionalLogin/>]} />
             <Route path='/legal-professional-register' element={[<Navbar/>,<LegalProfessionalRegister />]} />

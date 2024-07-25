@@ -166,127 +166,135 @@ function SupporterViewSuggestionDetails() {
             </div>
             <div className='row m-5'>
                 <div className='col'>
-                    <h3 className='theme-purple'>Current Status</h3>
+                <h3 className='theme-purple'>Current Status</h3>
+                    </div>
                 </div>
-            </div>
-
-          
-            {
-                (user.sug1)?
-                <>
-            <div className='row m-5 supporter-add-suggestion-box1 rounded-3 py-1 text-center'>
-                <div className='col '>
-                    <h3 className='text-white'>Moved to Legal Professional Option</h3>
+    
+              
+                {
+                    (user.sug1)?
+                    <>
+                <div className='row m-5 supporter-add-suggestion-box1 rounded-3 py-1 text-center'>
+                    <div className='col '>
+                        <h3 className='text-white'>Moved to Legal Professional Option</h3>
+                    </div>
                 </div>
-            </div>
-            <div className='row m-5'>
-                <div className='col'>
-                    <table className="table table-borderless">
-                        <thead>
-                            {/* <tr className=' h5'>
-                                <th scope="col" className='theme-purple'>#</th>
-                                <th scope="col" className='theme-purple'>Advocate Name</th>
-                                <th scope="col" className='theme-purple'>Mail Id</th>
-                                <th scope="col" className='theme-purple'>Contact Number</th>
-                                <th scope="col" className='theme-purple'>Firm Name</th>
-                                <th scope="col" className='theme-purple'>Firm Address</th>
-                                <th scope="col" className='theme-purple'>License Number</th>
-                                <th scope="col" className='theme-purple'>Status</th>
-                            </tr> */}
-                        </thead>
-                        <tbody>
-                            {/* <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                            </tr> */}
-                        </tbody>
-                    </table>
+                <div className='row m-5'>
+                    <div className='col'>
+                        {console.log(user)}
+                        <table className="table table-borderless">
+                            <thead>
+                                {/* <tr className=' h5'>
+                                    <th scope="col" className='theme-purple'>#</th>
+                                    <th scope="col" className='theme-purple'>Advocate Name</th>
+                                    <th scope="col" className='theme-purple'>Mail Id</th>
+                                    <th scope="col" className='theme-purple'>Contact Number</th>
+                                    <th scope="col" className='theme-purple'>Firm Name</th>
+                                    <th scope="col" className='theme-purple'>Firm Address</th>
+                                    <th scope="col" className='theme-purple'>License Number</th>
+                                    <th scope="col" className='theme-purple'>Status</th>
+                                </tr> */}
+                            </thead>
+                            <tbody>
+                                {/* <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                    <td>@mdo</td>
+                                    <td>@mdo</td>
+                                    <td>@mdo</td>
+                                    <td>@mdo</td>
+                                </tr> */}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-            </>
-
-            :(user.sug2)?
-
-         <>
-            <div className='row m-5 supporter-add-suggestion-box2 rounded-3 py-1 text-center'>
-                <div className='col '>
-                    <h3 className='text-white'>Moved to Safe House Option</h3>
+                </>
+    
+                :('')
+                                }
+                                {
+                                (user.sug2)?
+    
+             <>
+                <div className='row m-5 supporter-add-suggestion-box2 rounded-3 py-1 text-center'>
+                    <div className='col '>
+                        <h3 className='text-white'>Moved to Safe House Option</h3>
+                    </div>
                 </div>
-            </div>
-            <div className='row m-5'>
-                <div className='col'>
-                    <table className="table table-borderless">
-                        <thead>
-                            {/* <tr className=' h5'>
-                                <th scope="col" className='theme-purple'>#</th>
-                                <th scope="col" className='theme-purple'>House Name</th>
-                                <th scope="col" className='theme-purple'>Address</th>
-                                <th scope="col" className='theme-purple'>Contact Number</th>
-                                <th scope="col" className='theme-purple'>Accommodation Capacity</th>
-                                <th scope="col" className='theme-purple'>Monthly Rent</th>
-                                <th scope="col" className='theme-purple'>Status</th>
-                            </tr> */}
-                        </thead>
-                        <tbody>
-                            {/* <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                            </tr> */}
-                        </tbody>
-                    </table>
+                <div className='row m-5'>
+                    <div className='col'>
+                        <table className="table table-borderless">
+                            <thead>
+                                {/* <tr className=' h5'>
+                                    <th scope="col" className='theme-purple'>#</th>
+                                    <th scope="col" className='theme-purple'>House Name</th>
+                                    <th scope="col" className='theme-purple'>Address</th>
+                                    <th scope="col" className='theme-purple'>Contact Number</th>
+                                    <th scope="col" className='theme-purple'>Accommodation Capacity</th>
+                                    <th scope="col" className='theme-purple'>Monthly Rent</th>
+                                    <th scope="col" className='theme-purple'>Status</th>
+                                </tr> */}
+                            </thead>
+                            <tbody>
+                                {/* <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                    <td>@mdo</td>
+                                    <td>@mdo</td>
+                                    <td>@mdo</td>
+                                </tr> */}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-            </> :(
-            <>  
-                <div className='row m-5 supporter-add-suggestion-box3 rounded-3 py-1 text-center'>
-                <div className='col '>
-                    <h3 className='text-white'>Moved to Safe Counselor Option</h3>
+                </> 
+                  :('')
+                }
+                {
+                (user.sug2)?(
+                <>  
+                    <div className='row m-5 supporter-add-suggestion-box3 rounded-3 py-1 text-center'>
+                    <div className='col '>
+                        <h3 className='text-white'>Moved to Safe Counselor Option</h3>
+                    </div>
                 </div>
-            </div>
-            <div className='row m-5'>
-                <div className='col'>
-                    <table className="table table-borderless">
-                        <thead>
-                            {/* <tr className=' h5'>
-                                <th scope="col" className='theme-purple'>#</th>
-                                <th scope="col" className='theme-purple'>Counsellor Name</th>
-                                <th scope="col" className='theme-purple'>Mail Id</th>
-                                <th scope="col" className='theme-purple'>Contact Number</th>
-                                <th scope="col" className='theme-purple'>Work Experience</th>
-                                <th scope="col" className='theme-purple'>Location</th>
-                                <th scope="col" className='theme-purple'>Specialisation</th>
-                                <th scope="col" className='theme-purple'>Status</th>
-                            </tr> */}
-                        </thead>
-                        <tbody>
-                            {/* <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                            </tr> */}
-                        </tbody>
-                    </table>
+                <div className='row m-5'>
+                    <div className='col'>
+                        <table className="table table-borderless">
+                            <thead>
+                                {/* <tr className=' h5'>
+                                    <th scope="col" className='theme-purple'>#</th>
+                                    <th scope="col" className='theme-purple'>Counsellor Name</th>
+                                    <th scope="col" className='theme-purple'>Mail Id</th>
+                                    <th scope="col" className='theme-purple'>Contact Number</th>
+                                    <th scope="col" className='theme-purple'>Work Experience</th>
+                                    <th scope="col" className='theme-purple'>Location</th>
+                                    <th scope="col" className='theme-purple'>Specialisation</th>
+                                    <th scope="col" className='theme-purple'>Status</th>
+                                </tr> */}
+                            </thead>
+                            <tbody>
+                                {/* <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                    <td>@mdo</td>
+                                    <td>@mdo</td>
+                                    <td>@mdo</td>
+                                    <td>@mdo</td>
+                                </tr> */}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-            </>
-            )
-        }
+                </>
+                ):('')
+            }
         </div>
     )
 }

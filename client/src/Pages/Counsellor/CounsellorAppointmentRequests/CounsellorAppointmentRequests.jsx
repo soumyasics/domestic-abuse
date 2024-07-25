@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import './CounsellorAppointmentRequests.css';
-import { viewCounsellorAppointments, acceptAppointmentById, rejectAppointmentById } from '../../../Services/apiService';
+import { viewCounsellorAppointments, acceptAppointmentById, rejectAppointmentById, acceptCouncAppointmentById, rejectCouncAppointmentById } from '../../../Services/apiService';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { confirmAlert } from 'react-confirm-alert';
@@ -18,8 +18,8 @@ const CounsellorAppointmentRequests = () => {
 
   const fetchAppointments = useCallback(async () => {
     try {
-    //   const response = await viewCounsellorAppointments();
-    //   setAppointments(response.data || []);
+      const response = await viewCounsellorAppointments(localStorage.getItem('counsellorId'));
+      setAppointments(response.data || []);
     } catch (error) {
       console.error('Error fetching appointments:', error);
       toast.error('Error fetching appointment requests.');
@@ -41,13 +41,13 @@ const CounsellorAppointmentRequests = () => {
           label: 'Yes',
           onClick: async () => {
             try {
-            //   const response = await acceptAppointmentById(id);
-            //   if (response.success) {
-            //     toast.success('Appointment accepted successfully.');
-            //     fetchAppointments(currentPage);
-            //   } else {
-            //     toast.error(response.message || 'Error accepting appointment.');
-            //   }
+              const response = await acceptCouncAppointmentById(id);
+              if (response.status==200) {
+                toast.success('Appointment accepted successfully.');
+                fetchAppointments(currentPage);
+              } else {
+                toast.error(response.message || 'Error accepting appointment.');
+              }
             } catch (error) {
               toast.error('Error accepting appointment.');
             }
@@ -69,13 +69,13 @@ const CounsellorAppointmentRequests = () => {
           label: 'Yes',
           onClick: async () => {
             try {
-            //   const response = await rejectAppointmentById(id);
-            //   if (response.success) {
-            //     toast.success('Appointment rejected successfully.');
-            //     fetchAppointments(currentPage);
-            //   } else {
-            //     toast.error(response.message || 'Error rejecting appointment.');
-            //   }
+              const response = await rejectCouncAppointmentById(id);
+              if (response.status==200) {
+                toast.success('Appointment rejected successfully.');
+                fetchAppointments(currentPage);
+              } else {
+                toast.error(response.message || 'Error rejecting appointment.');
+              }
             } catch (error) {
               toast.error('Error rejecting appointment.');
             }
@@ -128,8 +128,8 @@ const CounsellorAppointmentRequests = () => {
               <tr className="text-center">
                 <th className='bg-purple text-white'>#</th>
                 <th className='bg-purple text-white'>User Name</th>
-                <th className='bg-purple text-white'>Appointment Date</th>
-                <th className='bg-purple text-white'>Appointment Time</th>
+                <th className='bg-purple text-white'>DOB</th>
+                <th className='bg-purple text-white'>Gender</th>
                 <th className='bg-purple text-white'>Contact Number</th>
                 <th className='bg-purple text-white'>Type of Issues</th>
                 <th className='bg-purple text-white'>Action</th>
@@ -141,14 +141,14 @@ const CounsellorAppointmentRequests = () => {
                 return (
                   <tr key={appointment._id}>
                     <td>{index + 1 + currentPage * itemsPerPage}</td>
-                    <td>{appointment.userName}</td>
-                    <td>{formattedDate}</td>
-                    <td>{formattedTime}</td>
-                    <td>{appointment.contactNumber}</td>
-                    <td>{appointment.typeOfIssues}</td>
+                    <td>{appointment.userId.name}</td>
+                    <td>{appointment.userId.dob.slice(0,10)}</td>
+                    <td>{appointment.userId.gender}</td>
+                    <td>{appointment.userId.contact}</td>
+                    <td>{appointment.issueId.type}</td>
                     <td className=''>
                       <div className='text-center'>
-                        <i className="m-3 cursor-pointer"><BsEye size={22} /></i>
+                        {/* <i className="m-3 cursor-pointer"><BsEye size={22} /></i> */}
                         <Button
                           variant="outline-success"
                           className="m-2 px-5"
