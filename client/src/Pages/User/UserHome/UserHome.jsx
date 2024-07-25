@@ -7,11 +7,13 @@ import safehouse3 from '../../../Assets/safehouse1.jpeg';
 import cardImg1 from '../../../Assets/user-home-card1.png';
 import cardImg2 from '../../../Assets/user-home-card2.png';
 import cardImg3 from '../../../Assets/user-home-card3.png';
+import {ToastContainer } from 'react-toastify';
 
 
 function UserHome() {
     return (
         <div className='container'>
+            <ToastContainer />
             <div className='row m-5'>
                 <div className='col d-flex m-auto'>
                     <img src={hero} alt='home-hero' className='img-fluid m-auto object-fit-cover w-100 h-100' />

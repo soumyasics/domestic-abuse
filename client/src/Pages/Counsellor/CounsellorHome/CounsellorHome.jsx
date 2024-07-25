@@ -6,6 +6,8 @@ import victim2 from '../../../Assets/counsellor-home-2.jpeg';
 import victim3 from '../../../Assets/counsellor-home-3.png';
 import { FaRegThumbsUp, FaComments } from "react-icons/fa";
 import { FaPeopleGroup } from "react-icons/fa6";
+import { useParams,Link,useNavigate } from 'react-router-dom';
+
 function CounsellorHome() {
   return (
     <div className='container-xxl'>
@@ -23,7 +25,7 @@ function CounsellorHome() {
           </div>
           <div className='row m-5'>
             <div className='col ms-5'>
-              <button className='btn bg-purple text-white px-5'>Check Appointments</button>
+             <Link to={`/counsellor-appointment-requests`}> <button className='btn bg-purple text-white px-5'>Check Appointments</button></Link>
             </div>
           </div>
         </div>

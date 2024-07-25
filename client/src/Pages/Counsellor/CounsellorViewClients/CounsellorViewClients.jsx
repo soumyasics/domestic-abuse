@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import ReactPaginate from 'react-paginate';
 import { BsEye } from "react-icons/bs";
 import {Link, useNavigate} from 'react-router-dom';
+import { viewCounsellorAprvdAppointments } from '../../../Services/apiService';
 
 function CounsellorViewClients() {
     const [clients, setClients] = useState([]);
@@ -16,20 +17,20 @@ function CounsellorViewClients() {
   
     const fetchClients = useCallback(async () => {
       try {
-      //   const response = await viewCounsellorClients();
-      //   setClients(response.data || []);
+          const response = await viewCounsellorAprvdAppointments(localStorage.getItem('counsellorId'));
+          setClients(response.data || []);
       } catch (error) {
-        console.error('Error fetching clients:', error);
-        toast.error('Error fetching Clients requests.');
+          console.error('Error fetching issues:', error);
+          toast.error('Error fetching issues.');
       } finally {
-        setLoading(false);
+          setLoading(false);
       }
-    }, []);
-  
-    useEffect(() => {
-      fetchClients(currentPage);
-    }, [fetchClients, currentPage]);
-  
+  }, [localStorage.getItem('counsellorId')]);
+
+  useEffect(() => {
+      
+      fetchClients();
+  }, [fetchClients]);
   
     const handlePageClick = (event) => {
       setCurrentPage(event.selected);
@@ -49,7 +50,7 @@ function CounsellorViewClients() {
       return { formattedDate, formattedTime };
     };
     const navigateToDetails = (id) => {
-        navigate(`/user-viewdetailedCounsellor/${id}`);
+        navigate(`/counsellor-view-detaild-client/${id}`);
     };
 
     return (
@@ -70,32 +71,36 @@ function CounsellorViewClients() {
         ) : (
           <>
             <Table striped bordered hover className="table-responsive">
-              <thead>
-                <tr className="text-center">
-                  <th className='bg-purple text-white'>#</th>
-                  <th className='bg-purple text-white'>User Name</th>
-                  <th className='bg-purple text-white'>Appointment Date</th>
-                  <th className='bg-purple text-white'>Appointment Time</th>
-                  <th className='bg-purple text-white'>Contact Number</th>
-                  <th className='bg-purple text-white'>Type of Issues</th>
-                  <th className='bg-purple text-white'>Action</th>
-                </tr>
-              </thead>
+            <thead>
+                                    <tr className="text-center">
+                                        <th className='bg-purple text-white'>User Name</th>
+                                        <th className='bg-purple text-white'>Gender</th>
+                                        <th className='bg-purple text-white'>Date of Birth</th>
+                                        <th className='bg-purple text-white'>Type of Issue</th>
+                                        <th className='bg-purple text-white'>Severity</th>
+                                        <th className='bg-purple text-white'>Location</th>
+                                        <th className='bg-purple text-white'>Date</th>
+
+                                        <th className='bg-purple text-white'>Action</th>
+                                    </tr>
+                                </thead>
               <tbody className='text-center'>
                 {paginatedClients.map((client, index) => {
                   const { formattedDate, formattedTime } = formatDateTime(client.appointmentDate);
                   return (
                     <tr key={client._id}>
-                      <td>{index + 1 + currentPage * itemsPerPage}</td>
-                      <td>{client.userName}</td>
-                      <td>{formattedDate}</td>
-                      <td>{formattedTime}</td>
-                      <td>{client.contactNumber}</td>
-                      <td>{client.typeOfIssues}</td>
+                   <td>{client.userId.name}</td>
+                                            <td>{client.userId.gender}</td>
+                                            <td>{client.userId.dob.slice(0, 10)}</td>
+                                            <td>{client.issueId.type}</td>
+                                            <td>{client.issueId.severity}</td>
+                                            <td>{client.issueId.location}</td>
+                                            <td>{client.issueId.dateTime.slice(0, 10)}</td>
                       <td className=''>
                         <div className='text-center'>
                           <i className="m-3 cursor-pointer"><BsEye size={22} /></i>
-                          <Link className=" theme-purple link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" onClick={() => navigateToDetails(client._id)}>View Details</Link>
+                          <Link className=" theme-purple link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+                           to={`/counsellor-view-detaild-client/${client.issueId._id}`}>View Details</Link>
                         </div>
                       </td>
                     </tr>

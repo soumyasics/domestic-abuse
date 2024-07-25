@@ -46,6 +46,7 @@ if(cases){
 
 // View all 
 const viewCasePendingReqsByLpId= (req, res) => {
+  console.log('p',req.params.id);
   Case.find({cId:req.params.id,status:'pending'}).populate('userId issueId')
     .exec()
     .then(data => {
@@ -63,6 +64,7 @@ const viewCasePendingReqsByLpId= (req, res) => {
       }
     })
     .catch(err => {
+      console.log(err);
       res.status(500).json({
         status: 500,
         msg: 'Data not obtained',
@@ -71,7 +73,7 @@ const viewCasePendingReqsByLpId= (req, res) => {
     });
 };
 const viewCaseApprovedReqsByLpId= (req, res) => {
-  Case.find({cId:req.params.id,lpStatus:'approved'}).populate('userId issueId caseId')
+  Case.find({cId:req.params.id,status:'approved'}).populate('userId issueId')
     .exec()
     .then(data => {
       if (data.length > 0) {
@@ -88,6 +90,7 @@ const viewCaseApprovedReqsByLpId= (req, res) => {
       }
     })
     .catch(err => {
+      console.log(err);
       res.status(500).json({
         status: 500,
         msg: 'Data not obtained',
@@ -97,7 +100,7 @@ const viewCaseApprovedReqsByLpId= (req, res) => {
 };
 // View all issues
 const viewCaseReqsByUserId = (req, res) => {
-  Case.find({userId:req.params.id}).populate('lpid issueId  caseId')
+  Case.find({userId:req.params.id}).populate('lpid issueId')
     .exec()
     .then(data => {
       if (data.length > 0) {
@@ -123,7 +126,7 @@ const viewCaseReqsByUserId = (req, res) => {
 };
 // View all issues
 const viewCaseReqsByIssueId = (req, res) => {
-  Case.find({issueId:req.params.id}).populate('lpid issueId  caseId')
+  Case.find({issueId:req.params.id}).populate('lpid issueId')
     .exec()
     .then(data => {
       if (data.length > 0) {
@@ -150,7 +153,7 @@ const viewCaseReqsByIssueId = (req, res) => {
 
 // View issue by ID
 const viewCaseReqById = (req, res) => {
-  Case.findById({ _id: req.params.id }).populate('userId issueId caseId cId')
+  Case.findById({ _id: req.params.id }).populate('userId issueId  cId')
     .exec()
     .then(data => {
       res.json({
@@ -170,7 +173,7 @@ const viewCaseReqById = (req, res) => {
 
 // View issue by ID
 const approveCaseByUserId = (req, res) => {
-  Case.findByIdAndUpdate({ _id: req.params.id },{lpStatus:"approved"})
+  Case.findByIdAndUpdate({ _id: req.params.id },{status:"approved"})
     .exec()
     .then(data => {
       res.json({
@@ -189,7 +192,7 @@ const approveCaseByUserId = (req, res) => {
 };
 
 const rejectCaseByUserId = (req, res) => {
-  Case.findByIdAndUpdate({ _id: req.params.id },{lpStatus:"rejected"})
+  Case.findByIdAndUpdate({ _id: req.params.id },{status:"rejected"})
     .exec()
     .then(data => {
       res.json({
