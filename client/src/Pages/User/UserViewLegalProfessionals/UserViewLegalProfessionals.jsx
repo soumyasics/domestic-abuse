@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const UserViewLegalProfessionals = () => {
   const {id}=useParams()
+  const {x}=useParams()
   const [legalProfessionals, setLegalProfessionals] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [loading, setLoading] = useState(true);

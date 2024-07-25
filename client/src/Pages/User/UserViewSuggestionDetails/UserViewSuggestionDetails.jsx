@@ -70,7 +70,7 @@ function UserViewSuggestionDetails() {
       toast.error('Error fetching suggestions.');
     }
   };
-
+  let st=datas.pending==1?'p':((datas.approved)==1?'a':'r')
   const fetchSuggestions = async () => {
     try {
       const response = await getSuggestionById(id);
@@ -259,15 +259,17 @@ function UserViewSuggestionDetails() {
           <div className='row mx-5 '>
             {console.log(suggestion)}
            
-             
+            {((datas.pending==0)&&(datas.approved==1)&&(datas.rejected==0))?'pppp':(
+
             <div className='col text-end'>
               <span className='text-info m-2'>Status</span> 
               {datas.pending==1?<span className='m-2'>Pending </span>
-               :datas.rejected==1?<span className='m-2'>Rejected </span>:
-               <span className='m-2'> Approved  </span>
+               :datas.approved==1?<span className='m-2'>Approved </span>:
+               <span className='m-2'>Rejected </span>
               }
              
-            </div>
+            </div>)
+}
           
           </div>
  
@@ -275,15 +277,16 @@ function UserViewSuggestionDetails() {
             <div className='col text-white supporter-add-suggestion-box1 rounded-4 text-center p-2'>
               Meet an Advocate
             </div>
-            {datas.pending==0?(
+            {(datas.pending==0)&&(datas.approved!=1)?(
               <> 
                <div className='col text-center'>
+               
              <Link to={`/user-view-all-legal-professionals/${user._id}`}> <button className='btn bg-purple text-white rounded-4 px-5'>Request</button></Link>
             </div>
             </>):('')
              }
             <div className='col text-center'>
-            <Link to={`/user-legal-professional-view-Status/${id}`}>    <button className='btn bg-purple text-white rounded-4 px-5'>View Details</button></Link>
+            <Link to={`/user-legal-professional-view-Status/${st}/${id}`}>    <button className='btn bg-purple text-white rounded-4 px-5'>View Details</button></Link>
             </div>
           
          
@@ -292,17 +295,22 @@ function UserViewSuggestionDetails() {
 }
 {(suggestion.sug2)?(
             <>
+            {console.log(houses)}
           <div className='row mx-5'>
             
-           
+          {((houses.pending==0)&&(houses.approved==0)&&(houses.rejected==0))?'':(
               <div className='col text-end'>
+             
+
               <span className='text-info m-2'>Status</span> <span className='m-2'> 
               {houses.pending==1?<span className='m-2'>Pending </span>
-               :houses.rejected==1?<span className='m-2'>Rejected </span>:
-               <span className='m-2'> Approved  </span>
+               :houses.approved==1?<span className='m-2'>Approved </span>:
+               <span className='m-2'>Rejected </span>
               }
               </span>
-            </div>
+
+            </div>)
+}
           </div>
          
           <div className='row m-5 fw-semibold mt-0'>
@@ -312,43 +320,50 @@ function UserViewSuggestionDetails() {
             {(houses.pending==0||houses.rejected==1)?(
               <> 
             <div className='col text-center'>
-              <button className='btn bg-purple text-white rounded-4 px-5'>Request</button>
+            <Link to={`/user-view-safehouse-issue/${id}`}>   <button className='btn bg-purple text-white rounded-4 px-5'>Request</button></Link>
             </div>
             </>):('')
           }
+                {((houses.pending==0)&&(houses.approved==0)&&(houses.rejected==0))?'':(
             <div className='col text-center'>
             <button className='btn bg-purple text-white rounded-4 px-5'>View Details</button>
             </div>
+                )}
           </div>
           </>):('')
         }
             {(suggestion.sug3)?(
             <>
           <div className='row mx-5'>
+          {((couns.pending==0)&&(couns.approved==0)&&(couns.rejected==0))?'':(
             <div className='col text-end'>
               <span className='text-info m-2'>Status</span> <span className='m-2'> 
               {couns.pending==1?<span className='m-2'>Pending </span>
-               :couns.rejected==1?<span className='m-2'>Rejected </span>:
-               <span className='m-2'> Approved  </span>
+               :couns.approved==1?<span className='m-2'>Approved </span>:
+               <span className='m-2'>Rejected </span>
               }
               </span>
-            </div>
+            </div>)}
           </div>
         
           <div className='row m-5 fw-semibold mt-0'>
-            <div className='col text-white supporter-add-suggestion-box3 rounded-4 text-center p-2'>
+           <div className='col text-white supporter-add-suggestion-box3 rounded-4 text-center p-2'>
               Meet a Counselor
             </div>
             {datas.pending==0?(
               <> 
             <div className='col text-center'>
-              <button className='btn bg-purple text-white rounded-4 px-5'>Request</button>
+            
+            <Link to={`/user-view-all-counsellors/${id}`}>   <button className='btn bg-purple text-white rounded-4 px-5'>Request</button></Link>
             </div>
             </>):('')
         }
+                  {((couns.pending==0)&&(couns.approved==0)&&(couns.rejected==0))?'':(
+
             <div className='col text-center'>
               <button className='btn bg-purple text-white rounded-4 px-5'>View Details</button>
-            </div>
+            </div> 
+                  )}
           </div>
           </>):('')
         }

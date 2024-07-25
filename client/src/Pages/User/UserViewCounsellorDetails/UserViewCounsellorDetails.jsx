@@ -3,10 +3,12 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getCounsellorById, bookCounsellorAppointment } from '../../../Services/apiService';
+import { getCounsellorById, bookCounsellorAppointment, sendReqCounc } from '../../../Services/apiService';
 
 function UserViewCounsellorDetails() {
-    const { id } = useParams();
+    const { cid } = useParams();
+    const { issueId } = useParams();
+
     const navigate = useNavigate();
     const [counsellor, setCounsellor] = useState({});
     const [appointmentDate, setAppointmentDate] = useState('');
@@ -16,7 +18,7 @@ function UserViewCounsellorDetails() {
     useEffect(() => {
         const fetchCounsellorDetails = async () => {
             try {
-                const response = await getCounsellorById(id);
+                const response = await getCounsellorById(cid);
                 setCounsellor(response);
             } catch (error) {
                 toast.error('Error fetching counsellor details.');
@@ -24,7 +26,7 @@ function UserViewCounsellorDetails() {
         };
 
         fetchCounsellorDetails();
-    }, [id]);
+    }, [cid]);
 
     const validate = () => {
         const newErrors = {};
@@ -43,24 +45,22 @@ function UserViewCounsellorDetails() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!validate()) {
-            toast.error('Please fix the errors in the form.');
-            return;
-        }
-        setIsSubmitting(true);
         try {
-            // const response = await bookCounsellorAppointment(id, { appointmentDate });
-            // if (response.success) {
-            //     toast.success('Appointment booked successfully.');
-            //     navigate('/user-viewCounsellors');
-            // } else {
-            //     toast.error(response.message || 'Error booking appointment.');
-            // }
-        } catch (error) {
-            toast.error('Error booking appointment.');
-        } finally {
-            setIsSubmitting(false);
-        }
+            const response = await sendReqCounc(issueId,cid,localStorage.getItem('userId'));
+            if (response.status === 200) {
+                console.log(response);
+              toast.success('Request sent successfully.');
+              navigate('/user-home')
+      
+            } else {
+              console.log(response);
+            }
+          } catch (error) {
+            console.error('Error fetching user data:', error);
+            toast.error('An error occurred while fetching the user data');
+          }
+       
+        
     };
 
     return (
@@ -77,6 +77,7 @@ function UserViewCounsellorDetails() {
                 </div>
             </div>
             <div className='row m-5 d-flex justify-content-center align-items-center'>
+            <ToastContainer />
                 <div className='col-8 bg-creamy'>
                     <div className='row m-5'>
                         <div className='col'>
@@ -156,18 +157,18 @@ function UserViewCounsellorDetails() {
                             </div>
                         </div>
                     </div>
-                    <div className='row m-5'>
+                    {/* <div className='row m-5'>
                         <div className='col'>
                             <h3 className='theme-purple'>Add Details</h3>
                         </div>
-                    </div>
+                    </div> */}
                     <form onSubmit={handleSubmit} noValidate>
-                        <div className='row m-5'>
+                        {/* <div className='row m-5'>
                             <div className='col-6'>
                                 <label htmlFor='appointmentDate' className='form-label theme-purple'>Counselling Date</label>
                             </div>
-                        </div>
-                        <div className='row m-5'>
+                        </div> */}
+                        {/* <div className='row m-5'>
                             <div className='col-6'>
                                 <div className="input-group">
                                     <input
@@ -183,7 +184,7 @@ function UserViewCounsellorDetails() {
                                     {errors.appointmentDate && <div id="appointmentDateError" className="invalid-feedback">{errors.appointmentDate}</div>}
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className='row m-5'>
                             <div className='col text-end'>
                                 <button type="submit" className="btn bg-theme btn-lg fw-bolder px-5 text-white rounded-4 mx-5" disabled={isSubmitting}>

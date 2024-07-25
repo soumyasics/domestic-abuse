@@ -10,9 +10,9 @@ import { FaFile } from "react-icons/fa";
 import demo from '../../../Assets/supp-edit-profile.png';
 function UserViewLPStatus() {
    
-    
-      const { id } = useParams();
-    
+  // const { st} = useParams();
+      const { st,id } = useParams();
+      
       const [legalProfessional, setLegalProfessional] = useState({
         name: '',
         email: '',
@@ -41,6 +41,8 @@ function UserViewLPStatus() {
           }
         };
         fetchLegalProfessionalData();
+        console.log("st",st);
+
       }, [id]);
     
    
@@ -128,22 +130,13 @@ return(
                     {x.lpId.barAssociationId}
                   </div>
                 </div>
-                {/* <div className='row border-bottom m-5'>
-                  <div className='col-6'>
-                    Id Proof:
-                  </div> */}
-                  {/* <div className='col-6 text-secondary'>
-                    <a href={`${IMG_BASE_URL}${legalProfessional.proof.filename}`} target="_blank" rel="noopener noreferrer">
-                      <FaFile className='theme-purple mx-1' /> Click Here
-                    </a>
-                  </div> */}
-                {/* </div> */}
+              
                 <div className='row border-bottom m-5'>
                   <div className='col-6'>
                     Status:
                   </div>
                   <div className='col-6 text-secondary'>
-                  Pending
+               {(st=='p')?<span>Pending</span>:(st=='a')?<span>Approved</span>:<span>Rejected</span>}
                   </div>
                 </div>
               </div>
