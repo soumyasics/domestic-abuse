@@ -62,10 +62,12 @@ const UserViewLegalProfessionals = () => {
               type='text'
               id='search'
               name='search'
-              className='form-control bg-creamy  border border-end-0 rounded-start-2'
+              className='form-control bg-creamy border border-end-0 rounded-start-2'
               placeholder='Search Legal Professionals'
             />
-            <span className='bg-purple text-white  text-center px-4 d-flex align-items-center justify-content-center border border-start-0 rounded-end-2 cursor-pointer'><FaSearch /></span>
+            <span className='bg-purple text-white text-center px-4 d-flex align-items-center justify-content-center border border-start-0 rounded-end-2 cursor-pointer'>
+              <FaSearch />
+            </span>
           </div>
         </div>
       </div>
@@ -81,7 +83,7 @@ const UserViewLegalProfessionals = () => {
           <p className="m-5 text-center fs-3 theme-purple">No legal professionals found</p>
         ) : (
           paginatedProfessionals.map((legalProfessional, index) => (
-            <div key={legalProfessional._id} className='col-md-3'>
+            <div key={legalProfessional._id} className='col-auto m-5'>
               <div
                 className='card m-3 cursor-pointer user-view-legal-professionals-card'
                 onClick={() => handleCardClick(legalProfessional._id)}
@@ -89,12 +91,11 @@ const UserViewLegalProfessionals = () => {
                 <img
                   src={legalProfessional.photo && legalProfessional.photo.filename ? `${IMG_BASE_URL}/${legalProfessional.photo.filename}` : demoLegalProfessional}
                   alt='Legal Professional'
-                  className='card-img-top img-fluid'
+                  className='card-img-top'
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.src = demoLegalProfessional;
                   }}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
                 <div className='card-body bg-purple text-white text-center'>
                   <h5 className='card-title mt-5'>{legalProfessional.name}</h5>
@@ -119,7 +120,7 @@ const UserViewLegalProfessionals = () => {
         pageClassName={'page-item'}
         pageLinkClassName={'page-link'}
         previousClassName={'page-item'}
-        previousLinkClassName={'page-link '}
+        previousLinkClassName={'page-link'}
         nextClassName={'page-item'}
         nextLinkClassName={'page-link'}
         breakLinkClassName={'page-link'}
