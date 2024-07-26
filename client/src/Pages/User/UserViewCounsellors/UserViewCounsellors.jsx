@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import './UserViewCounsellors.css';
 import 'react-toastify/dist/ReactToastify.css';
 import ReactPaginate from 'react-paginate';
-import {Link, useNavigate } from 'react-router-dom';
+import {Link, useNavigate, useParams } from 'react-router-dom';
 import { FaArrowLeftLong } from "react-icons/fa6";
 
 
@@ -15,6 +15,7 @@ function UserViewCounsellors() {
     const [currentPage, setCurrentPage] = useState(0);
     const itemsPerPage = 10;
     const navigate = useNavigate();
+    const {id}=useParams()
 
     const fetchCounsellors = useCallback(async () => {
         try {
@@ -44,8 +45,9 @@ function UserViewCounsellors() {
 
     const pageCount = Math.ceil(counsellors.length / itemsPerPage);
 
-    const navigateToDetails = (id) => {
-        navigate(`/user-viewdetailedCounsellor/${id}`);
+    const navigateToDetails = (cid) => {
+        console.log("hr");
+        navigate(`/user-view-all-counsellor-details/${cid}/${id}`);
     };
 
     return (
@@ -91,7 +93,7 @@ function UserViewCounsellors() {
                                                 <td className='theme-purple'>
                                                     <div className='text-center'>
                                                         <Link className=" theme-purple link-dark"
-                                                            onClick={() => navigateToDetails(counsellor._id)}>View Details</Link>
+                                                            to= {`/user-view-all-counsellor-details/${counsellor._id}/${id}`}>View Details</Link>
                                                     </div>
                                                 </td>
                                             </tr>

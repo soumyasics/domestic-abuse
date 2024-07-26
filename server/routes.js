@@ -150,6 +150,7 @@ router.post('/viewCaseReqsByIssueId/:id',casReqs.viewCaseReqsByIssueId);
 
 //House Requests
 router.post('/addhouseReq',houseReqs.addReq);
+router.post('/addhouseReqwithIssue/:id',houseReqs.addHouseReqsWithIssue);
 router.post('/viewHouseReqById/:id',houseReqs.viewHouseReqById);
 router.post('/viewpendingReqsBySuppId/:id',houseReqs.viewpendingReqsBySuppId);
 router.post('/approveReqByUserId/:id',houseReqs.approveReqByUserId);

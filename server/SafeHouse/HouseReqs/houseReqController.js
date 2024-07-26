@@ -37,6 +37,40 @@ let suppdata=await houseSchema.findById({_id:houseId})
   }
 };
 
+// Register a new issue
+const addHouseReqsWithIssue= async (req, res) => {
+  try {
+    const {userId,houseId } = req.body;
+let suppdata=await houseSchema.findById({_id:houseId})
+    const newCase= new houseReqSchema({
+        houseId,
+      userId,
+      issueId:req.params.id,
+      suppId:suppdata.supporterId,
+      date:new Date()
+    });
+
+    await newCase.save()
+      .then(data => {
+        return res.json({
+          status: 200,
+          msg: 'Inserted successfully',
+          data: data
+        });
+      })
+      .catch(err => {
+        console.log("err",err);
+        return res.json({
+          status: 500,
+          msg: 'Data not inserted',
+          data: err,
+        });
+      });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 // View all 
 const viewpendingReqsBySuppId= (req, res) => {
   console.log(req.params.id);
@@ -191,5 +225,6 @@ module.exports = {
   viewpendingReqsBySuppId,
   approveReqByUserId,
   rejectHouseByUserId,
-  getHouseReqStatusForSugge
+  getHouseReqStatusForSugge,
+  addHouseReqsWithIssue
 };

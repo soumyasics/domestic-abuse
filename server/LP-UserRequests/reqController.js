@@ -155,7 +155,7 @@ const viewCaseReqsByUserId = (req, res) => {
 };
 // View all issues
 const viewCaseReqsByIssueId = (req, res) => {
-  Case.find({issueId:req.params.id}).populate('lpid issueId  caseId')
+  Case.find({issueId:req.params.id}).populate('lpId issueId')
     .exec()
     .then(data => {
       if (data.length > 0) {
@@ -172,6 +172,7 @@ const viewCaseReqsByIssueId = (req, res) => {
       }
     })
     .catch(err => {
+      console.log("err",err);
       res.status(500).json({
         status: 500,
         msg: 'Data not obtained',
