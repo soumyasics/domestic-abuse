@@ -86,6 +86,7 @@ import LegalProfessionalChangePassword from './Pages/Legal Professional/LegalPro
 import UserViewLPStatus from './Pages/User/UserLegalProfessionalDetails/UserViewLPStatus';
 import UserViewSafeHousewitIssue from './Pages/User/UserViewSafehouses/UserViewSafeHousewitIssue';
 import CouncillorviewClintDetailed from './Pages/Counsellor/CounsellorViewClients/CouncillorviewClintDetailed';
+import UserChatLegalProfessional from './Pages/User/UserChatLegalProfessional/UserChatLegalProfessional';
 
 function App() {
   return (
@@ -145,6 +146,8 @@ function App() {
             <Route path='/user-payment' element={[<UserNav/>,<UserPayment/>]} />
             <Route path='/user-view-blogs' element={[<UserNav/>,<UserViewBlogs/>]} />
             <Route path='/user-view-request-history' element={[<UserNav/>,<UserViewRequestHistory/>]} />
+            <Route path='/user-chat-legal-professional' element={[<UserNav/>,<UserChatLegalProfessional/>]} />
+
 
             {/* Admin Paths */}
             <Route path='/admin-login' element={[<Navbar />, <AdminLogin />]} />
