@@ -87,6 +87,7 @@ import UserViewLPStatus from './Pages/User/UserLegalProfessionalDetails/UserView
 import UserViewSafeHousewitIssue from './Pages/User/UserViewSafehouses/UserViewSafeHousewitIssue';
 import CouncillorviewClintDetailed from './Pages/Counsellor/CounsellorViewClients/CouncillorviewClintDetailed';
 import UserChatLegalProfessional from './Pages/User/UserChatLegalProfessional/UserChatLegalProfessional';
+import UserChatSupporter from './Pages/User/UserChatSupporter/UserChatSupporter';
 
 function App() {
   return (
@@ -147,6 +148,7 @@ function App() {
             <Route path='/user-view-blogs' element={[<UserNav/>,<UserViewBlogs/>]} />
             <Route path='/user-view-request-history' element={[<UserNav/>,<UserViewRequestHistory/>]} />
             <Route path='/user-chat-legal-professional' element={[<UserNav/>,<UserChatLegalProfessional/>]} />
+            <Route path='/user-chat-supporter' element={[<UserNav/>,<UserChatSupporter/>]} />
 
 
             {/* Admin Paths */}
