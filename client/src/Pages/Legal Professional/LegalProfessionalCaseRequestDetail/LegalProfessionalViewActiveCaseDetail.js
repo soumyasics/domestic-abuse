@@ -102,7 +102,12 @@ function LegalProfessionalViewActiveCaseDetail() {
             <div className='col text-center'>
               <h3 className='theme-purple'>Case Request</h3>
             </div>
+           
           </div>
+          <Link to={``}>Payment Details</Link>
+              <Link to={`/user-add-case/${id}`}>Update Case Details</Link>
+
+              <Link to={``}>Chat now</Link>
           <div className='row m-5'>
             <div className='col bg-creamy border rounded m-5'>
               <div className='row m-5'>
@@ -110,6 +115,8 @@ function LegalProfessionalViewActiveCaseDetail() {
                   <h4 className='theme-purple'>User Details</h4>
                 </div>
               </div>
+              
+
               <div className='row m-5'>
                 <div className='col '>
                   Name

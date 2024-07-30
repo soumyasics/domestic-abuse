@@ -121,7 +121,7 @@ function App() {
 
             <Route path='/user-view-issues' element={[<UserNav />, <UserViewIssues />]} />
             <Route path='/user-view-suggestion-details/:id' element={[<UserNav />, <UserViewSuggestionDetails />]} />
-            <Route path='/user-add-case' element={[<UserNav />, <UserAddCase />]} />
+            <Route path='/user-add-case/:id' element={[<UserNav />, <UserAddCase />]} />
             <Route path='/user-legal-professional-case-details' element={[<UserNav />, <UserLegalProfessionalCaseDetails />]} />
             <Route path='/user-payment' element={[<UserNav />, <UserPayment />]} />
             <Route path='/user-view-blogs' element={[<UserNav />, <UserViewBlogs />]} />
