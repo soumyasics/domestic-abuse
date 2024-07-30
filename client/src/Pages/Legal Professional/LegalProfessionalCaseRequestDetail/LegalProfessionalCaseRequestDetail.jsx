@@ -97,6 +97,7 @@ function LegalProfessionalCaseRequestDetail() {
     };
   return (
     <div className='container-fluid'>
+    <ToastContainer/>
       <div className='row m-5'>
         <div className='col text-center'>
           <h3 className='theme-purple'>Case Request</h3>
