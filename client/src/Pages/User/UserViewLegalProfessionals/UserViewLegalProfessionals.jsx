@@ -56,7 +56,7 @@ const UserViewLegalProfessionals = () => {
         <div className='col'>
           <FaArrowLeftLong size={35} className='cursor-pointer' onClick={() => navigate('/user-home')} />
         </div>
-        <div className='col text-end d-flex justify-content-end'>
+        {/* <div className='col text-end d-flex justify-content-end'>
           <div className='input-group w-50'>
             <input
               type='text'
@@ -69,7 +69,7 @@ const UserViewLegalProfessionals = () => {
               <FaSearch />
             </span>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className='row m-5'>
         <div className='col text-center'>

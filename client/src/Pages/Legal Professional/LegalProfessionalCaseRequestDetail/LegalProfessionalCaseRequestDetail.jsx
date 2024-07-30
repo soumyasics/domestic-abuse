@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
 import './LegalProfessionalCaseRequestDetail.css';
-import { IMG_BASE_URL } from '../../../Services/apiService';
+import { acceptLPAppointmentById, IMG_BASE_URL, rejectLPAppointmentById, viewLPAppointmentById } from '../../../Services/apiService';
 import { FaDownload } from "react-icons/fa";
-import {useParams} from 'react-router-dom';
-
+import {useNavigate, useParams} from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Table, Button } from 'react-bootstrap';
+import '../../Counsellor/CounsellorAppointmentRequests/CounsellorAppointmentRequests.css';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import ReactPaginate from 'react-paginate';
+import { BsEye } from "react-icons/bs";
+import { Link } from 'react-router-dom';
 function LegalProfessionalCaseRequestDetail() {
   const { id } = useParams();
+  const Navigate=useNavigate()
+   const [loading, setLoading] = useState(true);
     const [user, setUser] = useState({
         supporterId: localStorage.getItem('supporterId'),
         issueId: {
@@ -19,7 +29,7 @@ function LegalProfessionalCaseRequestDetail() {
         sug1: false,
         sug2: false,
         sug3: false,
-       
+       _id:'',
         userId: {
 
             address: '',
@@ -34,9 +44,57 @@ function LegalProfessionalCaseRequestDetail() {
         }
     });
 
-    const [issue, setIssue] = useState({
+    const fetchAppointments = useCallback(async () => {
+      try {
+        const response = await viewLPAppointmentById(id);
+        setUser(response.data || []);
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error fetching appointments:', error);
+        toast.error('Error fetching appointment requests.');
+      } finally {
+        setLoading(false);
+      }
+    }, []);
+  
+    useEffect(() => {
+      fetchAppointments();
+    }, [id]);
 
-    });
+
+    const handleAccept = async () => {
+     try{
+                const response = await acceptLPAppointmentById(id);
+                if (response.status==200) {
+                  toast.success('Appointment accepted successfully.');
+                  fetchAppointments();
+                  // Navigate(`/legal-professional-view-appointments`)
+                } else {
+                  toast.error(response.message || 'Error accepting appointment.');
+                }
+              } catch (error) {
+                toast.error('Error accepting appointment.');
+              }
+         
+    };
+  
+    const handleReject = async () => {
+    
+              try {
+                const response = await rejectLPAppointmentById(id);
+                if (response.status==200) {
+                  toast.success('Appointment rejected successfully.');
+                  fetchAppointments();
+                  // Navigate(`/legal-professional-view-appointments`)
+
+                } else {
+                  toast.error(response.message || 'Error rejecting appointment.');
+                }
+              } catch (error) {
+                toast.error('Error rejecting appointment.');
+              }
+           
+    };
   return (
     <div className='container-fluid'>
       <div className='row m-5'>
@@ -77,7 +135,7 @@ function LegalProfessionalCaseRequestDetail() {
           </div>
           <div className='row m-5 theme-purple fs-5 '>
             <div className='col'>
-              {user?.userId?.dob}
+              {user?.userId?.dob.slice(0,10)}
             </div>
             <div className='col'>
               {user?.userId?.gender}
@@ -96,7 +154,7 @@ function LegalProfessionalCaseRequestDetail() {
               {user?.userId?.address}
             </div>
             <div className='col'>
-              {user.relation}
+              {user?.userId?.relation}
             </div>
           </div>
           <div className='row m-5'>
@@ -154,8 +212,8 @@ function LegalProfessionalCaseRequestDetail() {
       </div>
       <div className='row m-5'>
         <div className='col text-end'>
-            <button className='btn btn-outline-success mx-5 px-5'>Accept</button>
-            <button className='btn btn-outline-danger mx-5 px-5'>Reject</button>
+            <button className='btn btn-outline-success mx-5 px-5' onClick={handleAccept} >Accept</button>
+            <button className='btn btn-outline-danger mx-5 px-5' onClick={handleReject}>Reject </button>
         </div>
       </div>
     </div>

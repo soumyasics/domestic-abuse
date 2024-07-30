@@ -259,7 +259,7 @@ function UserViewSuggestionDetails() {
           <div className='row mx-5 '>
             {console.log(suggestion)}
            
-            {((datas.pending==0)&&(datas.approved==1)&&(datas.rejected==0))?'pppp':(
+            {((datas.pending==0)&&(datas.approved==0)&&(datas.rejected==0))?'':(
 
             <div className='col text-end'>
               <span className='text-info m-2'>Status</span> 
@@ -285,10 +285,12 @@ function UserViewSuggestionDetails() {
             </div>
             </>):('')
              }
+              {((datas.pending==0)&&(datas.approved==0)&&(datas.rejected==0))?'':(
             <div className='col text-center'>
-            <Link to={`/user-legal-professional-view-Status/${st}/${id}`}>    <button className='btn bg-purple text-white rounded-4 px-5'>View Details</button></Link>
+            <Link to={`/user-legal-professional-view-Status/${st}/${id}`}> 
+               <button className='btn bg-purple text-white rounded-4 px-5'>View Details</button></Link>
             </div>
-          
+            )}
          
           </div>
           </>):('')
@@ -350,7 +352,7 @@ function UserViewSuggestionDetails() {
            <div className='col text-white supporter-add-suggestion-box3 rounded-4 text-center p-2'>
               Meet a Counselor
             </div>
-            {datas.pending==0?(
+            {(couns.pending==0||couns.rejected==1)?(
               <> 
             <div className='col text-center'>
             
