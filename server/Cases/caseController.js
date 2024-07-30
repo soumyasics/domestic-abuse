@@ -9,11 +9,11 @@ const { login } = require('../Supporter/supporterController');
 // Register a new issue
 const registerCase= async (req, res) => {
   try {
-    const { description,status,date } = req.body;
+    const { description,status,date,title } = req.body;
 console.log(req.params.id);
 const appData=await reqSchema.findById(req.params.id)
     const newCase= new Case({
-      status,
+      title,
       description,
       status,
       userId:appData.userId,
@@ -188,6 +188,28 @@ const viewCaseByLPId = (req, res) => {
       });
     });
 };
+
+// View issue by ID
+const viewCaseByissueId =async (req, res) => {
+  const appData=await reqSchema.findById(req.params.id)
+
+  await  Case.find({ issueId: appData.issueId }).populate('userId issueId')
+    .exec()
+    .then(data => {
+      res.json({
+        status: 200,
+        msg: 'Data obtained successfully',
+        data: data,
+      });
+    })
+    .catch(err => {
+      res.status(500).json({
+        status: 500,
+        msg: 'No data obtained',
+        Error: err,
+      });
+    });
+};
 // Delete issue by ID
 const deleteCaseById = (req, res) => {
   Case.findByIdAndDelete({ _id: req.params.id })
@@ -216,6 +238,7 @@ module.exports = {
   viewCaseById,
   deleteCaseById,
   viewCaseByLPId,
+  viewCaseByissueId,
   viewCaseByUserId,
   viewPendingCases
 };

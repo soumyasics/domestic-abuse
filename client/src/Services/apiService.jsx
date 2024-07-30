@@ -1622,3 +1622,75 @@ export const viewLegalReqsByIssueId = async (id) => {
     throw error;
   }
 };
+export const viewCaseByissueId = async (id) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/viewCaseByissueId/${id}`);
+    console.log("in legal ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+
+
+
+// Api for Registering addBlog
+export const addPayment = async (suggestions) => {
+  try {
+  console.log("in trt");
+
+    const response = await axios.post(`${API_BASE_URL}/registerPayment`, suggestions)
+console.log(response);
+    // Handling responses based on status code
+    switch (response.data.status) {
+      case 200:
+        console.log(response.data.msg); // "Inserted successfully"
+        return { success: true, message: response.data.msg, data: response.data.data };
+      
+      case 500:
+        console.log(response.data.msg); // "Data not Inserted"
+        return { success: false, message: response.data.msg };
+      default:
+        console.log('Unexpected response status:', response.data.status);
+        return { success: false, message: 'Unexpected error occurred' };
+    }
+  } catch (error) {
+    console.error('Error Registering payment', error);
+    throw error;
+  }
+};
+
+export const viewPaymentsByappId = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewPaymentsByAppId/${id}`);
+    console.log("in legal ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+
+export const viewPaymentsForUser = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewPaymentsByUserId/${id}`);
+    return response.data.data;
+  } catch (error) {
+    console.error('Error fetching Counsellor Requests for Admin', error);
+    throw error;
+  }
+};
+
+export const addPaymentByUser = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/addPaymentsId/${id}`);
+    console.log("Payment response:", response);
+    return response;
+  } catch (error) {
+    // Log detailed error information
+    console.error('Error adding payment:', error.response || error.message || error);
+    throw error;
+  }
+};
+

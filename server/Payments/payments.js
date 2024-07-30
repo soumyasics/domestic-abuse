@@ -6,29 +6,11 @@ const caseeSchema = new mongoose.Schema({
     required: true,
     ref: 'users'
   },
-  issueId: {
+  appId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: 'users'
+    ref: 'lprequests'
   },
-  status: {
-    type: String,
-    required: true
-  },
-  status: {
-    type: String,
-    required: true
-  },
-  title: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String,
-    required: true
-  },
-  
- 
   date: {
     type: Date,
     required: true
@@ -37,11 +19,17 @@ const caseeSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'legalprofessionals'
   },
-  lpStatus:{
-    type:Boolean,
-    default:false
-  }
-
+  paymentStatus:{
+    type:String,
+    default:'Requested'
+  },
+  payment: {
+    type: Number,
+    required: true
+  },
+  category:{
+    type:String,
+  },
 });
 
-module.exports = mongoose.model('cases', caseeSchema);
+module.exports = mongoose.model('payments', caseeSchema);

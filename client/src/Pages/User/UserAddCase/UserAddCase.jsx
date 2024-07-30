@@ -1,20 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './UserAddCase.css';
-import { addCase, getIssueById } from '../../../Services/apiService';
+import { addCase, getIssueById, viewCaseByissueId } from '../../../Services/apiService';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Table, Button } from 'react-bootstrap';
+import '../../Counsellor/CounsellorAppointmentRequests/CounsellorAppointmentRequests.css';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import { Link } from 'react-router-dom';
 function UserAddCase() {
+  const { id } = useParams()
+
   const [formData, setFormData] = useState({
-    title: '',
+    title: `case-${id.slice(20, 24).toUpperCase()}`,
     description: '',
     status: 'Trial',
     date: '',
   });
 
-  const { id } = useParams()
 
   const [errors, setErrors] = useState({});
+  const [caseDetails, setCaseDetails] = useState([])
 
   const validate = () => {
     const newErrors = {};
@@ -28,6 +34,7 @@ function UserAddCase() {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+  const [loading, setLoading] = useState(true);
 
 
   const handleSubmit = async (e) => {
@@ -36,6 +43,7 @@ function UserAddCase() {
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length === 0) {
       try {
+        console.log(formData);
         const response = await addCase(formData,id);
         console.log(response);
         if (response.success) {
@@ -51,6 +59,24 @@ function UserAddCase() {
     }
   };
 
+
+  const fetchCaseDetails = useCallback(async () => {
+    try {
+      const response = await viewCaseByissueId(id);
+      setCaseDetails(response.data || []);
+      console.log("case da",response.data);
+    } catch (error) {
+      console.error('Error fetching appointments:', error);
+      toast.error('Error fetching case details.');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log("in 2");
+    fetchCaseDetails();
+  }, []);
   return (
     <div className='container-fluid'>
       <div className='row m-5'>
@@ -71,8 +97,8 @@ function UserAddCase() {
                   name='title'
                   type='text'
                   className='form-control form-control-lg'
-                  value={`case-${id.slice(20, 24).toUpperCase()}`}
-                  onChange={handleChange}
+                  placeholder={`case-${id.slice(20, 24).toUpperCase()}`}
+                  disabled
                 />
                 {errors.title && <div className='text-danger'>{errors.title}</div>}
               </div>
@@ -140,6 +166,37 @@ function UserAddCase() {
           </div>
         </div>
       </form>
+
+      <Table striped bordered hover className="appointments-table">
+                    <thead>
+                      <tr className="text-center">
+                        <th className='bg-purple text-white'>#</th>
+                        <th className='bg-purple text-white'>Case No</th>
+                        <th className='bg-purple text-white'>Case Status</th>
+                        <th className='bg-purple text-white'>Date</th>
+                        <th className='bg-purple text-white'>Description</th>
+                        
+                      </tr>
+                    </thead>
+                    <tbody className='text-center'>
+                      {
+                        caseDetails&&caseDetails.length>0?(
+                      caseDetails.map((appointment, index) => {
+                        return (
+                          <tr key={appointment._id}>
+                            <td>{++index}</td>
+                            <td>{appointment._id}</td>
+                            <td>{appointment.status}</td>
+                            <td>{appointment.date.slice(0,10)}</td>
+                            <td>{appointment.description}</td>
+                          
+                          </tr>
+                        )
+                      })
+                    ):(<p></p>)
+                  }
+                    </tbody>
+                  </Table>
     </div>
   );
 }

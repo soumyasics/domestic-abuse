@@ -11,6 +11,8 @@ const cases=require('./Cases/caseController')
 const casReqs=require('./LP-UserRequests/reqController')
 const houseReqs=require('./SafeHouse/HouseReqs/houseReqController')
 const councReqs=require('./Councellor-UserRequests/reqController')
+const Payments=require('./Payments/paymentController')
+const payments = require('./Payments/paymentController')
 
 //suppoerter routes
 router.post('/registerSupporters', supporter.upload, supporter.registerSupporters);
@@ -135,6 +137,7 @@ router.get('/viewCaseByUserId/:id', cases.viewCaseByUserId);
 router.post('/viewPendingCases', cases.viewPendingCases);
 router.get('/viewCaseByLPId/:id', cases.viewCaseByLPId);
 router.get('/viewCases', cases.viewCases);
+router.get('/viewCaseByissueId/:id', cases.viewCaseByissueId);
 
 
 router.post('/addReq/:id',casReqs.addReq);
@@ -170,5 +173,16 @@ router.post('/getCouncReqStatusForSugge/:id',councReqs.getCouncellrReqStatusForS
 
 router.post('/viewCouncCaseReqsByUserId/:id',councReqs.viewCaseReqsByUserId);
 router.post('/viewCouncCaseReqsByIssueId/:id',councReqs.viewCaseReqsByIssueId);
+
+
+
+router.post('/registerPayment',payments.registerPayment);
+router.post('/viewPayments',payments.viewPayments);
+router.post('/viewPaymentsByUserId/:id',payments.viewPaymentsByUserId);
+router.post('/viewPaymentsByLPId/:id',payments.viewPaymentsByLPId);
+router.post('/viewPaymentsByAppId/:id',payments.viewPaymentsByAppId);
+router.post('/addPaymentsId/:id',payments.addPaymentsId);
+
+
 
 module.exports = router
