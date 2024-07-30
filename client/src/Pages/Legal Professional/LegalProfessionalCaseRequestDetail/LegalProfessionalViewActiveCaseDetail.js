@@ -1,5 +1,5 @@
 import './LegalProfessionalCaseRequestDetail.css';
-import { acceptLPAppointmentById, IMG_BASE_URL, rejectLPAppointmentById, viewLPAppointmentById } from '../../../Services/apiService';
+import { acceptLPAppointmentById, IMG_BASE_URL, rejectLPAppointmentById, viewCaseByissueId, viewLPAppointmentById } from '../../../Services/apiService';
 import { FaDownload } from "react-icons/fa";
 import { useNavigate, useParams } from 'react-router-dom';
 import React, { useState, useEffect, useCallback } from 'react';
@@ -18,6 +18,7 @@ function LegalProfessionalViewActiveCaseDetail() {
   const { id } = useParams();
   const navigate = useNavigate()
   const [loading, setLoading] = useState(true);
+
   const [user, setUser] = useState({
     supporterId: localStorage.getItem('supporterId'),
     issueId: {
@@ -26,7 +27,8 @@ function LegalProfessionalViewActiveCaseDetail() {
       severity: '',
       location: '',
       contact: '',
-      dateTime: ''
+      dateTime: '',
+      _id:''
     },
     sug1: false,
     sug2: false,
@@ -64,39 +66,8 @@ function LegalProfessionalViewActiveCaseDetail() {
   }, [id]);
 
 
-  const handleAccept = async () => {
-    try {
-      const response = await acceptLPAppointmentById(id);
-      if (response.status === 200) {
-        toast.success('Appointment accepted successfully.');
-        fetchAppointments();
-        // Navigate(`/legal-professional-view-appointments`)
-      } else {
-        toast.error(response.message || 'Error accepting appointment.');
-      }
-    } catch (error) {
-      toast.error('Error accepting appointment.');
-    }
 
-  };
 
-  const handleReject = async () => {
-
-    try {
-      const response = await rejectLPAppointmentById(id);
-      if (response.status === 200) {
-        toast.success('Appointment rejected successfully.');
-        fetchAppointments();
-        // Navigate(`/legal-professional-view-appointments`)
-
-      } else {
-        toast.error(response.message || 'Error rejecting appointment.');
-      }
-    } catch (error) {
-      toast.error('Error rejecting appointment.');
-    }
-
-  };
   return (
     <div className='container-fluid'>
       <div className='row m-5'>
@@ -107,10 +78,10 @@ function LegalProfessionalViewActiveCaseDetail() {
       </div>
       <div className='row m-5'>
         <div className='col text-end'>
-          <button className='btn bg-purple text-white rounded-4 p-3 py-1 fw-semibold mx-3'>
+          <button className='btn bg-purple text-white rounded-4 p-3 py-1 fw-semibold mx-3' onClick={()=>{navigate(`/legal-add-payment/${id}`)}}>
             Payment Details
           </button>
-          <button className='btn bg-purple text-white rounded-4 p-3 py-1 fw-semibold mx-3' onClick={()=>{navigate(`/user-add-case/${id}`)}}>
+          <button className='btn bg-purple text-white rounded-4 p-3 py-1 fw-semibold mx-3' onClick={()=>{navigate(`/legal-add-case/${id}`)}}>
             Update Case Details
           </button>
           <button className='btn bg-purple text-white rounded-4 p-3 py-1 fw-semibold mx-3'>
@@ -125,7 +96,7 @@ function LegalProfessionalViewActiveCaseDetail() {
               <h4 className='theme-purple'>User Details</h4>
             </div>
           </div>
-          <Link to={``}>Payment Details</Link>
+          <Link to={`/legal-add-payment/${id}`}>Payment Details</Link>
               <Link to={`/legal-add-case/${id}`}>Update Case Details</Link>
 
 
@@ -230,6 +201,7 @@ function LegalProfessionalViewActiveCaseDetail() {
           </div>
         </div>
       </div>
+     
 
     </div>
   )
