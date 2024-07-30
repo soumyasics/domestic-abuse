@@ -105,7 +105,7 @@ function LegalProfessionalViewActiveCaseDetail() {
            
           </div>
           <Link to={``}>Payment Details</Link>
-              <Link to={`/user-add-case/${id}`}>Update Case Details</Link>
+              <Link to={`/legal-add-case/${id}`}>Update Case Details</Link>
 
               <Link to={``}>Chat now</Link>
           <div className='row m-5'>

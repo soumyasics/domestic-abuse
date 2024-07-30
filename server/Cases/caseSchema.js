@@ -6,12 +6,16 @@ const caseeSchema = new mongoose.Schema({
     required: true,
     ref: 'users'
   },
-
-  title: {
+  issueId: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'users'
+  },
+  status: {
     type: String,
     required: true
   },
-  location: {
+  status: {
     type: String,
     required: true
   },
@@ -19,10 +23,7 @@ const caseeSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  location: {
-    type: String,
-    required: true
-  },
+  
  
   date: {
     type: Date,

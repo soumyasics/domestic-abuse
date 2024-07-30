@@ -121,7 +121,6 @@ function App() {
 
             <Route path='/user-view-issues' element={[<UserNav />, <UserViewIssues />]} />
             <Route path='/user-view-suggestion-details/:id' element={[<UserNav />, <UserViewSuggestionDetails />]} />
-            <Route path='/user-add-case/:id' element={[<UserNav />, <UserAddCase />]} />
             <Route path='/user-legal-professional-case-details' element={[<UserNav />, <UserLegalProfessionalCaseDetails />]} />
             <Route path='/user-payment' element={[<UserNav />, <UserPayment />]} />
             <Route path='/user-view-blogs' element={[<UserNav />, <UserViewBlogs />]} />
@@ -240,6 +239,7 @@ function App() {
             <Route path='/legal-professional-view-case-details/:id' element={[<LPNav/>,<LegalProfessionalCaseRequestDetail/>]} />
             <Route path='/legal-professional-update-case-details' element={[<LPNav/>,<LegalProfessionalUpdateCaseDetails/>]} />
             <Route path='/legal-professional-view-active-case-details/:id' element={[<LPNav/>,<LegalProfessionalViewActiveCaseDetail/>]} />
+            <Route path='/legal-add-case/:id' element={[<LPNav />, <UserAddCase />]} />
 
             {/* Legal Professional Paths  */}
             <Route path='/legal-professional-login' element={[<Navbar />, <LegalProfessionalLogin />]} />
