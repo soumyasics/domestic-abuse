@@ -61,7 +61,7 @@ const navigate=useNavigate()
           <div className='col-6 bg-creamy py-5 px-0'>
             <div className='row m-5'>
               <div className='col-4 theme-purple text-center fs-5'>
-                Case Title
+                Case Number
               </div>
               <div className='col-8'>
                 <input
@@ -69,7 +69,7 @@ const navigate=useNavigate()
                   name='title'
                   type='text'
                   className='form-control form-control-lg'
-                  value={formData.title}
+                  value='no'
                   onChange={handleChange}
                 />
                 {errors.title && <div className='text-danger'>{errors.title}</div>}
