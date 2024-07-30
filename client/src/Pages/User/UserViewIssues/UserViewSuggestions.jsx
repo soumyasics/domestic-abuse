@@ -82,7 +82,7 @@ setIssues(response.data)
                     <td>{suggestion.severity}</td>
                     <td>{suggestion.location}</td>
                     <td>{suggestion.dateTime.slice(11, 16)}</td>
-                    <td><a href={ `${IMG_BASE_URL}/${suggestion.file.filename}`} target="_blank" rel="noopener noreferrer"> <FaFile className='theme-purple mx-1'/> Click Here</a>
+                    <td><a href={ `${IMG_BASE_URL}/${suggestion.file?.filename}`} target="_blank" rel="noopener noreferrer"> <FaFile className='theme-purple mx-1'/> Click Here</a>
                     </td>
                     <td>
                       <div className='text-center'>
