@@ -1238,7 +1238,7 @@ export const getBlogs= async (id) => {
 // Api for Registering addBlog
 export const addCase = async (cases,id) => {
   try {
-  console.log("in trt");
+  console.log("in trt",id);
 
     const response = await axios.post(`${API_BASE_URL}/registerCase/${id}`, cases )
 console.log(response);

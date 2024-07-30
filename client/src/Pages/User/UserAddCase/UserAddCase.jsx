@@ -1,32 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './UserAddCase.css';
-import { addCase } from '../../../Services/apiService';
+import { addCase, getIssueById } from '../../../Services/apiService';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 function UserAddCase() {
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    location: '',
+    status: 'Trial',
     date: '',
   });
+
+  const { id } = useParams()
 
   const [errors, setErrors] = useState({});
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.title) newErrors.title = 'Title is required';
     if (!formData.description) newErrors.description = 'Description is required';
-    if (!formData.location) newErrors.location = 'Location is required';
+    if (!formData.status) newErrors.location = 'Status is required';
     if (!formData.date) newErrors.date = 'Date is required';
     return newErrors;
   };
-const navigate=useNavigate()
+  const navigate = useNavigate()
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,19 +36,19 @@ const navigate=useNavigate()
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length === 0) {
       try {
-        const response = await addCase(formData,localStorage.getItem('userId'));
+        const response = await addCase(formData,id);
         console.log(response);
         if (response.success) {
           toast.success(response.message);
-          navigate('/user-home');
+          navigate('/legal-professional-home');
         } else {
           toast.error(response.message);
         }
-  } catch (error) {
-      console.error('Error Adding Cases', error);
-      toast.error(error.response?.data?.message || 'failed to Add Issue. Please try again.');
-  }
-}
+      } catch (error) {
+        console.error('Error Adding Cases', error);
+        toast.error(error.response?.data?.message || 'failed to Add Issue. Please try again.');
+      }
+    }
   };
 
   return (
@@ -69,10 +71,30 @@ const navigate=useNavigate()
                   name='title'
                   type='text'
                   className='form-control form-control-lg'
-                  value='no'
+                  value={`case-${id.slice(20, 24).toUpperCase()}`}
                   onChange={handleChange}
                 />
                 {errors.title && <div className='text-danger'>{errors.title}</div>}
+              </div>
+            </div>
+            <div className='row m-5'>
+              <div className='col-4 theme-purple text-center fs-5'>
+                Status
+              </div>
+              <div className='col-8'>
+                <select
+                  id='status'  // Changed to 'status' to match the name attribute
+                  name='status'
+                  className='form-control form-control-lg'
+                  value={formData.status}
+                  onChange={handleChange}
+                >
+                  <option value='trial'>Trial</option>
+                  <option value='open'>Open</option>
+                  <option value='final judgement'>Final Judgement</option>
+                </select>
+
+                {errors.status && <div className='text-danger'>{errors.status}</div>}
               </div>
             </div>
             <div className='row m-5'>
@@ -90,22 +112,7 @@ const navigate=useNavigate()
                 {errors.description && <div className='text-danger'>{errors.description}</div>}
               </div>
             </div>
-            <div className='row m-5'>
-              <div className='col-4 theme-purple text-center fs-5'>
-                Location
-              </div>
-              <div className='col-8'>
-                <input
-                  id='location'
-                  name='location'
-                  type='text'
-                  className='form-control form-control-lg'
-                  value={formData.location}
-                  onChange={handleChange}
-                />
-                {errors.location && <div className='text-danger'>{errors.location}</div>}
-              </div>
-            </div>
+
             <div className='row m-5'>
               <div className='col-4 theme-purple text-center fs-5'>
                 Date
