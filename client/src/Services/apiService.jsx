@@ -1488,6 +1488,62 @@ export const viewCounsellorAppointments = async (id) => {
     throw error;
   }
 };
+export const viewLPAppointments = async (id) => {
+  try {
+    
+    const response = await axios.post(`${API_BASE_URL}/viewCasePendingReqsByLpId/${id}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+
+export const acceptLPAppointmentById = async (id) => {
+  try {
+    
+    const response = await axios.post(`${API_BASE_URL}/approveCaseByUserId/${id}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+export const rejectLPAppointmentById = async (id) => {
+  try {
+    
+    const response = await axios.post(`${API_BASE_URL}/rejectCaseByUserId/${id}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+export const viewLPAprvdAppointments = async (id) => {
+  try {
+    
+    const response = await axios.post(`${API_BASE_URL}/viewCaseApprovedReqsByLpId/${id}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+export const viewLPAppointmentById = async (id) => {
+  try {
+    
+    const response = await axios.post(`${API_BASE_URL}/viewCaseReqById/${id}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
 export const acceptCouncAppointmentById = async (id) => {
   try {
     
@@ -1527,6 +1583,39 @@ export const viewMySuggestionByIssueIdforCounc = async (id) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/viewSuggestionByIssueId/${id}`);
     console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+
+export const viewhouseReqsByIssueId = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewhouseReqsByIssueId/${id}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+
+export const viewCouncCaseReqsByIssueId = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewCouncCaseReqsByIssueId/${id}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+
+export const viewLegalReqsByIssueId = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewCaseReqsByIssueId/${id}`);
+    console.log("in legal ",response);
     return response.data;
   } catch (error) {
     console.error(' Error fetching Supporter List ', error);

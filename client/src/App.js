@@ -88,6 +88,9 @@ import UserViewSafeHousewitIssue from './Pages/User/UserViewSafehouses/UserViewS
 import CouncillorviewClintDetailed from './Pages/Counsellor/CounsellorViewClients/CouncillorviewClintDetailed';
 import UserChatLegalProfessional from './Pages/User/UserChatLegalProfessional/UserChatLegalProfessional';
 import UserChatSupporter from './Pages/User/UserChatSupporter/UserChatSupporter';
+import LegalProfessionalViewCases from './Pages/Legal Professional/LegalProfessionalCaseRequestDetail/LegalProfessionalViewCases';
+import LegalProfessionalViewActiveCases from './Pages/Legal Professional/LegalProfessionalCaseRequestDetail/LegalProfessionalViewActiveCases';
+import LegalProfessionalViewActiveCaseDetail from './Pages/Legal Professional/LegalProfessionalCaseRequestDetail/LegalProfessionalViewActiveCaseDetail';
 
 function App() {
   return (
@@ -231,8 +234,10 @@ function App() {
             <Route path='/legal-professional-add-blogs' element={[<LPNav/>,<LegalProfessionalAddBlogs/>]} />
             <Route path='/legal-professional-edit-blogs/:id' element={[<LPNav/>,<LegalProfessionalEditBlogs/>]} />
             <Route path='/legal-professional-view-blogs' element={[<LPNav/>,<LegalProfessionalViewBlogs/>]} />
-            <Route path='/legal-professional-view-case-details' element={[<LPNav/>,<LegalProfessionalCaseRequestDetail/>]} />
+            <Route path='/legal-professional-view-case-details/:id' element={[<LPNav/>,<LegalProfessionalCaseRequestDetail/>]} />
             <Route path='/legal-professional-update-case-details' element={[<LPNav/>,<LegalProfessionalUpdateCaseDetails/>]} />
+            <Route path='/legal-professional-view-active-case-details/:id' element={[<LPNav/>,<LegalProfessionalViewActiveCaseDetail/>]} />
+
             {/* Legal Professional Paths  */}
             <Route path='/legal-professional-login' element={[<Navbar />, <LegalProfessionalLogin />]} />
             <Route path='/legal-professional-register' element={[<Navbar />, <LegalProfessionalRegister />]} />
@@ -245,7 +250,9 @@ function App() {
             <Route path='/legal-professional-view-case-details' element={[<LPNav />, <LegalProfessionalCaseRequestDetail />]} />
             <Route path='/legal-professional-update-case-details' element={[<LPNav />, <LegalProfessionalUpdateCaseDetails />]} />
             <Route path='/legal-professional-change-password' element={[<LPNav />, <LegalProfessionalChangePassword />]} />
-            
+            <Route path='/legal-professional-view-appointments' element={[<LPNav/>,<LegalProfessionalViewCases/>]} />
+            <Route path='/legal-professional-view-acive-cases' element={[<LPNav/>,<LegalProfessionalViewActiveCases/>]} />
+
           </Routes>
         </div>
         <Footer />

@@ -68,26 +68,14 @@ function SupporterAddSuggestion() {
 useEffect(() => {
   console.log("user",user);
 })
-  const handleSuggestionChange = (event) => {
-    const { name, checked } = event.target;
-    console.log(name)
-    if(name=="sug1"){
-      suggestion.sug1=checked
-    }
-   else if(name=="sug2"){
-      suggestion.sug2=checked
-    }
-   else if(name=="sug3"){
-      suggestion.sug3=checked
-    }
-    setSuggestion(prevState => ({
-      ...prevState,
-      [name]: true
-    }));
-    
+const handleSuggestionChange = (event) => {
+  const { name, checked } = event.target;
 
-    console.log(suggestion);
-  };
+  setSuggestion(prevState => ({
+      ...prevState,
+      [name]: checked
+  }));
+};
 
   const handleSubmit =async (event) => {
     event.preventDefault();
