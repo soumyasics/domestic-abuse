@@ -125,6 +125,8 @@ function LegalProfessionalViewActiveCaseDetail() {
               <h4 className='theme-purple'>User Details</h4>
             </div>
           </div>
+          <Link to={``}>Payment Details</Link>
+              <Link to={`/legal-add-case/${id}`}>Update Case Details</Link>
 
 
           <div className='row m-5'>
