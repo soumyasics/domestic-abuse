@@ -126,7 +126,7 @@ const viewCaseReqsByUserId = (req, res) => {
 };
 // View all issues
 const viewCaseReqsByIssueId = (req, res) => {
-  Case.find({issueId:req.params.id}).populate('lpid issueId')
+  Case.find({issueId:req.params.id}).populate('issueId userId cId')
     .exec()
     .then(data => {
       if (data.length > 0) {

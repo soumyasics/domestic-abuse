@@ -156,6 +156,7 @@ router.post('/viewpendingReqsBySuppId/:id',houseReqs.viewpendingReqsBySuppId);
 router.post('/approveReqByUserId/:id',houseReqs.approveReqByUserId);
 router.post('/rejectHouseByUserId/:id',houseReqs.rejectHouseByUserId);
 router.post('/viewHouseReqsByUserId/:id',houseReqs.viewhouseReqsByUserId);
+router.post('/viewhouseReqsByIssueId/:id',houseReqs.viewhouseReqsByIssueId);
 
 
 //councellor req
