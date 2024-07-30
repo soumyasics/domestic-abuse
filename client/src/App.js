@@ -88,6 +88,8 @@ import UserViewSafeHousewitIssue from './Pages/User/UserViewSafehouses/UserViewS
 import CouncillorviewClintDetailed from './Pages/Counsellor/CounsellorViewClients/CouncillorviewClintDetailed';
 import UserChatLegalProfessional from './Pages/User/UserChatLegalProfessional/UserChatLegalProfessional';
 import UserChatSupporter from './Pages/User/UserChatSupporter/UserChatSupporter';
+import LegalProfessionalChatUser from './Pages/Legal Professional/LegalProfessionalChatUser/LegalProfessionalChatUser';
+import SupporterChatUser from './Pages/Supporter/SupporterChatUser/SupporterChatUser';
 import LegalProfessionalViewCases from './Pages/Legal Professional/LegalProfessionalCaseRequestDetail/LegalProfessionalViewCases';
 import LegalProfessionalViewActiveCases from './Pages/Legal Professional/LegalProfessionalCaseRequestDetail/LegalProfessionalViewActiveCases';
 import LegalProfessionalViewActiveCaseDetail from './Pages/Legal Professional/LegalProfessionalCaseRequestDetail/LegalProfessionalViewActiveCaseDetail';
@@ -199,6 +201,7 @@ function App() {
             <Route path='/supporter-view-blogs' element={[<SupprterNavbar />, <SupporterViewBlogs />]} />
             <Route path='/supporter-edit-safe-house/:id' element={[<SupprterNavbar />, <SupporterEditSafeHouse />]} />
             <Route path='/supporter-view-all-safehouses' element={[<SupprterNavbar />, <SupporterViewAllSafehouses />]} />
+            <Route path='/supporter-chat-user' element={[<SupprterNavbar />, <SupporterChatUser />]} />
 
             {/* Counsellor Paths */}
             <Route path='/counsellor-register' element={[<Navbar />, <CounsellorRegistration />]} />
@@ -250,6 +253,7 @@ function App() {
             <Route path='/legal-professional-view-case-details' element={[<LPNav />, <LegalProfessionalCaseRequestDetail />]} />
             <Route path='/legal-professional-update-case-details' element={[<LPNav />, <LegalProfessionalUpdateCaseDetails />]} />
             <Route path='/legal-professional-change-password' element={[<LPNav />, <LegalProfessionalChangePassword />]} />
+            <Route path='/legal-professional-chat-user' element={[<LPNav />, <LegalProfessionalChatUser />]} />
             <Route path='/legal-professional-view-appointments' element={[<LPNav/>,<LegalProfessionalViewCases/>]} />
             <Route path='/legal-professional-view-acive-cases' element={[<LPNav/>,<LegalProfessionalViewActiveCases/>]} />
 
