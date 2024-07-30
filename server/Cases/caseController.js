@@ -1,20 +1,25 @@
 const Case = require('./caseSchema');
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
+const reqSchema = require('../LP-UserRequests/reqSchema');
+const { login } = require('../Supporter/supporterController');
 
 
 
 // Register a new issue
 const registerCase= async (req, res) => {
   try {
-    const { description,location, title,lpId,date } = req.body;
-
+    const { description,status,date } = req.body;
+console.log(req.params.id);
+const appData=await reqSchema.findById(req.params.id)
     const newCase= new Case({
-      title,
+      status,
       description,
-      location,
-      userId:req.params.id,
-      lpId:lpId,
+      status,
+      userId:appData.userId,
+      issueId:appData.issueId,
+
+      lpId:appData.lpId,
       date:date
     });
 
@@ -35,6 +40,8 @@ const registerCase= async (req, res) => {
         });
       });
   } catch (error) {
+    console.log("err",error);
+
     res.status(500).json({ message: error.message });
   }
 };
