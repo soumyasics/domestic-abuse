@@ -104,7 +104,7 @@ function LPNav() {
                             </a>
                             <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown3">
                                 <li><Link className="dropdown-item theme-purple fw-semibold" to={`/legal-professional-view-appointments`}>Client Requests</Link></li>
-                                <li><button className="dropdown-item theme-purple fw-semibold" to="#">Active Cases</button></li>
+                                <li><Link className="dropdown-item theme-purple fw-semibold" to={`/legal-professional-view-acive-cases`}>Active Cases</Link></li>
                             </ul>
                         </li>
                                
