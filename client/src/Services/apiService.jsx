@@ -1633,7 +1633,16 @@ export const viewCaseByissueId = async (id) => {
   }
 };
 
-
+export const viewCaseByUserId = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewCaseReqsByUserId/${id}`);
+    console.log("in legal ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
 
 // Api for Registering addBlog
 export const addPayment = async (suggestions) => {

@@ -185,7 +185,7 @@ function UserAddCase() {
                         return (
                           <tr key={appointment._id}>
                             <td>{++index}</td>
-                            <td>{appointment._id}</td>
+                            <td>{appointment.title}</td>
                             <td>{appointment.status}</td>
                             <td>{appointment.date.slice(0,10)}</td>
                             <td>{appointment.description}</td>

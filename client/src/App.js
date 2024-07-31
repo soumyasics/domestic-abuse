@@ -96,6 +96,7 @@ import LegalProfessionalViewActiveCaseDetail from './Pages/Legal Professional/Le
 import LegalProfessionalAddPayment from './Pages/Legal Professional/LegalProfessionalAddPayment.js/LegalProfessionalAddPayment';
 import UserViewPaymentReqs from './Pages/User/UserPayment/UserViewPaymentReqs';
 import UserViewLPs from './Pages/User/UserPayment/UserViewLPs';
+import UserViewCaseUpdates from './Pages/User/UserLegalProfessionalDetails/UserViewCaseUpdates';
 
 function App() {
   return (
@@ -159,6 +160,7 @@ function App() {
 
             <Route path='/user-view-payments' element={[<UserNav/>,<UserViewPaymentReqs/>]} />
             <Route path='/user-view-lps' element={[<UserNav/>,<UserViewLPs/>]} />
+            <Route path='/user-view-Case-Updates' element={[<UserNav/>,<UserViewCaseUpdates/>]} />
 
             {/* Admin Paths */}
             <Route path='/admin-login' element={[<Navbar />, <AdminLogin />]} />
