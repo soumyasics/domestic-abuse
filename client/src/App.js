@@ -150,7 +150,6 @@ function App() {
             <Route path='/user-legal-professional-case-details' element={[<UserNav/>,<UserLegalProfessionalCaseDetails/>]} />
             <Route path='/user-legal-professional-view-Status/:st/:id' element={[<UserNav/>,<UserViewLPStatus/>]} />
             <Route path='/user-view-safehouse-issue/:id' element={[<UserNav/>,<UserViewSafeHousewitIssue/>]} />
-
             <Route path='/user-payment' element={[<UserNav/>,<UserPayment/>]} />
             <Route path='/user-view-blogs' element={[<UserNav/>,<UserViewBlogs/>]} />
             <Route path='/user-view-request-history' element={[<UserNav/>,<UserViewRequestHistory/>]} />
