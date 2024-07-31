@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import './UserPayment.css';
 import { FaLock } from "react-icons/fa";
+import { useParams } from 'react-router-dom';
+import { addPaymentByUser } from '../../../Services/apiService';
+import { toast } from 'react-toastify';
 
 function UserPayment() {
     const [errors, setErrors] = useState({});
@@ -10,7 +13,7 @@ function UserPayment() {
         expiryYear: '',
         cv: ''
     });
-
+const {id}=useParams()
     const validate = () => {
         const errors = {};
 
@@ -48,13 +51,22 @@ function UserPayment() {
         setFormValues({ ...formValues, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (validate()) {
-            // Perform payment process
-            console.log("Payment successful");
+        try {
+            const response = await addPaymentByUser(id);
+            console.log(response);
+            if (response.data.status === 200) {
+                toast.success('Payment Successful');
+            } else {
+                toast.error('Payment failed.');
+            }
+        } catch (error) {
+            console.error('Error adding payment:', error.response || error.message || error);
+            toast.error('Error Adding Payments.');
         }
     };
+
 
     return (
         <div className='container-fluid d-flex justify-content-center align-items-center'>

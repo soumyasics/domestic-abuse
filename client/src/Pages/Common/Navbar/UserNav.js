@@ -68,14 +68,19 @@ function UserNav() {
                                 {/* )} */}
                             </li>
                             
-                            {/* <li className="nav-item">
-                                <Link className="nav-link mx-3 theme-purple fw-semibold" to="/">About Us</Link>
-                            </li> */}
-                            
-                            {/* <li className="nav-item">
-                                <Link className="nav-link mx-3 theme-purple fw-semibold" to="/">Our Services</Link>
-                            </li> */}
-                           
+                        
+                            <li className="nav-item dropdown">
+                                <a className="nav-link dropdown-toggle mx-3 theme-purple fw-semibold" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Legal Services
+                                </a>
+                                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown1">
+                                    <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-view-Case-Updates">Case Updates</Link></li>
+                                    <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-view-payments">Payments</Link></li>
+
+                                    <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-view-lps">Legal Professionals</Link></li>
+
+                                </ul>
+                            </li>
 
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle mx-3 theme-purple fw-semibold" href="#" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
