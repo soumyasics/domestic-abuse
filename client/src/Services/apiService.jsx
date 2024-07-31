@@ -1632,9 +1632,39 @@ export const viewCaseByissueId = async (id) => {
     throw error;
   }
 };
+export const viewCaseByissueIdNew = async (id) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/viewCaseByissueIdNew/${id}`);
+    console.log("in legal ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+export const viewCaseByUserId = async (id) => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/viewUniqueIssuesByUserId/${id}`);
 
+    console.log("in legal 1",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+export const viewOneCaseByIssueId = async (id) => {
+  try {
+    const response1 = await axios.get(`${API_BASE_URL}/viewOneCaseByissueId/${id}`);
+    const response = await axios.post(`${API_BASE_URL}/viewLegalProfessionalById/${response1.data.data.lpId}`);
 
-
+    console.log("in legal ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
 // Api for Registering addBlog
 export const addPayment = async (suggestions) => {
   try {
@@ -1694,3 +1724,50 @@ export const addPaymentByUser = async (id) => {
   }
 };
 
+export const chatting = async (mesg) => {
+  try {
+    console.log("in serv",mesg);
+    const response = await axios.post(`${API_BASE_URL}/chatting`,mesg);
+    console.log("Payment response:", response);
+    return response;
+  } catch (error) {
+    // Log detailed error information
+    console.error('Error adding payment:', error.response || error.message || error);
+    throw error;
+  }
+};
+export const viewChats = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewChatWithIssueId/${id}`);
+    console.log("Payment response:", response);
+    return response;
+  } catch (error) {
+    // Log detailed error information
+    console.error('Error adding payment:', error.response || error.message || error);
+    throw error;
+  }
+};
+
+export const viewChatBetweenUserAndAdv = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewChatBetweenUserAndAdv`,id);
+    console.log("Payment response:", response);
+    return response;
+  } catch (error) {
+    // Log detailed error information
+    console.error('Error adding payment:', error.response || error.message || error);
+    throw error;
+  }
+};
+
+export const viewChatBetweenUserAndSupp = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewChatBetweenUserAndSupp`,id);
+    console.log("Payment response:", response);
+    return response;
+  } catch (error) {
+    // Log detailed error information
+    console.error('Error adding payment:', error.response || error.message || error);
+    throw error;
+  }
+};

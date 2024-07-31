@@ -43,7 +43,8 @@ function LegalProfessionalViewActiveCaseDetail() {
       gender: '',
       relation: '',
       file: { filename: '' },
-      safetyPlan: ''
+      safetyPlan: '',
+      _id:''
 
     }
   });
@@ -84,7 +85,7 @@ function LegalProfessionalViewActiveCaseDetail() {
           <button className='btn bg-purple text-white rounded-4 p-3 py-1 fw-semibold mx-3' onClick={()=>{navigate(`/legal-add-case/${id}`)}}>
             Update Case Details
           </button>
-          <button className='btn bg-purple text-white rounded-4 p-3 py-1 fw-semibold mx-3'>
+          <button className='btn bg-purple text-white rounded-4 p-3 py-1 fw-semibold mx-3' onClick={()=>{navigate(`/legal-professional-chat-user/${user.userId._id}`)}}>
             <span className='mx-2'><RiMessage2Fill size={24} /></span>Chat Now
           </button>
         </div>

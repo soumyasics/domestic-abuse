@@ -1,81 +1,130 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './UserChatSupporter.css';
 import dpSupporter from '../../../Assets/chat-legal.png';
-import { IMG_BASE_URL } from '../../../Services/apiService';
+import { chatting, getSupporterById, IMG_BASE_URL, viewChatBetweenUserAndSupp, viewChats } from '../../../Services/apiService';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { IoMdSend } from "react-icons/io";
-
+import { Link, useParams } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import demo from '../../../Assets/supp-edit-profile.png';
 function UserChatSupporter() {
   const [supporter, setSupporter] = useState({});
-  const [messages, setMessages] = useState([
-    {
-      sender: 'user',
-      text: 'Hi, I need some support regarding my current situation. I am staying in a safe house and need to understand my options and support available to me.',
-      timestamp: '8:00 AM'
-    },
-    {
-      sender: 'supporter',
-      text: 'Hello, I can help with that. Could you provide some more details about your situation? Are you in the safe house due to domestic violence, stalking, or another reason?',
-      timestamp: '8:02 AM'
-    },
-    {
-      sender: 'user',
-      text: 'I am here because of domestic violence. My partner has been abusive, and I had to leave for my safety. I\'m worried about what happens next, especially regarding my mental health and any support I might need.',
-      timestamp: '8:03 AM'
-    },
-    {
-      sender: 'supporter',
-      text: 'I\'m sorry to hear that you\'re going through this. It\'s important to know that there are several support systems available to you. First, have you spoken to a counsellor or therapist about your situation?',
-      timestamp: '8:04 AM'
-    },
-    {
-      sender: 'user',
-      text: 'Yes, I have been in touch with a therapist.',
-      timestamp: '8:05 AM'
-    },
-    {
-      sender: 'supporter',
-      text: 'That\'s a good step. Therapy can help you process your experiences and develop coping strategies. Additionally, there are support groups for individuals who have gone through similar situations. Would you be interested in joining one?',
-      timestamp: '8:06 AM'
-    },
-    {
-      sender: 'user',
-      text: 'Not yet. I\'m not sure how to start that process.',
-      timestamp: '8:07 AM'
-    },
-    {
-      sender: 'supporter',
-      text: 'We can definitely work on that. I can help you find a support group and connect you with other resources that can assist you. It\'s important to take things one step at a time and know that you\'re not alone in this.',
-      timestamp: '8:09 AM'
-    },
-    {
-      sender: 'user',
-      text: 'Thank you for the support. I feel a bit more hopeful now.',
-      timestamp: '8:10 AM'
+
+  const { id,suppId } = useParams();
+  const userId = localStorage.getItem("userId");
+    const [patient, setPatient] = useState({});
+    const [imagePreview, setImagePreview] = useState(demo);
+
+    const [mesg, setMesg] = useState({
+      msg: "",
+      from: "user",
+      suppId: suppId,
+      userId: userId,
+      to:'supporter'
+     
+    });
+    const [data, setData] = useState([]);
+
+    const handleChange = (e) => {
+      setMesg({
+        ...mesg,
+        [e.target.name]: e.target.value,
+      });
+    };
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await viewChatBetweenUserAndSupp({
+          suppId:suppId,
+          userId:userId
+        }); 
+        console.log(response);
+        if (response.data.status==200) {
+          setData(response.data.data);
+          // setImagePreview(response.data.image.filename ? `${IMG_BASE_URL}/${response.data.image.filename}` : demo);
+
+        } else {
+          toast.error(response.message);
+        }
+      } catch (error) {
+        console.error('Error fetching user data', error);
+        toast.error('Error fetching user data. Please try again.');
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  //Chat viewing API
+  // const [chat, setChat] = useState({
+  //   patientId: id,
+  //   councellorId: Counsellorid,
+  // });
+
+  // useEffect(() => {
+   
+  // }, [chat]);
+
+  const chatBodyRef = useRef(null);
+
+  useEffect(() => {
+    if (chatBodyRef.current) {
+      chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
     }
-  ]);
+  }, [data]);
+
+  useEffect(() => {
+    const fetchSupporterData = async () => {
+        if (suppId) {
+            try {
+                const response = await getSupporterById(suppId);
+                console.log('Fetch supporter response:', response);
+                if (response.status === 200) {
+                    setSupporter(response.data);
+                    setImagePreview(response.data.image ? `${IMG_BASE_URL}/${response.data.image.filename}` : demo);
+                } else {
+                    toast.error('Supporter not found');
+                }
+            } catch (error) {
+                console.error('Error fetching supporter data:', error);
+                toast.error('An error occurred while fetching the supporter data');
+            }
+        }
+    };
+
+    fetchSupporterData();
+}, []);
+
+
   const [newMessage, setNewMessage] = useState('');
 
-  const handleSendMessage = () => {
-    if (newMessage.trim() !== '') {
-      setMessages([
-        ...messages,
-        {
-          sender: 'user',
-          text: newMessage,
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-        }
-      ]);
-      setNewMessage('');
+  const handleSendMessage = async () => {
+    try {
+      const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const newMessage = {
+        ...mesg,
+        timestamp: timestamp
+      };
+  
+      await chatting(newMessage); 
+      setData((prevData) => [...prevData, newMessage]); 
+      setMesg({
+        ...mesg,
+        msg: "",
+        timestamp: '' 
+      });
+    } catch (error) {
+      console.error("Error sending message", error);
+      toast.error('Error sending message. Please try again.');
     }
   };
-
+ 
   return (
     <Container fluid className="chat-container p-5">
       <Row className="chat-header">
         <Col xs="auto">
           <img
-            src={supporter.photo && supporter.photo.filename ? `${IMG_BASE_URL}/${supporter.photo.filename}` : dpSupporter}
+            src={supporter.image && supporter.image.filename ? `${IMG_BASE_URL}/${supporter.image.filename}` : dpSupporter}
             alt="Supporter"
             onError={(e) => {
               e.target.onerror = null;
@@ -89,9 +138,10 @@ function UserChatSupporter() {
       </Row>
 
       <Row className="chat-content flex-grow-1">
-        {messages.map((message, index) => (
-          <div key={index} className={`chat-bubble ${message.sender} w-50 m-4`}>
-            {message.text}
+        {console.log(data)}
+        {data.map((message, index) => (
+          <div key={index} className={`chat-bubble ${message.to} w-50 m-4`}>
+       {message.msg}
             <div className="chat-timestamp">{message.timestamp}</div>
           </div>
         ))}
@@ -102,8 +152,9 @@ function UserChatSupporter() {
           <Form className="d-flex w-100">
             <Form.Control
               type="text"
-              value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
+              name='msg'
+              onChange={handleChange}
+              value={mesg.msg}
               placeholder="Type a message"
               className="me-2"
             />

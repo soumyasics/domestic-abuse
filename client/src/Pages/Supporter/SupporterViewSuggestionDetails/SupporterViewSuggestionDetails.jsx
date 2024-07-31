@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { IMG_BASE_URL, viewCouncCaseReqsByIssueId, viewhouseReqsByIssueId, viewLegalReqsByIssueId, viewMySuggestionById } from '../../../Services/apiService';
 import './SupporterViewSuggestionDetails.css';
 import { RiMessage2Fill } from "react-icons/ri";
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaDownload } from "react-icons/fa";
@@ -36,7 +36,8 @@ function SupporterViewSuggestionDetails() {
             gender: '',
             relation: '',
             file: { filename: '' },
-            safetyPlan: ''
+            safetyPlan: '',
+            _id:''
         }
     });
 
@@ -101,9 +102,9 @@ function SupporterViewSuggestionDetails() {
         <div className='container-fluid'>
             <div className='row m-5'>
                 <div className='col text-end'>
-                    <button className='btn bg-purple text-white rounded-4 p-3 py-1 fw-semibold'>
+                   <Link to={`/supporter-chat-user/${user.issueId._id}/${user.userId._id}`}> <button className='btn bg-purple text-white rounded-4 p-3 py-1 fw-semibold'>
                         <span className='mx-2'><RiMessage2Fill size={30} /></span>Chat Now
-                    </button>
+                    </button></Link>
                 </div>
             </div>
             <div className='row m-5'>
