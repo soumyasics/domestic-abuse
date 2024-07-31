@@ -29,15 +29,21 @@ function UserViewCaseUpdates() {
     fetchCaseDetails();
   }, []);
   return (
-    <div>    <Table striped bordered hover className="appointments-table">
+    <div className='container'>    
+        
+        {
+            caseDetails&&caseDetails.length>0?(
+        
+        
+        <Table striped bordered hover className="appointments-table">
     <thead>
       <tr className="text-center">
         <th className='bg-purple text-white'>#</th>
-        <th className='bg-purple text-white'>Case No</th>
-        <th className='bg-purple text-white'>Case Status</th>
-        <th className='bg-purple text-white'>Date</th>
+        <th className='bg-purple text-white'>Issue Type</th>
         <th className='bg-purple text-white'>Description</th>
-        
+        <th className='bg-purple text-white'>Severity</th>
+        <th className='bg-purple text-white'>Action</th>
+
       </tr>
     </thead>
     <tbody className='text-center'>
@@ -47,18 +53,21 @@ function UserViewCaseUpdates() {
         return (
           <tr key={appointment._id}>
             <td>{++index}</td>
-            <td>{appointment.title}</td>
-            <td>{appointment.status}</td>
-            <td>{appointment.date.slice(0,10)}</td>
+             <td>{appointment.type}</td>
             <td>{appointment.description}</td>
-          
+             <td>{appointment.severity}</td> 
+             <td><Link to={`/user-view-case-details/${appointment._id}/`}> View Details</Link></td> 
+
           </tr>
         )
       })
     ):(<p></p>)
   }
     </tbody>
-  </Table></div>
+  </Table>
+            ):(<h1>No Cases Registered for You </h1>)
+        }
+        </div>
   )
 }
 

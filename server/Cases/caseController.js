@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const multer = require('multer');
 const reqSchema = require('../LP-UserRequests/reqSchema');
 const { login } = require('../Supporter/supporterController');
-
+const Issue=require('../UserIssues/IssuesSchema')
 
 
 // Register a new issue
@@ -210,6 +210,47 @@ const viewCaseByissueId =async (req, res) => {
       });
     });
 };
+
+// View issue by ID
+const viewOneCaseByissueId =async (req, res) => {
+
+  await  Case.findOne({ issueId: req.params.id })
+    .exec()
+    .then(data => {
+      res.json({
+        status: 200,
+        msg: 'Data obtained successfully',
+        data: data,
+      });
+    })
+    .catch(err => {
+      res.status(500).json({
+        status: 500,
+        msg: 'No data obtained',
+        Error: err,
+      });
+    });
+};
+// View issue by ID
+const viewCaseByissueIdNew =async (req, res) => {
+
+  await  Case.find({ issueId:req.params.id }).populate('userId issueId lpId')
+    .exec()
+    .then(data => {
+      res.json({
+        status: 200,
+        msg: 'Data obtained successfully',
+        data: data,
+      });
+    })
+    .catch(err => {
+      res.status(500).json({
+        status: 500,
+        msg: 'No data obtained',
+        Error: err,
+      });
+    });
+};
 // Delete issue by ID
 const deleteCaseById = (req, res) => {
   Case.findByIdAndDelete({ _id: req.params.id })
@@ -230,6 +271,32 @@ const deleteCaseById = (req, res) => {
     });
 };
 
+const viewUniqueIssuesByUserId = (req, res) => {
+  Case.find({ userId: req.params.id }).select('issueId') // Find cases for the user
+    .exec()
+    .then(cases => {
+      // Extract issueIds and remove duplicates
+      const issueIds = cases.map(caseDoc => caseDoc.issueId.toString());
+      const uniqueIssueIds = [...new Set(issueIds)];
+
+      // Fetch issue details for unique issueIds
+      return Issue.find({ _id: { $in: uniqueIssueIds } }).exec();
+    })
+    .then(issues => {
+      res.json({
+        status: 200,
+        msg: 'Data obtained successfully',
+        data: issues,
+      });
+    })
+    .catch(err => {
+      res.status(500).json({
+        status: 500,
+        msg: 'No data obtained',
+        Error: err,
+      });
+    });
+};
 
 module.exports = {
   registerCase,
@@ -240,5 +307,7 @@ module.exports = {
   viewCaseByLPId,
   viewCaseByissueId,
   viewCaseByUserId,
-  viewPendingCases
+  viewPendingCases,
+  viewUniqueIssuesByUserId,
+  viewCaseByissueIdNew,viewOneCaseByissueId
 };

@@ -1,61 +1,137 @@
-import React, { useState } from 'react';
 import './SupporterChatUser.css';
 import dpSupporter from '../../../Assets/chat-legal.png'; 
-import { IMG_BASE_URL } from '../../../Services/apiService';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { IoMdSend } from "react-icons/io";
-
+import React, { useEffect, useRef, useState } from 'react';
+import { chatting, getSupporterById, getUserById, IMG_BASE_URL, viewChatBetweenUserAndSupp, viewChats } from '../../../Services/apiService';
+import { toast, ToastContainer } from 'react-toastify';
+import demo from '../../../Assets/supp-edit-profile.png';
+import { useParams } from 'react-router-dom';
 function SupporterChatUser() {
-  const [supporter, setSupporter] = useState({});
-  const [messages, setMessages] = useState([
-    {
-      sender: 'user',
-      text: 'Hi, I need some support regarding my current situation. I am staying in a safe house and need guidance.',
-      timestamp: '8:00 AM'
-    },
-    {
-      sender: 'supporter',
-      text: 'Hello, I can help with that. Could you provide some more details about your situation?',
-      timestamp: '8:02 AM'
-    },
-    {
-      sender: 'user',
-      text: 'I am here because of domestic violence. I\'m worried about what happens next.',
-      timestamp: '8:03 AM'
-    },
-    {
-      sender: 'supporter',
-      text: 'I\'m sorry to hear that. It\'s important to know that there are several protections and resources available to you.',
-      timestamp: '8:04 AM'
-    },
-    {
-      sender: 'user',
-      text: 'Thank you for the advice. I feel a bit more prepared now.',
-      timestamp: '8:10 AM'
-    }
-  ]);
-  const [newMessage, setNewMessage] = useState('');
+  const [user, setUser] = useState({
+    name:'',
+    image:{filename:''}
+  });
 
-  const handleSendMessage = () => {
-    if (newMessage.trim() !== '') {
-      setMessages([
-        ...messages,
-        {
-          sender: 'user',
-          text: newMessage,
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  const { issueId,userId } = useParams();
+  const suppId = localStorage.getItem("supporterId");
+    const [patient, setPatient] = useState({});
+    const [imagePreview, setImagePreview] = useState(demo);
+
+    const [mesg, setMesg] = useState({
+      msg: "",
+      from: "supporter",
+      suppId: suppId,
+      userId: userId,
+      to:'user',
+      timestamp:''
+     
+    });
+    const [data, setData] = useState([]);
+
+    const handleChange = (e) => {
+      setMesg({
+        ...mesg,
+        [e.target.name]: e.target.value,
+      });
+    };
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await viewChatBetweenUserAndSupp({
+          suppId:suppId,
+          userId:userId
+        }); 
+        console.log(response);
+        if (response.data.status==200) {
+          setData(response.data.data);
+          // setImagePreview(response.data.image.filename ? `${IMG_BASE_URL}/${response.data.image.filename}` : demo);
+
+        } else {
+          toast.error(response.message);
         }
-      ]);
-      setNewMessage('');
+      } catch (error) {
+        console.error('Error fetching user data', error);
+        toast.error('Error fetching user data. Please try again.');
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  const chatBodyRef = useRef(null);
+
+  useEffect(() => {
+    if (chatBodyRef.current) {
+      chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
     }
-  };
+  }, [data]);
+
+  useEffect(() => {
+    const fetchSupporterData = async () => {
+        if (suppId) {
+            try {
+                const response = await getUserById(userId);
+                console.log('Fetch supporter response:', response);
+                if (response.success) {
+                    setUser(response.user);
+                    setImagePreview(response.user.image ? `${IMG_BASE_URL}/${response.user.image.filename}` : demo);
+                } else {
+                    toast.error('user not found');
+                }
+            } catch (error) {
+                console.error('Error fetching supporter data:', error);
+            }
+        }
+    };
+
+    fetchSupporterData();
+}, []);
+
+//   const handleSendMessage = () => {
+//    const datas= chatting(mesg)
+// console.log(datas);
+// setData((prevData) => [...prevData]);
+// setMesg({
+//   ...mesg,
+//   msg: "",
+//   timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+
+  
+// });
+    
+
+//     console.log("mesg",mesg);
+//   };
+
+
+const handleSendMessage = async () => {
+  try {
+    const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const newMessage = {
+      ...mesg,
+      timestamp: timestamp
+    };
+
+    await chatting(newMessage); 
+    setData((prevData) => [...prevData, newMessage]); 
+    setMesg({
+      ...mesg,
+      msg: "",
+      timestamp: '' 
+    });
+  } catch (error) {
+    console.error("Error sending message", error);
+    toast.error('Error sending message. Please try again.');
+  }
+};
 
   return (
     <Container fluid className="chat-container p-5">
       <Row className="chat-header">
         <Col xs="auto">
           <img
-            src={supporter.photo && supporter.photo.filename ? `${IMG_BASE_URL}/${supporter.photo.filename}` : dpSupporter}
+            src={user.image && user.image.filename ? `${IMG_BASE_URL}/${user.image.filename}` : dpSupporter}
             alt="Supporter"
             onError={(e) => {
               e.target.onerror = null;
@@ -64,26 +140,31 @@ function SupporterChatUser() {
           />
         </Col>
         <Col>
-          <p className="mb-0">{supporter?.name || 'Supporter Name'}</p>
+          <p className="mb-0">{user?.name || 'Supporter Name'}</p>
         </Col>
       </Row>
-
       <Row className="chat-content flex-grow-1">
-        {messages.map((message, index) => (
-          <div key={index} className={`chat-bubble ${message.sender} w-50 m-4`}>
-            {message.text}
-            <div className="chat-timestamp">{message.timestamp}</div>
-          </div>
-        ))}
-      </Row>
+  <div className="message-container">
+    {data.map((message, index) => (
+      <div
+        key={index}
+        className={`chat-bubble ${message.from}`}
+      >
+        {message.msg}
+        <div className="chat-timestamp">{message.timestamp}</div>
+      </div>
+    ))}
+  </div>
+</Row>
 
       <Row className="chat-footer">
         <Col>
           <Form className="d-flex w-100">
             <Form.Control
               type="text"
-              value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
+              name='msg'
+              onChange={handleChange}
+              value={mesg.msg}
               placeholder="Type a message"
               className="me-2"
             />
