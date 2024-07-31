@@ -110,7 +110,7 @@ function LegalProfessionalViewActiveCaseDetail() {
           <button className='btn bg-purple text-white rounded-4 p-3 py-1 fw-semibold mx-3'>
             Payment Details
           </button>
-          <button className='btn bg-purple text-white rounded-4 p-3 py-1 fw-semibold mx-3' onClick={()=>{navigate(`/user-add-case/${id}`)}}>
+          <button className='btn bg-purple text-white rounded-4 p-3 py-1 fw-semibold mx-3' onClick={()=>{navigate(`/legal-add-case/${id}`)}}>
             Update Case Details
           </button>
           <button className='btn bg-purple text-white rounded-4 p-3 py-1 fw-semibold mx-3'>
@@ -125,10 +125,6 @@ function LegalProfessionalViewActiveCaseDetail() {
               <h4 className='theme-purple'>User Details</h4>
             </div>
           </div>
-          <Link to={``}>Payment Details</Link>
-              <Link to={`/legal-add-case/${id}`}>Update Case Details</Link>
-
-
           <div className='row m-5'>
             <div className='col '>
               Name
