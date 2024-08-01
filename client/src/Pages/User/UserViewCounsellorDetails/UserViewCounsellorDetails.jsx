@@ -42,7 +42,9 @@ function UserViewCounsellorDetails() {
     const handleChange = (e) => {
         setAppointmentDate(e.target.value);
     };
-
+const navtoHome=()=>{
+    navigate('/user-home')
+}
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -50,7 +52,7 @@ function UserViewCounsellorDetails() {
             if (response.status === 200) {
                 console.log(response);
               toast.success('Request sent successfully.');
-              navigate('/user-home')
+              setTimeout(navtoHome,700)
       
             } else {
               console.log(response);
