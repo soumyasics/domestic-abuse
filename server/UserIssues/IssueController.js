@@ -291,7 +291,7 @@ console.log(req.body.description);
         symptoms.forEach(symptom => {
 //             // Iterate over each disease in the diseasesData
             for (const [disease, diseaseSymptoms] of Object.entries(diseasesData)) {
-                if (diseaseSymptoms.includes(symptom)) {
+                if ((diseaseSymptoms).includes(symptom)) {
                     diseaseSet.add(disease);
                 }
             }

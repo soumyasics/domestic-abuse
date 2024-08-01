@@ -89,7 +89,7 @@ function UserAddIssue() {
               console.log(response);
               if (response.success) {
                 toast.success(response.message);
-                navigate('/user-home');
+                // navigate('/user-home');
               } else {
                 toast.error(response.message);
               }
@@ -102,7 +102,7 @@ function UserAddIssue() {
     };
     const fetchIssueType = async (data) => {
         try {
-            const symptomsArray = data.split(",").map(symptom => symptom.trim());
+            const symptomsArray = data.split(" ").map(symptom => (symptom.trim()));
 
             const response = await axios.post(`${API_BASE_URL}/getTypeFromDescription`,{description:symptomsArray});  
                       console.log(response);

@@ -84,9 +84,9 @@ function UserHome() {
                 </div>
             </div>
             <div className='row'>
-                <div className='col text-end m-5'>
+                {/* <div className='col text-end m-5'>
                     <button className='btn bg-purple text-white rounded-4'>Add an Issue</button>
-                </div>
+                </div> */}
             </div>
         </div>
     )
