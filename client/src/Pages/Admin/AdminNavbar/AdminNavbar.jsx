@@ -45,7 +45,7 @@ useEffect(() => {
               <Link className="nav-link mx-3 theme-purple fw-semibold" to="/admin-viewall-users">Users</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link mx-3 theme-purple fw-semibold" to="/admin-dashboard">Blog</Link>
+              <Link className="nav-link mx-3 theme-purple fw-semibold" to="/blogs">Blog</Link>
             </li>
             <li className="nav-item">
              

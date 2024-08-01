@@ -98,6 +98,8 @@ import UserViewPaymentReqs from './Pages/User/UserPayment/UserViewPaymentReqs';
 import UserViewLPs from './Pages/User/UserPayment/UserViewLPs';
 import UserViewCaseUpdates from './Pages/User/UserLegalProfessionalDetails/UserViewCaseUpdates';
 import UserViewCaseDetailsDetailed from './Pages/User/UserLegalProfessionalDetails/UserViewCaseDetailsDetailed';
+import AdminViewUserDetailed from './Pages/Admin/AdminUserViewAll/AdminViewUserDetailed';
+import AdminviewAllBlogs from './Pages/Admin/AdminUserViewAll/AdminviewAllBlogs';
 
 function App() {
   return (
@@ -187,6 +189,8 @@ function App() {
             <Route path='/admin-viewdetailedLegalProfessional-aprvd/:id' element={[<AdminNavbar />, <AdminLegalProfessionalDetailedViewAprvd />]} />
             <Route path='/admin-viewall-aprvd-LegalProfessional' element={[<AdminNavbar />, <AdminLegalProfessionalViewAll />]} />
             <Route path='/admin-viewall-users' element={[<AdminNavbar />, <AdminUserViewAll />]} />
+            <Route path='/admin-viewdetailedUser-aprvd/:id' element={[<AdminNavbar />, <AdminViewUserDetailed />]} />
+            <Route path='/blogs' element={[<AdminNavbar />, <AdminviewAllBlogs />]} />
 
 
 
