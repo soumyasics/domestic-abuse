@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import './UserAddIssue.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { registerIssue } from '../../../Services/apiService';
+import { API_BASE_URL, getIssueType, registerIssue } from '../../../Services/apiService';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function UserAddIssue() {
+    const [predictions, setPredictions] = useState("");
+
     const [issue, setIssue] = useState({
         type: '',
         description: '',
@@ -60,6 +63,10 @@ function UserAddIssue() {
             ...issue,
             [name]: value,
         });
+        if(name=='description'){
+            console.log("in descr");
+            fetchIssueType(value)
+        }
     };
     const navigate = useNavigate();
 
@@ -93,6 +100,27 @@ function UserAddIssue() {
             setIsSubmitting(false);
         }
     };
+    const fetchIssueType = async (data) => {
+        try {
+            const symptomsArray = data.split(",").map(symptom => symptom.trim());
+
+            const response = await axios.post(`${API_BASE_URL}/getTypeFromDescription`,{description:symptomsArray});  
+                      console.log(response);
+            if (response.data.status==200) {
+        
+                setPredictions(response.data.data.join(", "));
+                                console.log(response.data.data);
+            } else {
+               
+                    setPredictions("No predictions available.");
+                  
+            }
+        } catch (error) {
+            console.error('Error fetching issue data', error);
+            toast.error('Failed to fetch issue data. Please try again.');
+        }
+    };
+   
     return (
         <div className='container-fluid'>
             <div className='row m-5'>
@@ -107,6 +135,36 @@ function UserAddIssue() {
                             <div className='col'>
                                 <div className='row'>
                                     <div className='col text-start'>
+                                    <div className='col text-start'>
+                                    <label htmlFor='description' className='form-label theme-purple mx-2'>Description </label>
+                                    <textarea
+                                        id="description"
+                                        name="description"
+                                        className={`form-control  border bg-creamy h-75 m-2 ${errors.description ? 'is-invalid' : ''}`}
+                                        placeholder=""
+                                        value={issue.description}
+                                        onChange={handleChange}
+                                        aria-describedby="descriptionError"
+                                        required
+                                    />
+                                    {errors.description && <div id="descriptionError" className="invalid-feedback m-2">{errors.description}</div>}
+                            </div>
+
+                            
+           {
+            predictions ?(
+                <div className="prediction-content">
+            <div className="col-12">
+            <p>Prediction of your Issue Type</p>
+            <div className="col-12">
+              <textarea 
+                value={predictions}
+                readOnly
+              />
+            </div>
+          </div>
+        </div>):('')
+           } 
                                             <label htmlFor='type' className='form-label theme-purple mx-2'>Type of Issue </label>
                                             <input
                                                 type="text"
@@ -142,20 +200,7 @@ function UserAddIssue() {
                                     </div>
                                 </div>
                             </div>
-                            <div className='col text-start'>
-                                    <label htmlFor='description' className='form-label theme-purple mx-2'>Description </label>
-                                    <textarea
-                                        id="description"
-                                        name="description"
-                                        className={`form-control  border bg-creamy h-75 m-2 ${errors.description ? 'is-invalid' : ''}`}
-                                        placeholder=""
-                                        value={issue.description}
-                                        onChange={handleChange}
-                                        aria-describedby="descriptionError"
-                                        required
-                                    />
-                                    {errors.description && <div id="descriptionError" className="invalid-feedback m-2">{errors.description}</div>}
-                            </div>
+                           
                         </div>
                         <div className='row m-5'>
                             <div className='col text-start'>

@@ -96,6 +96,8 @@ import LegalProfessionalViewActiveCaseDetail from './Pages/Legal Professional/Le
 import LegalProfessionalAddPayment from './Pages/Legal Professional/LegalProfessionalAddPayment.js/LegalProfessionalAddPayment';
 import UserViewPaymentReqs from './Pages/User/UserPayment/UserViewPaymentReqs';
 import UserViewLPs from './Pages/User/UserPayment/UserViewLPs';
+import UserViewCaseUpdates from './Pages/User/UserLegalProfessionalDetails/UserViewCaseUpdates';
+import UserViewCaseDetailsDetailed from './Pages/User/UserLegalProfessionalDetails/UserViewCaseDetailsDetailed';
 
 function App() {
   return (
@@ -153,11 +155,13 @@ function App() {
             <Route path='/user-payment' element={[<UserNav/>,<UserPayment/>]} />
             <Route path='/user-view-blogs' element={[<UserNav/>,<UserViewBlogs/>]} />
             <Route path='/user-view-request-history' element={[<UserNav/>,<UserViewRequestHistory/>]} />
-            <Route path='/user-chat-legal-professional' element={[<UserNav/>,<UserChatLegalProfessional/>]} />
-            <Route path='/user-chat-supporter' element={[<UserNav/>,<UserChatSupporter/>]} />
+            <Route path='/user-chat-legal-professional/:id' element={[<UserNav/>,<UserChatLegalProfessional/>]} />
+            <Route path='/user-chat-supporter/:id/:suppId' element={[<UserNav/>,<UserChatSupporter/>]} />
 
             <Route path='/user-view-payments' element={[<UserNav/>,<UserViewPaymentReqs/>]} />
             <Route path='/user-view-lps' element={[<UserNav/>,<UserViewLPs/>]} />
+            <Route path='/user-view-Case-Updates' element={[<UserNav/>,<UserViewCaseUpdates/>]} />
+            <Route path='/user-view-case-details/:id' element={[<UserNav/>,<UserViewCaseDetailsDetailed/>]} />
 
             {/* Admin Paths */}
             <Route path='/admin-login' element={[<Navbar />, <AdminLogin />]} />
@@ -204,7 +208,7 @@ function App() {
             <Route path='/supporter-view-blogs' element={[<SupprterNavbar />, <SupporterViewBlogs />]} />
             <Route path='/supporter-edit-safe-house/:id' element={[<SupprterNavbar />, <SupporterEditSafeHouse />]} />
             <Route path='/supporter-view-all-safehouses' element={[<SupprterNavbar />, <SupporterViewAllSafehouses />]} />
-            <Route path='/supporter-chat-user' element={[<SupprterNavbar />, <SupporterChatUser />]} />
+            <Route path='/supporter-chat-user/:issueId/:userId' element={[<SupprterNavbar />, <SupporterChatUser />]} />
 
             {/* Counsellor Paths */}
             <Route path='/counsellor-register' element={[<Navbar />, <CounsellorRegistration />]} />
@@ -259,7 +263,7 @@ function App() {
             <Route path='/legal-professional-view-case-details' element={[<LPNav />, <LegalProfessionalCaseRequestDetail />]} />
             <Route path='/legal-professional-update-case-details' element={[<LPNav />, <LegalProfessionalUpdateCaseDetails />]} />
             <Route path='/legal-professional-change-password' element={[<LPNav />, <LegalProfessionalChangePassword />]} />
-            <Route path='/legal-professional-chat-user' element={[<LPNav />, <LegalProfessionalChatUser />]} />
+            <Route path='/legal-professional-chat-user/:userId' element={[<LPNav />, <LegalProfessionalChatUser />]} />
             <Route path='/legal-professional-view-appointments' element={[<LPNav/>,<LegalProfessionalViewCases/>]} />
             <Route path='/legal-professional-view-acive-cases' element={[<LPNav/>,<LegalProfessionalViewActiveCases/>]} />
 

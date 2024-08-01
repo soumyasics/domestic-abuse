@@ -27,6 +27,7 @@ function UserViewSuggestionDetails() {
   const { id } = useParams();
   const [user, setUser] = useState({
     type: '',
+    _id:'',
     description: '',
     severity: '',
     location: '',
@@ -41,13 +42,15 @@ function UserViewSuggestionDetails() {
       relation: '',
       file: { filename: '' },
       safetyPlan: ''
-    }
+    },
+
   });
 
   const [suggestion, setSuggestion] = useState({
     sug1: false,
     sug2: false,
-    sug3: false
+    sug3: false,
+    suppId:''
   });
 
   const fetchSuggestionsByIssues = async () => {
@@ -58,7 +61,8 @@ function UserViewSuggestionDetails() {
       setSuggestion({
         sug1: response.data.sug1,
         sug2: response.data.sug2,
-        sug3: response.data.sug3
+        sug3: response.data.sug3,
+        // suppId:response.data.supporterId._id?response.data.supporterId._id:''
       });
       console.log("Updated suggestion state:", {
         sug1: response.data.sug1,
@@ -151,7 +155,7 @@ function UserViewSuggestionDetails() {
       <div className='row m-5'>
         <div className='col'>
           <div className='col text-end'>
-            <button className='btn bg-purple text-white rounded-4 p-3 py-1 fw-semibold'><span className='mx-2'><RiMessage2Fill size={30} /></span>Chat with Supporter</button>
+            <Link to={`/user-chat-supporter/${user._id}/${suggestion.suppId}`}><button className='btn bg-purple text-white rounded-4 p-3 py-1 fw-semibold'><span className='mx-2'><RiMessage2Fill size={30} /></span>Chat with Supporter</button></Link>
           </div>
         </div>
       </div>

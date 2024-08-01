@@ -11,8 +11,8 @@ const cases=require('./Cases/caseController')
 const casReqs=require('./LP-UserRequests/reqController')
 const houseReqs=require('./SafeHouse/HouseReqs/houseReqController')
 const councReqs=require('./Councellor-UserRequests/reqController')
-const Payments=require('./Payments/paymentController')
 const payments = require('./Payments/paymentController')
+const chat = require('./Chat/chatController')
 
 //suppoerter routes
 router.post('/registerSupporters', supporter.upload, supporter.registerSupporters);
@@ -101,6 +101,7 @@ router.get('/viewIssues', issue.viewIssues);
 router.post('/viewPendingIssues', issue.viewPendingIssues);
 router.post('/viewPendingIssuesByUserId/:id', issue.viewPendingIssuesByUserId);
 router.post('/viewSupportedIssues/:id', issue.viewSupportedIssues);
+router.post('/getTypeFromDescription', issue.getDiseaseBySymptoms);
 
 
 //suggestions
@@ -138,6 +139,9 @@ router.post('/viewPendingCases', cases.viewPendingCases);
 router.get('/viewCaseByLPId/:id', cases.viewCaseByLPId);
 router.get('/viewCases', cases.viewCases);
 router.get('/viewCaseByissueId/:id', cases.viewCaseByissueId);
+router.get('/viewUniqueIssuesByUserId/:id', cases.viewUniqueIssuesByUserId);
+router.get('/viewCaseByissueIdNew/:id', cases.viewCaseByissueIdNew);
+router.get('/viewOneCaseByissueId/:id', cases.viewOneCaseByissueId);
 
 
 router.post('/addReq/:id',casReqs.addReq);
@@ -183,6 +187,10 @@ router.post('/viewPaymentsByLPId/:id',payments.viewPaymentsByLPId);
 router.post('/viewPaymentsByAppId/:id',payments.viewPaymentsByAppId);
 router.post('/addPaymentsId/:id',payments.addPaymentsId);
 
-
+//chat
+router.post('/chatting',chat.chatting);
+router.post('/viewChatBetweenUserAndAdv',chat.viewChatBetweenUserAndAdv);
+router.post('/viewChatWithIssueId/:id',chat.viewChatWithIssueId);
+router.post('/viewChatBetweenUserAndSupp',chat.viewChatBetweenUserAndSupp);
 
 module.exports = router
