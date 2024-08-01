@@ -1,59 +1,59 @@
 {
     "Physical Abuse": [
-        "Hitting",
-        "Slapping",
-        "Punching",
-        "Kicking",
-        "Choking",
-        "Using weapons"
+        "hitting",
+        "slapping",
+        "punching",
+        "kicking",
+        "choking",
+        "using weapons"
     ],
     "Emotional or Psychological Abuse": [
-        "Belittling",
-        "Gaslighting",
-        "Intimidation",
-        "Threats",
-        "Undermining self-esteem"
+        "belittling",
+        "gaslighting",
+        "intimidation",
+        "threats",
+        "undermining self-esteem"
     ],
     "Sexual Abuse": [
-        "Rape",
-        "Forced sexual acts",
-        "Sexual coercion",
-        "Non-consensual activities"
+        "rape",
+        "forced sexual acts",
+        "sexual coercion",
+        "non-consensual activities"
     ],
     "Economic Abuse": [
-        "Financial control",
-        "Preventing employment",
-        "Exploiting financial dependence"
+        "financial control",
+        "preventing employment",
+        "exploiting financial dependence"
     ],
     "Verbal Abuse": [
-        "Insults",
-        "Derogatory comments",
-        "Yelling",
-        "Belittling"
+        "insults",
+        "derogatory comments",
+        "yelling",
+        "belittling"
     ],
     "Digital Abuse": [
-        "Stalking via social media",
-        "Threatening messages",
-        "Tracking movements"
+        "stalking via social media",
+        "threatening messages",
+        "tracking movements"
     ],
     "Reproductive Abuse": [
-        "Forcing pregnancy",
-        "Coercing abortion",
-        "Sabotaging birth control"
+        "forcing pregnancy",
+        "coercing abortion",
+        "sabotaging birth control"
     ],
     "Isolation": [
-        "Controlling social interactions",
-        "Limiting communication",
-        "Restricting transportation"
+        "controlling social interactions",
+        "limiting communication",
+        "restricting transportation"
     ],
     "Stalking": [
-        "Following",
-        "Unwanted attention",
-        "Monitoring through technology"
+        "following",
+        "unwanted attention",
+        "monitoring through technology"
     ],
     "Threats and Intimidation": [
-        "Violence threats",
-        "Harm threats",
-        "Coercion through fear"
+        "violence threats",
+        "harm threats",
+        "coercion through fear"
     ]
 }
