@@ -150,34 +150,38 @@ function UserAddIssue() {
                                             {errors.description && <div id="descriptionError" className="invalid-feedback m-2">{errors.description}</div>}
                                         </div>
 
-
-                                        {
-                                            predictions ? (
-                                                <div className="row">
-                                                    <div className="col">
-                                                        <p>Prediction of your Issue Type</p>
-                                                        <div className="col">
-                                                            <textarea
-                                                                value={predictions}
-                                                                readOnly
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                </div>) : ('')
-                                        }
-                                        <label htmlFor='type' className='form-label theme-purple mx-2'>Type of Issue </label>
-                                        <input
-                                            type="text"
-                                            id="type"
-                                            name='type'
-                                            className={`form-control  border  bg-creamy m-2  ${errors.type ? 'is-invalid' : ''}`}
-                                            placeholder=""
-                                            value={issue.type}
-                                            onChange={handleChange}
-                                            aria-describedby="typeError"
-                                            required
-                                        />
-                                        {errors.type && <div id="typeError" className="invalid-feedback m-2">{errors.type}</div>}
+                            
+           {
+            predictions ?(
+                <div className="prediction-content">
+            <div className="col-12">
+            <p>Prediction of your Issue Type</p>
+            <div className="col-12">
+              <textarea 
+                value={predictions}
+                readOnly
+              />
+            </div>
+          </div>
+        </div>):('')
+           } 
+                                            <label htmlFor='type' className='form-label theme-purple mx-2'>Type of Issue </label>
+                                         
+                                         <select  value={issue.type}
+                                                onChange={handleChange} name='type'>
+                                            <option value="Physical Abuse">Physical Abuse</option>
+                                            <option value="Physical Abuse">Physical Abuse</option>
+<option value="Emotional or Psychological Abuse">Emotional or Psychological Abuse</option>
+<option value="Sexual Abuse">Sexual Abuse</option>
+<option value="Economic Abuse">Economic Abuse</option>
+<option value="Verbal Abuse">Verbal Abuse</option>
+<option value="Digital Abuse">Digital Abuse</option>
+<option value="Reproductive Abuse">Reproductive Abuse</option>
+<option value="Isolation">Isolation</option>
+<option value="Stalking">Stalking</option>
+<option value="Threats and Intimidation">Threats and Intimidation</option>
+                                        </select>  
+                                            {errors.type && <div id="typeError" className="invalid-feedback m-2">{errors.type}</div>}
                                     </div>
                                 </div>
                                 <div className='row'>
