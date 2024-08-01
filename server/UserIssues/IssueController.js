@@ -248,6 +248,72 @@ const requireAuth = (req, res, next) => {
   });
 };
 
+const fs = require('fs');
+const path = require('path');
+
+// Load and parse the JSON data
+const getAbuseTypesFromJson = () => {
+  const filePath = path.join(__dirname, 'issuesDataset.json');
+  const data = fs.readFileSync(filePath, 'utf8');
+  return JSON.parse(data);
+};
+
+// Function to retrieve the type from the description
+const getTypeFromDescription = (req,res) => {
+  console.log("req",req.body.description);
+  const issuesData = getAbuseTypesFromJson();
+  const matchedTypes = [];
+
+  for (const [type, descriptions] of Object.entries(issuesData)) {
+    if (descriptions.some(desc => req.body.description.includes(desc))) {
+      matchedTypes.push(type);
+    }
+  }
+
+  console.log(matchedTypes);
+};
+
+const diseasesData = require('./issuesDataset.json'); 
+
+const getDiseaseBySymptoms = (req, res) => {
+    try {
+console.log(req.body.description);
+       const  symptoms  = req.body.description;
+
+        if (!symptoms || !Array.isArray(symptoms) || symptoms.length === 0) {
+            return res.status(400).json({ message: 'Please provide an array of symptoms.' });
+        }
+
+//         // Initialize a set to avoid duplicate disease names
+        const diseaseSet = new Set();
+
+//         // Iterate over each symptom
+        symptoms.forEach(symptom => {
+//             // Iterate over each disease in the diseasesData
+            for (const [disease, diseaseSymptoms] of Object.entries(diseasesData)) {
+                if (diseaseSymptoms.includes(symptom)) {
+                    diseaseSet.add(disease);
+                }
+            }
+        });
+
+//         // Convert the set to an array
+        const diseases = Array.from(diseaseSet);
+console.log(diseases);
+        res.status(200).json({
+            status: 200,
+            message: 'Diseases retrieved successfully',
+            data: diseases,
+        });
+    } catch (error) {
+        console.error('Error processing symptoms:', error);
+        res.status(500).json({
+            message: 'Error processing symptoms',
+            error: error.message,
+        });
+    }
+};
+
 module.exports = {
   registerIssue,
   viewIssues,
@@ -258,5 +324,7 @@ module.exports = {
   requireAuth,
   viewPendingIssues,
   viewPendingIssuesByUserId,
-  viewSupportedIssues
+  viewSupportedIssues,
+  getTypeFromDescription,
+  getDiseaseBySymptoms
 };

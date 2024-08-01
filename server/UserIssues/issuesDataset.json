@@ -1,0 +1,59 @@
+{
+    "Physical Abuse": [
+        "Hitting",
+        "Slapping",
+        "Punching",
+        "Kicking",
+        "Choking",
+        "Using weapons"
+    ],
+    "Emotional or Psychological Abuse": [
+        "Belittling",
+        "Gaslighting",
+        "Intimidation",
+        "Threats",
+        "Undermining self-esteem"
+    ],
+    "Sexual Abuse": [
+        "Rape",
+        "Forced sexual acts",
+        "Sexual coercion",
+        "Non-consensual activities"
+    ],
+    "Economic Abuse": [
+        "Financial control",
+        "Preventing employment",
+        "Exploiting financial dependence"
+    ],
+    "Verbal Abuse": [
+        "Insults",
+        "Derogatory comments",
+        "Yelling",
+        "Belittling"
+    ],
+    "Digital Abuse": [
+        "Stalking via social media",
+        "Threatening messages",
+        "Tracking movements"
+    ],
+    "Reproductive Abuse": [
+        "Forcing pregnancy",
+        "Coercing abortion",
+        "Sabotaging birth control"
+    ],
+    "Isolation": [
+        "Controlling social interactions",
+        "Limiting communication",
+        "Restricting transportation"
+    ],
+    "Stalking": [
+        "Following",
+        "Unwanted attention",
+        "Monitoring through technology"
+    ],
+    "Threats and Intimidation": [
+        "Violence threats",
+        "Harm threats",
+        "Coercion through fear"
+    ]
+}

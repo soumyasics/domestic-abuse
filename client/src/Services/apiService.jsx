@@ -1771,3 +1771,18 @@ export const viewChatBetweenUserAndSupp = async (id) => {
     throw error;
   }
 };
+
+export const getIssueType = async (id) => {
+  try {
+    console.log("descr in serv",id);
+    const symptomsArray = id.split(",").map(symptom => symptom.trim());
+
+    const response = await axios.post(`${API_BASE_URL}/getTypeFromDescription`,{description:symptomsArray});
+    console.log("Payment response:", response);
+    return response;
+  } catch (error) {
+    // Log detailed error information
+    console.error('Error getting payment:', error.response || error.message || error);
+    throw error;
+  }
+};
