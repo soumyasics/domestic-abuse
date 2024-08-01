@@ -85,8 +85,6 @@ function LegalProfessionalAddPayment() {
       const response = await addPayment(formValues);
       if (response.success) {
         toast.success('Payment requested successfully!');
-
-
         // Reset form or perform additional actions on success
       } else {
         toast.error(response.message);
@@ -140,7 +138,7 @@ function LegalProfessionalAddPayment() {
       </form>
       {
         appointments.length === 0 ? (
-          <p className="m-5 text-center fs-1 theme-purple">No new entries</p>
+          <p className="m-5 text-center fs-1 theme-purple">No new payments</p>
         ) : (
           <>
             <Table striped bordered hover className="appointments-table my-5">
