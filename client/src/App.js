@@ -246,6 +246,7 @@ function App() {
             <Route path='/legal-add-case/:id' element={[<LPNav />, <UserAddCase />]} />
             <Route path='/legal-add-payment/:id' element={[<LPNav />, <LegalProfessionalAddPayment />]} />
 
+
             {/* Legal Professional Paths  */}
             <Route path='/legal-professional-login' element={[<Navbar />, <LegalProfessionalLogin />]} />
             <Route path='/legal-professional-register' element={[<Navbar />, <LegalProfessionalRegister />]} />

@@ -44,7 +44,7 @@ function UserAddCase() {
     if (Object.keys(validationErrors).length === 0) {
       try {
         console.log(formData);
-        const response = await addCase(formData,id);
+        const response = await addCase(formData, id);
         console.log(response);
         if (response.success) {
           toast.success(response.message);
@@ -64,7 +64,7 @@ function UserAddCase() {
     try {
       const response = await viewCaseByissueId(id);
       setCaseDetails(response.data || []);
-      console.log("case da",response.data);
+      console.log("case da", response.data);
     } catch (error) {
       console.error('Error fetching appointments:', error);
       toast.error('Error fetching case details.');
@@ -109,7 +109,7 @@ function UserAddCase() {
               </div>
               <div className='col-8'>
                 <select
-                  id='status'  
+                  id='status'
                   name='status'
                   className='form-select form-select-lg'
                   value={formData.status}
@@ -169,35 +169,35 @@ function UserAddCase() {
           </div>
         </div>
       </form>
-      <h4 className=' mx-5'>Recent Case Details</h4>
+      <h4 className='mx-5'>Recent Case Details</h4>
       <Table striped bordered hover className="appointments-table my-5">
-                    <thead>
-                      <tr className="text-center">
-                        <th className='bg-purple text-white'>#</th>
-                        <th className='bg-purple text-white'>Case No</th>
-                        <th className='bg-purple text-white'>Case Status</th>
-                        <th className='bg-purple text-white'>Date</th>
-                        <th className='bg-purple text-white'>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody className='text-center'>
-                      {
-                        caseDetails&&caseDetails.length>0?(
-                      caseDetails.map((appointment, index) => {
-                        return (
-                          <tr key={appointment._id}>
-                            <td>{++index}</td>
-                            <td>{appointment._id}</td>
-                            <td>{appointment.status}</td>
-                            <td>{appointment.date.slice(0,10)}</td>
-                            <td>{appointment.description}</td>
-                          </tr>
-                        )
-                      })
-                    ):(<p></p>)
-                  }
-                    </tbody>
-                  </Table>
+        <thead>
+          <tr className="text-center">
+            <th className='bg-purple text-white'>#</th>
+            <th className='bg-purple text-white'>Case No</th>
+            <th className='bg-purple text-white'>Case Status</th>
+            <th className='bg-purple text-white'>Date</th>
+            <th className='bg-purple text-white'>Description</th>
+          </tr>
+        </thead>
+        <tbody className='text-center'>
+          {
+            caseDetails && caseDetails.length > 0 ? (
+              caseDetails.map((appointment, index) => {
+                return (
+                  <tr key={appointment._id}>
+                    <td>{++index}</td>
+                    <td>{appointment._id}</td>
+                    <td>{appointment.status}</td>
+                    <td>{appointment.date.slice(0, 10)}</td>
+                    <td>{appointment.description}</td>
+                  </tr>
+                )
+              })
+            ) : (<p></p>)
+          }
+        </tbody>
+      </Table>
     </div>
   );
 }
