@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import './SupporterAddSuggestion.css';
 import { FaDownload } from "react-icons/fa";
 import { addSuggestions, getSuggestionById, IMG_BASE_URL } from '../../../Services/apiService';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Table } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 function SupporterAddSuggestion() {
+  const navigate=useNavigate()
   const {id}=useParams()
   const [user, setUser] = useState({
     type: '',
@@ -76,7 +77,9 @@ const handleSuggestionChange = (event) => {
       [name]: checked
   }));
 };
-
+const navtoHome=()=>{
+  navigate('/supporter-home')
+}
   const handleSubmit =async (event) => {
     event.preventDefault();
     // Here you can add the logic to save the suggestion to the backend
@@ -85,7 +88,9 @@ const handleSuggestionChange = (event) => {
       const response = await addSuggestions(suggestion);
       console.log('Fetch supporter response:', response);
       if (response.success) {
-        alert("Suggestion Send Successfully")
+        toast.success("Suggestion Send Successfully")
+        setTimeout(navtoHome,700)
+
       } else {
           toast.error('not found');
       }
