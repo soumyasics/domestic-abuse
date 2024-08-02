@@ -30,7 +30,10 @@ function UserEditProfile() {
   const userId  = localStorage.getItem('userId')
 
   const [imagePreview, setImagePreview] = useState(demo);
-
+  const formatDate = (date) => {
+    const d = new Date(date);
+    return d.toISOString().split('T')[0];
+  };
   const validate = () => {
     const newErrors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -83,7 +86,7 @@ function UserEditProfile() {
     }
 
     if (user.image && !['image/jpeg', 'image/png', 'image/gif'].includes(user.image.type)) {
-      newErrors.image = 'Only image files (jpeg, png, gif) are allowed';
+      // newErrors.image = 'Only image files (jpeg, png, gif) are allowed';
       console.log("in im");
     }
 
@@ -94,14 +97,11 @@ function UserEditProfile() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await getUserById(userId); 
-        console.log(response.user);
+        const response = await getUserById(userId);
         if (response.success) {
-          setUser(response.user);
-          console.log(response.user.image.filename);
+          const formattedDob = response.user.dob ? formatDate(response.user.dob) : '';
+          setUser({ ...response.user, dob: formattedDob });
           setImagePreview(response.user.image.filename ? `${IMG_BASE_URL}/${response.user.image.filename}` : demo);
-
-          console.log(user);
         } else {
           toast.error(response.message);
         }
@@ -110,6 +110,7 @@ function UserEditProfile() {
         toast.error('Error fetching user data. Please try again.');
       }
     };
+  
 
     fetchUserData();
   }, []);
@@ -129,6 +130,34 @@ function UserEditProfile() {
       image: file,
     });
   };
+const navtoHome=()=>{
+  navigate('/user-home');
+}
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (!validate()) {
+  //     toast.error('Please fix the errors in the form.');
+  //     return;
+  //   }
+
+  //   setIsSubmitting(true);
+  //   try {
+  //     const response = await updateUser(userId, user); 
+  //     if (response.success) {
+  //       toast.success(response.message);
+  //       console.log('ggg');
+        
+  //     } else {
+  //       toast.error(response.message);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error updating user', error);
+  //     toast.error(error.response?.data?.message || 'Update failed. Please try again.');
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -136,13 +165,27 @@ function UserEditProfile() {
       toast.error('Please fix the errors in the form.');
       return;
     }
-
+  
     setIsSubmitting(true);
+    
+    // Create a new FormData object to handle file upload
+    const formData = new FormData();
+    formData.append('name', user.name);
+    formData.append('email', user.email);
+    formData.append('contact', user.contact);
+    formData.append('dob', user.dob);
+    formData.append('gender', user.gender);
+    formData.append('address', user.address);
+    formData.append('relation', user.relation);
+    formData.append('safetyPlan', user.safetyPlan);
+    if (user.image && user.image instanceof File) {
+      formData.append('image', user.image);
+    }
+  
     try {
-      const response = await updateUser(userId, user); 
+      const response = await updateUser(userId, formData); // Update API service to handle FormData
       if (response.success) {
         toast.success(response.message);
-        navigate('/user-home');
       } else {
         toast.error(response.message);
       }
@@ -153,7 +196,7 @@ function UserEditProfile() {
       setIsSubmitting(false);
     }
   };
-
+  
   return (
     <>
     {console.log(user.name)}

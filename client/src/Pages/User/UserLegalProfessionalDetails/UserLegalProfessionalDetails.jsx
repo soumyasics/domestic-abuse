@@ -149,7 +149,7 @@ const [imagePreview, setImagePreview] = useState(demo);
                 </a>
               </div> */}
             {/* </div> */}
-            <div className='text-center'>
+            {issueId=='undefined'?( ''):( <div className='text-center'>
               <Button
                 className="m-2 px-5 bg-purple text-white"
                 onClick={handleRequest}
@@ -163,6 +163,7 @@ const [imagePreview, setImagePreview] = useState(demo);
                 Cancel
               </Button>
             </div>
+          )}
           </div>
         </div>
       ) : (

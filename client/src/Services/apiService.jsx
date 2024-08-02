@@ -1182,7 +1182,7 @@ export const viewBlogsById = async (id) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/viewBlogsById/${id}`);
     console.log("in ",response);
-    return response.data;
+    return response;
   } catch (error) {
     console.error(' Error fetching Supporter List ', error);
     throw error;
