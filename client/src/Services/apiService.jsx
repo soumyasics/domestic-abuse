@@ -217,6 +217,8 @@ export const editSupportersById = async (id, supporterData) => {
 export const getSupporterById = async (supporterId) => {
   try {
       const response = await axios.post(`${API_BASE_URL}/viewSupportersById/${supporterId}`);
+      console.log(response);
+      
       return response.data;
   } catch (error) {
       console.error(`Error fetching supporter with ID ${supporterId}:`, error);
@@ -894,6 +896,18 @@ export const viewAllSafehouses=async()=>{
   try {
     console.log("in fun");
     const response = await axios.post(`${API_BASE_URL}/viewSafehouses`);
+    console.log("in fun",response);
+
+    return response;
+  } catch (error) {
+    console.error('Error fetching legal professional by ID:', error);
+    throw error;
+  }
+}
+export const viewAllSafehouseReqsByUser=async(id)=>{
+  try {
+    console.log("in fun");
+    const response = await axios.post(`${API_BASE_URL}/viewHouseReqsByUserId/${id}`);
     console.log("in fun",response);
 
     return response;

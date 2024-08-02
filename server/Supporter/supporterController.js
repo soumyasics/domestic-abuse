@@ -144,6 +144,8 @@ if(flag==0){
 
 // View Supporters by ID
 const viewSupportersById = (req, res) => {
+    console.log(req.params.id);
+    
     Supporters.findById({ _id: req.params.id })
         .exec()
         .then(data => {

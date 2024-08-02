@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './CounsellorViewBlogs.css';
-import { getBlogsByCounsellorId, IMG_BASE_URL } from '../../../Services/apiService'; // Assuming getBlogs is the function to fetch blogs from backend
+import { deleteBlogsById, getBlogsByCounsellorId, IMG_BASE_URL } from '../../../Services/apiService'; // Assuming getBlogs is the function to fetch blogs from backend
 import demo from '../../../Assets/blog-demo.png';
 import { FaRegCalendarAlt } from "react-icons/fa";
 import ReactPaginate from 'react-paginate';
@@ -13,17 +13,18 @@ function CounsellorViewBlogs() {
   const [currentPage, setCurrentPage] = useState(0);
   const blogsPerPage = 3;
 const navigate=useNavigate()
+const fetchBlogs = async () => {
+  try {
+    const response = await getBlogsByCounsellorId(localStorage.getItem('counsellorId'));
+    console.log("bol",response);
+    setBlogs(response.data);
+  } catch (error) {
+    console.error('Error fetching blogs:', error);
+  }
+};
   useEffect(() => {
     // Fetch blogs from backend
-    const fetchBlogs = async () => {
-      try {
-        const response = await getBlogsByCounsellorId(localStorage.getItem('counsellorId'));
-        console.log("bol",response);
-        setBlogs(response.data);
-      } catch (error) {
-        console.error('Error fetching blogs:', error);
-      }
-    };
+
 
     fetchBlogs();
   }, []);
@@ -31,13 +32,14 @@ const navigate=useNavigate()
   const handlePageClick = (data) => {
     setCurrentPage(data.selected);
   };
- const deleteBlogsById=(id)=>{
+ const deleteBlogsById1=async(id)=>{
     try {
-        const response =  deleteBlogsById(id);
+        const response =await  deleteBlogsById(id);
         console.log('del supporter response:', response);
 
         if (response.status==200) {
             toast.success('Blog Removed successfully');
+fetchBlogs()
             navigate('/counsellor-view-blogs');
         } else {
             toast.success(response.message || 'Blog updated successfully');
@@ -92,7 +94,7 @@ const navigate=useNavigate()
           <div className='row m-5'>
             <div className='col text-end'>
               <span><Link to={`/counsellor-edit-blogs/${blog._id}`}><button className='btn rounded bg-purple px-5 m-2 text-white'>Edit</button></Link></span>
-              <span><button className='btn rounded bg-purple px-5 m-2 text-white' onClick={()=>{deleteBlogsById(blog._id)}}>Remove</button></span>
+              <span><button className='btn rounded bg-purple px-5 m-2 text-white' onClick={()=>{deleteBlogsById1(blog._id)}}>Remove</button></span>
             </div>
           </div>
         </div>
