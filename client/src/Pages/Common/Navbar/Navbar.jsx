@@ -66,10 +66,10 @@ function Navbar() {
                             )}
                         </li> */}
                         <li className="nav-item">
-                            <Link className="nav-link mx-3 theme-purple fw-semibold" to="/">About Us</Link>
+                            <Link className="nav-link mx-3 theme-purple fw-semibold" to="/about-us">About Us</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link mx-3 theme-purple fw-semibold" to="/">Our Services</Link>
+                            <Link className="nav-link mx-3 theme-purple fw-semibold" to="/services">Our Services</Link>
                         </li>
                         {/* {isLoggedIn ? (
                             <>

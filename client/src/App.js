@@ -100,6 +100,8 @@ import UserViewCaseUpdates from './Pages/User/UserLegalProfessionalDetails/UserV
 import UserViewCaseDetailsDetailed from './Pages/User/UserLegalProfessionalDetails/UserViewCaseDetailsDetailed';
 import AdminViewUserDetailed from './Pages/Admin/AdminUserViewAll/AdminViewUserDetailed';
 import AdminviewAllBlogs from './Pages/Admin/AdminUserViewAll/AdminviewAllBlogs';
+import OurServices from './Pages/Common/OurServices/OurServices';
+import AboutUs from './Pages/Common/AboutUs/AboutUs';
 
 function App() {
   return (
@@ -109,6 +111,10 @@ function App() {
           <Routes>
             {/* Common Paths */}
             <Route path="/" element={[<Navbar />, <Home />]} />
+            <Route path="/services" element={[<Navbar />, <OurServices />]} />
+            <Route path="/about-us" element={[<Navbar />, <AboutUs />]} />
+
+
             {/* User Paths */}
             <Route path='/user-login' element={[<Navbar />, <UserLogin />]} />
             <Route path='/user-register' element={[<Navbar />, <UserRegister />]} />
