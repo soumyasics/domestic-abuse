@@ -62,7 +62,7 @@ function UserViewSuggestionDetails() {
         sug1: response.data.sug1,
         sug2: response.data.sug2,
         sug3: response.data.sug3,
-        // suppId:response.data.supporterId._id?response.data.supporterId._id:''
+        suppId:response.data.supporterId._id?response.data.supporterId._id:''
       });
       console.log("Updated suggestion state:", {
         sug1: response.data.sug1,
