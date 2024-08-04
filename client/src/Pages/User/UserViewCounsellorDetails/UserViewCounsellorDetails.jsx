@@ -187,13 +187,13 @@ const navtoHome=()=>{
                                 </div>
                             </div>
                         </div> */}
-                        <div className='row m-5'>
+                       {issueId=='undefined'?( ''):(<div className='row m-5'>
                             <div className='col text-end'>
                                 <button type="submit" className="btn bg-theme btn-lg fw-bolder px-5 text-white rounded-4 mx-5" disabled={isSubmitting}>
                                     {isSubmitting ? 'Booking...' : 'Book Now'}
                                 </button>
                             </div>
-                        </div>
+                        </div>)}
                     </form>
                 </div>
             </div>

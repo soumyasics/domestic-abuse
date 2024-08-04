@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './UserViewRequestHistory.css';
 import safehouseDemo from '../../../Assets/ADMIN VIEW DETAILS.png';
-import { IMG_BASE_URL, viewAllSafehouses } from '../../../Services/apiService';
+import { IMG_BASE_URL, viewAllSafehouseReqsByUser, viewAllSafehouses } from '../../../Services/apiService';
 import ReactPaginate from 'react-paginate';
 import {  useNavigate } from 'react-router-dom';
 import { FaArrowLeftLong } from "react-icons/fa6";
@@ -15,7 +15,7 @@ function UserViewRequestHistory() {
     // Fetch safehouses data from the backend
     const fetchSafehouses = async () => {
         try {
-            const response = await viewAllSafehouses();
+            const response = await viewAllSafehouseReqsByUser(localStorage.getItem('userId'));
             console.log('Response:', response); // Log the response to debug
             if (response.status === 200) {
                 setSafehouses(response.data.data || []);
@@ -71,32 +71,32 @@ function UserViewRequestHistory() {
                                     </div>
                                     <div className='row m-3'>
                                         <div className='col'>
-                                            <p className='card-text'>Shared by {safehouse.capacity}</p>
+                                            <p className='card-text'>Shared by {safehouse.houseId.capacity}</p>
                                         </div>
                                     </div>
                                     <div className='row m-3'>
                                         <div className='col'>
-                                            <p className='card-text'>{safehouse.landmark ? safehouse.landmark : 'Landmark'}</p>
+                                            <p className='card-text'>{safehouse.houseId.landmark ? safehouse.houseId.landmark : 'Landmark'}</p>
                                         </div>
                                     </div>
                                     <div className='row m-3'>
                                         <div className='col'>
-                                            <p className='card-text'><b>{safehouse.rent}</b>/ Per Month</p>
+                                            <p className='card-text'><b>{safehouse.houseId.rent}</b>/ Per Month</p>
                                         </div>
                                     </div>
                                     <div className='row m-3'>
                                         <div className='col'>
-                                            <p className='card-text'>{safehouse.description ? safehouse.description : 'Description not available'}</p>
+                                            <p className='card-text'>{safehouse.houseId.description ? safehouse.houseId.description : 'Description not available'}</p>
                                         </div>
                                     </div>
-                                    <div className='row m-3'>
+                                    {/* <div className='row m-3'>
                                         <div className='col'>
                                             <p className='card-text'>{safehouse.paymentStatus ? safehouse.paymentStatus : 'Payment Status Unavailable'}</p>
                                         </div>
-                                    </div>
+                                    </div> */}
                                     <div className='row m-3'>
                                         <div className='col'>
-                                            <p className='card-text'>{safehouse.supporterStatus ? safehouse.supporterStatus : 'Supporter Status Unavailable'}</p>
+                                            <p className='card-text'>{safehouse.status ? 'Supporter Status : '+safehouse.status : 'Supporter Status Unavailable'}</p>
                                         </div>
                                     </div>
                                 </div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './LegalProfessionalEditBlogs.css';
 import demo from '../../../Assets/blog-demo.png';
 import { PiPencilDuotone } from "react-icons/pi";
-import { useParams,Link,useNavigate } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {  editBlogsById, IMG_BASE_URL, viewBlogsById } from '../../../Services/apiService';
@@ -14,19 +14,19 @@ function LegalProfessionalEditBlogs() {
         content: '',
         image: {filename:''},
     });
-
+    const fetchBlogs = async () => {
+        try {
+          const response = await viewBlogsById(id);
+          console.log("bol",response);
+          setFormValues(response.data.data);
+        } catch (error) {
+          console.error('Error fetching blogs:', error);
+        }
+      };
     
   useEffect(() => {
     // Fetch blogs from backend
-    const fetchBlogs = async () => {
-      try {
-        const response = await viewBlogsById(id);
-        console.log("bol",response);
-        setFormValues(response.data);
-      } catch (error) {
-        console.error('Error fetching blogs:', error);
-      }
-    };
+
 
     fetchBlogs();
   }, []);
@@ -63,16 +63,18 @@ const navigate=useNavigate()
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit =async (e) => {
        e.preventDefault()
              
                 try {
-                    const response =  editBlogsById(id,formValues);
+                    const response =await  editBlogsById(id,formValues);
                     console.log('Edit LP response:', response);
     
                     if (response.status==200) {
                         toast.success('Blog updated successfully');
+                        // fetchBlogs()
                         navigate('/legal-professional-view-blogs');
+                       
                     } else {
                         toast.success(response.message || 'Blog updated successfully');
                     }
@@ -166,11 +168,9 @@ const navigate=useNavigate()
                     <div className='row m-5'>
                         <div className='col-4 text-center d-flex align-items-center'></div>
                         <div className='col-4 text-end'>
-                            <button type='submit' className='btn text-white bg-purple py-2 px-5 ' onClick={handleSubmit}>Update</button>
+                            <button type='submit' className='btn text-white bg-purple py-2 px-5 '>Update</button>
                         </div>
-                        <div className='col-4 text-end'>
-                            <button type='button' className='btn text-white bg-purple py-2 px-5 ' >Cancel</button>
-                        </div>
+                       
                     </div>
                 </form>
             </div>

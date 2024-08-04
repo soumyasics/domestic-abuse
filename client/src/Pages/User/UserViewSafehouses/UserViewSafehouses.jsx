@@ -77,7 +77,6 @@ const reqHouse=async(id)=>{
         if (response.data.status==200) {
           toast.success('Request Send to Supporter');
           
-          navigate('/user-home');
         } else {
           toast.error(response.data.msg);
         }
@@ -93,8 +92,8 @@ const reqHouse=async(id)=>{
                     <FaArrowLeftLong size={35} className='cursor-pointer' onClick={() => navigate(-1)} />
                 </div>
                 <div className='col text-end'>
-                    <button className='btn bg-purple text-white rounded-4 mx-5'>Request History</button>
-
+                  <Link to={`/user-view-request-history`}>  <button className='btn bg-purple text-white rounded-4 mx-5'>Request History</button>
+                  </Link>
                 </div>
                 <div className='col text-start'>
                     <div className='input-group'>

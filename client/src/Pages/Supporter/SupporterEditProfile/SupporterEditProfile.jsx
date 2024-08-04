@@ -18,7 +18,7 @@ function SupporterEditProfile() {
         contact: '',
         password: '',
         organization: '',
-        image: null,
+        image: {filename:''},
     });
     const [imagePreview, setImagePreview] = useState(demo);
     const [errors, setErrors] = useState({});
@@ -31,7 +31,7 @@ function SupporterEditProfile() {
             if (supporterId) {
                 try {
                     const response = await getSupporterById(supporterId);
-                    console.log('Fetch supporter response:', response);
+                    console.log('Fetch supporter response:',supporterId, response);
                     if (response.status === 200) {
                         setSupporter(response.data);
                         setImagePreview(response.data.image ? `${IMG_BASE_URL}/${response.data.image.filename}` : demo);

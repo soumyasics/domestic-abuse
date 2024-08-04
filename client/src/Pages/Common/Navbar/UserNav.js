@@ -91,7 +91,6 @@ function UserNav() {
                                     <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-view-issues">View Issues</Link></li>
 
                                     <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-view-suggestions">View Suggestions</Link></li>
-                                    <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-add-case">Add A Case</Link></li>
 
                                 </ul>
                             </li>

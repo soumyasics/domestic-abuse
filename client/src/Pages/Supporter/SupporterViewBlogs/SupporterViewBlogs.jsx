@@ -1,28 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import './SupporterViewBlogs.css';
-import { IMG_BASE_URL,getBlogsBySuppId} from '../../../Services/apiService'; // Assuming getBlogs is the function to fetch blogs from backend
+import { IMG_BASE_URL,deleteBlogsById,getBlogsBySuppId} from '../../../Services/apiService'; // Assuming getBlogs is the function to fetch blogs from backend
 import demo from '../../../Assets/blog-demo.png';
 import { FaRegCalendarAlt } from "react-icons/fa";
 import ReactPaginate from 'react-paginate';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast} from 'react-toastify';
+import { toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 function SupporterViewBlogs() {
   const [blogs, setBlogs] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const blogsPerPage = 3;
 const navigate=useNavigate()
+const fetchBlogs = async () => {
+  try {
+    const response = await getBlogsBySuppId(localStorage.getItem('supporterId'));
+    console.log("bol",response);
+    setBlogs(response.data);
+  } catch (error) {
+    console.error('Error fetching blogs:', error);
+  }
+};
   useEffect(() => {
     // Fetch blogs from backend
-    const fetchBlogs = async () => {
-      try {
-        const response = await getBlogsBySuppId(localStorage.getItem('supporterId'));
-        console.log("bol",response);
-        setBlogs(response.data);
-      } catch (error) {
-        console.error('Error fetching blogs:', error);
-      }
-    };
+   
 
     fetchBlogs();
   }, []);
@@ -30,16 +31,19 @@ const navigate=useNavigate()
   const handlePageClick = (data) => {
     setCurrentPage(data.selected);
   };
- const deleteBlogsById=(id)=>{
+ const deleteBlogsById1=async(id)=>{
     try {
-        const response =  deleteBlogsById(id);
+        const response =await deleteBlogsById(id);
         console.log('del supporter response:', response);
 
         if (response.status==200) {
             toast.success('Blog Removed successfully');
-            navigate('/supporter-view-blogs');
-        } else {
-            toast.success(response.message || 'Blog updated successfully');
+            fetchBlogs();
+
+        } 
+        else{
+          toast.error('Blog cannot be removed');
+
         }
     } catch (error) {
         console.error('Error updating profile:', error);
@@ -91,7 +95,7 @@ const navigate=useNavigate()
           <div className='row m-5'>
             <div className='col text-end'>
               <span><Link to={`/supporter-edit-blogs/${blog._id}`}><button className='btn rounded bg-purple px-5 m-2 text-white'>Edit</button></Link></span>
-              <span><button className='btn rounded bg-purple px-5 m-2 text-white' onClick={()=>{deleteBlogsById(blog._id)}}>Remove</button></span>
+              <span><button className='btn rounded bg-purple px-5 m-2 text-white' onClick={()=>{deleteBlogsById1(blog._id)}}>Remove</button></span>
             </div>
           </div>
         </div>
@@ -102,6 +106,7 @@ const navigate=useNavigate()
 
   return (
     <div className='container-fluid'>
+      <ToastContainer/>
       <div className='row m-5 mb-2'>
         <div className='col text-center theme-purple'>
           <h5 className=''>Supporter Blogs</h5>

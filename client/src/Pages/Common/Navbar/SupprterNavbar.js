@@ -109,7 +109,7 @@ function SupprterNavbar() {
                                 </a>
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown4">
                                     <li><Link className="dropdown-item theme-purple fw-semibold" to="/supporter-edit-profile">Profile View</Link></li>
-                                    <li><Link className="dropdown-item theme-purple fw-semibold" to="#">Change Password</Link></li>
+                                    {/* <li><Link className="dropdown-item theme-purple fw-semibold" to="#">Change Password</Link></li> */}
                                     <li><button className="dropdown-item theme-purple fw-semibold" to="#" onClick={handleLogout}>Logout</button></li>
                                 </ul>
                             </li>
