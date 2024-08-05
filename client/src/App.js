@@ -131,7 +131,6 @@ function App() {
             <Route path='/user-edit-issue/:id' element={[<UserNav />, <UserEditIssue />]} />
             <Route path='/user-view-issue/:id' element={[<UserNav />, <UserViewIssue />]} />
             <Route path='/user-view-suggestions' element={[<UserNav />, <UserViewSuggestions />]} />
-
             <Route path='/user-view-issues' element={[<UserNav />, <UserViewIssues />]} />
             <Route path='/user-view-suggestion-details/:id' element={[<UserNav />, <UserViewSuggestionDetails />]} />
             <Route path='/user-legal-professional-case-details' element={[<UserNav />, <UserLegalProfessionalCaseDetails />]} />
@@ -149,13 +148,11 @@ function App() {
             <Route path='/user-view-all-counsellor-details/:cid/:issueId' element={[<UserNav/>,<UserViewCounsellorDetails/>]} />
             <Route path='/user-view-all-legal-professionals/:id' element={[<UserNav/>,<UserViewLegalProfessionals/>]} />
             <Route path='/user-view-all-legal-professionals' element={[<UserNav/>,<UserViewLegalProfessionals/>]} />
-
             <Route path='/user-legal-professional-detail/:issueId/:advId' element={[<UserNav/>,<UserLegalProfessionalDetails/>]} />
             <Route path='/user-add-issue' element={[<UserNav/>,<UserAddIssue/>]} />
             <Route path='/user-edit-issue/:id' element={[<UserNav/>,<UserEditIssue/>]} />
             <Route path='/user-view-issue/:id' element={[<UserNav/>,<UserViewIssue/>]} />
             <Route path='/user-view-suggestions' element={[<UserNav/>,<UserViewSuggestions/>]} />
-
             <Route path='/user-view-issues' element={[<UserNav/>,<UserViewIssues/>]} />
             <Route path='/user-view-suggestion-details/:id' element={[<UserNav/>,<UserViewSuggestionDetails/>]} />
             <Route path='/user-add-case' element={[<UserNav/>,<UserAddCase/>]} />
@@ -167,7 +164,6 @@ function App() {
             <Route path='/user-view-request-history' element={[<UserNav/>,<UserViewRequestHistory/>]} />
             <Route path='/user-chat-legal-professional/:id' element={[<UserNav/>,<UserChatLegalProfessional/>]} />
             <Route path='/user-chat-supporter/:id/:suppId' element={[<UserNav/>,<UserChatSupporter/>]} />
-
             <Route path='/user-view-payments' element={[<UserNav/>,<UserViewPaymentReqs/>]} />
             <Route path='/user-view-lps' element={[<UserNav/>,<UserViewLPs/>]} />
             <Route path='/user-view-Case-Updates' element={[<UserNav/>,<UserViewCaseUpdates/>]} />

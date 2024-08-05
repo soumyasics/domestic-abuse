@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './SupporterAddBlogs.css';
 import { addBlog } from '../../../Services/apiService';
-import { toast } from 'react-toastify';
+import { toast,ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 function SupporterAddBlogs() {
@@ -80,6 +80,7 @@ function SupporterAddBlogs() {
 
     return (
         <div className='container-fluid'>
+        <ToastContainer/>
             <div className='row m-5'>
                 <div className='col text-center'>
                     <h3 className='theme-purple'>Add Blogs</h3>
@@ -146,7 +147,7 @@ function SupporterAddBlogs() {
                                 <button type='submit' className='btn text-white bg-purple py-2 px-5 '>Add Blogs</button>
                             </div>
                             <div className='col-4 text-end'>
-                                <button type='button' className='btn text-white bg-purple py-2 px-5 '>Cancel</button>
+                                <button type='button' className='btn text-white bg-purple py-2 px-5 ' onClick={()=>{navigate(-1);}}>Cancel</button>
                             </div>
                         </div>
                     </form>
