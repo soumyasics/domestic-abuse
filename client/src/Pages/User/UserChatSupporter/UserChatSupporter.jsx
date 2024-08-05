@@ -10,36 +10,38 @@ import demo from '../../../Assets/supp-edit-profile.png';
 function UserChatSupporter() {
   const [supporter, setSupporter] = useState({});
 
-  const { id,suppId } = useParams();
+  const { id, suppId } = useParams();
   const userId = localStorage.getItem("userId");
-    const [patient, setPatient] = useState({});
-    const [imagePreview, setImagePreview] = useState(demo);
+  const [patient, setPatient] = useState({});
+  const [imagePreview, setImagePreview] = useState(demo);
 
-    const [mesg, setMesg] = useState({
-      msg: "",
-      from: "user",
-      suppId: suppId,
-      userId: userId,
-      to:'supporter'
-     
+ 
+
+  const [mesg, setMesg] = useState({
+    msg: "",
+    from: "user",
+    suppId: suppId,
+    userId: userId,
+    to: 'supporter'
+
+  });
+  const [data, setData] = useState([]);
+
+  const handleChange = (e) => {
+    setMesg({
+      ...mesg,
+      [e.target.name]: e.target.value,
     });
-    const [data, setData] = useState([]);
-
-    const handleChange = (e) => {
-      setMesg({
-        ...mesg,
-        [e.target.name]: e.target.value,
-      });
-    };
+  };
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const response = await viewChatBetweenUserAndSupp({
-          suppId:suppId,
-          userId:userId
-        }); 
+          suppId: suppId,
+          userId: userId
+        });
         console.log(response);
-        if (response.data.status==200) {
+        if (response.data.status == 200) {
           setData(response.data.data);
           // setImagePreview(response.data.image.filename ? `${IMG_BASE_URL}/${response.data.image.filename}` : demo);
 
@@ -62,7 +64,7 @@ function UserChatSupporter() {
   // });
 
   // useEffect(() => {
-   
+
   // }, [chat]);
 
   const chatBodyRef = useRef(null);
@@ -75,25 +77,25 @@ function UserChatSupporter() {
 
   useEffect(() => {
     const fetchSupporterData = async () => {
-        if (suppId) {
-            try {
-                const response = await getSupporterById(suppId);
-                console.log('Fetch supporter response:', response);
-                if (response.status === 200) {
-                    setSupporter(response.data);
-                    setImagePreview(response.data.image ? `${IMG_BASE_URL}/${response.data.image.filename}` : demo);
-                } else {
-                    toast.error('Supporter not found');
-                }
-            } catch (error) {
-                console.error('Error fetching supporter data:', error);
-                toast.error('An error occurred while fetching the supporter data');
-            }
+      if (suppId) {
+        try {
+          const response = await getSupporterById(suppId);
+          console.log('Fetch supporter response:', response);
+          if (response.status === 200) {
+            setSupporter(response.data);
+            setImagePreview(response.data.image ? `${IMG_BASE_URL}/${response.data.image.filename}` : demo);
+          } else {
+            toast.error('Supporter not found');
+          }
+        } catch (error) {
+          console.error('Error fetching supporter data:', error);
+          toast.error('An error occurred while fetching the supporter data');
         }
+      }
     };
 
     fetchSupporterData();
-}, []);
+  }, []);
 
 
   const [newMessage, setNewMessage] = useState('');
@@ -105,20 +107,20 @@ function UserChatSupporter() {
         ...mesg,
         timestamp: timestamp
       };
-  
-      await chatting(newMessage); 
-      setData((prevData) => [...prevData, newMessage]); 
+
+      await chatting(newMessage);
+      setData((prevData) => [...prevData, newMessage]);
       setMesg({
         ...mesg,
         msg: "",
-        timestamp: '' 
+        timestamp: ''
       });
     } catch (error) {
       console.error("Error sending message", error);
       toast.error('Error sending message. Please try again.');
     }
   };
- 
+
   return (
     <Container fluid className="chat-container p-5">
       <Row className="chat-header">
@@ -137,7 +139,7 @@ function UserChatSupporter() {
         </Col>
       </Row>
 
-      <Row className="chat-content flex-grow-1">
+      {/* <Row className="chat-content flex-grow-1">
         {console.log(data)}
         {data.map((message, index) => (
           <div key={index} className={`chat-bubble ${message.to} w-50 m-4`}>
@@ -145,7 +147,19 @@ function UserChatSupporter() {
             <div className="chat-timestamp">{message.timestamp}</div>
           </div>
         ))}
-      </Row>
+      </Row> */}
+<div className='row'>
+  <div className="chat-content flex-grow-1" ref={chatBodyRef}>
+        {console.log(data)}
+        {data.map((message, index) => (
+          <div key={index} className={`chat-bubble ${message.to} w-50 m-4`} >
+            {message.msg}
+            <div className="chat-timestamp">{message.timestamp}</div>
+          </div>
+        ))}
+      </div>
+</div>
+      
 
       <Row className="chat-footer">
         <Col>

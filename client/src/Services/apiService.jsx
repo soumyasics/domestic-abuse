@@ -138,7 +138,17 @@ export const viewSupporters = async () => {
     throw error;
   }
 };
-
+//Api for View all supporters
+export const resetPwdLP = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/resetPassword/${id}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
 //Api for Removing Supporters by Id
 export const removeSupportersById = async (id) => {
   try {

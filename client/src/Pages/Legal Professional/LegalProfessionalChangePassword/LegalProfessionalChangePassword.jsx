@@ -3,6 +3,7 @@ import './LegalProfessionalChangePassword.css';
 import { useNavigate } from 'react-router-dom';
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import { toast } from 'react-toastify';
+import { resetPasswordLegalProfessional, resetPwdLP } from '../../../Services/apiService';
 
 function LegalProfessionalChangePassword() {
     const [changePassword, setChangePassword] = useState({
@@ -61,13 +62,13 @@ function LegalProfessionalChangePassword() {
 
         setIsSubmitting(true);
         try {
-            //   const response = await registerLegalProfessional(legalProfessional);
-            //   if (response.success) {
-            //     toast.success(response.message);
-            //     navigate('/legal-professional-login');
-            //   } else {
-            //     toast.error(response.message);
-            //   }
+              const response = await resetPwdLP(localStorage.getItem('lpId'));
+              if (response.success) {
+                toast.success(response.message);
+                // navigate('/legal-professional-login');
+              } else {
+                toast.error(response.message);
+              }
         } catch (error) {
             console.error('Error while Changing Password', error);
             toast.error(error.response?.data?.message || 'Password Change failed. Please try again.');
