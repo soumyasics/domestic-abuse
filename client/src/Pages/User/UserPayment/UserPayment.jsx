@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './UserPayment.css';
 import { FaLock } from "react-icons/fa";
 import { useParams } from 'react-router-dom';
-import { addPaymentByUser } from '../../../Services/apiService';
+import { addPaymentByUser, viewPaymentsByIdforUser } from '../../../Services/apiService';
 import { toast } from 'react-toastify';
 
 function UserPayment() {
     const [errors, setErrors] = useState({});
+    const [paymentData, setpaymentData] = useState({
+        payment: 0,
+        
+    });
     const [formValues, setFormValues] = useState({
         cardNumber: '',
         expiryMonth: '',
@@ -14,6 +18,27 @@ function UserPayment() {
         cv: ''
     });
 const {id}=useParams()
+const [loading, setLoading] = useState(true);
+
+const fetchLegalProfessionals = useCallback(async () => {
+    try {
+      const response = await viewPaymentsByIdforUser(id);
+      console.log(response.data);
+      
+      setpaymentData(response.data);
+    } catch (error) {
+      console.error('Error fetching legal professionals:', error);
+      toast.error('Error fetching legal professionals.');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchLegalProfessionals();
+  }, [fetchLegalProfessionals]);
+
+ 
     const validate = () => {
         const errors = {};
 
@@ -158,8 +183,8 @@ const {id}=useParams()
                         </div>
                         <div className='row m-5 mb-1 user-payment-final-payment text-center rounded-2'>
                             <div className='col'>
-                                <h3 className='text-white text-end d-inline-block py-2 ms-5'>Final Payment </h3>
-                                <span className='bg-white rounded-4 px-2 m-3 theme-purple float-end'> &#8377; 8000</span>
+                                <h3 className='text-white text-end d-inline-block py-2 ms-5'>Payable Amount </h3>
+                                <span className='bg-white rounded-4 px-2 m-3 theme-purple float-end'> &#8377;{paymentData.payment}</span>
                             </div>
                         </div>
                         <div className='row mb-2'>
