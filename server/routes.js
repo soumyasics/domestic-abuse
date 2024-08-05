@@ -73,6 +73,7 @@ router.post('/approveLegalProfessionalById/:id', LegalProfessional.approveLegalP
 router.post('/deleteLegalProfessionalById/:id', LegalProfessional.deleteLegalProfessionalById);
 router.post('/deActivateLegalProfessionalById/:id', LegalProfessional.deActivateLegalProfessionalById);
 router.post('/activateLegalProfessionalById/:id', LegalProfessional.activateLegalProfessionalById);
+router.post('/resetPassword/:id', LegalProfessional.resetPassword);
 
 
 

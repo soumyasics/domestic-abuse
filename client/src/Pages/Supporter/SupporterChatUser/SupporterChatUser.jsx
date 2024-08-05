@@ -143,7 +143,7 @@ const handleSendMessage = async () => {
           <p className="mb-0">{user?.name || 'Supporter Name'}</p>
         </Col>
       </Row>
-      <Row className="chat-content flex-grow-1">
+      {/* <Row className="chat-content flex-grow-1">
   <div className="message-container">
     {data.map((message, index) => (
       <div
@@ -155,7 +155,18 @@ const handleSendMessage = async () => {
       </div>
     ))}
   </div>
-</Row>
+</Row> */}
+<div className='row'>
+  <div className="chat-content flex-grow-1" ref={chatBodyRef}>
+        {console.log(data)}
+        {data.map((message, index) => (
+          <div key={index} className={`chat-bubble ${message.from} w-50 m-4`} >
+            {message.msg}
+            <div className="chat-timestamp">{message.timestamp}</div>
+          </div>
+        ))}
+      </div>
+</div>
 
       <Row className="chat-footer">
         <Col>

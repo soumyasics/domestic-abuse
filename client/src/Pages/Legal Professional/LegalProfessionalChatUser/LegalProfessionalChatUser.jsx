@@ -105,14 +105,26 @@ function LegalProfessionalChatUser() {
         </Col>
       </Row>
 
-      <Row className="chat-content flex-grow-1" ref={chatBodyRef}>
+      {/* <Row className="chat-content flex-grow-1" ref={chatBodyRef}>
         {messages.map((message, index) => (
           <div key={index} className={`chat-bubble ${message.from} w-50 m-4`}>
             {message.msg}
             <div className="chat-timestamp">{message.timestamp}</div>
           </div>
         ))}
-      </Row>
+      </Row> */}
+
+<div className='row'>
+  <div className="chat-content flex-grow-1" ref={chatBodyRef}>
+        {console.log(messages)}
+        {messages.map((message, index) => (
+          <div key={index} className={`chat-bubble ${message.from} w-50 m-4`} >
+            {message.msg}
+            <div className="chat-timestamp">{message.timestamp}</div>
+          </div>
+        ))}
+      </div>
+</div>
 
       <Row className="chat-footer">
         <Col>
