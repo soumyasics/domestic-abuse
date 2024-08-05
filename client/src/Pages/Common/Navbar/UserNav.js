@@ -113,6 +113,8 @@ function UserNav() {
                                 </a>
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown3">
                                     <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-edit-profile">Profile View</Link></li>
+                                    <li><Link className="dropdown-item theme-purple fw-semibold" to="/user-reset-pwd">Reset Password</Link></li>
+
                                     <li><button className="dropdown-item theme-purple fw-semibold" onClick={handleLogout}>Logout</button></li>
                                   
                                 </ul>

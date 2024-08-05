@@ -199,10 +199,11 @@ const resetPassword = async (req, res) => {
     await Supporters.findById({ _id: req.params.id })
         .exec()
         .then(data => {
-            if (data.password === req.body.oldpassword)
+            if (data.password === req.body.oldPassword)
                 pwdMatch = true;
         })
         .catch(err => {
+            console.log(err);
             res.status(500).json({
                 status: 500,
                 msg: "Data not Updated",
@@ -212,7 +213,7 @@ const resetPassword = async (req, res) => {
 
     if (pwdMatch) {
         await Supporters.findByIdAndUpdate({ _id: req.params.id }, {
-            password: req.body.newpassword
+            password: req.body.newPassword
         })
             .exec()
             .then(data => {
@@ -228,6 +229,8 @@ const resetPassword = async (req, res) => {
                     });
             })
             .catch(err => {
+                console.log(err);
+                
                 res.status(500).json({
                     status: 500,
                     msg: "Data not Updated",

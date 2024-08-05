@@ -208,11 +208,12 @@ const forgotPassword = (req, res) => {
 // Reset Password for Legal Professional
 const resetPassword = async (req, res) => {
   let pwdMatch = false;
+console.log(req.body);
 
   await LegalProfessionals.findById(req.params.id)
     .exec()
     .then(data => {
-      if (data.password === req.body.oldpassword) {
+      if (data.password === req.body.oldPassword) {
         pwdMatch = true;
       }
     })
@@ -226,7 +227,7 @@ const resetPassword = async (req, res) => {
 
   if (pwdMatch) {
     await LegalProfessionals.findByIdAndUpdate(req.params.id, {
-      password: req.body.newpassword
+      password: req.body.newPassword
     })
       .exec()
       .then(data => {
