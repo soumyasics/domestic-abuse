@@ -1840,3 +1840,15 @@ export const getIssueType = async (id) => {
     throw error;
   }
 };
+
+export const viewPaymentsByIdforUser = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewPaymentsById/${id}`);
+    console.log("Payment response:", response);
+    return response.data;
+  } catch (error) {
+    // Log detailed error information
+    console.error('Error adding payment:', error.response || error.message || error);
+    throw error;
+  }
+};
