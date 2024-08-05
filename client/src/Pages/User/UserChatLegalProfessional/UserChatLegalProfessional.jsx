@@ -125,14 +125,26 @@ function UserChatLegalProfessional() {
         </Col>
       </Row>
 
-      <Row className="chat-content flex-grow-1" ref={chatBodyRef}>
+      {/* <Row className="chat-content flex-grow-1" ref={chatBodyRef}>
         {data.map((message, index) => (
           <div key={index} className={`chat-bubble ${message.from}`}>
             {message.msg}
             <div className="chat-timestamp">{message.timestamp}</div>
           </div>
         ))}
-      </Row>
+      </Row> */}
+
+<div className='row'>
+  <div className="chat-content flex-grow-1" ref={chatBodyRef}>
+        {console.log(data)}
+        {data.map((message, index) => (
+          <div key={index} className={`chat-bubble ${message.to} w-50 m-4`} >
+            {message.msg}
+            <div className="chat-timestamp">{message.timestamp}</div>
+          </div>
+        ))}
+      </div>
+</div>
 
       <Row className="chat-footer">
         <Col>
@@ -145,7 +157,7 @@ function UserChatLegalProfessional() {
               placeholder="Type a message"
               className="me-2"
             />
-            <span className='d-flex align-items-center cursor-pointer' onClick={handleSendMessage}>
+            <span className='d-flex align-items-center cursor-pointer'  onClick={handleSendMessage}>
               <IoMdSend size={30} />
             </span>
           </Form>

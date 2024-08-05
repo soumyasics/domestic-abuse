@@ -29,7 +29,13 @@
   padding: 10px;
   display: flex;
   flex-direction: column;
-  background-color: #E9ECEF; /* Light gray background */
+  background-color: #E9ECEF; 
+  min-height: 50vh;
+  max-height:400px ;
+}
+
+.chat-content::-webkit-scrollbar{
+  display: none;
 }
 
 .message-container {
@@ -48,6 +54,11 @@
 }
 
 .chat-bubble.supporter {
+  background-color: #FCECDE;
+  color: #501843;
+  align-self: flex-end; /* Align supporter messages to the right */
+}
+.chat-bubble.lp {
   background-color: #FCECDE;
   color: #501843;
   align-self: flex-end; /* Align supporter messages to the right */
