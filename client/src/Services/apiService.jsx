@@ -1,10 +1,10 @@
 //src/Services/apiService.jsx
 import axios from 'axios';
 
-export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
-export const IMG_BASE_URL = 'http://localhost:4039/';
-// export const IMG_BASE_URL = 'http://hybrid.srishticampus.in:4039/';
-// export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
+// export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
+// export const IMG_BASE_URL = 'http://localhost:4039/';
+export const IMG_BASE_URL = 'http://hybrid.srishticampus.in:4039/';
+export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
 // Api for Viewing all Supporters Request for admin to approve, reject or view
 export const viewSupporterReqsForAdmin = async () => {
   try {
@@ -139,9 +139,39 @@ export const viewSupporters = async () => {
   }
 };
 //Api for View all supporters
-export const resetPwdLP = async (id) => {
+export const resetPwdLP = async (id,data) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/resetPassword/${id}`);
+    const response = await axios.post(`${API_BASE_URL}/resetPassword/${id}`,data);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+export const resetPwdUser = async (id,data) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/resetPasswordUser/${id}`,data);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+export const resetPwdCouncellor = async (id,data) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/resetPasswordCounsellor/${id}`,data);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+export const resetPwdSupp = async (id,data) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/resetPasswordSupporter/${id}`,data);
     console.log("in ",response);
     return response.data;
   } catch (error) {

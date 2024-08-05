@@ -100,6 +100,9 @@ import UserViewCaseUpdates from './Pages/User/UserLegalProfessionalDetails/UserV
 import UserViewCaseDetailsDetailed from './Pages/User/UserLegalProfessionalDetails/UserViewCaseDetailsDetailed';
 import AdminViewUserDetailed from './Pages/Admin/AdminUserViewAll/AdminViewUserDetailed';
 import AdminviewAllBlogs from './Pages/Admin/AdminUserViewAll/AdminviewAllBlogs';
+import UserResetPwd from './Pages/User/UserViewBlogs/UserResetPwd';
+import SupporterResetPwd from './Pages/Supporter/SupporterViewSuggestionDetails/SupporterResetPwd';
+import CouncellorResetPwd from './Pages/Counsellor/CounsellorViewBlogs/CouncellorResetPwd';
 
 function App() {
   return (
@@ -125,6 +128,7 @@ function App() {
             <Route path='/user-edit-issue/:id' element={[<UserNav />, <UserEditIssue />]} />
             <Route path='/user-view-issue/:id' element={[<UserNav />, <UserViewIssue />]} />
             <Route path='/user-view-suggestions' element={[<UserNav />, <UserViewSuggestions />]} />
+            <Route path='/user-reset-pwd' element={[<UserNav />, <UserResetPwd />]} />
 
             <Route path='/user-view-issues' element={[<UserNav />, <UserViewIssues />]} />
             <Route path='/user-view-suggestion-details/:id' element={[<UserNav />, <UserViewSuggestionDetails />]} />
@@ -199,6 +203,8 @@ function App() {
             {/* Supporter Paths */
 
             }
+      <Route path='/supporter-regset-pwd' element={[<Navbar />, <SupporterResetPwd />]} />
+
             <Route path='/supporter-register' element={[<Navbar />, <SupporterRegister />]} />
             <Route path='/supporter-login' element={[<Navbar />, <SupporterLogin />]} />
             <Route path='/supporter-home' element={[<SupprterNavbar />, <SupporterHome />]} />
@@ -221,6 +227,8 @@ function App() {
             <Route path='/counsellor-register' element={[<Navbar />, <CounsellorRegistration />]} />
             <Route path='/counsellor-login' element={[<Navbar />, <CounsellorLogin />]} />
             <Route path='/counsellor-forgot-password' element={[<Navbar />, <CounsellorForgotPassword />]} />
+            <Route path='/counsellor-reset-password' element={[<CouncillorNav />, <CouncellorResetPwd/>]} />
+
             <Route path='/counsellor-home' element={[<CouncillorNav />, <CounsellorHome />]} />
             <Route path='/counsellor-edit-profile' element={[<CouncillorNav />, <CounsellorEditProfile />]} />
             <Route path='/counsellor-appointment-requests' element={[<CouncillorNav />, <CounsellorAppointmentRequests />]} />
