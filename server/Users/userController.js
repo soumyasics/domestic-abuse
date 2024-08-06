@@ -169,19 +169,21 @@ const forgotPassword = (req, res) => {
 // Reset Password
 const resetPassword = async (req, res) => {
   let pwdMatch = false;
-
+  console.log("err",req.body);
   await User.findById({ _id: req.params.id })
     .exec()
     .then(data => {
-      if (data.password === req.body.oldpassword)
+      if (data.password === req.body.oldPassword)
         pwdMatch = true;
     })
     .catch(err => {
+      console.log(err);
+      
       res.status(500).json({ status: 500, msg: "Data not updated", Error: err });
     });
 
   if (pwdMatch) {
-    await User.findByIdAndUpdate({ _id: req.params.id }, { password: req.body.newpassword })
+    await User.findByIdAndUpdate({ _id: req.params.id }, { password: req.body.newPassword })
       .exec()
       .then(data => {
         if (data != null)
@@ -190,6 +192,8 @@ const resetPassword = async (req, res) => {
           res.json({ status: 500, msg: "User not found" });
       })
       .catch(err => {
+        console.log(err);
+        
         res.status(500).json({ status: 500, msg: "Data not updated", Error: err });
       });
   } else {

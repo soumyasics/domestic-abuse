@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import './LegalProfessionalChangePassword.css';
+import '../../Legal Professional/LegalProfessionalChangePassword/LegalProfessionalChangePassword.css';
 import { useNavigate } from 'react-router-dom';
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import { toast, ToastContainer } from 'react-toastify';
-import { resetPasswordLegalProfessional, resetPwdLP } from '../../../Services/apiService';
+import { resetPasswordLegalProfessional, resetPasswordUser, resetPwdLP, resetPwdUser } from '../../../Services/apiService';
 
-function LegalProfessionalChangePassword() {
+
+function UserResetPwd() {
     const [changePassword, setChangePassword] = useState({
         oldPassword: '',
         newPassword: '',
@@ -62,7 +63,7 @@ function LegalProfessionalChangePassword() {
 
         setIsSubmitting(true);
         try {
-              const response = await resetPwdLP(localStorage.getItem('lpId'),changePassword);
+              const response = await resetPwdUser(localStorage.getItem('userId'),changePassword);
               console.log(response);
               
               if (response.status==200) {
@@ -176,4 +177,4 @@ function LegalProfessionalChangePassword() {
     )
 }
 
-export default LegalProfessionalChangePassword
+export default UserResetPwd

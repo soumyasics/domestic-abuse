@@ -16,18 +16,18 @@ function CounsellorEditBlogs() {
         image: {filename:''},
     });
 
-    
+    const fetchBlogs = async () => {
+        try {
+          const response = await viewBlogsById(id);
+          console.log("bol",response);
+          setFormValues(response.data.data);
+        } catch (error) {
+          console.error('Error fetching blogs:', error);
+        }
+      };
   useEffect(() => {
     // Fetch blogs from backend
-    const fetchBlogs = async () => {
-      try {
-        const response = await viewBlogsById(id);
-        console.log("bol",response);
-        setFormValues(response.data);
-      } catch (error) {
-        console.error('Error fetching blogs:', error);
-      }
-    };
+  
 
     fetchBlogs();
   }, []);
@@ -63,17 +63,19 @@ const navigate=useNavigate()
             setFormValues({ ...formValues, [name]: value });
         }
     };
+    
 
-    const handleSubmit = (e) => {
+    const handleSubmit =async (e) => {
        e.preventDefault()
              
                 try {
-                    const response =  editBlogsById(id,formValues);
+                    const response = await editBlogsById(id,formValues);
                     console.log('Edit counc response:', response);
     
                     if (response.status==200) {
                         toast.success('Blog updated successfully');
-                        navigate('/counsellor-view-blogs');
+                        setTimeout(()=>{navigate('/counsellor-view-blogs');
+                       },800)
                     } else {
                         toast.success(response.message || 'Blog updated successfully');
                     }

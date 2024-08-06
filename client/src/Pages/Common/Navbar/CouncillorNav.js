@@ -103,6 +103,8 @@ function CouncillorNav() {
                             </a>
                             <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown2">
                                 <li><Link className="dropdown-item theme-purple fw-semibold" to="/counsellor-edit-profile">Profile View</Link></li>
+                                <li><Link className="dropdown-item theme-purple fw-semibold" to="/counsellor-reset-password">Change Password</Link></li>
+
                                 {/* <li><Link className="dropdown-item theme-purple fw-semibold" to="#">Change Password</Link></li> */}
                                 <li><button className="dropdown-item theme-purple fw-semibold" to="#" onClick={handleLogout}>Logout</button></li>
                             </ul>

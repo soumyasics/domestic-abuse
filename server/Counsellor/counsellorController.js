@@ -188,7 +188,7 @@ const resetPassword = async (req, res) => {
     await Counsellors.findById({ _id: req.params.id })
         .exec()
         .then(data => {
-            if (data.password === req.body.oldpassword)
+            if (data.password === req.body.oldPassword)
                 pwdMatch = true;
         })
         .catch(err => {
@@ -201,7 +201,7 @@ const resetPassword = async (req, res) => {
 
     if (pwdMatch) {
         await Counsellors.findByIdAndUpdate({ _id: req.params.id }, {
-            password: req.body.newpassword
+            password: req.body.newPassword
         })
             .exec()
             .then(data => {
