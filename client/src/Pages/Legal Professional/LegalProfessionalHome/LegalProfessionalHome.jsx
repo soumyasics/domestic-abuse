@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './LegalProfessionalHome.css';
 import home from '../../../Assets/legal-home.png';
 import { PiUsersFourLight } from "react-icons/pi";
@@ -7,6 +7,7 @@ import { GiFizzingFlask } from "react-icons/gi";
 import { FaGavel,FaFile } from "react-icons/fa";
 
 function LegalProfessionalHome() {
+  const navigate = useNavigate();
   return (
     <div className='container-fluid'>
       <div className='row'>
@@ -21,7 +22,7 @@ function LegalProfessionalHome() {
               <p className="card-text fs-6 m-5">
                 Your expertise can provide the critical support and guidance needed to navigate complex legal systems, ensuring that survivors receive the protection and justice they deserve. By joining our network, you can offer invaluable legal assistance, helping to secure restraining orders, custody arrangements, and other legal remedies that can safeguard survivors and their families. Your contribution can not only change lives but also restore hope and security to those who need it most. Together, we can create a safer, more just world for everyone.
               </p>
-              <Link to="/appointments" className="btn btn-light theme-purple px-5  mx-5 mt-1">Appointments</Link>
+              <button className="btn btn-light theme-purple px-5  mx-5 mt-1" onClick={()=>{navigate('/legal-professional-view-appointments')}}>Appointments</button>
             </div>
           </div>
         </div>
