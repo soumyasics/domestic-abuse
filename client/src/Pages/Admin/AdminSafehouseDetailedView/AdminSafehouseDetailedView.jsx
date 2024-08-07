@@ -223,8 +223,6 @@ function AdminsafehousesDetailedView() {
               </div>
             </div>
           </div>
-
-
         </div>
       </div>
     </>
