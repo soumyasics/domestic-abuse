@@ -100,6 +100,8 @@ import UserViewCaseUpdates from './Pages/User/UserLegalProfessionalDetails/UserV
 import UserViewCaseDetailsDetailed from './Pages/User/UserLegalProfessionalDetails/UserViewCaseDetailsDetailed';
 import AdminViewUserDetailed from './Pages/Admin/AdminUserViewAll/AdminViewUserDetailed';
 import AdminviewAllBlogs from './Pages/Admin/AdminUserViewAll/AdminviewAllBlogs';
+import OurServices from './Pages/Common/OurServices/OurServices';
+import AboutUs from './Pages/Common/AboutUs/AboutUs';
 import UserResetPwd from './Pages/User/UserViewBlogs/UserResetPwd';
 import SupporterResetPwd from './Pages/Supporter/SupporterViewSuggestionDetails/SupporterResetPwd';
 import CouncellorResetPwd from './Pages/Counsellor/CounsellorViewBlogs/CouncellorResetPwd';
@@ -112,6 +114,10 @@ function App() {
           <Routes>
             {/* Common Paths */}
             <Route path="/" element={[<Navbar />, <Home />]} />
+            <Route path="/services" element={[<Navbar />, <OurServices />]} />
+            <Route path="/about-us" element={[<Navbar />, <AboutUs />]} />
+
+
             {/* User Paths */}
             <Route path='/user-login' element={[<Navbar />, <UserLogin />]} />
             <Route path='/user-register' element={[<Navbar />, <UserRegister />]} />
@@ -147,26 +153,22 @@ function App() {
             <Route path='/user-view-all-counsellor-details/:cid/:issueId' element={[<UserNav/>,<UserViewCounsellorDetails/>]} />
             <Route path='/user-view-all-legal-professionals/:id' element={[<UserNav/>,<UserViewLegalProfessionals/>]} />
             <Route path='/user-view-all-legal-professionals' element={[<UserNav/>,<UserViewLegalProfessionals/>]} />
-
             <Route path='/user-legal-professional-detail/:issueId/:advId' element={[<UserNav/>,<UserLegalProfessionalDetails/>]} />
             <Route path='/user-add-issue' element={[<UserNav/>,<UserAddIssue/>]} />
             <Route path='/user-edit-issue/:id' element={[<UserNav/>,<UserEditIssue/>]} />
             <Route path='/user-view-issue/:id' element={[<UserNav/>,<UserViewIssue/>]} />
             <Route path='/user-view-suggestions' element={[<UserNav/>,<UserViewSuggestions/>]} />
-
             <Route path='/user-view-issues' element={[<UserNav/>,<UserViewIssues/>]} />
             <Route path='/user-view-suggestion-details/:id' element={[<UserNav/>,<UserViewSuggestionDetails/>]} />
             <Route path='/user-add-case' element={[<UserNav/>,<UserAddCase/>]} />
             <Route path='/user-legal-professional-case-details' element={[<UserNav/>,<UserLegalProfessionalCaseDetails/>]} />
             <Route path='/user-legal-professional-view-Status/:st/:id' element={[<UserNav/>,<UserViewLPStatus/>]} />
             <Route path='/user-view-safehouse-issue/:id' element={[<UserNav/>,<UserViewSafeHousewitIssue/>]} />
-
             <Route path='/user-payment' element={[<UserNav/>,<UserPayment/>]} />
             <Route path='/user-view-blogs' element={[<UserNav/>,<UserViewBlogs/>]} />
             <Route path='/user-view-request-history' element={[<UserNav/>,<UserViewRequestHistory/>]} />
             <Route path='/user-chat-legal-professional/:id' element={[<UserNav/>,<UserChatLegalProfessional/>]} />
             <Route path='/user-chat-supporter/:id/:suppId' element={[<UserNav/>,<UserChatSupporter/>]} />
-
             <Route path='/user-view-payments' element={[<UserNav/>,<UserViewPaymentReqs/>]} />
             <Route path='/user-view-lps' element={[<UserNav/>,<UserViewLPs/>]} />
             <Route path='/user-view-Case-Updates' element={[<UserNav/>,<UserViewCaseUpdates/>]} />
@@ -264,6 +266,7 @@ function App() {
             <Route path='/legal-professional-view-active-case-details/:id' element={[<LPNav/>,<LegalProfessionalViewActiveCaseDetail/>]} />
             <Route path='/legal-add-case/:id' element={[<LPNav />, <UserAddCase />]} />
             <Route path='/legal-add-payment/:id' element={[<LPNav />, <LegalProfessionalAddPayment />]} />
+
 
             {/* Legal Professional Paths  */}
             <Route path='/legal-professional-login' element={[<Navbar />, <LegalProfessionalLogin />]} />

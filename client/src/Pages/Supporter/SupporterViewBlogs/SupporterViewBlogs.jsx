@@ -52,8 +52,7 @@ const fetchBlogs = async () => {
 
 
  }
-  const displayBlogs = blogs
-    // .slice(currentPage * blogsPerPage, (currentPage + 1) * blogsPerPage)
+  const displayBlogs = blogs.slice(currentPage * blogsPerPage, (currentPage + 1) * blogsPerPage)
     .map((blog) => {
       return(
         <div>

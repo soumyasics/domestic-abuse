@@ -147,7 +147,7 @@ function AdminCounsellorViewAll() {
                     <div className='text-center'>
                       <i className="m-3 cursor-pointer" onClick={()=>{navigateToInd(counsellor._id)}}><BsEye size={22} /></i>
                       <button
-                     className={`toggle-button ${counsellor.isActive ? 'active' : 'inactive'}`} 
+                     className={`toggle-button m-1 ${counsellor.isActive ? 'active' : 'inactive'}`} 
                     onClick={()=>{toggleUserActiveState(counsellor)}}
                     >
                       {counsellor.isActive ? 'Active' : 'Inactive'}

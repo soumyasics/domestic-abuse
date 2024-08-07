@@ -82,7 +82,7 @@ const AdminSidebar = ({ changeActivePage }) => {
                 <button onClick={() => toggleMenu('safeSpace')} className="nav-link btn btn-link text-decoration-none d-flex justify-content-between align-items-center w-100">
                   <div className="d-flex align-items-center">
                     <House size={24} className='theme-purple' />
-                    <span className="ms-1 d-none d-sm-inline theme-purple">Safe Space</span>
+                    <span className="ms-1 d-none d-sm-inline theme-purple">Safe House</span>
                   </div>
                   <MdArrowDropDown size={25} className="theme-purple" />
                 </button>

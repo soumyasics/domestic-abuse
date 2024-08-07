@@ -44,7 +44,7 @@ function UserAddCase() {
     if (Object.keys(validationErrors).length === 0) {
       try {
         console.log(formData);
-        const response = await addCase(formData,id);
+        const response = await addCase(formData, id);
         console.log(response);
         if (response.success) {
           toast.success(response.message);
@@ -64,7 +64,7 @@ function UserAddCase() {
     try {
       const response = await viewCaseByissueId(id);
       setCaseDetails(response.data || []);
-      console.log("case da",response.data);
+      console.log("case da", response.data);
     } catch (error) {
       console.error('Error fetching appointments:', error);
       toast.error('Error fetching case details.');
@@ -81,12 +81,12 @@ function UserAddCase() {
     <div className='container-fluid'>
       <div className='row m-5'>
         <div className='col text-center'>
-          <h3 className='theme-purple'>Add Case Details</h3>
+          <h3 className='theme-purple'>Case Update</h3>
         </div>
       </div>
       <form onSubmit={handleSubmit}>
         <div className='row m-5 d-flex justify-content-center align-items-center'>
-          <div className='col-6 bg-creamy py-5 px-0'>
+          <div className='col-6 border border-3 py-5 px-0'>
             <div className='row m-5'>
               <div className='col-4 theme-purple text-center fs-5'>
                 Case Number
@@ -109,9 +109,9 @@ function UserAddCase() {
               </div>
               <div className='col-8'>
                 <select
-                  id='status'  // Changed to 'status' to match the name attribute
+                  id='status'
                   name='status'
-                  className='form-control form-control-lg'
+                  className='form-select form-select-lg'
                   value={formData.status}
                   onChange={handleChange}
                 >
@@ -156,9 +156,12 @@ function UserAddCase() {
               </div>
             </div>
             <div className='row m-5 mb-0'>
-              <div className='col text-center'>
-                <button type='submit' className='btn bg-purple text-white px-5'>
+              <div className='col text-end'>
+                <button type='submit' className='btn bg-purple text-white px-4 mx-3'>
                   Add
+                </button>
+                <button type='submit' className='btn bg-purple text-white px-4 mx-3'>
+                  Cancel
                 </button>
                 {errors.form && <div className='text-danger mt-3'>{errors.form}</div>}
               </div>
@@ -166,37 +169,35 @@ function UserAddCase() {
           </div>
         </div>
       </form>
-
-      <Table striped bordered hover className="appointments-table">
-                    <thead>
-                      <tr className="text-center">
-                        <th className='bg-purple text-white'>#</th>
-                        <th className='bg-purple text-white'>Case No</th>
-                        <th className='bg-purple text-white'>Case Status</th>
-                        <th className='bg-purple text-white'>Date</th>
-                        <th className='bg-purple text-white'>Description</th>
-                        
-                      </tr>
-                    </thead>
-                    <tbody className='text-center'>
-                      {
-                        caseDetails&&caseDetails.length>0?(
-                      caseDetails.map((appointment, index) => {
-                        return (
-                          <tr key={appointment._id}>
-                            <td>{++index}</td>
-                            <td>{appointment.title}</td>
-                            <td>{appointment.status}</td>
-                            <td>{appointment.date.slice(0,10)}</td>
-                            <td>{appointment.description}</td>
-                          
-                          </tr>
-                        )
-                      })
-                    ):(<p></p>)
-                  }
-                    </tbody>
-                  </Table>
+      <h4 className='mx-5'>Recent Case Details</h4>
+      <Table striped bordered hover className="appointments-table my-5">
+        <thead>
+          <tr className="text-center">
+            <th className='bg-purple text-white'>#</th>
+            <th className='bg-purple text-white'>Case No</th>
+            <th className='bg-purple text-white'>Case Status</th>
+            <th className='bg-purple text-white'>Date</th>
+            <th className='bg-purple text-white'>Description</th>
+          </tr>
+        </thead>
+        <tbody className='text-center'>
+          {
+            caseDetails && caseDetails.length > 0 ? (
+              caseDetails.map((appointment, index) => {
+                return (
+                  <tr key={appointment._id}>
+                    <td>{++index}</td>
+                    <td>{appointment.title}</td>
+                    <td>{appointment.status}</td>
+                    <td>{appointment.date.slice(0, 10)}</td>
+                    <td>{appointment.description}</td>
+                  </tr>
+                )
+              })
+            ) : (<p></p>)
+          }
+        </tbody>
+      </Table>
     </div>
   );
 }
