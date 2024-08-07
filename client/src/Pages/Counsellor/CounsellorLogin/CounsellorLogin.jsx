@@ -65,7 +65,7 @@ function CounsellorLogin() {
         <div className="col-md-6 text-center d-grid align-self-center my-5">
           <div className="row m-4">
             <div className="col">
-              <h1 className='fw-semibold theme-purple m-3'>Login</h1>
+              <h1 className='fw-semibold theme-purple m-3'>Counsellor Login</h1>
             </div>
           </div>
           <div className="row m-4 text-start">

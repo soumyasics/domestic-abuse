@@ -159,18 +159,18 @@ const navtoHome=()=>{
                             </div>
                         </div>
                     </div>
-                    {/* <div className='row m-5'>
+                    <div className='row m-5'>
                         <div className='col'>
                             <h3 className='theme-purple'>Add Details</h3>
                         </div>
-                    </div> */}
+                    </div>
                     <form onSubmit={handleSubmit} noValidate>
-                        {/* <div className='row m-5'>
+                        <div className='row m-5'>
                             <div className='col-6'>
                                 <label htmlFor='appointmentDate' className='form-label theme-purple'>Counselling Date</label>
                             </div>
-                        </div> */}
-                        {/* <div className='row m-5'>
+                        </div>
+                        <div className='row m-5'>
                             <div className='col-6'>
                                 <div className="input-group">
                                     <input
@@ -186,7 +186,7 @@ const navtoHome=()=>{
                                     {errors.appointmentDate && <div id="appointmentDateError" className="invalid-feedback">{errors.appointmentDate}</div>}
                                 </div>
                             </div>
-                        </div> */}
+                        </div>
                        {issueId=='undefined'?( ''):(<div className='row m-5'>
                             <div className='col text-end'>
                                 <button type="submit" className="btn bg-theme btn-lg fw-bolder px-5 text-white rounded-4 mx-5" disabled={isSubmitting}>
