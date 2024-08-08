@@ -176,7 +176,7 @@ function AdminsafehousesDetailedView() {
               <div className='col text-center'>
                 <div className="rounded-circle overflow-hidden" style={{ width: '250px', height: '250px', margin: '0 auto' }}>
                   <img
-                    src={safehouses.supporterId.image && safehouses.supporterId.image.filename ? `${IMG_BASE_URL}/${safehouses.supporterId.image.filename}` : demo}
+                    src={safehouses.supporterId?.image && safehouses.supporterId?.image.filename ? `${IMG_BASE_URL}/${safehouses.supporterId?.image.filename}` : demo}
                     alt='Supporter'
                     className='img-fluid'
                     onError={(e) => {
@@ -195,7 +195,7 @@ function AdminsafehousesDetailedView() {
                 Name:
               </div>
               <div className='col-6 text-secondary '>
-                {safehouses.supporterId.name}
+                {safehouses.supporterId?.name}
               </div>
             </div>
             <div className='row border-bottom m-5'>
@@ -203,7 +203,7 @@ function AdminsafehousesDetailedView() {
                 Contact No:
               </div>
               <div className='col-6 text-secondary'>
-                {safehouses.supporterId.contact}
+                {safehouses.supporterId?.contact}
               </div>
             </div>
             <div className='row border-bottom m-5'>
@@ -211,7 +211,7 @@ function AdminsafehousesDetailedView() {
                 Email Id:
               </div>
               <div className='col-6 text-secondary'>
-                {safehouses.supporterId.email}
+                {safehouses.supporterId?.email}
               </div>
             </div>
             <div className='row border-bottom m-5'>
@@ -219,12 +219,10 @@ function AdminsafehousesDetailedView() {
                 Organisation Name:
               </div>
               <div className='col-6 text-secondary'>
-                {safehouses.supporterId.organization}
+                {safehouses.supporterId?.organization}
               </div>
             </div>
           </div>
-
-
         </div>
       </div>
     </>

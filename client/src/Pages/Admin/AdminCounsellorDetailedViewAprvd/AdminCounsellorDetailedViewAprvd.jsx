@@ -212,7 +212,7 @@ const fetchCounsellorData = async () => {
             </div>
             <div className='text-center'>
             <button
-                     className={`toggle-button ${counsellor.isActive ? 'active' : 'inactive'}`} 
+                     className={`toggle-button m-5 ${counsellor.isActive ? 'active' : 'inactive'}`} 
                     onClick={()=>{toggleUserActiveState(counsellor)}}
                     >
                       {counsellor.isActive ? 'Active' : 'Inactive'}

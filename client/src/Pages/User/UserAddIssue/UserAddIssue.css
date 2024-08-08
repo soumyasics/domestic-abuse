@@ -1,0 +1,11 @@
+.prediction-content {
+    margin: 1rem 0;
+}
+
+.prediction-item {
+    background-color: whitesmoke; /* Light background */
+    border-radius: 0.25rem; /* Rounded corners */
+    padding: 0.5rem; /* Padding */
+    margin: 0.25rem 0; /* Margin */
+    border: 1px solid #e0e0e0; /* Light border */
+}
