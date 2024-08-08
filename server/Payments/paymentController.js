@@ -154,6 +154,34 @@ const viewPaymentsByLPId = (req, res) => {
 };
 
 // View payments by LP ID
+const viewPaymentsById = (req, res) => {
+  Payment.findById( req.params.id )
+    .exec()
+    .then(data => {
+      if (data) {
+        res.json({
+          status: 200,
+          msg: 'Payments obtained successfully',
+          data: data,
+        });
+      } else {
+        res.json({
+          status: 200,
+          msg: 'No payments found for this LP',
+        });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        status: 500,
+        msg: 'Failed to obtain payments for this LP',
+        Error: err,
+      });
+    });
+};
+
+// View payments by LP ID
 const viewPaymentsByAppId = (req, res) => {
   Payment.find({ appId: req.params.id })
     .populate('userId lpId')
@@ -188,6 +216,7 @@ module.exports = {
   viewPaymentsByUserId,
   viewPaymentsByLPId,
   viewPaymentsByAppId,
-  addPaymentsId
+  addPaymentsId,
+  viewPaymentsById
 };
 

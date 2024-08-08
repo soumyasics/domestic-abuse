@@ -187,6 +187,7 @@ router.post('/viewPaymentsByUserId/:id',payments.viewPaymentsByUserId);
 router.post('/viewPaymentsByLPId/:id',payments.viewPaymentsByLPId);
 router.post('/viewPaymentsByAppId/:id',payments.viewPaymentsByAppId);
 router.post('/addPaymentsId/:id',payments.addPaymentsId);
+router.post('/viewPaymentsById/:id',payments.viewPaymentsById);
 
 //chat
 router.post('/chatting',chat.chatting);
