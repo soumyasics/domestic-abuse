@@ -47,6 +47,10 @@ const navtoHome=()=>{
 }
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!validate()) {
+            toast.error('Please fix the errors in the form.');
+            return;
+          }
         try {
             const response = await sendReqCounc(issueId,cid,localStorage.getItem('userId'));
             if (response.status === 200) {
@@ -88,7 +92,7 @@ const navtoHome=()=>{
                                     Name
                                 </div>
                                 <div className='col theme-purple'>
-                                    {counsellor.name}
+                                    {counsellor?.name}
                                 </div>
                             </div>
                         </div>
@@ -98,7 +102,7 @@ const navtoHome=()=>{
                                     Email Id
                                 </div>
                                 <div className='col theme-purple'>
-                                    {counsellor.email}
+                                    {counsellor?.email}
                                 </div>
                             </div>
                         </div>
@@ -110,7 +114,7 @@ const navtoHome=()=>{
                                     Contact Number
                                 </div>
                                 <div className='col theme-purple'>
-                                    {counsellor.contact}
+                                    {counsellor?.contact}
                                 </div>
                             </div>
                         </div>
@@ -120,7 +124,7 @@ const navtoHome=()=>{
                                     Language
                                 </div>
                                 <div className='col theme-purple'>
-                                    {counsellor.language}
+                                    {counsellor?.language}
                                 </div>
                             </div>
                         </div>
@@ -132,7 +136,7 @@ const navtoHome=()=>{
                                     Experience
                                 </div>
                                 <div className='col theme-purple'>
-                                    {counsellor.experience}
+                                    {counsellor?.experience}
                                 </div>
                             </div>
                         </div>
@@ -142,7 +146,7 @@ const navtoHome=()=>{
                                     Location
                                 </div>
                                 <div className='col theme-purple'>
-                                    {counsellor.location}
+                                    {counsellor?.location}
                                 </div>
                             </div>
                         </div>
@@ -154,12 +158,12 @@ const navtoHome=()=>{
                                     Specialisation
                                 </div>
                                 <div className='col theme-purple'>
-                                    {counsellor.specialisation}
+                                    {counsellor?.specialisation}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {issueId=='undefined'?(''):(<>
+                    {issueId==='undefined'?(''):(<>
                     <div className='row m-5'>
                         <div className='col'>
                             <h3 className='theme-purple'>Add Details</h3>
@@ -189,7 +193,7 @@ const navtoHome=()=>{
                                 </div>
                             </div>
                         </div>
-                       {issueId=='undefined'?( ''):(<div className='row m-5'>
+                       {issueId==='undefined'?( ''):(<div className='row m-5'>
                             <div className='col text-end'>
                                 <button type="submit" className="btn bg-theme btn-lg fw-bolder px-5 text-white rounded-4 mx-5" disabled={isSubmitting}>
                                     {isSubmitting ? 'Booking...' : 'Book Now'}
