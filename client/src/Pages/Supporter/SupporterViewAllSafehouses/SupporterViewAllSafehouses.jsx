@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import './SupporterViewAllSafehouses.css';
 import safehouseDemo from '../../../Assets/ADMIN VIEW DETAILS.png';
-import { IMG_BASE_URL, rejectSafehouseById, viewAllSafehouses, viewAllSafehousesBySuppId } from '../../../Services/apiService';
+import { IMG_BASE_URL, rejectSafehouseById, viewAllSafehousesBySuppId } from '../../../Services/apiService';
 import ReactPaginate from 'react-paginate';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { useNavigate } from 'react-router-dom';
+
 function SupporterViewAllSafehouses() {
     const [safehouses, setSafehouses] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
     const safehousesPerPage = 4;
-const navigate=useNavigate()
+    const navigate = useNavigate();
+
     // Fetch safehouses data from the backend
     const fetchSafehouses = async () => {
         try {
@@ -38,32 +40,31 @@ const navigate=useNavigate()
     const handlePageClick = ({ selected }) => {
         setCurrentPage(selected);
     };
-    const deleteHouse=(id)=>{
-        
-    confirmAlert({
-      title: 'Confirm Deletion',
-      message: 'Are you sure you want to delete this safe house?',
-      buttons: [
-        {
-          label: 'Yes',
-          onClick: async () => {
-            const response = await rejectSafehouseById(id);
-            if (response.success) {
-              console.log(`Safehouse with ID: ${id} rejected successfully`);
-              fetchSafehouses(); // Refresh the list after rejection
-            } else {
-              console.error('Failed to reject safehouse:', response.message);
-            }
-          }
-        },
-        {
-          label: 'No',
-          onClick: () => console.log('Rejection cancelled')
-        }
-      ]
-    });
-  };
-    
+
+    const deleteHouse = (id) => {
+        confirmAlert({
+            title: 'Confirm Deletion',
+            message: 'Are you sure you want to delete this safe house?',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: async () => {
+                        const response = await rejectSafehouseById(id);
+                        if (response.success) {
+                            console.log(`Safehouse with ID: ${id} rejected successfully`);
+                            fetchSafehouses(); // Refresh the list after rejection
+                        } else {
+                            console.error('Failed to reject safehouse:', response.message);
+                        }
+                    }
+                },
+                {
+                    label: 'No',
+                    onClick: () => console.log('Rejection cancelled')
+                }
+            ]
+        });
+    };
 
     return (
         <div className='container-fluid'>
@@ -74,14 +75,15 @@ const navigate=useNavigate()
                             <img
                                 src={safehouse.image && safehouse.image.filename ? `${IMG_BASE_URL}/${safehouse.image.filename}` : safehouseDemo}
                                 alt='safehouses'
-                                className='img-fluid rounded object-fit-cover m-5'
+                                className='img-fluid rounded object-fit-contain m-5'
+                                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                                 onError={(e) => {
                                     e.target.onerror = null;
                                     e.target.src = safehouseDemo;
                                 }}
                             />
                         </div>
-                        <div className='col '>
+                        <div className='col'>
                             <div className='card w-100 shadow user-view-safehouse-dimension m-5 h-auto'>
                                 <div className='card-body'>
                                     <div className='row m-3'>
@@ -93,9 +95,6 @@ const navigate=useNavigate()
                                         <div className='col'>
                                             <p className='card-text'>Shared by {safehouse.capacity}</p>
                                         </div>
-                                        {/* <div className='col text-end'>
-                                            <button className='btn bg-purple text-white rounded-4 mx-5'>Request</button>
-                                        </div> */}
                                     </div>
                                     <div className='row m-3'>
                                         <div className='col'>
@@ -114,8 +113,8 @@ const navigate=useNavigate()
                                     </div>
                                     <div className='row m-3'>
                                         <div className='col text-end'>
-                                            <span className='m-2'><button className='btn text-primary-emphasis btn-light' onClick={()=>{navigate(`/supporter-edit-safe-house/${safehouse._id}`)}}>Edit</button></span>
-                                            <span className='m-2'><button className='btn text-danger btn-light' onClick={()=>{deleteHouse(safehouse._id)}}>Delete</button></span>
+                                            <span className='m-2'><button className='btn text-primary-emphasis btn-light' onClick={() => { navigate(`/supporter-edit-safe-house/${safehouse._id}`) }}>Edit</button></span>
+                                            <span className='m-2'><button className='btn text-danger btn-light' onClick={() => { deleteHouse(safehouse._id) }}>Delete</button></span>
                                         </div>
                                     </div>
                                 </div>
