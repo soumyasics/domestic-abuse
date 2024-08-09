@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
 import demoLegalProfessional from '../../../Assets/legal-professional-registration.png';
@@ -78,8 +78,9 @@ function UserViewLPs() {
           ) : (
             paginatedProfessionals.map((legalProfessional, index) => (
               <div key={legalProfessional._id} className='col-auto m-5'>
-                <div
-                  className='card m-3 cursor-pointer user-view-legal-professionals-card'
+              <Link to={`/user-legal-professional-detail/undefined/${legalProfessional._id}`} style={{textDecoration:'none'}}>
+               <div
+                  className='card m-3 cursor-pointer user-view-legal-professionals-card' style={{width: '19rem'}}
                 
                 >
                   <img
@@ -96,6 +97,7 @@ function UserViewLPs() {
                     <h5 className='card-title mb-5'>{legalProfessional.firmName}</h5>
                   </div>
                 </div>
+                </Link>
               </div>
             ))
           )}

@@ -14,11 +14,15 @@ function LegalProfessionalEditBlogs() {
         content: '',
         image: {filename:''},
     });
+    const [imagePreview, setImagePreview] = useState(demo);
+
     const fetchBlogs = async () => {
         try {
           const response = await viewBlogsById(id);
           console.log("bol",response);
           setFormValues(response.data.data);
+          setImagePreview(response.data.data.image ? `${IMG_BASE_URL}/${response.data.data.image.filename}` : demo);
+
         } catch (error) {
           console.error('Error fetching blogs:', error);
         }
@@ -57,8 +61,21 @@ const navigate=useNavigate()
     const handleChange = (e) => {
         const { title, value, files } = e.target;
         if (title === 'image') {
-            setFormValues({ ...formValues, [title]: files[0] });
-        } else {
+            setFormValues({ ...formValues, image: files[0] });
+         
+                const file = e.target.files[0];
+                if (file) {
+                  
+                       formValues.image=file
+                
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        setImagePreview(reader.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+                 else {
             setFormValues({ ...formValues, [title]: value });
         }
     };
@@ -100,7 +117,8 @@ const navigate=useNavigate()
                         <div className='col position-relative'>
                             <div className='overflow-hidden'>
                                 <img
-                                    src={formValues.image && formValues.image.filename ? `${IMG_BASE_URL}/${formValues.image.filename}` : demo}
+                                    // src={formValues.image && formValues.image.filename ? `${IMG_BASE_URL}/${formValues.image.filename}` : demo}
+                                    src={imagePreview ? `${imagePreview}` : demo}
                                     alt='blog demo'
                                     className='img-fluid'
                                     onError={(e) => {

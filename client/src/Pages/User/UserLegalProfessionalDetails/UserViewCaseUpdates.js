@@ -56,7 +56,7 @@ function UserViewCaseUpdates() {
              <td>{appointment.type}</td>
             <td>{appointment.description}</td>
              <td>{appointment.severity}</td> 
-             <td><Link to={`/user-view-case-details/${appointment._id}/`}> View Details</Link></td> 
+             <td><Link to={`/user-view-case-details/${appointment._id}`}> View Details</Link></td> 
 
           </tr>
         )
@@ -65,7 +65,9 @@ function UserViewCaseUpdates() {
   }
     </tbody>
   </Table>
-            ):(<h1>No Cases Registered for You </h1>)
+            ):(<div className='mt-5'>
+              <h1>No Cases Registered for You </h1>
+              </div>)
         }
         </div>
   )

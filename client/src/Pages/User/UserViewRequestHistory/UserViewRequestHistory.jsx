@@ -52,7 +52,7 @@ function UserViewRequestHistory() {
                     <div className='row m-5' key={safehouse._id}>
                         <div className='col user-view-safehouse-dimension d-flex m-auto'>
                             <img
-                                src={safehouse.image && safehouse.image.filename ? `${IMG_BASE_URL}/${safehouse.image.filename}` : safehouseDemo}
+                                src={safehouse.houseId.image && safehouse.houseId.image.filename ? `${IMG_BASE_URL}/${safehouse.houseId.image.filename}` : safehouseDemo}
                                 alt='safehouses'
                                 className='img-fluid rounded object-fit-cover'
                                 onError={(e) => {
@@ -66,7 +66,7 @@ function UserViewRequestHistory() {
                                 <div className='card-body'>
                                     <div className='row m-3'>
                                         <div className='col'>
-                                            <h5 className='card-title theme-purple'>{safehouse.name ? safehouse.name : 'New House'}</h5>
+                                            <h5 className='card-title theme-purple'>{safehouse.houseId.name ? safehouse.houseId.name : 'New House'}</h5>
                                         </div>
                                     </div>
                                     <div className='row m-3'>

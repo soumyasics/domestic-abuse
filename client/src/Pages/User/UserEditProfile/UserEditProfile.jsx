@@ -129,7 +129,20 @@ function UserEditProfile() {
       ...user,
       image: file,
     });
+
+     const file1 = e.target.files[0];
+          if (file1) {
+            
+                 user.image=file
+          
+              const reader = new FileReader();
+              reader.onloadend = () => {
+                  setImagePreview(reader.result);
+              };
+              reader.readAsDataURL(file1);
+          
   };
+}
 const navtoHome=()=>{
   navigate('/user-home');
 }

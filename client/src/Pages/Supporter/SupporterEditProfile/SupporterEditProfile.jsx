@@ -125,7 +125,7 @@ function SupporterEditProfile() {
 
                 if (response.success) {
                     toast.success('Profile updated successfully');
-                    navigate('/supporter-home');
+                    // navigate('/supporter-home');
                 } else {
                     toast.error(response.message || 'Failed to update profile');
                 }
