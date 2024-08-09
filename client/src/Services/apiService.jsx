@@ -1338,7 +1338,15 @@ export const viewSafehousesReqsBySupporterId = async (id) => {
     throw error;
   }
 };
-
+export const viewapproveReqBySuppId = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewapproveReqBySuppId/${id}`);
+    return response;
+  } catch (error) {
+    console.error('Error fetching safehouses:', error);
+    throw error;
+  }
+};
 
 // Api for Accepting Supporter Request by Id
 export const rejectHouseReqsById = async (id) => {

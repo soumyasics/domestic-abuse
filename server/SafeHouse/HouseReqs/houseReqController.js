@@ -196,6 +196,25 @@ const approveReqByUserId = (req, res) => {
     });
 };
 
+// View issue by ID
+const viewapproveReqBySuppId = (req, res) => {
+  houseReqSchema.find({ suppId: req.params.id ,status:"approved"}).populate('suppId userId houseId')
+  .exec()
+  .then(data => {
+    res.json({
+      status: 200,
+      msg: 'Data obtained successfully',
+      data: data,
+    });
+  })
+  .catch(err => {
+    res.status(500).json({
+      status: 500,
+      msg: 'No data obtained',
+      Error: err,
+    });
+  });
+};
 const rejectHouseByUserId = (req, res) => {
     houseReqSchema.findByIdAndUpdate({ _id: req.params.id },{status:"rejected"})
     .exec()
@@ -256,5 +275,6 @@ module.exports = {
   rejectHouseByUserId,
   getHouseReqStatusForSugge,
   addHouseReqsWithIssue,
-  viewhouseReqsByIssueId
+  viewhouseReqsByIssueId,
+  viewapproveReqBySuppId
 };

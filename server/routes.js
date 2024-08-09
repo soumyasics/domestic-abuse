@@ -165,6 +165,7 @@ router.post('/approveReqByUserId/:id',houseReqs.approveReqByUserId);
 router.post('/rejectHouseByUserId/:id',houseReqs.rejectHouseByUserId);
 router.post('/viewHouseReqsByUserId/:id',houseReqs.viewhouseReqsByUserId);
 router.post('/viewhouseReqsByIssueId/:id',houseReqs.viewhouseReqsByIssueId);
+router.post('/viewapproveReqBySuppId/:id',houseReqs.viewapproveReqBySuppId);
 
 
 //councellor req

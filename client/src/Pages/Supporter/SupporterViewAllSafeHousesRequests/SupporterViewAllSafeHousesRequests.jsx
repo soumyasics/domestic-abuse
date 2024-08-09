@@ -6,7 +6,7 @@ import { Button, Table } from 'react-bootstrap';
 import ReactPaginate from 'react-paginate';
 import { FaPen } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
-import { viewSafehouses,rejectSafehouseById, viewSafehousesBySupporterId, viewSafehousesReqsBySupporterId, rejectHouseReqsById, approveCounsellorsById, approveHouseReqsById } from '../../../Services/apiService'; 
+import { viewSafehouses,rejectSafehouseById, viewSafehousesBySupporterId, viewSafehousesReqsBySupporterId, rejectHouseReqsById, approveCounsellorsById, approveHouseReqsById, viewapproveReqBySuppId } from '../../../Services/apiService'; 
 import { Link,useNavigate } from 'react-router-dom';
 import { toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,6 +14,8 @@ import { BsEye } from "react-icons/bs";
 
 function SupporterViewAllSafeHousesRequests() {
   const [safehouses, setSafehouses] = useState([]);
+  const [apsafehouses, setApSafehouses] = useState([]);
+
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const safehousesPerPage = 10;
@@ -36,8 +38,27 @@ function SupporterViewAllSafeHousesRequests() {
       console.error('Error fetching safehouses:', error);
     }
   };
+  
+  const fetchApSafehouses = async () => {
+    try {
+      const response = await viewapproveReqBySuppId(localStorage.getItem('supporterId'));
+      console.log(response);
+      console.log(
+        "qqq",response.data.data
+      );
+      if (response.data.status === 200) {
+        setApSafehouses(response.data.data);
+      } else {
+        setApSafehouses([])
+        console.error('Failed to fetch safehouses:', response.msg);
+      }
+    } catch (error) {
+      console.error('Error fetching safehouses:', error);
+    }
+  };
   useEffect(() => {
     fetchSafehouses();
+    fetchApSafehouses()
     console.log(safehouses);
   }, []); // Empty dependency array ensures it runs only once on component mount
 
@@ -114,12 +135,16 @@ function SupporterViewAllSafeHousesRequests() {
       <div className='row m-5 mt-5 mb-2'>
         <div className='col'>
           <h4 className='theme-purple'>Safe House Details</h4>
+          {/* <h5  style={{marginLeft:'915px',color:'purple'}}>Approved Details</h5> */}
+          
         </div>
         <div className='col text-end'>
         </div>
       </div>
       <div className='table-responsive m-5 mt-5'>
-        <Table bordered hover className="supporters-table view-all-safehouse-theme-table-body">
+      {safehouses&&safehouses.length>0?(
+        <> 
+         <Table bordered hover className="supporters-table view-all-safehouse-theme-table-body">
           <thead>
             <tr className="text-center">
               <th className='view-all-safehouse-theme text-white'>SI.No</th>
@@ -166,6 +191,44 @@ function SupporterViewAllSafeHousesRequests() {
             ))}
           </tbody>
         </Table>
+        </>
+      ):(<h2>No New requests From User</h2>)
+    }
+<br/><br/><br/>
+{apsafehouses&&apsafehouses.length>0?(
+        <> 
+<h4 className='theme-purple'>Approved Safe House Details</h4>
+
+
+         <Table bordered hover className="supporters-table view-all-safehouse-theme-table-body">
+          <thead>
+            <tr className="text-center">
+              <th className='view-all-safehouse-theme text-white'>SI.No</th>
+              <th className='view-all-safehouse-theme text-white'>Name</th>
+                <th className='view-all-safehouse-theme text-white'>Email-Id</th>
+                <th className='view-all-safehouse-theme text-white'>Contact Number</th>
+                <th className='view-all-safehouse-theme text-white'>House Name</th>
+                <th className='view-all-safehouse-theme text-white'>User Address</th>
+
+            </tr>
+          </thead>
+          <tbody className='text-center'>
+            {apsafehouses&&apsafehouses.map((user, index) => (
+              <tr key={user._id} className='view-all-safehouse-theme-table-body'>
+                 <td className='p-2'>{index+1}</td> 
+                <td>{user.userId.name}</td>
+                  <td>{user.userId.email}</td>
+                  <td>{user.userId.contact}</td>
+                  <td>{user.houseId.name}</td>
+                  <td>{user.userId.address}</td>
+             
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+        </>
+      ):(<h2>No New requests From User</h2>)
+    }
         <div className="d-flex justify-content-center">
           {/* <ReactPaginate
             previousLabel={'Previous'}
@@ -189,6 +252,8 @@ function SupporterViewAllSafeHousesRequests() {
           />   */}
         </div>
       </div>
+
+
     </div>
   );
 }

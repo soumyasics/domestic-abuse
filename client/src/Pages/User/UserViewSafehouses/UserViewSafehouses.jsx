@@ -73,7 +73,7 @@ const reqHouse=async(id)=>{
         houseReqs.houseId=id
         console.log("data to be",houseReqs);
         const response = await addHouseReqs(houseReqs);
-        console.log("dy",response);
+        console.log("dy",response.data.data.status);
         if (response.data.status==200) {
           toast.success('Request Send to Supporter');
           
