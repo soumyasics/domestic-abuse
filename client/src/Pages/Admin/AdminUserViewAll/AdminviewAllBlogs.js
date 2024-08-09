@@ -75,8 +75,8 @@ function AdminviewAllBlogs() {
         ));
 
     return (
-        <div className='container-fluid'>
-            <div className='row m-5 mb-2'>
+        <div className='container-fluid m-auto'>
+            <div className='row m-5 mt-5 mb-2'>
                 <div className='col text-center theme-purple'>
                     <h5 className=''>Blogs</h5>
                     <h3 className='supporter-view-blogs-heading-border border-bottom border-5 rounded w-50 d-flex justify-content-center m-auto'>

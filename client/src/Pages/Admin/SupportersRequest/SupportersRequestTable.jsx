@@ -25,6 +25,7 @@ const SupportersRequestTable = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedSupporter, setSelectedSupporter] = useState(null);
   const [action, setAction] = useState(false);
+
   const fetchSupporters = useCallback(async () => {
     try {
       if (props.activePage === 'new-request') {
@@ -155,79 +156,91 @@ const SupportersRequestTable = (props) => {
       {loading ? (
         <p className="theme-purple fs-1">Loading...</p>
       ) : supporters.length === 0 ? (
-        <p className="m-5 text-center fs-1">No new entries</p>
+        <p className="m-5 text-center fs-1">No entries available</p>
       ) : (
         <>
           <Table striped bordered hover className="supporters-table">
-            <thead className="">
-              <tr className="text-center ">
-                <th className='bg-purple text-white'>#</th>
-                <th className='bg-purple text-white'>Image</th>
-                <th className='bg-purple text-white'>Name</th>
-                <th className='bg-purple text-white'>Contact Number</th>
-                <th className='bg-purple text-white'>Email Id</th>
-                <th className='bg-purple text-white'>Organisation Name</th>
-                <th className='bg-purple text-white'>Action</th>
-              </tr>
-            </thead>
+            {supporters.length > 0 && (
+              <thead className="">
+                <tr className="text-center ">
+                  <th className='bg-purple text-white'>#</th>
+                  <th className='bg-purple text-white'>Image</th>
+                  <th className='bg-purple text-white'>Name</th>
+                  <th className='bg-purple text-white'>Contact Number</th>
+                  <th className='bg-purple text-white'>Email Id</th>
+                  <th className='bg-purple text-white'>Organisation Name</th>
+                  <th className='bg-purple text-white'>Action</th>
+                </tr>
+              </thead>
+            )}
             <tbody className='text-center'>
-              {action ? activeSupporters.map((supporter, index) => (
-                <tr key={supporter._id}>
-                  <td>{counter + index}</td>
-                  <td>
-                    <div className="rounded-circle overflow-hidden mx-auto" style={{ width: '50px', height: '50px' }}>
-                      <img
-                        src={`${IMG_BASE_URL}/${supporter.image && supporter.image.filename ? supporter.image.filename : demoImage}`}
-                        alt={`${supporter.name}'s avatar`}
-                        className="img-fluid"
-                        onError={(e) => {
-                          e.target.onerror = null;
-                          e.target.src = demoImage; 
-                        }}
-                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                      />
-                    </div>
-                  </td>
-                  <td>{supporter.name}</td>
-                  <td>{supporter.contact}</td>
-                  <td>{supporter.email}</td>
-                  <td>{supporter.organization}</td>
-                  <td className=''>
-                    <div className='text-center'>
-                      <div onClick={() => handleRemoval(supporter._id)} className='m-2 danger-box p-1 theme-purple'> <BsDashCircle size={22} color='white' className='mx-2'/>Remove </div>
-                    </div>
-                  </td>
-                </tr>
-              )) : supporters.map((supporter, index) => (
-                <tr key={supporter._id}>
-                  <td>{counter + index}</td>
-                  <td>
-                    <div className="rounded-circle overflow-hidden mx-auto" style={{ width: '50px', height: '50px' }}>
-                      <img
-                        src={`${IMG_BASE_URL}/${supporter.image && supporter.image.filename ? supporter.image.filename : demoImage}`}
-                        alt={`${supporter.name}'s avatar`}
-                        className="img-fluid"
-                        onError={(e) => {
-                          e.target.onerror = null;
-                          e.target.src = demoImage; 
-                        }}
-                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                      />
-                    </div>
-                  </td>
-                  <td>{supporter.name}</td>
-                  <td>{supporter.contact}</td>
-                  <td>{supporter.email}</td>
-                  <td>{supporter.organization}</td>
-                  <td className=''>
-                    <div className='text-center'>
-                      <i className="bi bi-eye m-3" onClick={() => handleView(supporter)}></i>
-                      <i className="bi bi-x m-3 redhover" onClick={() => handleReject(supporter._id)}></i>
-                      <i className="bi bi-check2 m-3 greenhover" onClick={() => handleApprove(supporter._id)}></i>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+              {action ? (
+                activeSupporters.length === 0 ? (
+                  <tr>
+                    <td colSpan="7" className="text-center">No approved supporters found</td>
+                  </tr>
+                ) : (
+                  activeSupporters.map((supporter, index) => (
+                    <tr key={supporter._id}>
+                      <td>{counter + index}</td>
+                      <td>
+                        <div className="rounded-circle overflow-hidden mx-auto" style={{ width: '50px', height: '50px' }}>
+                          <img
+                            src={`${IMG_BASE_URL}/${supporter.image && supporter.image.filename ? supporter.image.filename : demoImage}`}
+                            alt={`${supporter.name}'s avatar`}
+                            className="img-fluid"
+                            onError={(e) => {
+                              e.target.onerror = null;
+                              e.target.src = demoImage; 
+                            }}
+                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                          />
+                        </div>
+                      </td>
+                      <td>{supporter.name}</td>
+                      <td>{supporter.contact}</td>
+                      <td>{supporter.email}</td>
+                      <td>{supporter.organization}</td>
+                      <td className=''>
+                        <div className='text-center'>
+                          <div onClick={() => handleRemoval(supporter._id)} className='m-2 danger-box p-1 theme-purple'> <BsDashCircle size={22} color='white' className='mx-2'/>Remove </div>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                )
+              ) : (
+                supporters.map((supporter, index) => (
+                  <tr key={supporter._id}>
+                    <td>{counter + index}</td>
+                    <td>
+                      <div className="rounded-circle overflow-hidden mx-auto" style={{ width: '50px', height: '50px' }}>
+                        <img
+                          src={`${IMG_BASE_URL}/${supporter.image && supporter.image.filename ? supporter.image.filename : demoImage}`}
+                          alt={`${supporter.name}'s avatar`}
+                          className="img-fluid"
+                          onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = demoImage; 
+                          }}
+                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        />
+                      </div>
+                    </td>
+                    <td>{supporter.name}</td>
+                    <td>{supporter.contact}</td>
+                    <td>{supporter.email}</td>
+                    <td>{supporter.organization}</td>
+                    <td className=''>
+                      <div className='text-center'>
+                        <i className="bi bi-eye m-3" onClick={() => handleView(supporter)}></i>
+                        <i className="bi bi-x m-3 redhover" onClick={() => handleReject(supporter._id)}></i>
+                        <i className="bi bi-check2 m-3 greenhover" onClick={() => handleApprove(supporter._id)}></i>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </Table>
 

@@ -171,7 +171,7 @@ const AdminSidebar = ({ changeActivePage }) => {
                 </ul>
               </li>
               <li className='admin-list w-100 border-bottom border-dark-subtle'>
-                <Link to="/blogs" className="nav-link d-flex justify-content-between align-items-center ">
+                <Link  className="nav-link d-flex justify-content-between align-items-center " onClick={() => changeActivePage("blogs")}>
                   <div className="d-flex align-items-center">
                     <FaBookOpen size={24} className='theme-purple' />
                     <span className="ms-1 d-none d-sm-inline theme-purple">Blogs</span>

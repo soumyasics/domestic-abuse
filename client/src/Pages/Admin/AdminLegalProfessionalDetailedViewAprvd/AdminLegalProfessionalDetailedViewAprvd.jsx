@@ -10,6 +10,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { FaFile } from "react-icons/fa";
 import axiosInstance from '../../../Constant/BaseURL'
+import { Eyeglasses } from 'react-bootstrap-icons';
 
 function AdminLegalProfessionalDetailedViewAprvd() {
     const { id } = useParams();
@@ -20,7 +21,10 @@ function AdminLegalProfessionalDetailedViewAprvd() {
         if (id) {
           try {
             const legalProfessionalData = await getLegalProfessionalById(id);
+            if(legalProfessionalData.data)
             setLegalProfessional(legalProfessionalData.data);
+          else 
+          setLegalProfessional(null)
           } catch (error) {
             console.error('Failed to fetch legal professional data:', error);
           }

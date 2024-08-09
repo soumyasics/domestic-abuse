@@ -90,13 +90,18 @@ const viewLegalProfessionals = (req, res) => {
           data: data
         });
       } else {
-        res.json({
-          status: 200,
-          msg: "No Data obtained"
+        console.log("in else");
+        
+       return res.json({
+          status: 400,
+          msg: "No Data obtained",
+          data:[]
         });
       }
     })
     .catch(err => {
+      console.log(err);
+      
       res.status(500).json({
         status: 500,
         msg: "Data not obtained",

@@ -78,6 +78,8 @@ const navigate=useNavigate()
     setCurrentPage(event.selected);
   };
   const navigateToInd=(id)=>{
+    // <Link  className="nav-link d-flex justify-content-between align-items-center " onClick={() => changeActivePage("blogs")}>
+
     navigate(`/admin-viewdetailedLegalProfessional-aprvd/${id}`)
   } 
   const paginatedLegalProfessionals = Array.isArray(legalProfessionals)
