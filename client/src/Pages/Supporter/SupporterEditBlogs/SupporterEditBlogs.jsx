@@ -83,7 +83,7 @@ function SupporterEditBlogs() {
 
             if (response.status === 200) {
                 toast.success('Blog updated successfully');
-                // navigate('/supporter-view-blogs');
+               setTimeout(()=>{navigate(-1)},800)
             } else {
                 toast.error(response.message || 'Failed to update blog');
             }
