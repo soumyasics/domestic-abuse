@@ -1510,7 +1510,7 @@ export const fetchHouseReqss = async (issueId) => {
 //Api for send req to LP
 export const fetchCouncReqss = async (issueId) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/getCouncellrReqStatusForSugge/${issueId}`);
+    const response = await axios.post(`${API_BASE_URL}/getCouncReqStatusForSugge/${issueId}`);
     console.log("in ",response);
     return response.data;
   } catch (error) {

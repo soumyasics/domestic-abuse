@@ -83,8 +83,11 @@ function LegalProfessionalAddPayment() {
     setIsSubmitting(true);
     try {
       const response = await addPayment(formValues);
+      console.log("resp here",response);
+      
       if (response.success) {
         toast.success('Payment requested successfully!');
+        fetchAppointments()
         // Reset form or perform additional actions on success
       } else {
         toast.error(response.message);

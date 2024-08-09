@@ -209,6 +209,8 @@ function SupporterViewSuggestionDetails() {
                     <Accordion.Item eventKey="0">
                         <Accordion.Header>Moved to Legal Professional Option</Accordion.Header>
                         <Accordion.Body>
+                            {console.log("lg",legalReqs)
+                            }
                             {legalReqs&&legalReqs.length > 0 ? (
                                 <div className='row m-5'>
                                     <div className='col'>
@@ -220,7 +222,7 @@ function SupporterViewSuggestionDetails() {
                                                     <th scope="col" className='theme-purple'>Mail Id</th>
                                                     <th scope="col" className='theme-purple'>Contact Number</th>
                                                     <th scope="col" className='theme-purple'>Firm Name</th>
-                                                    <th scope="col" className='theme-purple'>Firm Address</th>
+                                                    <th scope="col" className='theme-purple'>Request Date</th>
                                                     <th scope="col" className='theme-purple'>License Number</th>
                                                     <th scope="col" className='theme-purple'>Status</th>
                                                 </tr>
@@ -229,13 +231,13 @@ function SupporterViewSuggestionDetails() {
                                                 {legalReqs.map((req, index) => (
                                                     <tr key={index}>
                                                         <td>{index + 1}</td>
-                                                        <td>{req.advocateName}</td>
-                                                        <td>{req.mailId}</td>
-                                                        <td>{req.contactNumber}</td>
-                                                        <td>{req.firmName}</td>
-                                                        <td>{req.firmAddress}</td>
-                                                        <td>{req.licenseNumber}</td>
-                                                        <td>{req.status}</td>
+                                                        <td>{req.lpId.name}</td>
+                                                        <td>{req.lpId.email}</td>
+                                                        <td>{req.lpId.contact}</td>
+                                                        <td>{req.lpId.firmName}</td>
+                                                        <td>{req.date.slice(0,10)}</td>
+                                                        <td>{req.lpId.licenseNumber}</td>
+                                                        <td>{req.lpStatus}</td>
                                                     </tr>
                                                 ))}
                                             </tbody>

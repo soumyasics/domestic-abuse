@@ -143,9 +143,9 @@ const handleSubmit = async (e) => {
             const response = await editCounsellorById(counsellorId, counsellor);
             console.log('Edit supporter response:', response);
 
-            if (response.success==200) {
+            if (response.success) {
                 toast.success('Profile updated successfully');
-                navigate('/counsellor-home');
+                // navigate('/counsellor-home');
             } else {
                 toast.error(response.message || 'Failed to update profile');
             }

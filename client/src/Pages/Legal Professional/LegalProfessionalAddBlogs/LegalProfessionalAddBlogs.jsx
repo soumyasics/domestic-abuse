@@ -100,6 +100,7 @@ function LegalProfessionalAddBlogs() {
                                     type='text'
                                     name='title'
                                     value={formValues.title}
+                                    placeholder='Bolg Title'
                                     onChange={handleChange}
                                     className={`form-control form-control-lg supporter-add-blog-input opacity-50 shadow m-2 me-0 border ${errors.title ? 'is-invalid' : ''}`}
                                     required
@@ -120,6 +121,7 @@ function LegalProfessionalAddBlogs() {
                                     onChange={handleChange}
                                     className={`form-control form-control-lg supporter-add-blog-input opacity-50 shadow m-2 me-0 border ${errors.content ? 'is-invalid' : ''}`}
                                     required
+                                      placeholder='Bolg Contents'
                                 />
                                 {errors.content && <div id="contentError" className="invalid-feedback ms-2">{errors.content}</div>}
                             </div>
@@ -147,9 +149,7 @@ function LegalProfessionalAddBlogs() {
                         <div className='col-4 text-end'>
                             <button type='submit' className='btn text-white bg-purple py-2 px-5 '>Add Blogs</button>
                         </div>
-                        <div className='col-4 text-end'>
-                            <button type='button' className='btn text-white bg-purple py-2 px-5 '>Cancel</button>
-                        </div>
+                       
                     </div>
                 </form>
             </div>

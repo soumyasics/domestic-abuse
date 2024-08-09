@@ -6,6 +6,10 @@ import AuthContext from '../../../context/AuthContext';
 
 function AdminNavbar() {
   const navigate = useNavigate();
+  useEffect(() => {
+    if(localStorage.getItem("admin")!=1)
+      navigate('/admin-login');
+  }, []);
   // const { isLoggedIn, logout } = useContext(AuthContext);
 
   const handleImageClick = () => {
@@ -13,10 +17,7 @@ function AdminNavbar() {
  
   };
 
-useEffect(() => {
-  if(localStorage.getItem("admin")==0)
-    navigate('/admin-login');
-}, []);
+
   const handleLogout = () => {
     localStorage.setItem('admin',0)
     navigate('/admin-login');

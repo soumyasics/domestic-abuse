@@ -139,7 +139,7 @@ function UserViewSuggestionDetails() {
       await fetchSuggestions();
       await fetchSuggestionsByIssues();
       await fetchLegalReqs()
-      // await fetchCouncReqs()
+      await fetchCouncReqs()
       await fetchHouseReqs()
     };
     fetchData();
@@ -331,9 +331,11 @@ function UserViewSuggestionDetails() {
             </>):('')
           }
                 {((houses.pending==0)&&(houses.approved==0)&&(houses.rejected==0))?'':(
-            <div className='col text-center'>
+  <div className='col text-center'>
+                          <Link to={`/user-view-safehouse-issue/${id}`}> 
+
             <button className='btn bg-purple text-white rounded-4 px-5'>View Details</button>
-            </div>
+            </Link> </div>
                 )}
           </div>
           </>):('')
