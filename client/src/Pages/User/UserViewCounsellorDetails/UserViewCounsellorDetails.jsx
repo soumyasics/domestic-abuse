@@ -159,12 +159,14 @@ const navtoHome=()=>{
                             </div>
                         </div>
                     </div>
+                    {issueId=='undefined'?(''):(<>
                     <div className='row m-5'>
                         <div className='col'>
                             <h3 className='theme-purple'>Add Details</h3>
                         </div>
                     </div>
-                    <form onSubmit={handleSubmit} noValidate>
+                 
+                     <form onSubmit={handleSubmit} noValidate>
                         <div className='row m-5'>
                             <div className='col-6'>
                                 <label htmlFor='appointmentDate' className='form-label theme-purple'>Counselling Date</label>
@@ -195,6 +197,8 @@ const navtoHome=()=>{
                             </div>
                         </div>)}
                     </form>
+                    </>
+)}
                 </div>
             </div>
         </div>

@@ -1,10 +1,11 @@
 //src/Services/apiService.jsx
 import axios from 'axios';
+import { MdElectricalServices } from 'react-icons/md';
 
-// export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
-// export const IMG_BASE_URL = 'http://localhost:4039/';
-export const IMG_BASE_URL = 'http://hybrid.srishticampus.in:4039/';
-export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
+export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
+export const IMG_BASE_URL = 'http://localhost:4039/';
+// export const IMG_BASE_URL = 'http://hybrid.srishticampus.in:4039/';
+// export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
 // Api for Viewing all Supporters Request for admin to approve, reject or view
 export const viewSupporterReqsForAdmin = async () => {
   try {
@@ -798,9 +799,11 @@ export const viewAllApprovedLegalProfessionals = async () => {
   try {
     console.log("in fun");
     const response = await axios.post(`${API_BASE_URL}/viewLegalProfessionals`);
-    console.log("in fun",response.data.data);
-
+    console.log("in fun",response.data.status);
+if(response.data.status==200)
     return response.data.data;
+  else
+  return []
   } catch (error) {
     console.error('Error fetching legal professional by ID:', error);
     throw error;

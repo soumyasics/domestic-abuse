@@ -12,16 +12,19 @@ function SupporterEditBlogs() {
     const [formValues, setFormValues] = useState({
         title: '',
         content: '',
-        image: null,
+        image: {filename:''},
     });
+    const [imagePreview, setImagePreview] = useState(demo);
 
     useEffect(() => {
         // Fetch blogs from backend
         const fetchBlogs = async () => {
             try {
                 const response = await viewBlogsById(id);
-                console.log("Blog", response);
-                setFormValues(response.data);
+                console.log("Blog", response.data.data);
+                setFormValues(response.data.data);
+                setImagePreview(response.data.data.image ? `${IMG_BASE_URL}/${response.data.data.image.filename}` : demo);
+
             } catch (error) {
                 console.error('Error fetching blogs:', error);
             }
@@ -46,6 +49,19 @@ function SupporterEditBlogs() {
         const { name, value, files } = e.target;
         if (name === 'image') {
             setFormValues({ ...formValues, image: files[0] });
+         
+                const file = e.target.files[0];
+                if (file) {
+                  
+                       formValues.image=file
+                
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        setImagePreview(reader.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            
         } else {
             setFormValues({ ...formValues, [name]: value });
         }
@@ -67,7 +83,7 @@ function SupporterEditBlogs() {
 
             if (response.status === 200) {
                 toast.success('Blog updated successfully');
-                navigate('/supporter-view-blogs');
+                // navigate('/supporter-view-blogs');
             } else {
                 toast.error(response.message || 'Failed to update blog');
             }
@@ -90,8 +106,11 @@ function SupporterEditBlogs() {
                         <div className='row m-5'>
                             <div className='col position-relative'>
                                 <div className='overflow-hidden'>
+
+                                    {console.log(imagePreview)}
+                                    
                                     <img
-                                        src={formValues.image ? `${IMG_BASE_URL}/${formValues.image.filename}` : demo}
+                                        src={imagePreview ? `${imagePreview}` : demo}
                                         alt='blog demo'
                                         className='img-fluid'
                                         onError={(e) => {

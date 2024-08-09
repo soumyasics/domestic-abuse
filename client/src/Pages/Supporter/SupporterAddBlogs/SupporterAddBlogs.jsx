@@ -100,6 +100,7 @@ function SupporterAddBlogs() {
                                         name='title'
                                         value={formValues.title}
                                         onChange={handleChange}
+                                        placeholder='Add Blog Title Here'
                                         className={`form-control form-control-lg supporter-add-blog-input opacity-50 shadow m-2 me-0 border ${errors.title ? 'is-invalid' : ''}`}
                                         required
                                     />
@@ -117,6 +118,7 @@ function SupporterAddBlogs() {
                                         name='content'
                                         value={formValues.content}
                                         onChange={handleChange}
+                                         placeholder='Add Blog Content Here'
                                         className={`form-control form-control-lg supporter-add-blog-input opacity-50 shadow m-2 me-0 border ${errors.content ? 'is-invalid' : ''}`}
                                         required
                                     />
@@ -134,6 +136,7 @@ function SupporterAddBlogs() {
                                         type='file'
                                         name='image'
                                         onChange={handleChange}
+                                        
                                         className={`form-control form-control-lg supporter-add-blog-input opacity-50 shadow m-2 me-0 border ${errors.image ? 'is-invalid' : ''}`}
                                         required
                                     />
