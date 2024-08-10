@@ -101,7 +101,7 @@ const viewpendingReqsBySuppId= (req, res) => {
 };
 
 const viewhouseReqsByUserId= (req, res) => {
-    houseReqSchema.find({userId:req.params.id}).populate('suppId houseId')
+    houseReqSchema.find({userId:req.params.id}).sort({createdAt:-1}).populate('suppId houseId')
     .exec()
     .then(data => {
       if (data.length > 0) {

@@ -9,6 +9,8 @@ const addReq= async (req, res) => {
   try {
     const { issueId,cId,date } = req.body;
    let cases= await Case.findOne({issueId:issueId,userId:req.params.id})
+   console.log("cases",cases);
+   
 if(cases){
   return res.json({
     status: 409,
@@ -150,6 +152,33 @@ const viewCaseReqsByIssueId = (req, res) => {
       });
     });
 };
+const viewCaseReqsByIssueId1 = (req, res) => {
+  console.log("here",req.params.id);
+  
+  Case.findOne({issueId:req.params.id}).populate('issueId userId cId')
+    .exec()
+    .then(data => {
+      if (data) {
+        res.json({
+          status: 200,
+          msg: 'Data obtained successfully',
+          data: data,
+        });
+      } else {
+        res.json({
+          status: 200,
+          msg: 'No data obtained',
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({
+        status: 500,
+        msg: 'Data not obtained',
+        Error: err,
+      });
+    });
+};
 
 // View issue by ID
 const viewCaseReqById = (req, res) => {
@@ -251,5 +280,6 @@ module.exports = {
   rejectCaseByUserId,
   viewCaseReqsByUserId,
   viewCaseReqsByIssueId,
-  getCouncellrReqStatusForSugge
+  getCouncellrReqStatusForSugge,
+  viewCaseReqsByIssueId1
 };

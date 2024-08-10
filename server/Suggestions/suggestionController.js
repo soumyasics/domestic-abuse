@@ -152,7 +152,7 @@ const viewSuggestionBySuppId = (req, res) => {
 
 // View suggestion by ID
 const viewSuggestionByIssueId = (req, res) => {
-    Suggestion.findOne({ issueId: req.params.id })
+    Suggestion.findOne({ issueId: req.params.id }).sort({createdAt:-1})
         .populate('userId')
         .populate('supporterId')
         .populate('issueId')
