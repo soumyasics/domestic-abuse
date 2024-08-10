@@ -75,6 +75,8 @@ function UserViewSuggestionDetails() {
     }
   };
   let st=datas.pending==1?'p':((datas.approved)==1?'a':'r')
+  let stc=couns.pending==1?'p':((couns.approved)==1?'a':'r')
+
   const fetchSuggestions = async () => {
     try {
       const response = await getSuggestionById(id);
@@ -369,7 +371,9 @@ function UserViewSuggestionDetails() {
                   {((couns.pending==0)&&(couns.approved==0)&&(couns.rejected==0))?'':(
 
             <div className='col text-center'>
+               <Link to={`/user-view-all-counsellor-details-withIssue/${stc}/${id}`}> 
               <button className='btn bg-purple text-white rounded-4 px-5'>View Details</button>
+              </Link>
             </div> 
                   )}
           </div>

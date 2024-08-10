@@ -179,6 +179,7 @@ router.post('/getCouncReqStatusForSugge/:id',councReqs.getCouncellrReqStatusForS
 
 router.post('/viewCouncCaseReqsByUserId/:id',councReqs.viewCaseReqsByUserId);
 router.post('/viewCouncCaseReqsByIssueId/:id',councReqs.viewCaseReqsByIssueId);
+router.post('/viewCouncCaseReqsByIssueId1/:id',councReqs.viewCaseReqsByIssueId1);
 
 
 

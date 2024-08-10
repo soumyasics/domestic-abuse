@@ -1676,7 +1676,16 @@ export const viewCouncCaseReqsByIssueId = async (id) => {
     throw error;
   }
 };
-
+export const viewCouncCaseReqsByIssueId1 = async (id) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewCouncCaseReqsByIssueId1/${id}`);
+    console.log("in ",response);
+    return response.data.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
 export const viewLegalReqsByIssueId = async (id) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/viewCaseReqsByIssueId/${id}`);

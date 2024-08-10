@@ -28,6 +28,6 @@ const caseeSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'issues'
   },
-});
+},{timestamps:true});
 
 module.exports = mongoose.model('houserequests', caseeSchema);

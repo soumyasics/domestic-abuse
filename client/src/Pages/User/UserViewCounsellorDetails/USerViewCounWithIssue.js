@@ -3,11 +3,10 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getCounsellorById, bookCounsellorAppointment, sendReqCounc } from '../../../Services/apiService';
+import { getCounsellorById, bookCounsellorAppointment, sendReqCounc, viewCouncCaseReqsByIssueId1 } from '../../../Services/apiService';
 
-function UserViewCounsellorDetails() {
-    const { cid } = useParams();
-    const { issueId } = useParams();
+function USerViewCounWithIssue() {
+    const {st, id } = useParams();
 
     const navigate = useNavigate();
     const [counsellor, setCounsellor] = useState({});
@@ -18,7 +17,9 @@ function UserViewCounsellorDetails() {
     useEffect(() => {
         const fetchCounsellorDetails = async () => {
             try {
-                const response = await getCounsellorById(cid);
+                const response = await viewCouncCaseReqsByIssueId1(id);
+                console.log("datas",response);
+                
                 setCounsellor(response);
             } catch (error) {
                 toast.error('Error fetching counsellor details.');
@@ -26,49 +27,15 @@ function UserViewCounsellorDetails() {
         };
 
         fetchCounsellorDetails();
-    }, [cid]);
+    }, [id]);
 
-    const validate = () => {
-        const newErrors = {};
-        if (!appointmentDate) {
-            newErrors.appointmentDate = 'Appointment date is required.';
-        } else if (new Date(appointmentDate) <= new Date()) {
-            newErrors.appointmentDate = 'Appointment date must be in the future.';
-        }
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
-    };
 
-    const handleChange = (e) => {
-        setAppointmentDate(e.target.value);
-    };
+
+
 const navtoHome=()=>{
     navigate('/user-home')
 }
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (!validate()) {
-            toast.error('Please fix the errors in the form.');
-            return;
-          }
-        try {
-            const response = await sendReqCounc(issueId,cid,localStorage.getItem('userId'));
-            if (response.status === 200) {
-                console.log(response);
-              toast.success('Request sent successfully.');
-              setTimeout(navtoHome,700)
-      
-            } else {
-                toast.error(response.msg);
-              console.log(response);
-            }
-          } catch (error) {
-            console.error('Error fetching user data:', error);
-            toast.error('An error occurred while fetching the user data');
-          }
-       
-        
-    };
+
 
     return (
         <div className='container-fluid'>
@@ -93,7 +60,7 @@ const navtoHome=()=>{
                                     Name
                                 </div>
                                 <div className='col theme-purple'>
-                                    {counsellor?.name}
+                                    {counsellor?.cId?.name}
                                 </div>
                             </div>
                         </div>
@@ -103,7 +70,7 @@ const navtoHome=()=>{
                                     Email Id
                                 </div>
                                 <div className='col theme-purple'>
-                                    {counsellor?.email}
+                                    {counsellor?.cId?.email}
                                 </div>
                             </div>
                         </div>
@@ -115,7 +82,7 @@ const navtoHome=()=>{
                                     Contact Number
                                 </div>
                                 <div className='col theme-purple'>
-                                    {counsellor?.contact}
+                                    {counsellor?.cId?.contact}
                                 </div>
                             </div>
                         </div>
@@ -125,7 +92,7 @@ const navtoHome=()=>{
                                     Language
                                 </div>
                                 <div className='col theme-purple'>
-                                    {counsellor?.language}
+                                    {counsellor?.cId?.language}
                                 </div>
                             </div>
                         </div>
@@ -137,7 +104,7 @@ const navtoHome=()=>{
                                     Experience
                                 </div>
                                 <div className='col theme-purple'>
-                                    {counsellor?.experience}
+                                    {counsellor?.cId?.experience}
                                 </div>
                             </div>
                         </div>
@@ -147,7 +114,7 @@ const navtoHome=()=>{
                                     Location
                                 </div>
                                 <div className='col theme-purple'>
-                                    {counsellor?.location}
+                                    {counsellor?.cId?.location}
                                 </div>
                             </div>
                         </div>
@@ -159,55 +126,26 @@ const navtoHome=()=>{
                                     Specialisation
                                 </div>
                                 <div className='col theme-purple'>
-                                    {counsellor?.specialisation}
+                                    {counsellor?.cId?.specialisation}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {issueId==='undefined'?(''):(<>
                     <div className='row m-5'>
                         <div className='col'>
-                            <h3 className='theme-purple'>Add Details</h3>
+                            <div className='row'>
+                                <div className='col text-secondary'>
+                                    Request Status
+                                </div>
+                                <div className='col-6 text-secondary'>
+               {(st=='p')?<span>Pending</span>:(st=='a')?<span>Approved</span>:<span>Rejected</span>}
+                  </div>
+                            </div>
                         </div>
                     </div>
-                 
-                     <form onSubmit={handleSubmit} noValidate>
-                        <div className='row m-5'>
-                            <div className='col-6'>
-                                <label htmlFor='appointmentDate' className='form-label theme-purple'>Counselling Date</label>
-                            </div>
-                        </div>
-                        <div className='row m-5'>
-                            <div className='col-6'>
-                                <div className="input-group">
-                                    <input
-                                        type='datetime-local'
-                                        id="appointmentDate"
-                                        name="appointmentDate"
-                                        className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.appointmentDate ? 'is-invalid' : ''}`}
-                                        value={appointmentDate}
-                                        onChange={handleChange}
-                                        aria-describedby="appointmentDateError"
-                                        required
-                                    />
-                                    {errors.appointmentDate && <div id="appointmentDateError" className="invalid-feedback">{errors.appointmentDate}</div>}
-                                </div>
-                            </div>
-                        </div>
-                       {issueId==='undefined'?( ''):(<div className='row m-5'>
-                            <div className='col text-end'>
-                                <button type="submit" className="btn bg-theme btn-lg fw-bolder px-5 text-white rounded-4 mx-5" disabled={isSubmitting}>
-                                    {isSubmitting ? 'Booking...' : 'Book Now'}
-                                </button>
-                            </div>
-                        </div>)}
-                    </form>
-                    </>
-)}
                 </div>
             </div>
         </div>
     );
 }
-
-export default UserViewCounsellorDetails;
+export default USerViewCounWithIssue
