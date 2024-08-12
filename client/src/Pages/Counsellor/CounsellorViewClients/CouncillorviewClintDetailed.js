@@ -164,7 +164,7 @@ function CouncillorviewClintDetailed() {
                 <div className='row m-5'>
                     <div className='col'>
                     {console.log(user)}
-                        <h3 className='theme-purple'>Current Status</h3>
+                        <h3 className='theme-purple'>Supporter Suggestions</h3>
                     </div>
                 </div>
     
@@ -174,7 +174,7 @@ function CouncillorviewClintDetailed() {
                     <>
                 <div className='row m-5 supporter-add-suggestion-box1 rounded-3 py-1 text-center'>
                     <div className='col '>
-                        <h3 className='text-white'>Moved to Legal Professional Option</h3>
+                        <h3 className='text-white'>Meet A Legal Professional</h3>
                     </div>
                 </div>
                 <div className='row m-5'>
@@ -218,7 +218,7 @@ function CouncillorviewClintDetailed() {
              <>
                 <div className='row m-5 supporter-add-suggestion-box2 rounded-3 py-1 text-center'>
                     <div className='col '>
-                        <h3 className='text-white'>Moved to Safe House Option</h3>
+                        <h3 className='text-white'>Move to Safe House</h3>
                     </div>
                 </div>
                 <div className='row m-5'>
@@ -257,7 +257,7 @@ function CouncillorviewClintDetailed() {
                 <>  
                     <div className='row m-5 supporter-add-suggestion-box3 rounded-3 py-1 text-center'>
                     <div className='col '>
-                        <h3 className='text-white'>Moved to Safe Counselor Option</h3>
+                        <h3 className='text-white'>Meet A Counsellor</h3>
                     </div>
                 </div>
                 <div className='row m-5'>

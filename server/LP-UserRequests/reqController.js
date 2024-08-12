@@ -8,7 +8,7 @@ const multer = require('multer');
 const addReq= async (req, res) => {
   try {
     const { issueId,lpId,date } = req.body;
-   let cases= await Case.findOne({issueId:issueId,userId:req.params.id})
+   let cases= await Case.findOne({issueId:issueId,userId:req.params.id,lpId:lpId})
 if(cases){
   return res.json({
     status: 409,
@@ -76,9 +76,9 @@ const viewCasePendingReqsByLpId= (req, res) => {
 const getLpReqStatusForSugge=async(req, res) => {
   let approved=0,pending=0,rejected=0
   try{
- const apprData=await Case.find({issueId:req.params.id,lpStatus:'approved'}).populate('lpId')
- const pendData=await Case.find({issueId:req.params.id,lpStatus:'pending'}).populate('lpId')
- const rejData=await Case.find({issueId:req.params.id,lpStatus:'rejected'}).populate('lpId')
+ const apprData=await Case.find({issueId:req.params.id,lpStatus:'approved'}).populate('lpId').sort({createdAt:-1}).limit(1)
+ const pendData=await Case.find({issueId:req.params.id,lpStatus:'pending'}).populate('lpId').sort({createdAt:-1}).limit(1)
+ const rejData=await Case.find({issueId:req.params.id,lpStatus:'rejected'}).populate('lpId').sort({createdAt:-1}).limit(1)
 if(apprData.length>0)
   approved=apprData.length
 if(pendData.length>0)
