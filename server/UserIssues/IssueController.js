@@ -275,44 +275,117 @@ const getTypeFromDescription = (req,res) => {
 
 const diseasesData = require('./issuesDataset.json'); 
 
+// const getDiseaseBySymptoms = (req, res) => {
+//     try {
+// console.log(req.body.description);
+//        const  symptoms  = req.body.description;
+
+//         if (!symptoms || !Array.isArray(symptoms) || symptoms.length === 0) {
+//             return res.status(400).json({ message: 'Please provide an array of symptoms.' });
+//         }
+
+// //         // Initialize a set to avoid duplicate disease names
+//         const diseaseSet = new Set();
+
+// //         // Iterate over each symptom
+//         symptoms.forEach(symptom => {
+// //             // Iterate over each disease in the diseasesData
+//             for (const [disease, diseaseSymptoms] of Object.entries(diseasesData)) {
+//                 if ((diseaseSymptoms).includes(symptom)) {
+//                     diseaseSet.add(disease);
+//                 }
+//             }
+//         });
+
+// //         // Convert the set to an array
+//         const diseases = Array.from(diseaseSet);
+// console.log(diseases);
+//         res.status(200).json({
+//             status: 200,
+//             message: 'Diseases retrieved successfully',
+//             data: diseases,
+//         });
+//     } catch (error) {
+//         console.error('Error processing symptoms:', error);
+//         res.status(500).json({
+//             message: 'Error processing symptoms',
+//             error: error.message,
+//         });
+//     }
+// };
+
 const getDiseaseBySymptoms = (req, res) => {
-    try {
-console.log(req.body.description);
-       const  symptoms  = req.body.description;
+  try {
+      console.log(req.body.description);
+      const symptoms = req.body.description;
 
-        if (!symptoms || !Array.isArray(symptoms) || symptoms.length === 0) {
-            return res.status(400).json({ message: 'Please provide an array of symptoms.' });
-        }
+      if (!symptoms || !Array.isArray(symptoms) || symptoms.length === 0) {
+          return res.status(400).json({ message: 'Please provide an array of symptoms.' });
+      }
 
-//         // Initialize a set to avoid duplicate disease names
-        const diseaseSet = new Set();
+      // Initialize a set to avoid duplicate disease names
+      const diseaseSet = new Set();
 
-//         // Iterate over each symptom
-        symptoms.forEach(symptom => {
-//             // Iterate over each disease in the diseasesData
-            for (const [disease, diseaseSymptoms] of Object.entries(diseasesData)) {
-                if ((diseaseSymptoms).includes(symptom)) {
-                    diseaseSet.add(disease);
-                }
-            }
-        });
+      // Normalize symptoms
+      const normalizedSymptoms = symptoms.map(symptom => symptom.toLowerCase().trim());
 
-//         // Convert the set to an array
-        const diseases = Array.from(diseaseSet);
-console.log(diseases);
-        res.status(200).json({
-            status: 200,
-            message: 'Diseases retrieved successfully',
-            data: diseases,
-        });
-    } catch (error) {
-        console.error('Error processing symptoms:', error);
-        res.status(500).json({
-            message: 'Error processing symptoms',
-            error: error.message,
-        });
-    }
+      // Function to check if a symptom exactly matches any disease symptom
+      const isExactMatch = (symptom, diseaseSymptoms) => {
+          const normalizedSymptom = symptom.toLowerCase().trim();
+          // Check if the entire normalized symptom is found as a complete match
+          return diseaseSymptoms.some(diseaseSymptom => {
+              const normalizedDiseaseSymptom = diseaseSymptom.toLowerCase().trim();
+              return normalizedDiseaseSymptom === normalizedSymptom;
+          });
+      };
+
+      // Flag to check if any match is found
+      let matchFound = false;
+
+      // Iterate over each symptom
+      normalizedSymptoms.forEach(symptom => {
+          // Iterate over each disease in the diseasesData
+          for (const [disease, diseaseSymptoms] of Object.entries(diseasesData)) {
+              // Normalize disease symptoms
+              const normalizedDiseaseSymptoms = diseaseSymptoms.map(s => s.toLowerCase().trim());
+
+              // Check if the symptom exactly matches any of the disease symptoms
+              if (isExactMatch(symptom, normalizedDiseaseSymptoms)) {
+                  diseaseSet.add(disease);
+                  matchFound = true;
+              }
+          }
+      });
+
+      // Convert the set to an array
+      const diseases = Array.from(diseaseSet);
+
+      if (!matchFound) {
+          // Return a message if no matching symptoms are found
+          return res.status(200).json({
+              status: 200,
+              message: 'No diseases found matching the provided symptoms.',
+              data: [],
+          });
+      }
+
+      console.log(diseases);
+      res.status(200).json({
+          status: 200,
+          message: 'Diseases retrieved successfully',
+          data: diseases,
+      });
+  } catch (error) {
+      console.error('Error processing symptoms:', error);
+      res.status(500).json({
+          message: 'Error processing symptoms',
+          error: error.message,
+      });
+  }
 };
+
+
+
 
 module.exports = {
   registerIssue,

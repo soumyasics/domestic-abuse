@@ -8,7 +8,7 @@ const multer = require('multer');
 const addReq= async (req, res) => {
   try {
     const { issueId,cId,date } = req.body;
-   let cases= await Case.findOne({issueId:issueId,userId:req.params.id})
+   let cases= await Case.findOne({issueId:issueId,userId:req.params.id,cId:cId})
    console.log("cases",cases);
    
 if(cases){
@@ -243,9 +243,9 @@ const rejectCaseByUserId = (req, res) => {
 const getCouncellrReqStatusForSugge=async(req, res) => {
   let approved=0,pending=0,rejected=0
   try{
- const apprData=await Case.find({issueId:req.params.id,status:'approved'})
- const pendData=await Case.find({issueId:req.params.id,status:'pending'})
- const rejData=await Case.find({issueId:req.params.id,status:'rejected'})
+ const apprData=await Case.find({issueId:req.params.id,status:'approved'}).sort({createdAt:-1}).limit(1)
+ const pendData=await Case.find({issueId:req.params.id,status:'pending'}).sort({createdAt:-1}).limit(1)
+ const rejData=await Case.find({issueId:req.params.id,status:'rejected'}).sort({createdAt:-1}).limit(1)
 if(apprData.length>0)
   approved=apprData.length
 if(pendData.length>0)

@@ -28,6 +28,6 @@ const caseeSchema = new mongoose.Schema({
     default:'pending'
   }
 
-});
+},{timestamps:true});
 
 module.exports = mongoose.model('lprequests', caseeSchema);

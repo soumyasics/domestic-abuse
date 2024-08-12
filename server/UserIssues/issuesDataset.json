@@ -5,55 +5,53 @@
         "punching",
         "kicking",
         "choking",
-        "using weapons"
+        "weapons"
     ],
     "Emotional or Psychological Abuse": [
         "belittling",
         "gaslighting",
         "intimidation",
         "threats",
-        "undermining self-esteem"
+        "self-esteem"
     ],
     "Sexual Abuse": [
         "rape",
-        "forced sexual acts",
-        "sexual coercion",
-        "non-consensual activities"
+        "coercion",
+        "activities"
     ],
     "Economic Abuse": [
-        "financial control",
-        "preventing employment",
-        "exploiting financial dependence"
+        "financial",
+        "employment",
+        "dependence"
     ],
     "Verbal Abuse": [
         "insults",
-        "derogatory comments",
-        "yelling",
-        "belittling"
+        "derogatory",
+        "yelling"
     ],
     "Digital Abuse": [
-        "stalking via social media",
-        "threatening messages",
-        "tracking movements"
+        "stalking",
+        "messages",
+        "tracking"
     ],
     "Reproductive Abuse": [
-        "forcing pregnancy",
-        "coercing abortion",
-        "sabotaging birth control"
+        "pregnancy",
+        "abortion",
+        "birth-control"
     ],
     "Isolation": [
-        "controlling social interactions",
-        "limiting communication",
-        "restricting transportation"
+        "interactions",
+        "communication",
+        "transportation"
     ],
     "Stalking": [
         "following",
-        "unwanted attention",
-        "monitoring through technology"
+        "attention",
+        "monitoring"
     ],
     "Threats and Intimidation": [
-        "violence threats",
-        "harm threats",
-        "coercion through fear"
+        "violence",
+        "harm",
+        "coercion"
     ]
 }

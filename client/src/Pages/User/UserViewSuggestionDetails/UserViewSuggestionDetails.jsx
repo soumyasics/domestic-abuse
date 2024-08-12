@@ -360,7 +360,7 @@ function UserViewSuggestionDetails() {
            <div className='col text-white supporter-add-suggestion-box3 rounded-4 text-center p-2'>
               Meet a Counselor
             </div>
-            {(couns.pending==0||couns.rejected==1)?(
+            {(couns.pending==0&&couns.rejected==1)?(
               <> 
             <div className='col text-center'>
             

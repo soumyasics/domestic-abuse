@@ -72,7 +72,7 @@ function UserAddIssue() {
             const response = await registerIssue(issue);
             if (response.success) {
                 toast.success(response.message);
-                // navigate('/user-home');
+                navigate('/user-home');
             } else {
                 toast.error(response.message);
             }
