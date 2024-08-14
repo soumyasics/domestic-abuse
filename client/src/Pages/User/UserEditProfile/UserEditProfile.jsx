@@ -5,7 +5,7 @@ import { People } from 'react-bootstrap-icons';
 import { MdEmail } from "react-icons/md";
 import { FaPhoneAlt, FaCalendarAlt, FaVenusMars, FaHome, FaUsers } from "react-icons/fa";
 import { PiPencilDuotone } from "react-icons/pi";
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getUserById, updateUser ,IMG_BASE_URL} from '../../../Services/apiService';
@@ -125,12 +125,18 @@ function UserEditProfile() {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    setUser({
+    // if(file)
+    // setUser({
+    //   ...user,
+    //   image: file,
+    // });
+
+
+     const file1 = e.target.files[0];
+      setUser({
       ...user,
       image: file,
     });
-
-     const file1 = e.target.files[0];
           if (file1) {
             
                  user.image=file
@@ -142,6 +148,8 @@ function UserEditProfile() {
               reader.readAsDataURL(file1);
           
   };
+
+
 }
 const navtoHome=()=>{
   navigate('/user-home');
@@ -196,9 +204,13 @@ const navtoHome=()=>{
     }
   
     try {
-      const response = await updateUser(userId, formData); // Update API service to handle FormData
+      const response = await updateUser(userId, formData);
+      console.log("resp",response);
+      
       if (response.success) {
-        toast.success(response.message);
+        toast.success(response.message, {
+          autoClose: 500, 
+        });
       } else {
         toast.error(response.message);
       }
@@ -214,6 +226,7 @@ const navtoHome=()=>{
     <>
     {console.log(user.name)}
       <div className="container px-5 m-auto my-5  bg-creamy text-center">
+        <ToastContainer/>
         <div className='row  m-5'>
           <div className='col'>
             <h3 className='theme-purple m-5 mb-0'>User Profile</h3>
@@ -407,7 +420,7 @@ const navtoHome=()=>{
                     className="btn bg-theme btn-lg fw-bolder px-5 text-white rounded-4 m-4"
                     disabled={isSubmitting}
                   >
-                    {isSubmitting ? 'Updating...' : 'Update'}
+                 Update
                   </button>
                 </div>
               </div>

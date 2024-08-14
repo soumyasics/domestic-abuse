@@ -1,8 +1,11 @@
 const Issue = require('./IssuesSchema');
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
+// const tf = require('@tensorflow/tfjs-node');
+// const toxicity = require('@tensorflow-models/toxicity');
 
 
+// const model = await toxicity.load(threshold);
 // Multer setup for file uploads
 const storage = multer.diskStorage({
   destination: function (req, res, cb) {
@@ -109,7 +112,7 @@ const viewPendingIssues = (req, res) => {
 };
 
 const viewSupportedIssues = (req, res) => {
-  Issue.find({suppStatus:true,userId:req.params.id})
+  Issue.find({suppStatus:true,userId:req.params.id}).sort({createdAt:-1})
     .exec()
     .then(data => {
       if (data.length > 0) {
@@ -135,7 +138,7 @@ const viewSupportedIssues = (req, res) => {
 };
 
 const viewPendingIssuesByUserId = (req, res) => {
-  Issue.find({userId:req.params.id,suppStatus:false})
+  Issue.find({userId:req.params.id,suppStatus:false}).sort({createdAt:-1})
     .exec()
     .then(data => {
       if (data.length > 0) {
@@ -385,6 +388,44 @@ const getDiseaseBySymptoms = (req, res) => {
 };
 
 
+// // Initialize model and handle its loading state
+// let modelPromise;
+// const threshold = 0.9;
+
+
+// function loadModel() {
+//   if (!modelPromise) {
+//     modelPromise = toxicity.load(threshold);
+//   }
+//   return modelPromise;
+// }
+
+// // Function to classify text
+// async function classifyText(text) {
+//   const model = await loadModel(); // Ensure the model is loaded
+//   const predictions = await model.classify(text);
+//   console.log(predictions);
+
+//   const abuseTypes = predictions.map(prediction => ({
+//     label: prediction.label,
+//     match: prediction.results.some(result => result.match)
+//   }));
+
+//   return abuseTypes;
+// }
+
+// // Express route handler
+// const getML = async (req, res) => {
+//   try {
+//     const description = "I was physically assaulted yesterday.";
+//     const abuseTypes = await classifyText(description);
+//     console.log('Detected abuse types:', abuseTypes);
+//     res.json({ detectedAbuseTypes: abuseTypes });
+//   } catch (err) {
+//     console.error("Error classifying text:", err);
+//     res.status(500).send("Internal Server Error");
+//   }
+// };
 
 
 module.exports = {
@@ -399,5 +440,6 @@ module.exports = {
   viewPendingIssuesByUserId,
   viewSupportedIssues,
   getTypeFromDescription,
-  getDiseaseBySymptoms
+  getDiseaseBySymptoms,
+  // getML
 };

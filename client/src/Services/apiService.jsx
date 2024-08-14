@@ -2,10 +2,10 @@
 import axios from 'axios';
 import { MdElectricalServices } from 'react-icons/md';
 
-// export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
-// export const IMG_BASE_URL = 'http://localhost:4039/';
-export const IMG_BASE_URL = 'http://hybrid.srishticampus.in:4039/';
-export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
+export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
+export const IMG_BASE_URL = 'http://localhost:4039/';
+// export const IMG_BASE_URL = 'http://hybrid.srishticampus.in:4039/';
+// export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
 // Api for Viewing all Supporters Request for admin to approve, reject or view
 export const viewSupporterReqsForAdmin = async () => {
   try {
@@ -915,6 +915,8 @@ export const updateUser = async (id, data) => {
       });
       console.log(response);
       if (response.data.status === 200) {
+        console.log("ok");
+        
         return { success: true, message: response.data.msg };
       } else {
         return { success: false, message: response.data.msg || 'Rejection failed' };
@@ -1519,6 +1521,18 @@ export const fetchCouncReqss = async (issueId) => {
   }
 };
 //Api for send req to LP
+export const fetchHouseStatusByIssueId = async (issueId) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/viewhouseReqsByIssueId/${issueId}`);
+    console.log("in ",response);
+    return response.data;
+  } catch (error) {
+    console.error(' Error fetching Supporter List ', error);
+    throw error;
+  }
+};
+
+//Api for send req to LP
 export const fetchLegalStatusByIssueId = async (issueId) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/viewCaseReqsByIssueId/${issueId}`);
@@ -1529,7 +1543,6 @@ export const fetchLegalStatusByIssueId = async (issueId) => {
     throw error;
   }
 };
-
 //Api for send req to LP
 export const sendReqCounc = async (issueId,cid,userId) => {
   try {

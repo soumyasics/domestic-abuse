@@ -99,7 +99,7 @@ const editUserById = async (req, res) => {
       address,
       relation,
       safetyPlan,
-      image: req.file ? req.file : null
+      image: req.file
     };
 
    

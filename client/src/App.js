@@ -106,6 +106,7 @@ import UserResetPwd from './Pages/User/UserViewBlogs/UserResetPwd';
 import SupporterResetPwd from './Pages/Supporter/SupporterViewSuggestionDetails/SupporterResetPwd';
 import CouncellorResetPwd from './Pages/Counsellor/CounsellorViewBlogs/CouncellorResetPwd';
 import USerViewCounWithIssue from './Pages/User/UserViewCounsellorDetails/USerViewCounWithIssue';
+import UserViewSafeHouseStatus from './Pages/User/UserLegalProfessionalDetails/UserViewSafeHouseStatus';
 
 function App() {
   return (
@@ -175,6 +176,7 @@ function App() {
             <Route path='/user-view-Case-Updates' element={[<UserNav/>,<UserViewCaseUpdates/>]} />
             <Route path='/user-view-case-details/:id' element={[<UserNav/>,<UserViewCaseDetailsDetailed/>]} />
             <Route path='/user-view-all-counsellor-details-withIssue/:st/:id' element={[<UserNav/>,<USerViewCounWithIssue/>]} />
+            <Route path='/user-house-view-Status/:st/:id' element={[<UserNav/>,<UserViewSafeHouseStatus/>]} />
 
             {/* Admin Paths */}
             <Route path='/admin-login' element={[<Navbar />, <AdminLogin />]} />

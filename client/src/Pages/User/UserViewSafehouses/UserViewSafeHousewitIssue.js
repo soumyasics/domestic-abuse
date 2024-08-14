@@ -6,7 +6,7 @@ import ReactPaginate from 'react-paginate';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 
 
 function UserViewSafeHousewitIssue() {
@@ -75,11 +75,13 @@ function UserViewSafeHousewitIssue() {
             houseReqs.houseId=hid
             console.log("data to be",houseReqs);
             const response = await addHouseReqsWithIssue(houseReqs,id);
-            console.log("dy",response);
-            if (response.data.status==200) {
-              toast.success('Request Send to Supporter');
+            console.log("dy",response.data.status);
+            if (response.data.status=='200') {
+              toast.success('Request Send to Supporter', {
+                autoClose: 500, 
+              });
               
-              navigate('/user-home');
+             setTimeout(()=>{navigate('/user-home')},850)
             } else {
               toast.error(response.data.msg);
             }
@@ -90,6 +92,7 @@ function UserViewSafeHousewitIssue() {
     }
         return (
             <div className='container-fluid'>
+                <ToastContainer/>
                 <div className='row my-5 mx-3'>
                     <div className='col'>
                         <FaArrowLeftLong size={35} className='cursor-pointer' onClick={() => navigate(-1)} />

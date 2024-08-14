@@ -154,6 +154,7 @@ const viewCaseReqsByUserId = (req, res) => {
       });
     });
 };
+
 // View all issues
 const viewCaseReqsByIssueId = (req, res) => {
   Case.find({issueId:req.params.id}).populate('lpId issueId')
