@@ -38,6 +38,6 @@ ref:'users'
     type:Boolean,
     default:false
   }
-});
+},{timestamps:true});
 
 module.exports = mongoose.model('issues', issueSchema);

@@ -9,6 +9,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 function SupporterAddSuggestion() {
   const navigate=useNavigate()
+  console.log("pp",localStorage.getItem('supporterId'));
+  
   const {id}=useParams()
   const [user, setUser] = useState({
     type: '',

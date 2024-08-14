@@ -76,6 +76,7 @@ function UserViewSuggestionDetails() {
   };
   let st=datas.pending==1?'p':((datas.approved)==1?'a':'r')
   let stc=couns.pending==1?'p':((couns.approved)==1?'a':'r')
+  let sth=houses.pending==1?'p':((houses.approved)==1?'a':'r')
 
   const fetchSuggestions = async () => {
     try {
@@ -334,7 +335,7 @@ function UserViewSuggestionDetails() {
           }
                 {((houses.pending==0)&&(houses.approved==0)&&(houses.rejected==0))?'':(
   <div className='col text-center'>
-                          <Link to={`/user-view-safehouse-issue/${id}`}> 
+                          <Link to={`/user-house-view-Status/${st}/${id}`}> 
 
             <button className='btn bg-purple text-white rounded-4 px-5'>View Details</button>
             </Link> </div>
@@ -360,7 +361,7 @@ function UserViewSuggestionDetails() {
            <div className='col text-white supporter-add-suggestion-box3 rounded-4 text-center p-2'>
               Meet a Counselor
             </div>
-            {(couns.pending==0&&couns.rejected==1)?(
+            {(couns.pending==0&&couns.rejected!=1)?(
               <> 
             <div className='col text-center'>
             

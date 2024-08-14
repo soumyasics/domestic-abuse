@@ -41,7 +41,9 @@ function SupporterLogin() {
       });
 
       if (result.success) {
-        toast.success('Login successful!');
+        toast.success('Login successful!', {
+          autoClose: 500,
+        });
         localStorage.setItem("supporterId", result.user._id);
         setTimeout(() => {
           navigate('/supporter-home');

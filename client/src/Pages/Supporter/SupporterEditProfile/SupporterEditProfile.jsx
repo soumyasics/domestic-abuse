@@ -5,7 +5,7 @@ import { MdEmail } from "react-icons/md";
 import { FaPhoneAlt } from "react-icons/fa";
 import { CgOrganisation } from "react-icons/cg";
 import './SupporterEditProfile.css';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import demo from '../../../Assets/supp-edit-profile.png';
 import { editSupportersById, getSupporterById, IMG_BASE_URL } from '../../../Services/apiService';
@@ -124,7 +124,9 @@ function SupporterEditProfile() {
                 console.log('Edit supporter response:', response);
 
                 if (response.success) {
-                    toast.success('Profile updated successfully');
+                    toast.success('Profile updated successfully', {
+                        autoClose: 500, 
+                      });
                     // navigate('/supporter-home');
                 } else {
                     toast.error(response.message || 'Failed to update profile');
@@ -142,6 +144,7 @@ function SupporterEditProfile() {
 
     return (
         <div className="container px-5 m-auto mt-5 container-spec bg-creamy text-center">
+            <ToastContainer/>
             <form onSubmit={handleSubmit} noValidate>
                 <div className='row align-items-center justify-content-center'>
                     <div className='col-md-6'>

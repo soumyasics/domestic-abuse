@@ -103,6 +103,7 @@ router.post('/viewPendingIssues', issue.viewPendingIssues);
 router.post('/viewPendingIssuesByUserId/:id', issue.viewPendingIssuesByUserId);
 router.post('/viewSupportedIssues/:id', issue.viewSupportedIssues);
 router.post('/getTypeFromDescription', issue.getDiseaseBySymptoms);
+// router.get('/getML', issue.getML);
 
 
 //suggestions
