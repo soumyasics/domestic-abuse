@@ -1,16 +1,13 @@
-.footer-custom {
-  height: 300px;
-  overflow: hidden;
-  background-color: #59244C;
-}
 
 .bg-theme {
   background-color: #59244C !important;
 }
 
 .social-icon-custom {
-  max-width: 50px;
-  max-height: 50px;
+  max-width: 60px;
+  min-width: 30px;
+  max-height: 60px;
+  max-height: 30px;
 }
 
 .hr-custom {
@@ -20,15 +17,23 @@
   margin: 20px 0;
 }
 
-@media (max-width: 1400px) {
-  .social-icon-custom {
-    max-width: 40px;
-    max-height: 40px;
-    min-width: 30px;
-    min-height: 30px;
-  }
-}
 .footer-img{
-  width: 50%;
-  height: 50%;
+  width: 56.44px;
+  height: 90.1px;
+}
+footer {
+  color: #fff;
+  padding: 30px 0;
+}
+
+.footer-links a {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 15px;
+  transition: color 0.3s ease;
+  background-color: #59244C;
+}
+
+.footer-links a:hover {
+  color: #adb5bd;
 }
