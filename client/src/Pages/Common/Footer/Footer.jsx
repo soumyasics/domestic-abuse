@@ -10,99 +10,92 @@ import x from '../../../Assets/transparent-x-logo-logo-brand-identity-company-or
 
 function Footer() {
   return (
-    <footer className='footer-custom'>
-      <div className='container-fluid p-0'>
-        <div className='row d-flex align-items-center justify-content-between'>
-          <div className='col d-flex align-items-center'>
-            <Link className="navbar-brand me-2 text-center" to="#">
-              <img src={brand} alt='brand' className='footer-img' />
-            </Link>
-            <h1 className='ms-0'>
-              <span className='text-white me-2 fs-3 fw-semibold'>Safe</span>
-              <span className='theme-green fs-3 fw-semibold'>Space</span>
-            </h1>
-          </div>
-          <div className='col text-white m-3'>
-            <h5 className='fs-5 fw-semibold'>Terms & Policies</h5>
-            <ul className='list-group list-group-flush text-white bg-theme'>
-              <li className='list-group-item bg-transparent border-0'>
-                <Link className='text-white text-decoration-none' to='#'>Terms of Service</Link>
-              </li>
-              <li className='list-group-item bg-transparent border-0'>
-                <Link className='text-white text-decoration-none' to='#'>Privacy Policy</Link>
-              </li>
-            </ul>
-          </div>
-          <div className='col text-white m-3'>
-            <h5 className='fs-5 fw-semibold'>Contact</h5>
-            <p>safespace@gmail.com</p>
-            <p>Skype</p>
-          </div>
-          <div className='col text-white m-3 mt-5'>
-            <h5 className='fs-5  fw-semibold'>Important</h5>
-            <p>If you are in immediate danger, please call 911. </p>
-            <p>For confidential support</p>
-            <p> call the National Domestic Violence Hotline at 1-500-719-7133.</p>
-
-          </div>
-          <div className='col text-white m-3'>
-            <div className='row'>
-              <div className='col text-center m-5 mx-0'>
-                <p className='m-auto fw-semibold'>Keep in TOUCH</p>
-              </div>
+    <>
+      <footer class="footer bg-theme">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col d-flex align-items-center justify-content-center">
+              <Link className="navbar-brand me-2 text-center" to="#">
+                <img src={brand} alt='brand' className='footer-img' />
+              </Link>
+              <h1 className='ms-0 '>
+                <span className='text-white me-2 fs-3 fw-semibold'>Safe</span>
+                <span className='theme-green fs-3 fw-semibold'>Space</span>
+              </h1>
             </div>
-            <div className='row'>
-              <div className='col d-flex justify-content-center'>
-                <span className='m-1  p-2'>
-                  <Link to={'https://www.facebook.com/login/'} className='btn'>
-                    <img src={fb} alt="Facebook" className='rounded-circle img-fluid social-icon-custom' />
-                  </Link>
-
-                </span>
-                <span className='m-1 p-2'>
-                  <Link to={'https://www.instagram.com/accounts/login/?hl=en'} className='btn'>
-                    <img src={insta} alt="Instagram" className='rounded-circle img-fluid social-icon-custom' />
-                  </Link>
-                </span>
-                <span className='m-1 p-2'>
-                  <Link to={'https://x.com/?lang=en'} className='btn'>
-                    <img src={x} alt="X" className='rounded-circle img-fluid social-icon-custom' />
-
-                  </Link>
-                </span>
-                <span className='m-1 p-2'>
-                  <Link to={'https://www.youtube.com/'} className='btn'>
-                    <img src={youtube} alt="YouTube" className='rounded-circle img-fluid social-icon-custom' />
-
-                  </Link>
-
-                </span>
-                <span className='m-1 p-2'>
-                  <Link to={'https://in.linkedin.com/'} className='btn'>
-                    <img src={linkedIn} alt="LinkedIn" className='rounded-circle img-fluid social-icon-custom' />
-
-                  </Link>
-
-                </span>
+            <div class="col">
+              <h5 className='fs-5 fw-semibold'>Terms & Policies</h5>
+              <ul className='list-group list-group-flush text-white bg-theme'>
+                <li className='list-group-item bg-transparent border-0'>
+                  <Link className='text-white text-decoration-none' to='#'>Terms of Service</Link>
+                </li>
+                <li className='list-group-item bg-transparent border-0'>
+                  <Link className='text-white text-decoration-none' to='#'>Privacy Policy</Link>
+                </li>
+              </ul>
+            </div>
+            <div class="col">
+              <h5 className='fs-5 fw-semibold'>Contact</h5>
+              <p>safespace@gmail.com</p>
+              <p>Skype</p>
+            </div>
+            <div class="col">
+              <h5 className='fs-5  fw-semibold'>Important</h5>
+              <p>If you are in immediate danger, please call 911. </p>
+              <p>For confidential support</p>
+              <p> call the National Domestic Violence Hotline at 1-500-719-7133.</p>
+            </div>
+            <div class="col d-flex flex-column justify-content-center align-items-center">
+              <div className='row  '>
+                <div className='col'>
+                  <p className='m-auto fw-semibold '>Keep in TOUCH</p>
+                </div>
+              </div>
+              <div className='row'>
+                <div className='col'>
+                  <div className='row'>
+                    <div className='col m-1  p-2'>
+                      <Link to={'https://www.facebook.com/login/'} className='btn'>
+                        <img src={fb} alt="Facebook" className='rounded-circle img-fluid social-icon-custom' />
+                      </Link>
+                    </div>
+                    <div className='col m-1  p-2'>
+                      <Link to={'https://www.instagram.com/accounts/login/?hl=en'} className='btn'>
+                        <img src={insta} alt="Instagram" className='rounded-circle img-fluid social-icon-custom' />
+                      </Link>
+                    </div>
+                    <div className='col m-1  p-2'>
+                      <Link to={'https://x.com/?lang=en'} className='btn'>
+                        <img src={x} alt="X" className='rounded-circle img-fluid social-icon-custom' />
+                      </Link>
+                    </div>
+                    <div className='col m-1  p-2'>
+                      <Link to={'https://www.youtube.com/'} className='btn'>
+                        <img src={youtube} alt="YouTube" className='rounded-circle img-fluid social-icon-custom' />
+                      </Link>
+                    </div>
+                    <div className='col m-1  p-2'>
+                      <Link to={'https://in.linkedin.com/'} className='btn'>
+                        <img src={linkedIn} alt="LinkedIn" className='rounded-circle img-fluid social-icon-custom' />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className='row'>
-          <div className='col'>
-            <hr className='hr-custom' />
+          <hr className='hr-custom' />
+          <div class="row">
+            <div class="col-md-6">
+              <p></p>
+            </div>
+            <div class="col-md-6 text-end">
+              <p>&copy;@2024 All Rights Reserved-Safe Space for Domestic Abuse</p>
+            </div>
           </div>
         </div>
-        <div className='row text-white fs-6 text-center'>
-          <div className='col'>
-            <p>copyright@2024</p>
-          </div>
-          <div className='col'>
-            <p>All Rights Reserved-Safe Space for Domestic Abuse</p>
-          </div>
-        </div>
-      </div>
-    </footer>
+      </footer>
+    </>
   );
 }
 
