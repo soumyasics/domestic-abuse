@@ -6,7 +6,7 @@ import ReactPaginate from 'react-paginate';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaArrowLeftLong } from "react-icons/fa6";
 import { FaSearch } from "react-icons/fa";
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 
 function UserViewSafehouses() {
     const [safehouses, setSafehouses] = useState([]);
@@ -75,7 +75,12 @@ const reqHouse=async(id)=>{
         const response = await addHouseReqs(houseReqs);
         console.log("dy",response.data.data.status);
         if (response.data.status==200) {
-          toast.success('Request Send to Supporter');
+          toast.success('Request Send to Supporter', {
+            autoClose: 900, 
+          });
+          setTimeout(() => {
+            navigate('/user-view-request-history');
+          }, 1300);
           
         } else {
           toast.error(response.data.msg);
@@ -87,10 +92,12 @@ const reqHouse=async(id)=>{
 }
     return (
         <div className='container-fluid'>
+            <ToastContainer/>
             <div className='row my-5 mx-3'>
                 <div className='col'>
                     <FaArrowLeftLong size={35} className='cursor-pointer' onClick={() => navigate(-1)} />
                 </div>
+               
                 <div className='col text-end'>
                   <Link to={`/user-view-request-history`}>  <button className='btn bg-purple text-white rounded-4 mx-5'>Request History</button>
                   </Link>

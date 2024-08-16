@@ -101,6 +101,8 @@ function UserEditProfile() {
         if (response.success) {
           const formattedDob = response.user.dob ? formatDate(response.user.dob) : '';
           setUser({ ...response.user, dob: formattedDob });
+          console.log("data",response.user);
+          
           setImagePreview(response.user.image.filename ? `${IMG_BASE_URL}/${response.user.image.filename}` : demo);
         } else {
           toast.error(response.message);
@@ -113,7 +115,7 @@ function UserEditProfile() {
   
 
     fetchUserData();
-  }, []);
+  }, [userId]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -365,9 +367,9 @@ const navtoHome=()=>{
                       required
                     >
                       <option value="">Select Gender</option>
-                      <option value="Male">Male</option>
-                      <option value="Female">Female</option>
-                      <option value="Other">Other</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
                     </select>
                     {errors.gender && <div id="genderError" className="invalid-feedback">{errors.gender}</div>}
                   </div>

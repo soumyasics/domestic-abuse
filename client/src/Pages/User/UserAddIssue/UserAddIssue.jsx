@@ -35,8 +35,11 @@ function UserAddIssue() {
             newErrors.contact = 'Contact Number is required';
         } else if (!phoneRegex.test(issue.contact)) {
             newErrors.contact = 'Contact number should be 10 digits';
+        }   if (!issue.file) {
+            newErrors.file = 'Please add relevant Attachments';
         }
         if (issue.file) {
+         
             if (!allowedFileTypes.includes(issue.file.type)) {
                 newErrors.file = 'Only PDF and DOC files are allowed';
             }
@@ -70,9 +73,13 @@ function UserAddIssue() {
         setIsSubmitting(true);
         try {
             const response = await registerIssue(issue);
+            console.log("res",response);
+            
             if (response.success) {
                 toast.success(response.message);
-                navigate('/user-home');
+                setTimeout(() => {
+                    navigate('/user-home');
+                  }, 2000);
             } else {
                 toast.error(response.message);
             }
@@ -96,6 +103,15 @@ function UserAddIssue() {
             toast.error('Failed to fetch issue data. Please try again.');
         }
     };
+    const getCurrentDateTime = () => {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        return `${year}-${month}-${day}T${hours}:${minutes}`;
+      };
 
     return (
         <div className='container-fluid'>
@@ -144,6 +160,7 @@ function UserAddIssue() {
                                             name='type'
                                             className='form-select bg-creamy m-2'
                                         >
+                                            <option value="" disabled>Select Type of Issue</option>
                                             <option value="Physical Abuse">Physical Abuse</option>
                                             <option value="Emotional or Psychological Abuse">Emotional or Psychological Abuse</option>
                                             <option value="Sexual Abuse">Sexual Abuse</option>
@@ -214,6 +231,8 @@ function UserAddIssue() {
                                     className={`form-control border bg-creamy m-2 ${errors.dateTime ? 'is-invalid' : ''}`}
                                     value={issue.dateTime}
                                     onChange={handleChange}
+                                    max={getCurrentDateTime()} 
+
                                     required
                                 />
                                 {errors.dateTime && <div id="dateTimeError" className="invalid-feedback m-2">{errors.dateTime}</div>}
@@ -234,7 +253,7 @@ function UserAddIssue() {
                         </div>
                         <div className='row m-5'>
                             <div className='col text-center'>
-                                <button type="submit" className="btn btn-purple m-2" disabled={isSubmitting}>
+                                <button type="submit" className="btn bg-theme btn-lg fw-bolder px-5 text-white rounded-4 m-4" disabled={isSubmitting}>
                                     {isSubmitting ? 'Submitting...' : 'Submit'}
                                 </button>
                             </div>

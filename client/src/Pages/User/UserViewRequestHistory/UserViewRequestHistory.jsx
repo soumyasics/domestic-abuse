@@ -47,6 +47,9 @@ function UserViewRequestHistory() {
                     <FaArrowLeftLong size={35} className='cursor-pointer' onClick={() => navigate(-1)} />
                 </div>
             </div>
+            <div className='col text-center'>
+                    <h3 className='theme-purple'>My Safe House Requests</h3>
+                </div>
             {currentSafehouses.length > 0 ? (
                 currentSafehouses.map((safehouse) => (
                     <div className='row m-5' key={safehouse._id}>

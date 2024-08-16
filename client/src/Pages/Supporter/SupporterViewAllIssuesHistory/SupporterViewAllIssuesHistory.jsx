@@ -42,7 +42,7 @@ console.log("in view his");
   const pageCount = Math.ceil(suggestions.length / itemsPerPage);
 
   return (
-    <div className="table-responsive">
+    <div className="table-responsive container mt-5">
       <ToastContainer />
       {loading ? (
         <p className="theme-purple fs-1">Loading...</p>

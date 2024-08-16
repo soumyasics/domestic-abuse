@@ -12,7 +12,9 @@ console.log("lp",req.body.lpId);
     suppId:req.body.suppId,
     date:new Date(),
     issueId:req.body.issueId,
-    timestamp:req.body.timestamp
+    timestamp:req.body.timestamp,
+    datestamp:req.body.datestamp
+
   });
   await message
     .save()

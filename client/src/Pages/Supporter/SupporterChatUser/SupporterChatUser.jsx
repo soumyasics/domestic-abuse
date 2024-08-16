@@ -88,29 +88,27 @@ function SupporterChatUser() {
     fetchSupporterData();
 }, []);
 
-//   const handleSendMessage = () => {
-//    const datas= chatting(mesg)
-// console.log(datas);
-// setData((prevData) => [...prevData]);
-// setMesg({
-//   ...mesg,
-//   msg: "",
-//   timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-
-  
-// });
-    
-
-//     console.log("mesg",mesg);
-//   };
 
 
 const handleSendMessage = async () => {
   try {
+    
     const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const formatDate = (dateString) => {
+
+      const date = new Date(dateString);
+      
+    
+      const options = { month: 'short', day: 'numeric' };
+  
+      return date.toLocaleDateString('en-US', options);
+    };
+    const datestamp = formatDate(new Date());
+
     const newMessage = {
       ...mesg,
-      timestamp: timestamp
+      timestamp: timestamp,
+      datestamp:datestamp
     };
 
     await chatting(newMessage); 
@@ -118,7 +116,8 @@ const handleSendMessage = async () => {
     setMesg({
       ...mesg,
       msg: "",
-      timestamp: '' 
+      timestamp: '' ,
+      datestamp:''
     });
   } catch (error) {
     console.error("Error sending message", error);
@@ -162,7 +161,7 @@ const handleSendMessage = async () => {
         {data.map((message, index) => (
           <div key={index} className={`chat-bubble ${message.from} w-50 m-4`} >
             {message.msg}
-            <div className="chat-timestamp">{message.timestamp}</div>
+            <div className="chat-timestamp">{message.datestamp}&nbsp;{message.timestamp}</div>
           </div>
         ))}
       </div>
