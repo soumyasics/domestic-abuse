@@ -42,7 +42,7 @@ const registerSuggestion = async (req, res) => {
 
 // View all suggestions
 const viewSuggestions = (req, res) => {
-    Suggestion.find({})
+    Suggestion.find({}).sort({createdAt:-1})
         .populate('userId')
         .populate('supporterId')
         .populate('issueId')
@@ -126,7 +126,7 @@ const viewSuggestionById = (req, res) => {
 
 // View suggestion by ID
 const viewSuggestionBySuppId = (req, res) => {
-    Suggestion.find({ supporterId: req.params.id })
+    Suggestion.find({ supporterId: req.params.id }).sort({createdAt:-1})
         .populate('userId')
         .populate('supporterId')
         .populate('issueId')

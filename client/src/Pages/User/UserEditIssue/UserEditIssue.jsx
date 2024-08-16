@@ -21,6 +21,15 @@ function UserEditIssue() {
         contact:''
         // userId: localStorage.getItem('userId')
     });
+    const formatDate = (date) => {
+        const d = new Date(date);
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        const hours = String(d.getHours()).padStart(2, '0');
+        const minutes = String(d.getMinutes()).padStart(2, '0');
+        return `${year}-${month}-${day}T${hours}:${minutes}`;
+      };
     const [errors, setErrors] = useState({});
     const allowedFileTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
     const maxFileSize = 5 * 1024 * 1024;
@@ -30,7 +39,9 @@ function UserEditIssue() {
         try {
             const response = await getIssueById(id);
             if (response.success) {
-                setIssue(response.data.data);
+                const formattedDob = response.data.data.dateTime ? formatDate(response.data.data.dateTime) : '';
+
+                setIssue( {...response.data.data,dateTime:formattedDob});
                 console.log(response.data.data);
             } else {
                 toast.error(response.message);
@@ -135,7 +146,15 @@ console.log("issues",issue);
             setIsSubmitting(false);
         }
     };
-
+    const getCurrentDateTime = () => {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        return `${year}-${month}-${day}T${hours}:${minutes}`;
+      };
     return (
         <div className='container-fluid'>
                   <ToastContainer />
@@ -239,21 +258,24 @@ console.log("issues",issue);
                             </div>
                         </div>
                         <div className='row m-5'>
-                            {/* <div className='col text-start'>
+                            <div className='col text-start'>
                                     <label htmlFor='dateTime' className='form-label theme-purple mx-2'>Date and Time </label>
                                     <input
-                                        type='text'
+                                        type='datetime-local'
                                         id="dateTime"
                                         name='dateTime'
                                         className={`form-control  border  bg-creamy m-2 ${errors.dateTime ? 'is-invalid' : ''}`}
                                         placeholder=""
                                         value={issue.dateTime}
+                                        max={getCurrentDateTime()} 
+
+
                                         onChange={handleChange}
                                         aria-describedby="dateTimeError"
                                         required
                                     />
                                     {errors.dateTime && <div id="dateTimeError" className="invalid-feedback m-2">{errors.dateTime}</div>}
-                            </div> */}
+                            </div>
                             <div className='col text-start'>
                                     <label htmlFor='contact' className='form-label theme-purple mx-2'>Contact Number </label>
                                     <input

@@ -45,8 +45,13 @@ const [imagePreview, setImagePreview] = useState(demo);
     try {
       const response = await sendRequesttoLP(issueId,advId,localStorage.getItem('userId'));
       if (response.status === 200) {
-        toast.success('Request sent successfully.');
-        // navigate('/user-home')
+        toast.success('Request sent successfully.', {
+          autoClose: 800, 
+        });
+        setTimeout(() => {
+          navigate('/user-view-suggestions');
+        }, 1000);
+       
 
       } else {
         console.log(response);

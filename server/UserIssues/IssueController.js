@@ -86,7 +86,7 @@ const viewIssues = (req, res) => {
 // View all issues
 
 const viewPendingIssues = (req, res) => {
-  Issue.find({suppStatus:false}).populate('userId')
+  Issue.find({suppStatus:false}).populate('userId').sort({createdAt:-1})
     .exec()
     .then(data => {
       if (data.length > 0) {

@@ -44,6 +44,7 @@ function UserRegister() {
     const newErrors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^\d{10}$/;
+    const aadharRegex = /^\d{12}$/;
     const nameRegex = /^[A-Za-z\s]+$/;
 
     if (!user.name) {
@@ -91,7 +92,11 @@ function UserRegister() {
     }
 
     if (!user.safetyPlan) {
-      newErrors.safetyPlan = 'Safety plan is required';
+      newErrors.safetyPlan = 'Aadhar Number is required';
+    }
+      else if (!aadharRegex.test(user.safetyPlan)) {
+        newErrors.safetyPlan = 'Aadhar Numbershould be 12 digits';
+      
     }
 
     if (!user.image) {
@@ -245,6 +250,9 @@ function UserRegister() {
                       value={user.dob}
                       onChange={handleChange}
                       aria-describedby="dobError"
+                      max={new Date().toISOString().split("T")[0]}
+
+
                       required
                     />
                     {errors.dob && <div id="dobError" className="invalid-feedback">{errors.dob}</div>}
@@ -333,6 +341,7 @@ function UserRegister() {
                       aria-describedby="imageError"
                       required
                     />
+                    
                     {errors.image && <div id="imageError" className="invalid-feedback">{errors.image}</div>}
                   </div>
                 </div>
@@ -343,11 +352,12 @@ function UserRegister() {
                     <span className="input-group-text home-card-bg border-end-0 rounded-start-2 bg-purple text-white">
                       <FaShieldAlt />
                     </span>
-                    <textarea
+                    <input
+                      type="number"
                       id="safetyPlan"
                       name="safetyPlan"
                       className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.safetyPlan ? 'is-invalid' : ''}`}
-                      placeholder="Safety Plan"
+                      placeholder="Aadhar Number"
                       value={user.safetyPlan}
                       onChange={handleChange}
                       aria-describedby="safetyPlanError"
