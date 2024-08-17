@@ -70,7 +70,7 @@ const viewPayments = (req, res) => {
 
 // View payments by user ID
 const viewPaymentsByUserId = (req, res) => {
-  Payment.find({ userId: req.params.id })
+  Payment.find({ userId: req.params.id }).sort({createdAt:-1})
     .populate('lpId')
     .exec()
     .then(data => {
@@ -127,7 +127,7 @@ const addPaymentsId = (req, res) => {
 
 // View payments by LP ID
 const viewPaymentsByLPId = (req, res) => {
-  Payment.find({ lpId: req.params.id })
+  Payment.find({ lpId: req.params.id }).sort({createdAt:-1})
     .populate('userId')
     .exec()
     .then(data => {
@@ -183,7 +183,7 @@ const viewPaymentsById = (req, res) => {
 
 // View payments by LP ID
 const viewPaymentsByAppId = (req, res) => {
-  Payment.find({ appId: req.params.id })
+  Payment.find({ appId: req.params.id }).sort({createdAt:-1})
     .populate('userId lpId')
     .exec()
     .then(data => {

@@ -66,6 +66,16 @@ function LegalProfessionalChatUser() {
   // Handle sending message
   const handleSendMessage = async () => {
     if (newMessage.trim() !== '') {
+      const formatDate = (dateString) => {
+
+        const date = new Date(dateString);
+        
+      
+        const options = { month: 'short', day: 'numeric' };
+    
+        return date.toLocaleDateString('en-US', options);
+      };
+      const datestamp = formatDate(new Date());
       try {
         const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
         const newMsg = {
@@ -74,7 +84,8 @@ function LegalProfessionalChatUser() {
           lpId: lpId,
           userId: userId,
           to: 'user',
-          timestamp: timestamp
+          timestamp: timestamp,
+          datestamp:datestamp
         };
 
         await chatting(newMsg);
@@ -84,6 +95,10 @@ function LegalProfessionalChatUser() {
         console.error('Error sending message', error);
         toast.error('Error sending message. Please try again.');
       }
+    }else{
+      toast.error('You Cannot Send a Blank Message', {
+        autoClose: 900, 
+      });
     }
   };
 

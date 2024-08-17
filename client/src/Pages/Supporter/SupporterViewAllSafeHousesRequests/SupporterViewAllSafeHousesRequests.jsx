@@ -134,7 +134,7 @@ function SupporterViewAllSafeHousesRequests() {
     <div className='container-fluid m-auto'>
       <div className='row m-5 mt-5 mb-2'>
         <div className='col'>
-          <h4 className='theme-purple'>Safe House Details</h4>
+          {/* <h4 className='theme-purple'>Safe House Details</h4> */}
           {/* <h5  style={{marginLeft:'915px',color:'purple'}}>Approved Details</h5> */}
           
         </div>

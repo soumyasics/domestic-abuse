@@ -68,7 +68,7 @@ const registerSupporters = async (req, res) => {
 
 // View all Supporterss
 const viewSupporters = (req, res) => {
-    Supporters.find({adminApproved:true})
+    Supporters.find({adminApproved:true}).sort({createdAt:-1})
         .exec()
         .then(data => {
             if (data.length > 0) {
@@ -316,7 +316,7 @@ const createToken = (user) => {
 
   // view all Supporters to be accepted/rejected
 const viewSupporterReqsForAdmin = (req, res) => {
-    Supporters.find({adminApproved:false})
+    Supporters.find({adminApproved:false}).sort({createdAt:-1})
         .exec()
         .then(data => {
             res.json({

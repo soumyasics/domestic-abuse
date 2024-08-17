@@ -134,8 +134,11 @@ console.log("issues",issue);
             const response = await updateIssue(id, formData);
             console.log("resp",response.success);
             if (response.success==true) {
-                toast.success('Updated Successfully');
-                navigate('/user-view-issues');
+                toast.success('Updated Successfully', {
+                    autoClose: 900, 
+                  });
+
+                setTimeout(()=>{navigate('/user-view-issues')},1200)
             } else {
                 toast.error(response.message);
             }

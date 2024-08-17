@@ -27,6 +27,7 @@ const createToken = (user) => {
 const registerUser = async (req, res) => {
   try {
     const { name, email, contact, password,  dob, gender, address, relation, safetyPlan } = req.body;
+    let existingUser1 = await User.findOne({ safetyPlan });
 
     
 
@@ -48,7 +49,11 @@ const registerUser = async (req, res) => {
     if (existingUser) {
       return res.json({ status: 409, msg: "Email already registered" });
     }
-
+    if(existingUser1){
+      flag=1
+      return res.json({ status: 409, msg: "Aadhar Number already been registered with us !!" });
+    
+    }
     await newUser.save();
     res.status(201).json({ status: 200, msg: "User registered successfully", data: newUser });
   } catch (error) {
@@ -113,7 +118,7 @@ const editUserById = async (req, res) => {
         res.status(500).json({ status: 500, msg: "Data not updated", Error: err });
       });
   } else {
-    return res.json({ status: 409, msg: "Contact number already registered" });
+    return res.json({ status: 409, msg: "Contact number or Aadhar Number already been registered with us !!" });
   }
 };
 

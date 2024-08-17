@@ -36,7 +36,7 @@ function UserLogin() {
     try {
       const user = { email, password };
      const result = await loginUser(user, (token, userId) => {
-       login(token, 'supporter', userId); // Pass supporterId to login function
+       login(token, 'user', userId); // Pass supporterId to login function
       });
 
       if (result.success) {

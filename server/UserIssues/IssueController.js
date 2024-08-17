@@ -58,7 +58,7 @@ const registerIssue = async (req, res) => {
 
 // View all issues
 const viewIssues = (req, res) => {
-  Issue.find()
+  Issue.find().sort({createdAt:-1})
     .exec()
     .then(data => {
       if (data.length > 0) {

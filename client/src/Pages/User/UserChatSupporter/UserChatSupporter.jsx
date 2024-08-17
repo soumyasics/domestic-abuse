@@ -102,20 +102,38 @@ function UserChatSupporter() {
 
   const handleSendMessage = async () => {
     try {
+      const formatDate = (dateString) => {
+
+        const date = new Date(dateString);
+        
+      
+        const options = { month: 'short', day: 'numeric' };
+    
+        return date.toLocaleDateString('en-US', options);
+      };
+      const datestamp = formatDate(new Date());
       const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       const newMessage = {
         ...mesg,
-        timestamp: timestamp
+        timestamp: timestamp,
+        datestamp:datestamp
       };
 
+      if(!mesg.msg.trim()){
+        toast.error('You Cannot Send a Blank Message', {
+          autoClose: 900, 
+        });
+      }else{
       await chatting(newMessage);
       setData((prevData) => [...prevData, newMessage]);
       setMesg({
         ...mesg,
         msg: "",
-        timestamp: ''
+        timestamp: '',
+        datestamp:'',
       });
-    } catch (error) {
+    } 
+  }catch (error) {
       console.error("Error sending message", error);
       toast.error('Error sending message. Please try again.');
     }

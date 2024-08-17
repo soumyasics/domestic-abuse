@@ -43,13 +43,21 @@ function AdminLegalProfessionalDetailedView() {
             try {
               const response = await approveLegalProfessionalsById(id);
               if (response.success) {
-                toast.success('Legal professional approved successfully.');
-                navigate('/admin-viewall-aprvd-LegalProfessional')
+                toast.success('Legal professional approved successfully.', {
+                  autoClose: 900, 
+                });
+                setTimeout(() => {
+                  navigate('/admin-viewall-aprvd-LegalProfessional');
+                }, 1400);
               } else {
-                toast.error(response.message || 'Error approving legal professional.');
+                toast.error(response.message || 'Error approving legal professional.', {
+                  autoClose: 900, 
+                });
               }
             } catch (error) {
-              toast.error('Error approving legal professional.');
+              toast.error('Error approving legal professional.', {
+                autoClose: 900, 
+              });
             }
           },
         },
@@ -71,12 +79,21 @@ function AdminLegalProfessionalDetailedView() {
             try {
               const response = await rejectLegalProfessionalsById(id);
               if (response.success) {
-                toast.success('Legal professional rejected successfully.');
+                toast.success('Legal professional rejected successfully.', {
+                  autoClose: 900, 
+                });
+                setTimeout(() => {
+                  navigate('/admin-viewall-aprvd-LegalProfessional');
+                }, 1400);
               } else {
-                toast.error(response.message || 'Error rejecting legal professional.');
+                toast.error(response.message || 'Error rejecting legal professional.', {
+                  autoClose: 900, 
+                });
               }
             } catch (error) {
-              toast.error('Error rejecting legal professional.');
+              toast.error('Error rejecting legal professional.', {
+                autoClose: 900, 
+              });
             }
           },
         },
