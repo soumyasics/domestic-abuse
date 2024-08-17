@@ -60,7 +60,7 @@ const registerCounsellors = async (req, res) => {
 
 // View all Counsellors
 const viewCounsellors = (req, res) => {
-    Counsellors.find({adminApproved:true})
+    Counsellors.find({adminApproved:true}).sort({createdAt:-1})
         .exec()
         .then(data => {
             if (data.length > 0) {
@@ -287,7 +287,7 @@ const requireAuth = (req, res, next) => {
 
 // View all Counsellors to be accepted/rejected
 const viewCounsellorReqsForAdmin = (req, res) => {
-    Counsellors.find({ adminApproved: false })
+    Counsellors.find({ adminApproved: false }).sort({createdAt:-1})
         .exec()
         .then(data => {
             res.json({

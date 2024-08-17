@@ -116,7 +116,7 @@ function LegalProfessionalAddPayment() {
                     <label className='theme-purple form-label' htmlFor='payment'>Amount</label>
                   </div>
                   <div className='col-9'>
-                    <input type="text" id='payment' name="payment" className='form-control' onChange={handleChange} />
+                    <input type="text" placeholder='Enter Amount' id='payment' name="payment" className='form-control' onChange={handleChange} />
                   </div>
                 </div>
               </div>
@@ -126,7 +126,7 @@ function LegalProfessionalAddPayment() {
                     <label className='theme-purple form-label' htmlFor='category'>Request Category</label>
                   </div>
                   <div className='col-9'>
-                    <input type="text" id='category' name="category" className='form-control' onChange={handleChange} />
+                    <input type="text" id='category' placeholder='Consultation,Advance' name="category" className='form-control' onChange={handleChange} />
                   </div>
                 </div>
               </div>

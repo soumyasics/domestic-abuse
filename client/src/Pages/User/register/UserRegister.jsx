@@ -46,7 +46,7 @@ function UserRegister() {
     const phoneRegex = /^\d{10}$/;
     const aadharRegex = /^\d{12}$/;
     const nameRegex = /^[A-Za-z\s]+$/;
-
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
     if (!user.name) {
       newErrors.name = 'Name is required';
     } else if (!nameRegex.test(user.name)) {
@@ -67,7 +67,11 @@ function UserRegister() {
 
     if (!user.password) {
       newErrors.password = 'Password is required';
+    } else if (!passwordRegex.test(user.password)) {
+      newErrors.password = 'password Must Contain 1 Uppercase,1 Symbol and 1 Number with minimum 6 characters';
     }
+  
+    
 
     if (!user.rePassword) {
       newErrors.rePassword = 'Re Type Password is required';
@@ -130,11 +134,15 @@ function UserRegister() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) {
-      toast.error('Please fix the errors in the form.');
+      toast.error('Please fix the errors in the form.', {
+        autoClose: 900, 
+      });
       return;
     }
     if (!isAgreed) {
-      toast.error('You must agree to the terms and conditions.');
+      toast.error('You must agree to the terms and conditions.', {
+        autoClose: 900, 
+      });
       return;
     }
     
@@ -144,14 +152,22 @@ function UserRegister() {
       const response = await registerUsers(user);
       console.log(response);
       if (response.success) {
-        toast.success(response.message);
-        navigate('/user-login');
+        toast.success(response.message, {
+          autoClose: 900, 
+        });
+        setTimeout(() => {
+          navigate('/user-login');
+        }, 1300);
       } else {
-        toast.error(response.message);
+        toast.error(response.message, {
+          autoClose: 900, 
+        });
       }
     } catch (error) {
       console.error('Error Registering User', error);
-      toast.error(error.response?.data?.message || 'Registration failed. Please try again.');
+      toast.error(error.response?.data?.message || 'Registration failed. Please try again.', {
+        autoClose: 900, 
+      });
     } finally {
       setIsSubmitting(false);
     }

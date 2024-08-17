@@ -70,7 +70,7 @@ const viewBlogsById = (req, res) => {
 
 const viewAllBlogs = (req, res) => {
   blogSchema
-    .find({})
+    .find({}).sort({createdAt:-1})
     .populate("supporterId lpId counsellorId")
     .exec()
     .then((data) => {
@@ -94,8 +94,7 @@ const viewAllBlogs = (req, res) => {
 
 const viewMyBlogsBysupporterId = (req, res) => {
   blogSchema
-    .find({ supporterId: req.params.id })
-   
+    .find({ supporterId: req.params.id }).sort({createdAt:-1})
     .exec()
     .then((data) => {
       res.json({
@@ -116,7 +115,7 @@ const viewMyBlogsBysupporterId = (req, res) => {
 
 const viewMyBlogsByCounsellorId = (req, res) => {
   blogSchema
-    .find({ counsellorId: req.params.id })
+    .find({ counsellorId: req.params.id }).sort({createdAt:-1})
    
     .exec()
     .then((data) => {
@@ -140,7 +139,7 @@ const viewMyBlogsByCounsellorId = (req, res) => {
 
 const viewMyBlogsByLPId = (req, res) => {
   blogSchema
-    .find({ lpId: req.params.id })
+    .find({ lpId: req.params.id }).sort({createdAt:-1})
    
     .exec()
     .then((data) => {

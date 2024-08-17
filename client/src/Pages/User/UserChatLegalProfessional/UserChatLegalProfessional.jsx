@@ -4,7 +4,7 @@ import { IoMdSend } from "react-icons/io";
 import React, { useEffect, useRef, useState } from 'react';
 import { chatting, IMG_BASE_URL, viewChatBetweenUserAndAdv, viewOneCaseByIssueId } from '../../../Services/apiService';
 import { Container, Row, Col, Form } from 'react-bootstrap';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import demo from '../../../Assets/supp-edit-profile.png';
 import { useParams } from 'react-router-dom';
 
@@ -89,26 +89,48 @@ function UserChatLegalProfessional() {
   // Handle sending message
   const handleSendMessage = async () => {
     try {
+      const formatDate = (dateString) => {
+
+        const date = new Date(dateString);
+        
+      
+        const options = { month: 'short', day: 'numeric' };
+    
+        return date.toLocaleDateString('en-US', options);
+      };
+      const datestamp = formatDate(new Date());
       const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       const newMessage = {
         ...mesg,
-        timestamp: timestamp
+        timestamp: timestamp,
+        datestamp:datestamp
       };
+      console.log("mesg",mesg);
+      
+      if(!mesg.msg.trim()){
+        toast.error('You Cannot Send a Blank Message', {
+          autoClose: 900, 
+        });
+      }else{
       await chatting(newMessage);
       setData((prevData) => [...prevData, newMessage]);
       setMesg({
         ...mesg,
         msg: "",
-        timestamp: ''
+        timestamp: '',
+        datestamp:''
       });
-    } catch (error) {
+    }
+  }catch (error) {
       console.error("Error sending message", error);
       toast.error('Error sending message. Please try again.');
     }
+  
   };
 
   return (
     <Container fluid className="chat-container p-5">
+      <ToastContainer/>
       <Row className="chat-header">
         <Col xs="auto">
           <img

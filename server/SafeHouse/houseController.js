@@ -174,7 +174,7 @@ const viewSafehouseById = (req, res) => {
 // View safehouse by ID
 const viewSafehouseBySupporterId = (req, res) => {
     console.log("id",req.params.id);
-    Safehouse.find({supporterId:req.params.id})
+    Safehouse.find({supporterId:req.params.id}).sort({createdAt:-1})
         .exec()
         .then(data => {
             console.log(data);
@@ -193,7 +193,7 @@ const viewSafehouseBySupporterId = (req, res) => {
         });
 };
 const viewSafehouseReqsForAdmin = (req, res) => {
-    Safehouse.find({adminApproved:false})
+    Safehouse.find({adminApproved:false}).sort({createdAt:-1})
         .exec()
         .then(data => {
             res.json({

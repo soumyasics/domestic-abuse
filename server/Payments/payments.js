@@ -30,6 +30,6 @@ const caseeSchema = new mongoose.Schema({
   category:{
     type:String,
   },
-});
+},{timestamps:true});
 
 module.exports = mongoose.model('payments', caseeSchema);

@@ -80,7 +80,7 @@ const registerLegalProfessional = async (req, res) => {
 
 // View all Legal Professionals
 const viewLegalProfessionals = (req, res) => {
-  LegalProfessionals.find({adminApproved:true})
+  LegalProfessionals.find({adminApproved:true}).sort({createdAt:-1})
     .exec()
     .then(data => {
       if (data.length > 0) {
@@ -317,7 +317,7 @@ const requireAuth = (req, res, next) => {
 
 // View all Legal Professionals pending Admin Approval
 const viewLegalProfessionalReqsForAdmin = (req, res) => {
-  LegalProfessionals.find({ adminApproved: false })
+  LegalProfessionals.find({ adminApproved: false }).sort({createdAt:-1})
     .exec()
     .then(data => {
       res.json({

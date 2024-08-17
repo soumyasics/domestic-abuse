@@ -66,7 +66,12 @@ function LegalProfessionalCaseRequestDetail() {
      try{
                 const response = await acceptLPAppointmentById(id);
                 if (response.status==200) {
-                  toast.success('Appointment accepted successfully.');
+                  toast.success('Appointment accepted successfully.', {
+                    autoClose: 900, 
+                  });
+                  setTimeout(() => {
+                    Navigate('/legal-professional-view-acive-cases');
+                  }, 2000);
                   fetchAppointments();
                   // Navigate(`/legal-professional-view-appointments`)
                 } else {
@@ -83,7 +88,12 @@ function LegalProfessionalCaseRequestDetail() {
               try {
                 const response = await rejectLPAppointmentById(id);
                 if (response.status==200) {
-                  toast.success('Appointment rejected successfully.');
+                  toast.success('Appointment rejected successfully.', {
+                    autoClose: 900, 
+                  });
+                  setTimeout(() => {
+                    Navigate('/legal-professional-view-appointments');
+                  }, 2000);
                   fetchAppointments();
                   // Navigate(`/legal-professional-view-appointments`)
 

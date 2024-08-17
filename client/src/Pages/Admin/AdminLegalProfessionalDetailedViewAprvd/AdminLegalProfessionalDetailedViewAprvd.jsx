@@ -44,12 +44,18 @@ function AdminLegalProfessionalDetailedViewAprvd() {
               try {
                 const response = await approveLegalProfessionalsById(id);
                 if (response.success) {
-                  toast.success('Legal professional approved successfully.');
+                  toast.success('Legal professional approved successfully.', {
+                    autoClose: 900, 
+                  });
                 } else {
-                  toast.error(response.message || 'Error approving legal professional.');
+                  toast.error(response.message || 'Error approving legal professional.', {
+                    autoClose: 900, 
+                  });
                 }
               } catch (error) {
-                toast.error('Error approving legal professional.');
+                toast.error('Error approving legal professional.', {
+                  autoClose: 900, 
+                });
               }
             },
           },

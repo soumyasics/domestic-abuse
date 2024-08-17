@@ -111,6 +111,11 @@ const handleSendMessage = async () => {
       datestamp:datestamp
     };
 
+    if(!mesg.msg.trim()){
+      toast.error('You Cannot Send a Blank Message', {
+          autoClose: 900, 
+        });
+    }else{
     await chatting(newMessage); 
     setData((prevData) => [...prevData, newMessage]); 
     setMesg({
@@ -119,7 +124,8 @@ const handleSendMessage = async () => {
       timestamp: '' ,
       datestamp:''
     });
-  } catch (error) {
+  }
+ } catch (error) {
     console.error("Error sending message", error);
     toast.error('Error sending message. Please try again.');
   }
@@ -127,6 +133,7 @@ const handleSendMessage = async () => {
 
   return (
     <Container fluid className="chat-container p-5">
+      <ToastContainer/>
       <Row className="chat-header">
         <Col xs="auto">
           <img

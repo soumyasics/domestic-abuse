@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import './UserPayment.css';
 import { FaLock } from "react-icons/fa";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { addPaymentByUser, viewPaymentsByIdforUser } from '../../../Services/apiService';
 import { toast } from 'react-toastify';
 
@@ -11,12 +11,14 @@ function UserPayment() {
         payment: 0,
         
     });
+    const navigate = useNavigate();
     const [formValues, setFormValues] = useState({
         cardNumber: '',
         expiryMonth: '',
         expiryYear: '',
         cv: ''
     });
+    let formIsValid=true
 const {id}=useParams()
 const [loading, setLoading] = useState(true);
 
@@ -38,34 +40,56 @@ const fetchLegalProfessionals = useCallback(async () => {
     fetchLegalProfessionals();
   }, [fetchLegalProfessionals]);
 
- 
+  const validateExpiryDate = () => {
+    const { expiryMonth, expiryYear } = formValues;
+    const currentDate = new Date();
+    const selectedDate = new Date(`20${expiryYear}-${expiryMonth}-01`); // Construct the selected date as the 1st day of the month
+
+    if (selectedDate < currentDate) {
+        return false; // The selected date is in the past
+    }
+    return true; // The selected date is valid
+};
     const validate = () => {
         const errors = {};
+console.log("in validate");
 
         if (!formValues.cardNumber) {
             errors.cardNumber = "Card number is required";
+            formIsValid=false
         } else if (formValues.cardNumber.length !== 16) {
             errors.cardNumber = "Card number must be 16 digits";
+            formIsValid=false
         }
 
         if (!formValues.expiryMonth) {
             errors.expiryMonth = "Expiry month is required";
+            formIsValid=false
         } else if (!/^(0[1-9]|1[0-2])$/.test(formValues.expiryMonth)) {
+            formIsValid=false
             errors.expiryMonth = "Invalid month";
         }
 
         if (!formValues.expiryYear) {
             errors.expiryYear = "Expiry year is required";
+            formIsValid=false
         } else if (!/^\d{2}$/.test(formValues.expiryYear)) {
             errors.expiryYear = "Invalid year";
+            formIsValid=false
         }
 
         if (!formValues.cv) {
-            errors.cv = "CV code is required";
+            errors.cv = "CVV code is required";
+            formIsValid=false
         } else if (formValues.cv.length !== 3) {
-            errors.cv = "CV code must be 3 digits";
+            errors.cv = "CVV code must be 3 digits";
+            formIsValid=false
         }
-
+        if (!validateExpiryDate()) {
+            errors.expiryMonth = "Expiration date cannot be in the past";
+            errors.expiryYear = "Expiration date cannot be in the past";
+            formIsValid = false;
+        }
         setErrors(errors);
 
         return Object.keys(errors).length === 0;
@@ -79,13 +103,28 @@ const fetchLegalProfessionals = useCallback(async () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+          
+             
+            setErrors(errors);
+            if (!validate()) {
+                toast.error('Please fix the errors in the form.');
+                return;
+            }
             const response = await addPaymentByUser(id);
             console.log(response);
             if (response.data.status === 200) {
-                toast.success('Payment Successful');
+                toast.success('Payment Successful', {
+                    autoClose: 900, 
+                  });
+
+                  setTimeout(()=>{navigate('/user-view-payments')},1200)
+
             } else {
-                toast.error('Payment failed.');
+                toast.error('Payment failed.', {
+                    autoClose: 900, 
+                  });
             }
+      
         } catch (error) {
             console.error('Error adding payment:', error.response || error.message || error);
             toast.error('Error Adding Payments.');
@@ -119,7 +158,7 @@ const fetchLegalProfessionals = useCallback(async () => {
                                             onChange={handleChange}
                                             className={`form-control shadow m-2 me-0 border ${errors.cardNumber ? 'is-invalid' : ''}`}
                                             placeholder='Valid Card Number'
-                                            required
+                                        
                                         />
                                         <span className="input-group-text m-2 ms-0 shadow">
                                             <FaLock />
@@ -133,35 +172,72 @@ const fetchLegalProfessionals = useCallback(async () => {
                                     <h4 className='card-title m-3'>EXPIRY DATE</h4>
                                 </div>
                                 <div className='col text-center'>
-                                    <h4 className='card-title m-3'>CV CODE</h4>
+                                    <h4 className='card-title m-3'>CVV CODE</h4>
                                 </div>
                             </div>
                             <div className='row mb-3'>
                                 <div className='col mb-5 ms-2'>
                                     <div className='input-group'>
-                                        <input
+                                        {/* <input
                                             type='text'
                                             name='expiryMonth'
                                             value={formValues.expiryMonth}
                                             onChange={handleChange}
                                             className={`form-control shadow m-2 border ${errors.expiryMonth ? 'is-invalid' : ''}`}
                                             placeholder='MM'
-                                            required
-                                        />
-                                        {errors.expiryMonth && <div id="expiryMonthError" className="invalid-feedback ms-2">{errors.expiryMonth}</div>}
+                                          
+                                        /> */}
+                                        <select
+    name="expiryMonth"
+    value={formValues.expiryMonth}
+    onChange={handleChange}
+    className={`form-control shadow m-2 border ${errors.expiryMonth ? 'is-invalid' : ''}`}
+>
+    <option value="" disabled>Select Month</option>
+    <option value="01">January</option>
+    <option value="02">February</option>
+    <option value="03">March</option>
+    <option value="04">April</option>
+    <option value="05">May</option>
+    <option value="06">June</option>
+    <option value="07">July</option>
+    <option value="08">August</option>
+    <option value="09">September</option>
+    <option value="10">October</option>
+    <option value="11">November</option>
+    <option value="12">December</option>
+</select>
+{errors.expiryMonth && <div id="expiryMonthError" className="invalid-feedback ms-2">{errors.expiryMonth}</div>}
+
                                     </div>
                                 </div>
                                 <div className='col mb-5'>
                                     <div className='input-group'>
-                                        <input
+                                        {/* <input
                                             type='text'
                                             name='expiryYear'
                                             value={formValues.expiryYear}
                                             onChange={handleChange}
                                             className={`form-control shadow m-2 border ${errors.expiryYear ? 'is-invalid' : ''}`}
                                             placeholder='YY'
-                                            required
-                                        />
+                                         
+                                        /> */}
+                                        <select
+    name="expiryYear"
+    value={formValues.expiryYear}
+    onChange={handleChange}
+    className={`form-control shadow m-2 border ${errors.expiryYear ? 'is-invalid' : ''}`}
+>
+    <option value="" disabled>Select Year</option>
+    {[...Array(15)].map((_, index) => {
+        const year = new Date().getFullYear() + index;
+        return (
+            <option key={year} value={String(year).slice(-2)}>
+                {year}
+            </option>
+        );
+    })}
+</select>
                                         {errors.expiryYear && <div id="expiryYearError" className="invalid-feedback ms-2">{errors.expiryYear}</div>}
                                     </div>
                                 </div>
@@ -173,8 +249,8 @@ const fetchLegalProfessionals = useCallback(async () => {
                                             value={formValues.cv}
                                             onChange={handleChange}
                                             className={`form-control shadow m-2 border ${errors.cv ? 'is-invalid' : ''}`}
-                                            placeholder='CV'
-                                            required
+                                            placeholder='CVV'
+                                         
                                         />
                                         {errors.cv && <div id="cvError" className="invalid-feedback ms-2">{errors.cv}</div>}
                                     </div>

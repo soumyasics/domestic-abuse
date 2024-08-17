@@ -51,13 +51,19 @@ const AdminLegalProfessionalRequests = () => {
             try {
               const response = await approveLegalProfessionalsById(id);
               if (response.success) {
-                toast.success(response.message || 'Legal professional approved successfully.');
+                toast.success(response.message || 'Legal professional approved successfully.', {
+                  autoClose: 900, 
+                });
                 fetchLegalProfessionals();
               } else {
-                toast.error(response.message || 'Error approving legal professional.');
+                toast.error(response.message || 'Error approving legal professional.', {
+                  autoClose: 900, 
+                });
               }
             } catch (error) {
-              toast.error('Error approving legal professional.');
+              toast.error('Error approving legal professional.', {
+                autoClose: 900, 
+              });
             }
           },
         },
@@ -79,13 +85,19 @@ const AdminLegalProfessionalRequests = () => {
             try {
               const response = await rejectLegalProfessionalsById(id);
               if (response.success) {
-                toast.success(response.message || 'Legal professional rejected successfully.');
+                toast.success(response.message || 'Legal professional rejected successfully.', {
+                  autoClose: 900, 
+                });
                 fetchLegalProfessionals();
               } else {
-                toast.error(response.message || 'Error rejecting legal professional.');
+                toast.error(response.message || 'Error rejecting legal professional.', {
+                  autoClose: 900, 
+                });
               }
             } catch (error) {
-              toast.error('Error rejecting legal professional.');
+              toast.error('Error rejecting legal professional.', {
+                autoClose: 900, 
+              });
             }
           },
         },

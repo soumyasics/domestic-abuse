@@ -7,7 +7,7 @@ import { FaHouse, FaLocationDot, FaCoins, FaList } from "react-icons/fa6";
 import { MdNumbers, MdFamilyRestroom } from "react-icons/md";
 import { FaPhoneAlt, FaCameraRetro } from "react-icons/fa";
 import { registerSafeHouse } from '../../../Services/apiService';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -55,7 +55,7 @@ function SupporterAddSafeHouse() {
     }
 
     if (!safehouse.landmark) {
-      newErrors.landmark = 'Landmark is required';
+      newErrors.landmark = 'Disrtict is required';
     }
 
     if (!safehouse.licenseNo) {
@@ -115,10 +115,12 @@ function SupporterAddSafeHouse() {
     try {
       const response = await registerSafeHouse(safehouse);
       if (response.success) {
-        toast.success('Safe House registered successfully!');
+        toast.success('Safe House registered successfully!', {
+          autoClose: 900, 
+        });
         setTimeout(() => {
           navigate('/supporter-view-all-safehouses');
-        }, 1000);
+        }, 1300);
 
         // Reset form or perform additional actions on success
       } else {
@@ -135,6 +137,7 @@ function SupporterAddSafeHouse() {
 
   return (
     <div className="container px-5 m-auto mt-5">
+      <ToastContainer/>
       <div className="row px-5 mt-5">
         <div className="col-md-6 my-5 border rounded p-5 d-flex">
           <img src={safehouseImg} className="align-self-center img-fluid object-fit-cover" alt="safe house" />
@@ -226,20 +229,21 @@ function SupporterAddSafeHouse() {
                     aria-describedby="landmarkError"
                     required
                   >
-<option value="alappuzha">Alappuzha</option>
-  <option value="ernakulam">Ernakulam</option>
-  <option value="idukki">Idukki</option>
-  <option value="kannur">Kannur</option>
-  <option value="kasaragod">Kasaragod</option>
-  <option value="kollam">Kollam</option>
-  <option value="kottayam">Kottayam</option>
-  <option value="kozhikode">Kozhikode</option>
-  <option value="malappuram">Malappuram</option>
-  <option value="palakkad">Palakkad</option>
-  <option value="pathanamthitta">Pathanamthitta</option>
-  <option value="thiruvananthapuram">Thiruvananthapuram</option>
-  <option value="thrissur">Thrissur</option>
-  <option value="wayanad">Wayanad</option>
+                    <option value="">Select a district</option>
+<option value="Alappuzha">Alappuzha</option>
+  <option value="Ernakulam">Ernakulam</option>
+  <option value="Idukki">Idukki</option>
+  <option value="Kannur">Kannur</option>
+  <option value="Kasaragod">Kasaragod</option>
+  <option value="Kollam">Kollam</option>
+  <option value="Kottayam">Kottayam</option>
+  <option value="Kozhikode">Kozhikode</option>
+  <option value="Malappuram">Malappuram</option>
+  <option value="Palakkad">Palakkad</option>
+  <option value="Pathanamthitta">Pathanamthitta</option>
+  <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+  <option value="Thrissur">Thrissur</option>
+  <option value="Wayanad">Wayanad</option>
 
                   </select>
                   {errors.landmark && <div id="landmarkError" className="invalid-feedback">{errors.landmark}</div>}
