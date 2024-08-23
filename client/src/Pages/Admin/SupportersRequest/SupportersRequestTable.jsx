@@ -8,6 +8,7 @@ import {
   viewSupporters,
   removeSupportersById,
   IMG_BASE_URL,
+  viewSupportersForAdmin,
 } from '../../../Services/apiService';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -29,16 +30,17 @@ const SupportersRequestTable = (props) => {
   const fetchSupporters = useCallback(async () => {
     try {
       if (props.activePage === 'new-request') {
-        const supporterData = await viewSupporterReqsForAdmin();
-        const filteredSupporters = supporterData.data.filter(supporter => !supporter.adminApproved);
-        setSupporters(filteredSupporters);
+        let supporterData={data:[]}
+         supporterData = await viewSupporterReqsForAdmin();
+        const filteredSupporters = supporterData.data.length>0?supporterData.data.filter(supporter => !supporter.adminApproved):[];
+        setSupporters(filteredSupporters||[]);
         setCounter(1);
         setAction(false);
       }
       if (props.activePage === 'all-supporters') {
-        const supporterData = await viewSupporters();
-        const allSupporters = supporterData.data;
-        const activeSupportersFiltered = allSupporters.filter(supporter => supporter.isActive);
+         let supporterData = await viewSupportersForAdmin();
+        const allSupporters = supporterData.length>0?supporterData:[];
+        const activeSupportersFiltered =allSupporters.length>0? allSupporters.filter(supporter => supporter.isActive):[];
         setSupporters(allSupporters);
         setActiveSupporters(activeSupportersFiltered);
         setCounter(1);

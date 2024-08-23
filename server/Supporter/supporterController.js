@@ -1,7 +1,10 @@
 const Supporters = require('./supporterSchema');
   const secret = 'Supporters'; // Replace this with your own secret key
 const jwt=require('jsonwebtoken')
-const multer=require('multer')
+const multer=require('multer');
+const houseSchema = require('../SafeHouse/houseSchema');
+const houseReqSchema = require('../SafeHouse/HouseReqs/houseReqSchema');
+const blogSchema = require('../Blogs/blogSchema');
 
 const storage = multer.diskStorage({
     destination: function (req, res, cb) {
@@ -68,7 +71,7 @@ const registerSupporters = async (req, res) => {
 
 // View all Supporterss
 const viewSupporters = (req, res) => {
-    Supporters.find({adminApproved:true}).sort({createdAt:-1})
+    Supporters.find({adminApproved:true,isActive:true}).sort({createdAt:-1})
         .exec()
         .then(data => {
             if (data.length > 0) {
@@ -375,8 +378,9 @@ const rejectSupportersById = (req, res) => {
 };
 
 // Remove Supporters by ID
-const removeSupportersById = (req, res) => {
-    Supporters.findByIdAndUpdate({ _id: req.params.id },{isActive:false})
+const removeSupportersById =async (req, res) => {
+
+   await Supporters.findByIdAndUpdate({ _id: req.params.id },{isActive:false})
         .exec()
         .then(data => {
             res.json({
@@ -392,6 +396,15 @@ const removeSupportersById = (req, res) => {
                 Error: err
             });
         });
+        try{
+        await houseSchema.updateMany({supporterId:req.params.id},{isActive:false})
+        await blogSchema.updateMany({supporterId:req.params.id},{isActive:false})
+        }
+        catch(err){
+console.log(err);
+
+        }
+
 };
 
 // Activate Supporters by ID

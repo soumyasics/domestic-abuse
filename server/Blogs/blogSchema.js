@@ -30,8 +30,12 @@ const blogSchema = mongoose.Schema(
     image: {
       type: Object,
     },
-    
+    isActive:{
+     type:Boolean,
+    default:true
+    }
   },
+
   { timestamps: true }
 );
 module.exports = new mongoose.model("blogs", blogSchema);

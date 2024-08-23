@@ -139,7 +139,7 @@ function CounsellorViewAppointmentDetails() {
                     </div>
                     <div className='row'>
                         <div className='col fw-semibold'>
-                            Safety Plan
+                            Aadhar Number
                         </div>
                     </div>
                     <div className='row theme-purple fs-5 mb-5'>

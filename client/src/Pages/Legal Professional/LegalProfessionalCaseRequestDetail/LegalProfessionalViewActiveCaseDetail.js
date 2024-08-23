@@ -147,7 +147,7 @@ function LegalProfessionalViewActiveCaseDetail() {
           </div>
           <div className='row m-5'>
             <div className='col '>
-              Safety Plan
+            Aadhar Number
             </div>
           </div>
           <div className='row m-5 theme-purple fs-5 '>

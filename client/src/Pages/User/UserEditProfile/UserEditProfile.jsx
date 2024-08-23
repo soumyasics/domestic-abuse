@@ -82,7 +82,7 @@ function UserEditProfile() {
     }
 
     if (!user.safetyPlan) {
-      newErrors.safetyPlan = 'Safety plan is required';
+      newErrors.safetyPlan = ' Aadhar Number is required';
     }
 
     if (user.image && !['image/jpeg', 'image/png', 'image/gif'].includes(user.image.type)) {

@@ -1,6 +1,7 @@
 const Counsellors = require('./counsellorSchema');
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
+const blogSchema = require('../Blogs/blogSchema');
 
 const secret = 'CounsellorsSecret'; // Replace this with your own secret key
 
@@ -346,9 +347,9 @@ const rejectCounsellorsById = (req, res) => {
 };
 
 // Remove Counsellors by ID
-const removeCounsellorsById = (req, res) => {
+const removeCounsellorsById = async(req, res) => {
     console.log(req.params.id);
-    Counsellors.findByIdAndUpdate({ _id: req.params.id }, { isActive: false })
+   await Counsellors.findByIdAndUpdate({ _id: req.params.id }, { isActive: false })
         .exec()
         .then(data => {
             res.json({
@@ -364,6 +365,8 @@ const removeCounsellorsById = (req, res) => {
                 Error: err
             });
         });
+        await blogSchema.updateMany({counsellorId:req.params.id},{isActive:false})
+
 };
 
 // Activate Counsellors by ID

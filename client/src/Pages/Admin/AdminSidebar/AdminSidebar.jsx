@@ -32,10 +32,10 @@ const AdminSidebar = ({ changeActivePage }) => {
   };
 
   const handleLogout = () => {
-    logout();
+    localStorage.setItem('admin',0)
     navigate('/admin-login');
   };
-
+  
 
   return (
     <div className="container-fluid">
@@ -140,7 +140,7 @@ const AdminSidebar = ({ changeActivePage }) => {
                     </Link>
                   </li>
                   <li className="w-100 ms-3">
-                    <Link to="#" className="nav-link admin-list px-0">
+                    <Link to="#" className="nav-link admin-list px-0" onClick={handleLogout}>
                       <span className="ms-2 d-none d-sm-inline theme-purple" onClick={() => changeActivePage("admin-viewall-aprvd-LegalProfessional")}><IoMdArrowDropright size={25} /></span>
                       <span className="d-none d-sm-inline theme-purple" onClick={() => changeActivePage("admin-viewall-aprvd-LegalProfessional")}>View All</span>
                     </Link>

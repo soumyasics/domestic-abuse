@@ -227,7 +227,7 @@ function SupporterViewAllSafeHousesRequests() {
           </tbody>
         </Table>
         </>
-      ):(<h2>No New requests From User</h2>)
+      ):(<h2>No Approved Requests Found</h2>)
     }
         <div className="d-flex justify-content-center">
           {/* <ReactPaginate
