@@ -9,13 +9,17 @@ import '../../Counsellor/CounsellorAppointmentRequests/CounsellorAppointmentRequ
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { Link } from 'react-router-dom';
 function UserAddCase() {
-  const { id } = useParams()
+  const { id } = useParams();
+  const getCurrentDateTime = () => {
+    const now = new Date();
+    return now.toISOString().slice(0, 16); // "YYYY-MM-DDTHH:MM"
+  };
 
   const [formData, setFormData] = useState({
     title: `case-${id.slice(20, 24).toUpperCase()}`,
     description: '',
     status: 'Trial',
-    date: '',
+    date: getCurrentDateTime(),
   });
 
 
@@ -138,7 +142,7 @@ function UserAddCase() {
                 {errors.description && <div className='text-danger'>{errors.description}</div>}
               </div>
             </div>
-
+{/* 
             <div className='row m-5'>
               <div className='col-4 theme-purple text-center fs-5'>
                 Date
@@ -154,7 +158,7 @@ function UserAddCase() {
                 />
                 {errors.date && <div className='text-danger'>{errors.date}</div>}
               </div>
-            </div>
+            </div> */}
             <div className='row m-5 mb-0'>
               <div className='col text-end'>
                 <button type='submit' className='btn bg-purple text-white px-4 mx-3'>
