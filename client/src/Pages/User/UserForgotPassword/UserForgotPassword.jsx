@@ -45,22 +45,34 @@ function UserForgotPassword() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Validate the form inputs
     if (!validate()) {
       toast.error('Please fix the errors in the form.');
       return;
     }
+  
     try {
+      // Attempt to reset the password using the API
       const response = await resetPasswordUser(email, password);
-      console.log(response);
-      toast.success("Password reset successful. Redirecting to login page...");
-      setTimeout(() => {
-        navigate('/legal-professional-login');
-      }, 3000);
+      
+      // Handle successful password reset
+      if (response.status === 200) {
+        toast.success("Password reset successful. Redirecting to login page...");
+        setTimeout(() => {
+          navigate('/user-login'); // Adjusted the redirection to '/user-login'
+        }, 3000);
+      } else {
+        // Handle unexpected status codes
+        toast.error(response.msg || 'Unexpected response from the server.');
+      }
     } catch (error) {
+      // Handle errors and display appropriate messages
       console.error('Password reset failed', error);
-      toast.error(error.response?.data?.msg || 'Password reset failed');
+      toast.error(error.message || 'Password reset failed.');
     }
   };
+  
   return (
     <div className="container">
     <ToastContainer />

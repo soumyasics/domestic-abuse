@@ -180,7 +180,7 @@ const forgotPassword = (req, res) => {
             else
                 res.json({
                     status: 500,
-                    msg: "User Not Found"
+                    msg: "Supporter Not Found"
                 });
         })
         .catch(err => {
