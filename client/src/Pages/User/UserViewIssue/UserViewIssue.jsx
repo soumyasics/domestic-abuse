@@ -24,7 +24,7 @@ function UserViewIssue() {
       gender: '',
       relation: '',
       file: { filename: '' },
-      safetyPlan: ''
+      aadhar: ''
     }
   });
 
@@ -111,8 +111,8 @@ function UserViewIssue() {
                 <div className='col theme-purple'>{user?.userId?.gender}</div>
               </div>
               <div className='row border-bottom m-3 card-text'>
-                <div className='col'>Safety Plan</div>
-                <div className='col theme-purple'>{user?.userId?.safetyPlan}</div>
+                <div className='col'>Aadhar Number</div>
+                <div className='col theme-purple'>{user?.userId?.aadhar}</div>
               </div>
               <div className='row border-bottom m-3 card-text'>
                 <div className='col'>Contact No</div>

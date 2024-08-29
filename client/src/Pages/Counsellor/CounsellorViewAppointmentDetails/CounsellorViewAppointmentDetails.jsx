@@ -18,7 +18,7 @@ function CounsellorViewAppointmentDetails() {
         gender: '',
         address: '',
         relation: '',
-        safetyPlan: '',
+        aadhar: '',
         image: { filename: '' },
     });
     const [imagePreview, setImagePreview] = useState(demo);
@@ -139,12 +139,12 @@ function CounsellorViewAppointmentDetails() {
                     </div>
                     <div className='row'>
                         <div className='col fw-semibold'>
-                            Safety Plan
+                            Aadhar Number
                         </div>
                     </div>
                     <div className='row theme-purple fs-5 mb-5'>
                         <div className='col'>
-                            {user.safetyPlan}
+                            {user.aadhar}
                         </div>
                     </div>
                 </div>

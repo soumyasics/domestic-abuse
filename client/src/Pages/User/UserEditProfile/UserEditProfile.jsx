@@ -20,7 +20,7 @@ function UserEditProfile() {
     gender: '',
     address: '',
     relation: '',
-    safetyPlan: '',
+    aadhar: '',
     image: {filename:''},
   });
 
@@ -81,8 +81,8 @@ function UserEditProfile() {
       newErrors.relation = 'Relationship to the abuser is required';
     }
 
-    if (!user.safetyPlan) {
-      newErrors.safetyPlan = 'Safety plan is required';
+    if (!user.aadhar) {
+      newErrors.aadhar = 'Aadhar number is required';
     }
 
     if (user.image && !['image/jpeg', 'image/png', 'image/gif'].includes(user.image.type)) {
@@ -200,7 +200,7 @@ const navtoHome=()=>{
     formData.append('gender', user.gender);
     formData.append('address', user.address);
     formData.append('relation', user.relation);
-    formData.append('safetyPlan', user.safetyPlan);
+    formData.append('aadhar', user.aadhar);
     if (user.image && user.image instanceof File) {
       formData.append('image', user.image);
     }

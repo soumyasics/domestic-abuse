@@ -26,8 +26,8 @@ const createToken = (user) => {
 // Register User
 const registerUser = async (req, res) => {
   try {
-    const { name, email, contact, password,  dob, gender, address, relation, safetyPlan } = req.body;
-    let existingUser1 = await User.findOne({ safetyPlan });
+    const { name, email, contact, password,  dob, gender, address, relation, aadhar } = req.body;
+    let existingUser1 = await User.findOne({ aadhar });
 
     
 
@@ -41,7 +41,7 @@ const registerUser = async (req, res) => {
       gender,
       address,
       relation,
-      safetyPlan,
+      aadhar,
       image: req.file ? req.file : null
     });
 
@@ -81,7 +81,7 @@ const viewUsers = (req, res) => {
 // Update User by ID
 const editUserById = async (req, res) => {
   let flag = 0;
-  const { name, email, contact, dob, gender, address, relation, safetyPlan } = req.body;
+  const { name, email, contact, dob, gender, address, relation, aadhar } = req.body;
 
   let existingUser = await User.find({ contact });
   let userData = await User.findById({ _id: req.params.id });
@@ -103,7 +103,7 @@ const editUserById = async (req, res) => {
       gender,
       address,
       relation,
-      safetyPlan,
+      aadhar,
       image: req.file
     };
 

@@ -182,7 +182,7 @@ function App() {
             <Route path='/admin-login' element={[<Navbar />, <AdminLogin />]} />
             <Route path='/admin-dashboard' element={[
 
-              <AdminNavbar />, <AdminDashboard />
+               <AdminDashboard />
 
             ]} />
             <Route path='/admin-view-all-safehouses' element={

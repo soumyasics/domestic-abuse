@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  safetyPlan: {
+  aadhar: {
     type: String,
     required: true
   },
