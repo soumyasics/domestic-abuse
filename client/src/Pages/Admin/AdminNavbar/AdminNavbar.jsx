@@ -1,29 +1,23 @@
 import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import brand from '../../../Assets/2a75e2f413ad511cbebf7abc265805b4.png';
-import { useContext } from 'react';
-import AuthContext from '../../../context/AuthContext'; 
 
-function AdminNavbar() {
+function AdminNavbar({ changeActivePage }) {  // Added changeActivePage prop
   const navigate = useNavigate();
+
   useEffect(() => {
-    if(localStorage.getItem("admin")!=1)
+    if (localStorage.getItem("admin") != 1)
       navigate('/admin-login');
   }, []);
-  // const { isLoggedIn, logout } = useContext(AuthContext);
 
   const handleImageClick = () => {
     navigate('/admin-dashboard');
- 
   };
-
 
   const handleLogout = () => {
-    localStorage.setItem('admin',0)
+    localStorage.setItem('admin', 0);
     navigate('/admin-login');
   };
-
-
 
   return (
     <div className="container-fluid p-0">
@@ -40,19 +34,16 @@ function AdminNavbar() {
         <div className="collapse navbar-collapse mx-5 justify-content-end" id="navbarNav">
           <ul className="navbar-nav ml-auto mx-5">
             <li className="nav-item active">
-              <Link className="nav-link mx-3 theme-purple fw-semibold" to="/admin-dashboard">Home</Link>
+              <button className="nav-link mx-3 theme-purple fw-semibold" onClick={() => changeActivePage('home')}>Home</button>
             </li>
             <li className="nav-item">
-              <Link className="nav-link mx-3 theme-purple fw-semibold" to="/admin-viewall-users">Users</Link>
+              <button className="nav-link mx-3 theme-purple fw-semibold"  onClick={() => changeActivePage('all-users')}>Users</button>
             </li>
             <li className="nav-item">
-              <Link className="nav-link mx-3 theme-purple fw-semibold" to="/blogs">Blog</Link>
+              <button className="nav-link mx-3 theme-purple fw-semibold btn btn-link" onClick={() => changeActivePage('blogs')}>Blog</button>  {/* Updated Link */}
             </li>
             <li className="nav-item">
-             
-              
-                <button className="nav-link mx-3 theme-purple fw-semibold btn btn-link" onClick={handleLogout}>Logout</button>
-             
+              <button className="nav-link mx-3 theme-purple fw-semibold btn btn-link" onClick={handleLogout}>Logout</button>
             </li>
           </ul>
         </div>

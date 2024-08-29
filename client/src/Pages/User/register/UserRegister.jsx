@@ -21,7 +21,7 @@ function UserRegister() {
     gender: '',
     address: '',
     relation: '',
-    safetyPlan: '',
+    aadhar: '',
     image: null,
   });
 
@@ -95,11 +95,11 @@ function UserRegister() {
       newErrors.relation = 'Relationship to the abuser is required';
     }
 
-    if (!user.safetyPlan) {
-      newErrors.safetyPlan = 'Aadhar Number is required';
+    if (!user.aadhar) {
+      newErrors.aadhar = 'Aadhar Number is required';
     }
-      else if (!aadharRegex.test(user.safetyPlan)) {
-        newErrors.safetyPlan = 'Aadhar Numbershould be 12 digits';
+      else if (!aadharRegex.test(user.aadhar)) {
+        newErrors.aadhar = 'Aadhar Number should be 12 digits';
       
     }
 
@@ -370,16 +370,16 @@ function UserRegister() {
                     </span>
                     <input
                       type="number"
-                      id="safetyPlan"
-                      name="safetyPlan"
-                      className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.safetyPlan ? 'is-invalid' : ''}`}
+                      id="aadhar"
+                      name="aadhar"
+                      className={`form-control form-control-lg border border-start-0 home-card-bg rounded-end-2 ${errors.aadhar ? 'is-invalid' : ''}`}
                       placeholder="Aadhar Number"
-                      value={user.safetyPlan}
+                      value={user.aadhar}
                       onChange={handleChange}
-                      aria-describedby="safetyPlanError"
+                      aria-describedby="aadharError"
                       required
                     />
-                    {errors.safetyPlan && <div id="safetyPlanError" className="invalid-feedback">{errors.safetyPlan}</div>}
+                    {errors.aadhar && <div id="aadharError" className="invalid-feedback">{errors.aadhar}</div>}
                   </div>
                 </div>
               </div>
