@@ -10,14 +10,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { FaFile } from "react-icons/fa";
+import { FaArrowLeftLong } from "react-icons/fa6";
 import { approveSafehouseById, IMG_BASE_URL, viewSafehouseById,rejectSafehouseById } from '../../../Services/apiService';
 
-function AdminsafehousesDetailedView() {
+function AdminsafehousesDetailedView({changeActivePage}) {
   const { id } = useParams();
   const [safehouses, setsafehouses] = useState({photo:{filename:''},proof:{
     filename:''
   }});
-  const navigate=useNavigate()
+  const navigate=useNavigate();
 
   useEffect(() => {
     const fetchLegalProfessionalData = async () => {
@@ -96,6 +97,11 @@ function AdminsafehousesDetailedView() {
   return (
     <>
       <div className='container'>
+      <div className='row my-5 mx-3'>
+                <div className='col'>
+                    <FaArrowLeftLong size={35} className='cursor-pointer' onClick={() => navigate(-1)} />
+                </div>
+            </div>
         <div className='row m-5'>
           <div className='col'>
             <h3 className='text-center theme-purple fw-bold'>{safehouses.name ? safehouses.name : 'Aishwaryas Home'}</h3>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams,useNavigate } from 'react-router-dom';
 import './AdminCounsellorDetailedView.css';
 import demoCounsellor from '../../../Assets/counsellor-registration.png';
 import { IMG_BASE_URL, getCounsellorById } from '../../../Services/apiService';
@@ -8,12 +8,13 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import { FaArrowLeftLong } from "react-icons/fa6";
 import { viewCounsellorReqsForAdmin, approveCounsellorsById, rejectCounsellorsById } from '../../../Services/apiService';
 
 function AdminCounsellorDetailedView() {
   const { id } =useParams();
   const [counsellor, setCounsellor] = useState(null);
-
+  const navigate = useNavigate();
     console.log("in",id);
     useEffect(() => {
     const fetchCounsellorData = async () => {
@@ -85,6 +86,11 @@ function AdminCounsellorDetailedView() {
   };
   return (
     <div className='container'>
+    <div className='row my-5 mx-3'>
+                <div className='col'>
+                    <FaArrowLeftLong size={35} className='cursor-pointer' onClick={() => navigate(-1)} />
+                </div>
+      </div>
       <div className='row m-5'>
         <div className='col'>
           <h3 className='text-center theme-purple fw-bold'>Counsellor Details</h3>

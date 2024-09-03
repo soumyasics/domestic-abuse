@@ -9,6 +9,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import { viewCounsellorReqsForAdmin, approveCounsellorsById, rejectCounsellorsById } from '../../../Services/apiService';
 import axiosInstance from '../../../Constant/BaseURL'
 import demoCounsellor from '../../../Assets/counsellor-registration.png';
+import { FaArrowLeftLong } from "react-icons/fa6";
 
 function AdminViewUserDetailed() {
     const { id } =useParams();
@@ -136,6 +137,11 @@ function AdminViewUserDetailed() {
     };
     return (
       <div className='container'>
+      <div className='row my-5 mx-3'>
+                <div className='col'>
+                    <FaArrowLeftLong size={35} className='cursor-pointer' onClick={() => navigate(-1)} />
+                </div>
+        </div>
         <div className='row m-5'>
           <div className='col'>
             <h3 className='text-center theme-purple fw-bold'>User Details</h3>
