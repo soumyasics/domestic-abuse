@@ -1,6 +1,5 @@
 //src/Services/apiService.jsx
 import axios from 'axios';
-import { MdElectricalServices } from 'react-icons/md';
 
 export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
 export const IMG_BASE_URL = 'http://localhost:4039/';

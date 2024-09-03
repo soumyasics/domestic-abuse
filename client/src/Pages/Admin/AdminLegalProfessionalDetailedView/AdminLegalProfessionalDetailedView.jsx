@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { FaFile } from "react-icons/fa";
+import { FaArrowLeftLong } from "react-icons/fa6";
 
 function AdminLegalProfessionalDetailedView() {
   const { id } = useParams();
@@ -108,6 +109,11 @@ function AdminLegalProfessionalDetailedView() {
     <div className='container'>
       <ToastContainer />
       <div className='row m-5'>
+      <div className='row my-5 mx-3'>
+                <div className='col'>
+                    <FaArrowLeftLong size={35} className='cursor-pointer' onClick={() => navigate(-1)} />
+                </div>
+            </div>
         <div className='col'>
           <h3 className='text-center theme-purple fw-bold'>Legal Professional Details</h3>
         </div>

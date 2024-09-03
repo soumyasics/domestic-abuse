@@ -33,7 +33,9 @@ function AdminNavbar({ changeActivePage }) {  // Added changeActivePage prop
         </button>
         <div className="collapse navbar-collapse mx-5 justify-content-end" id="navbarNav">
           <ul className="navbar-nav ml-auto mx-5">
-            <li className="nav-item active">
+          {
+            changeActivePage?(<>
+              <li className="nav-item active">
               <button className="nav-link mx-3 theme-purple fw-semibold" onClick={() => changeActivePage('home')}>Home</button>
             </li>
             <li className="nav-item">
@@ -42,7 +44,10 @@ function AdminNavbar({ changeActivePage }) {  // Added changeActivePage prop
             <li className="nav-item">
               <button className="nav-link mx-3 theme-purple fw-semibold btn btn-link" onClick={() => changeActivePage('blogs')}>Blog</button>  {/* Updated Link */}
             </li>
-            <li className="nav-item">
+            </>
+            ):(<></>)
+          }
+          <li className="nav-item">
               <button className="nav-link mx-3 theme-purple fw-semibold btn btn-link" onClick={handleLogout}>Logout</button>
             </li>
           </ul>
