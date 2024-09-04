@@ -22,7 +22,7 @@ function UserViewSupporters() {
     try {
       const supporterData = await viewSupporters();
       if (supporterData.status==200) {
-        setSupporters(supporterData.data);
+        setSupporters(supporterData.data||[]);
       } else {
         toast.error('Error fetching supporters');
       }
@@ -62,7 +62,7 @@ function UserViewSupporters() {
           <h4 className='theme-purple'>All Supporters</h4>
         </div>
       </div>
-      <div className='row m-5'>
+     {currentSupporters.length>0? <div className='row m-5'>
         <div className='col table-responsive'>
           <Table striped bordered hover className="supporters-table">
             <thead>
@@ -130,7 +130,7 @@ function UserViewSupporters() {
             />
           </div>
         </div>
-      </div>
+      </div>:<h3>No Supporters found</h3>}
       <Modal show={showModal} onHide={handleClose} className='bg-creamy'>
         <Modal.Header closeButton className='bg-creamy'>
           <Modal.Title>Supporter Details</Modal.Title>

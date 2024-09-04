@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-// import './UserViewBlogs.css';
+import './AdminViewallBlogs.css';
 import { getBlogs, IMG_BASE_URL } from '../../../Services/apiService'; // Assuming getBlogs is the function to fetch blogs from backend
 import demo from '../../../Assets/blog-demo.png';
 import { FaRegCalendarAlt } from "react-icons/fa";
@@ -15,6 +15,8 @@ function AdminviewAllBlogs() {
         const fetchBlogs = async () => {
             try {
                 const response = await getBlogs();
+                console.log(response.data);
+                
                 setBlogs(response.data);
             } catch (error) {
                 console.error('Error fetching blogs:', error);
@@ -49,11 +51,11 @@ function AdminviewAllBlogs() {
                                   <h5>{blog.counsellorId?'Councellor Blog':blog.lpId?'Legal Professional Blog':'Supporter Blog'}</h5>
 
                         <div className='col'>
-                            <h5>{blog.counsellorId?blog.counsellorId.name:blog.lpId?blog.lpId.name:blog.supporterId.name}</h5>
+                            <h5>{blog.counsellorId?blog.counsellorId.name:blog.lpId?blog.lpId.name:blog.supporterId?blog.supporterId.name:'Unknown'}</h5>
 
 
                         </div>
-                        <div className='col d-flex justify-content-center align-items-center'>
+                        <div className='col d-flex justify-content-center align-items-center '>
                             <h5>
                                 <span className='me-2'><FaRegCalendarAlt size={20} /></span>
                                 <span className='my-4'>{new Date(blog.date).toLocaleDateString()}</span>
@@ -67,7 +69,7 @@ function AdminviewAllBlogs() {
                     </div>
                     <div className='row m-5'>
                         <div className='col'>
-                            <p className='fs-6'>{blog.content}</p>
+                            <p className='fs-6 text-justify'>{blog.content}</p>
                         </div>
                     </div>
                 </div>

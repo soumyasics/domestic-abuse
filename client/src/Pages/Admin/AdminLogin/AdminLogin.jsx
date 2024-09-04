@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './AdminLogin.css';
 import CoolGirl from '../../../Assets/ADMIN LOGIN.png';
 import { useNavigate } from 'react-router-dom';
@@ -7,12 +7,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import AuthContext from '../../../context/AuthContext';
 
 export default function AdminLogin() {
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [passwordShown, setPasswordShown] = useState(false);
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
-
+ useEffect(() => {
+    if(localStorage.getItem("admin")==1)
+      navigate('/admin-dashboard');
+  }, []);
   const togglePasswordVisibility = () => {
     setPasswordShown(!passwordShown);
   };

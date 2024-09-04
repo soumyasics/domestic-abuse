@@ -70,7 +70,7 @@ const registerSafehouse = async (req, res) => {
 
 // View all safehouses
 const viewSafehouses = (req, res) => {
-    Safehouse.find({adminApproved:true})
+    Safehouse.find({adminApproved:true,isActive:true})
         .exec()
         .then(data => {
             if (data.length > 0) {

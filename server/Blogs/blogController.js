@@ -70,7 +70,7 @@ const viewBlogsById = (req, res) => {
 
 const viewAllBlogs = (req, res) => {
   blogSchema
-    .find({}).sort({createdAt:-1})
+    .find({isActive:true}).sort({createdAt:-1})
     .populate("supporterId lpId counsellorId")
     .exec()
     .then((data) => {

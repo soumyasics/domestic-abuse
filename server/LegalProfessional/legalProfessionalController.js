@@ -49,7 +49,22 @@ const registerLegalProfessional = async (req, res) => {
         data: null
       });
     }
-
+    let existingLegalProfessional1 = await LegalProfessionals.findOne({ barAssociationId });
+    if (existingLegalProfessional1) {
+      return res.json({
+        status: 409,
+        msg: "barAssociationId Already Registered With Us !!",
+        data: null
+      });
+    }
+    let existingLegalProfessional2 = await LegalProfessionals.findOne({ licenseNumber });
+    if (existingLegalProfessional2) {
+      return res.json({
+        status: 409,
+        msg: "licenseNumber Already Registered With Us !!",
+        data: null
+      });
+    }
     await newLegalProfessional.save()
       .then(data => {
         return res.json({
