@@ -29,7 +29,8 @@ const registerUser = async (req, res) => {
     const { name, email, contact, password,  dob, gender, address, relation, aadhar } = req.body;
     let existingUser1 = await User.findOne({ aadhar });
 
-    
+    let existingUser3 = await User.findOne({ contact });
+
 
 
     const newUser = new User({
@@ -52,6 +53,11 @@ const registerUser = async (req, res) => {
     if(existingUser1){
       flag=1
       return res.json({ status: 409, msg: "Aadhar Number already been registered with us !!" });
+    
+    }
+    if(existingUser3){
+      flag=1
+      return res.json({ status: 409, msg: "Contact Number already been registered with us !!" });
     
     }
     await newUser.save();

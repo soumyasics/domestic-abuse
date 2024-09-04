@@ -81,13 +81,8 @@ function UserEditProfile() {
       newErrors.relation = 'Relationship to the abuser is required';
     }
 
-<<<<<<< HEAD
-    if (!user.safetyPlan) {
-      newErrors.safetyPlan = ' Aadhar Number is required';
-=======
     if (!user.aadhar) {
       newErrors.aadhar = 'Aadhar number is required';
->>>>>>> a74f5e5d60ad3748c2d01ebdd0a547996be9994f
     }
 
     if (user.image && !['image/jpeg', 'image/png', 'image/gif'].includes(user.image.type)) {
