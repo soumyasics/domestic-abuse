@@ -33,7 +33,7 @@ function CouncillorviewClintDetailed() {
                 gender: '',
                 relation: '',
                 file: { filename: '' },
-                safetyPlan: ''
+                aadhar: ''
     
             }
         });
@@ -98,7 +98,11 @@ function CouncillorviewClintDetailed() {
                                 </div>
                                 <div className='row border-bottom m-3 card-text'>
                                     <div className='col'>Aadhar Number</div>
+<<<<<<< HEAD
                                     <div className='col theme-purple'>{user?.userId?.safetyPlan}</div>
+=======
+                                    <div className='col theme-purple'>{user?.userId?.aadhar}</div>
+>>>>>>> a74f5e5d60ad3748c2d01ebdd0a547996be9994f
                                 </div>
                                 <div className='row border-bottom m-3 card-text'>
                                     <div className='col'>Contact No</div>

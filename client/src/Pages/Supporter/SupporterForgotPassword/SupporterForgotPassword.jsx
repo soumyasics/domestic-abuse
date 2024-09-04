@@ -44,23 +44,34 @@ function SupporterForgotPassword() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!validate()) {
-      toast.error('Please fix the errors in the form.');
-      return;
-    }
-    try {
-      const response = await forgotPassword(email, password);
-      console.log(response);
+  e.preventDefault();
+
+  // Validate form inputs
+  if (!validate()) {
+    toast.error('Please fix the errors in the form.');
+    return;
+  }
+
+  try {
+    // Call the forgotPassword API with the provided email and password
+    const response = await forgotPassword(email, password);
+
+    // Check if the password reset was successful
+    if (response.success) {
       toast.success("Password reset successful. Redirecting to login page...");
       setTimeout(() => {
-        navigate('/supporter-login');
+        navigate('/supporter-login'); // Redirect to the Supporter login page
       }, 3000);
-    } catch (error) {
-      console.error('Password reset failed', error);
-      toast.error(error.response?.data?.message || 'Password reset failed');
+    } else {
+      // Handle specific error messages returned by the API
+      toast.error(response.message || 'Password reset failed');
     }
-  };
+  } catch (error) {
+    // Handle unexpected errors
+    console.error('Password reset failed', error);
+    toast.error('An unexpected error occurred.');
+  }
+};
 
   return (
     <div className="container">

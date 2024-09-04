@@ -170,7 +170,7 @@ const forgotPassword = (req, res) => {
             else
                 res.json({
                     status: 500,
-                    msg: "User Not Found"
+                    msg: "Counsellor Not Found"
                 });
         })
         .catch(err => {

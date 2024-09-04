@@ -14,7 +14,7 @@ const councReqs=require('./Councellor-UserRequests/reqController')
 const payments = require('./Payments/paymentController')
 const chat = require('./Chat/chatController')
 
-//suppoerter routes
+//supporter routes
 router.post('/registerSupporters', supporter.upload, supporter.registerSupporters);
 router.post('/viewSupportersById/:id', supporter.viewSupportersById);
 router.post('/editSupportersById/:id', supporter.upload, supporter.editSupportersById);

@@ -39,7 +39,7 @@ function LegalProfessionalCaseRequestDetail() {
             gender: '',
             relation: '',
             file: { filename: '' },
-            safetyPlan: ''
+            aadhar: ''
 
         }
     });
@@ -87,7 +87,7 @@ function LegalProfessionalCaseRequestDetail() {
     
               try {
                 const response = await rejectLPAppointmentById(id);
-                if (response.status==200) {
+                if (response.status===200) {
                   toast.success('Appointment rejected successfully.', {
                     autoClose: 900, 
                   });
@@ -170,12 +170,16 @@ function LegalProfessionalCaseRequestDetail() {
           </div>
           <div className='row m-5'>
             <div className='col '>
+<<<<<<< HEAD
             Aadhar Number
+=======
+              Aadhar Number
+>>>>>>> a74f5e5d60ad3748c2d01ebdd0a547996be9994f
             </div>
           </div>
           <div className='row m-5 theme-purple fs-5 '>
             <div className='col'>
-              {user?.userId?.safetyPlan}
+              {user?.userId?.aadhar}
             </div>
           </div>
         </div>

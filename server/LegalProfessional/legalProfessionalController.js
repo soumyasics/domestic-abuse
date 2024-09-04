@@ -197,7 +197,7 @@ const forgotPassword = (req, res) => {
       } else {
         res.json({
           status: 500,
-          msg: "User Not Found"
+          msg: "Legal Professional Not Found"
         });
       }
     })

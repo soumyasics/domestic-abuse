@@ -41,7 +41,7 @@ function UserViewSuggestionDetails() {
       gender: '',
       relation: '',
       file: { filename: '' },
-      safetyPlan: ''
+      aadhar: ''
     },
 
   });

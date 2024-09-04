@@ -43,7 +43,7 @@ function LegalProfessionalViewActiveCaseDetail() {
       gender: '',
       relation: '',
       file: { filename: '' },
-      safetyPlan: '',
+      aadhar: '',
       _id:''
 
     }
@@ -147,12 +147,16 @@ function LegalProfessionalViewActiveCaseDetail() {
           </div>
           <div className='row m-5'>
             <div className='col '>
+<<<<<<< HEAD
             Aadhar Number
+=======
+              Aadhar Number
+>>>>>>> a74f5e5d60ad3748c2d01ebdd0a547996be9994f
             </div>
           </div>
           <div className='row m-5 theme-purple fs-5 '>
             <div className='col'>
-              {user?.userId?.safetyPlan}
+              {user?.userId?.aadhar}
             </div>
           </div>
         </div>

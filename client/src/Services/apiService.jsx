@@ -4,8 +4,8 @@ import { MdElectricalServices } from 'react-icons/md';
 
 export const API_BASE_URL = 'http://localhost:4039/domestic_abuse_api';
 export const IMG_BASE_URL = 'http://localhost:4039/';
-// export const IMG_BASE_URL = 'http://hybrid.srishticampus.in:4039/';
-// export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
+//export const IMG_BASE_URL = 'http://hybrid.srishticampus.in:4039/';
+//export const API_BASE_URL = 'http://hybrid.srishticampus.in/domestic_abuse_api/';
 // Api for Viewing all Supporters Request for admin to approve, reject or view
 export const viewSupporterReqsForAdmin = async () => {
   try {
@@ -628,11 +628,26 @@ export const resetPasswordLegalProfessional = async (email, password) => {
       email,
       password
     });
-    return response.data;
+
+    if (response.data.status === 200) {
+      return { success: true, message: response.data.msg };
+    } else {
+      return { success: false, message: response.data.msg };
+    }
   } catch (error) {
-    throw error;
+    if (error.response && error.response.data) {
+      return {
+        success: false,
+        message: error.response.data.msg || 'Password reset failed'
+      };
+    }
+    return {
+      success: false,
+      message: 'An unexpected error occurred'
+    };
   }
 };
+
 // Api for Viewing all Counsellor Requests for Admin
 export const viewCounsellorReqsForAdmin = async () => {
   try {
@@ -938,7 +953,7 @@ export const updateUser = async (id, data) => {
       throw error;
   }
 };
-//Api for Legal Professional Forgot Password
+//Api for User Forgot Password
 export const resetPasswordUser = async (email, password) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/forgotPasswordUser`, {

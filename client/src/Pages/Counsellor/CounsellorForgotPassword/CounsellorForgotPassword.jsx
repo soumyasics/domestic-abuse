@@ -47,22 +47,34 @@ function CounsellorForgotPassword() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    // Validate form inputs
     if (!validate()) {
       toast.error('Please fix the errors in the form.');
       return;
     }
+  
     try {
+      // Call the forgotPasswordCounsellor API with the provided email and password
       const response = await forgotPasswordCounsellor(email, password);
-      console.log(response);
-      toast.success("Password reset successful. Redirecting to login page...");
-      setTimeout(() => {
-        navigate('/counsellor-login');
-      }, 3000);
+  
+      // Check if the password reset was successful
+      if (response.success) {
+        toast.success("Password reset successful. Redirecting to login page...");
+        setTimeout(() => {
+          navigate('/counsellor-login'); // Redirect to the Counsellor login page
+        }, 3000);
+      } else {
+        // Handle specific error messages returned by the API
+        toast.error(response.message || 'Password reset failed');
+      }
     } catch (error) {
+      // Handle unexpected errors
       console.error('Password reset failed', error);
-      toast.error(error.response?.data?.message || 'Password reset failed');
+      toast.error('An unexpected error occurred.');
     }
   };
+  
 
   return (
     <div className="container">
