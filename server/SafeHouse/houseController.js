@@ -45,6 +45,14 @@ const registerSafehouse = async (req, res) => {
                 data: null
             });
         }
+        let existingSafehouse1 = await Safehouse.findOne({ licenseNo });
+        if (existingSafehouse1) {
+            return res.json({
+                status: 409,
+                msg: "license Number Already Registered With Us !!",
+                data: null
+            });
+        }
 
         await newSafehouse.save()
             .then(data => {
